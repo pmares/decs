@@ -2,27 +2,28 @@
 #define COLUMN_H_
 
 #include <string>
+#include "dlx.h"
 #include "node.h"
 
-namespace dlx
-{
+namespace dlx {
 
-class Column : public Node
-{
+using namespace std;
+
+class Column : public Node {
 public:
 	Column();
 	virtual ~Column();
-	unsigned int getSize() const { return size; }
-	unsigned int getIndex() const { return index; }
-	std::string getName() const { return name; }
+	uint getSize() const { return size; }
+	uint getIndex() const { return index; }
+	string getName() const { return name; }
 	void incrementSize() { size++; }
 	void decrementSize() { size--; }
 private:
-	unsigned int size;
-	unsigned int index;
+	uint size;
+	uint index;
 	std::string name;
 };
 
-}
+} /*namespace dlx*/
 
 #endif /*COLUMN_H_*/
