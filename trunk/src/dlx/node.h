@@ -1,11 +1,10 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-// Forward declaration to prevent circular dependency.
-class Column;
+namespace dlx {
 
-namespace dlx
-{
+// Forward declaration to prevent circular dependency between headers.
+class Column;
 
 class Node {
 public:
@@ -21,6 +20,10 @@ public:
 	void setUp(Node *node) { right = node; }
 	void setDown(Node *node) { right = node; }
 	void setColumn(Column *column) { col = column; }
+	int linkColumn();
+	int unlinkColumn();
+	int linkRow();
+	int unlinkRow();
 private:
 	Node *left;
 	Node *right;
@@ -29,6 +32,6 @@ private:
 	Column *col;
 };
 
-}
+} /*namespace dlx*/
 
 #endif /*NODE_H_*/

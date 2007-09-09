@@ -1,7 +1,6 @@
 #include "column.h"
 
-namespace dlx
-{
+namespace dlx {
 
 Column::Column():
 	size(0),
@@ -14,4 +13,4 @@ Column::~Column()
 {
 }
 
-}
+} /*namespace dlx*/
