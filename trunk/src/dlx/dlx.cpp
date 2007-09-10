@@ -85,7 +85,7 @@ Column* choose_column(Column* header) {
 
 /**
  * Search through the remaining matrix for a solution.
- * Initially invoked with level = 0.
+ * Initially invoked with k = 0.
  */
 void search(uint k) {
 	Column* h;
