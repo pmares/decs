@@ -4,19 +4,131 @@
 
 % Here we describe some of the important implementation details.
 
-\section{File format}
-
-\subsection{Storing sparse boolean matrices}
 
 
 \section{Transforms}
 
+
 \subsection{N-Queens}
+
+% [Begin Wikipedia quote] Consider a matrix with one column for each of the n ranks of the board, one column for each of the n files, and one column for each of the 4n-6 nontrivial diagonals of the board. The matrix has n^2 rows: one for each possible queen placement, and each row has a 1 in the  columns corresponding to that square's rank, file, and diagonals and a 0 in  all the other columns. Then the n queens problem is equivalent to choosing a subset of the rows of this  matrix such that every column has a 1 in precisely one of the chosen rows;  this is an exact cover problem. [end Wikipedia quote]
+
+% Actually, the Wikipedia entry contains an error in the argumentation. On  an n by n board, we will place at most n queens. They will avoid each other by being in separate rows and columns.  But we have a total of 2n-3 parallel diagonals which have to be guarded by the n queens. Which means  that all diagonals will not be occupied. The exact cover procedure will not  find any solutions. So, in order to turn the problem into a correct exact  cover problem, we will add 4n-6 lines with a 1 only in each of the columns corresponding to the  diagonals. This will allow the algorithm to complete its search for a  complete cover by adding these rows, which we can then delete afterwards  (these will be the only rows with only a single column entry). 
+% -- http://www.imtek.de/simulation//mathematica/IMSweb/imsTOC/Game%20Theory/ExactCoverDocu.html
+
 
 \subsection{Polyominoes}
 
 
+\subsection{Latin square}
+
+% Application of Exact Cover to Solving the Latin Square Puzzle
+% -- http://www.imtek.de/simulation//mathematica/IMSweb/imsTOC/Game%20Theory/ExactCoverDocu.html
+
+
+\section{File format}
+
+In order to store and transfer the DLX problem matrix efficiently a file format was defined for this specific purpose.
+
+The file the DLX problem matrix is stored in had to be given a clearly defined format. 
+
+%Challenges:
+%- Byte ordering
+%- Format version
+%- Storage of the boolean matrix (for efficient operation we first need to find out how the circular quad linked list of objects are most efficiently built. From top-left to bottom-right.
+
+%How to handle different byte ordering in the file format?
+%Make the file format x86 centric by requiring all values to be stored as little-endian.
+%Little end first, or increasing significance 
+%\cite{IEN137}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|r|r|l|p{2.7in}|}
+		\hline
+		\bf Offset & \bf Length & \bf Field & \bf Description \\ \hline
+		0  & 4 & file\_id & File type ID: ``DECS'' \\ \hline
+		4  & 1 & version & File format version. \\ \hline
+		5  & 1 & & Reserved. \\ \hline
+		6  & 1 & col\_bits & Number of bits used to represent column numbers + 1. \\ \hline
+		7  & 1 & row\_bits & Number of bits used to represent row numbers + 1. \\ \hline
+		8  & 4 & col\_count & Number of columns. \\ \hline
+		12 & 4 & row\_count & Number of rows. \\ \hline
+		16 & 4 & elem\_count & Number of non-zero values in the matrix. \\ \hline
+		20 & 4 & names & Byte offset to the column and row name list. 0 if unavailable. \\ \hline
+		24 & 4 & seccol & Byte offset to the secondary column list. 0 if unavailable. \\ \hline
+		38 & 4 & elements & Byte offset to the matrix element entries. Should never be 0. \\ \hline
+		32 & 4 & probid & Problem type ID. Each problem type has a unique ID so that the correct transform can be chosen and the problem specific information can be decoded. \\ \hline
+		36 & 4 & probinfo & Byte offset to problem specific information. 0 if unavailable. \\ \hline
+%		26 & 2 & Number & Job ID. Each problem type has a unique ID so that the correct transform is selected. \\ \hline
+	\end{tabular}
+	\caption{File header format}
+	\label{tab:header}
+\end{table}
+
+The DLX algorithm itself does not use the column and row names or the problem type ID and the problem specific information.
+This information can be used by the BOINC client to display graphical information during the computation.
+For example it can use the problem type ID to identify the correct transform, and when the DLX algorithm finds a solution it can run the reverse transform and display the solution graphically.
+BOINC has built-in support for OpenGL rendering and the solution can be displayed as part of a special BOINC screen saver.
+
+By allowing the number of bits used to store the column and row numbers (col\_bits and row\_bits fields) to be an arbitrary integer we can achieve a reduction in file size without too much additional work.
+Setting these parameters to something other than 8, 16 or 32 (or 64 on a 64-bit system) will incur an extra processing overhead when reading and writing the file as the program will have to apply some bit shifting operations to retrieve the values.
+The trade off between processing overhead and file size can be beneficial in cases where the number of non-zero elements, rows and/or columns is large and where storage and bandwidth resources are scarce.
+The number of bits for column and row numbers should always be large enough to accommodate the values of the maximum column and row numbers which is also specified in the file.
+This means that the values of 
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|r|r|l|p{2.7in}|}
+		\hline
+		\bf Offset & \bf Length & \bf Type & \bf Description \\ \hline
+		0  & 4 & Text   & File type ID: ``DECS'' \\ \hline
+		4  & 1 & Number & Major file format version. Kernel like versioning. Even numbers are stable and odd numbers are experimental. \\ \hline
+		5  & 1 & Number & Minor file format version. Files with same major version, but different minor are backwards compatible. \\ \hline
+		6  & 2 &        & Reserved for future use. \\ \hline
+		8  & 4 & Number & Number of columns. \\ \hline
+		12 & 4 & Number & Number of rows. \\ \hline
+		16 & 4 & Number & Number of non-zero values in the matrix. \\ \hline
+		20 & 4 & Number & Byte offset to the column and row names. 0 if unavailable. \\ \hline
+		24 & 4 & Number & Byte offset to the secondary column list. 0 if unavailable. \\ \hline
+		28 & 4 & Number & Byte offset to the matrix element entries. Should never be 0. \\ \hline
+		32 & 4 & Number & Problem type ID. Each problem type has a unique ID so that the correct transform can be chosen and the problem specific information can be decoded. \\ \hline
+		36 & 4 & Number & Byte offset to problem specific information. 0 if unavailable. \\ \hline
+%		26 & 2 & Number & Job ID. Each problem type has a unique ID so that the correct transform is selected. \\ \hline
+	\end{tabular}
+	\caption{File format for column and row names}
+	\label{tab:header}
+\end{table}
+
+
+
+\subsection{Storing sparse boolean matrices}
+
+
 \section{libdecs}
+
+
+\subsection{Modes of operation}
+
+% TODO: Fix this if we are able to return only the row numbers from the computing nodes (the DLX library).
+DECS has two basic modes of operation regarding how it handles the return values of the system.
+In the first mode, which is the most common, the system will store and forward all the solutions it finds back to the DECS server.
+This provides the calling application with the full set of solutions so that it can run a detailed analysis on them or save them for later use.
+For problems which generates a very large number of solutions or solutions which occupy large amounts of space this approach can cause a huge strain on the system.
+The memory, storage and bandwidth capacities of the computing nodes and the DECS server could cause considerable delays.
+In extreme cases it might even cause some or all of the solutions to never be returned.
+
+A policy of not accepting overly large problem matrices could be implemented to prevent this problem.
+This works well because the memory requirements of the DLX algorithm is proportional to the size of the problem matrix.
+However, it does not do us much good because the problem will remain unsolved.
+
+The second mode of operation will simply discard the solution matrices, but it keeps a count on the number of solutions
+It will only keep a count
+
+A possible extension to this would be to add other return values than number of solutions.
+Each solution the DLX algorithm arrives at could be further analyzed so that other aspects of the solutions could be returned.
+
 
 
 \section{BOINC}
