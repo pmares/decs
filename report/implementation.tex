@@ -70,6 +70,61 @@ Following the recommendations of Intel's Endianness White Paper \cite{intel-endi
 
 \subsection{Storing sparse boolean matrices}
 
+The storage format for the sparse boolean problem matrix has been designed for fast and efficient reading.
+For libdlx to initialize its data structure it must add the nodes row by row by reading them from the left to the right side.
+It starts with the top row and works its way down to the bottom just like you might read a text document.
+Before the nodes are added a root node is created which is the basis for the entire structure.
+To the right of the root node all the column header nodes are added in the order of increasing column indices.
+
+\begin{algorithm}
+	\caption{Create the circular doubly-linked list of columns}
+	\label{alg:columns}
+	\begin{algorithmic}[1]
+		\STATE $R \leftarrow$ new column object
+		\STATE $T \leftarrow R$
+		\FOR{$i \leftarrow 1$ to the value of the $numcols$ field}
+			\STATE $C \leftarrow$ new column object with index $i$
+			\IF{column $i$ is a primary column}
+				\STATE $C.left \leftarrow T$
+				\STATE $T.right \leftarrow C$
+			\ENDIF
+			\STATE $T \leftarrow C$
+			\STATE $H[i] \leftarrow C$
+		\ENDFOR
+		\STATE $R.left \leftarrow T$
+		\STATE $T.right \leftarrow R$
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Create the circular quad-linked node structure}
+	\label{alg:nodes}
+	\begin{distribalgo}[1]
+		\FOR{$j \leftarrow 1$ to the value of the $numrows$ field}
+			\FOREACH{column index $c$ in row $j$}
+				\STATE $N \leftarrow$ new node object with row index $j$
+				\STATE $C \leftarrow H[c]$
+				\STATE $N.column \leftarrow C$
+				\STATE $C.size \leftarrow C.size + 1$
+				\STATE $N.up \leftarrow C.up$
+				\STATE $N.down \leftarrow C$
+				\STATE $C.up.down \leftarrow N$
+				\STATE $C.up \leftarrow N$
+				\IF{$T$ is not set}
+					\STATE $T \leftarrow N$  \COMMENT{First node in a row}
+					\STATE $N.left \leftarrow N$
+					\STATE $N.right \leftarrow N$
+				\ELSE
+					\STATE $N.left \leftarrow T$
+					\STATE $N.right \leftarrow T.right$
+					\STATE $T.right.left \leftarrow N$
+					\STATE $T.right \leftarrow N$
+				\ENDIF
+			\ENDFOR
+			\STATE Unset $T$
+		\ENDFOR
+	\end{distribalgo}
+\end{algorithm}
 
 %Challenges:
 %- Format version
@@ -194,6 +249,7 @@ Here we will look at the external interface to libdlx and some of its internals.
 % - Building the boolean matrix
 
 \subsection{Building the boolean matrix}
+\label{matrix_construction}
 
 Before the DLX algorithm can be started the matrix needs to be read from a file and the data structures must be initialized.
 In the case of libdlx each non-zero element in the matrix is a quad-linked node in a circular quad-linked structure.
