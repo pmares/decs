@@ -119,4 +119,17 @@ void search(uint k) {
 	uncover(c);
 }
 
+/**
+ * Read from a file and solve the DLX matrix within.
+ */
+int solve(char* file) {
+	// Use own file processing code from different compilation unit to
+	// verify the file format and create the column and node objects.
+	
+	// Do the dance.
+	search(0);
+	return 0;
+}
+
+
 } /*namespace dlx*/
