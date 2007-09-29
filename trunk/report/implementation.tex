@@ -9,7 +9,7 @@
 \section{Transforms}
 
 
-\subsection{$N$ queens}
+\subsection{N queens}
 
 % [Begin Wikipedia quote] Consider a matrix with one column for each of the n ranks of the board, one column for each of the n files, and one column for each of the 4n-6 nontrivial diagonals of the board. The matrix has n^2 rows: one for each possible queen placement, and each row has a 1 in the  columns corresponding to that square's rank, file, and diagonals and a 0 in  all the other columns. Then the n queens problem is equivalent to choosing a subset of the rows of this  matrix such that every column has a 1 in precisely one of the chosen rows;  this is an exact cover problem. [end Wikipedia quote]
 
@@ -58,10 +58,10 @@ However, when the same value is stored in 2 bytes of memory the difference is cl
 \end{table}
 
 In order to achieve portability between different processor and operating system platforms one has to choose either big-endian, little-endian or a bit to indicate the byte ordering used in the file.
-It is also possible to use a endian-neutral format like ASCII text or the External Data Representation (XDR) \cite{RFC4506}.
+It is also possible to use a endian-neutral format like ASCII text or the External Data Representation (XDR) \cite{RFC4506} standard.
 
 To make the file format consistent across platforms little-endian was chosen.
-Following the recommendations of Intel's Endianness White Paper \cite{intel-endian} the proper byte swapping methods for big-endian systems was added.
+Following the recommendations of Intel's Endianness White Paper \cite{intel-endian} the proper byte swapping methods for big-endian systems has been implemented.
 
 %\cite{IEN137}
 % TODO: This is where my actual decision and rationale should be stated.
@@ -71,60 +71,7 @@ Following the recommendations of Intel's Endianness White Paper \cite{intel-endi
 \subsection{Storing sparse boolean matrices}
 
 The storage format for the sparse boolean problem matrix has been designed for fast and efficient reading.
-For libdlx to initialize its data structure it must add the nodes row by row by reading them from the left to the right side.
-It starts with the top row and works its way down to the bottom just like you might read a text document.
-Before the nodes are added a root node is created which is the basis for the entire structure.
-To the right of the root node all the column header nodes are added in the order of increasing column indices.
-
-\begin{algorithm}
-	\caption{Create the circular doubly-linked list of columns}
-	\label{alg:columns}
-	\begin{algorithmic}[1]
-		\STATE $R \leftarrow$ new column object
-		\STATE $T \leftarrow R$
-		\FOR{$i \leftarrow 1$ to the value of the $numcols$ field}
-			\STATE $C \leftarrow$ new column object with index $i$
-			\IF{column $i$ is a primary column}
-				\STATE $C.left \leftarrow T$
-				\STATE $T.right \leftarrow C$
-			\ENDIF
-			\STATE $T \leftarrow C$
-			\STATE $H[i] \leftarrow C$
-		\ENDFOR
-		\STATE $R.left \leftarrow T$
-		\STATE $T.right \leftarrow R$
-	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-	\caption{Create the circular quad-linked node structure}
-	\label{alg:nodes}
-	\begin{distribalgo}[1]
-		\FOR{$j \leftarrow 1$ to the value of the $numrows$ field}
-			\FOREACH{column index $c$ in row $j$}
-				\STATE $N \leftarrow$ new node object with row index $j$
-				\STATE $C \leftarrow H[c]$
-				\STATE $N.column \leftarrow C$
-				\STATE $C.size \leftarrow C.size + 1$
-				\STATE $N.up \leftarrow C.up$
-				\STATE $N.down \leftarrow C$
-				\STATE $C.up.down \leftarrow N$
-				\STATE $C.up \leftarrow N$
-				\IF{$T$ is not set}
-					\STATE $T \leftarrow N$  \COMMENT{First node in a row}
-					\STATE $N.left \leftarrow N$
-					\STATE $N.right \leftarrow N$
-				\ELSE
-					\STATE $N.left \leftarrow T$
-					\STATE $N.right \leftarrow T.right$
-					\STATE $T.right.left \leftarrow N$
-					\STATE $T.right \leftarrow N$
-				\ENDIF
-			\ENDFOR
-			\STATE Unset $T$
-		\ENDFOR
-	\end{distribalgo}
-\end{algorithm}
+For more information on how the matrix data structure is constructed see Section \vref{matrix_construction}.
 
 %Challenges:
 %- Format version
@@ -246,13 +193,76 @@ Here we will look at the external interface to libdlx and some of its internals.
 
 % Challenges
 % - Node and column objects. How to find the correct row number to reduce data sent back to the server.
-% - Building the boolean matrix
+% - Building the boolean matrix.
+% - Memory requirements in terms of the number of nodes and how it scales.
 
 \subsection{Building the boolean matrix}
 \label{matrix_construction}
 
 Before the DLX algorithm can be started the matrix needs to be read from a file and the data structures must be initialized.
 In the case of libdlx each non-zero element in the matrix is a quad-linked node in a circular quad-linked structure.
-To actually construct this data structure we need some column objects as well.
 
-% TODO: Add pseudocode for matrix creation.
+To construct the matrix data structure we have some special column objects.
+Before the nodes are added a root node is created which is the basis for the entire structure.
+To the right of the root node all the column header nodes are added in the order of increasing column indices.
+Algorithm~\ref{algocolumns} shows the pseudo code for creating the circular doubly-linked column list.
+I starts by creating the root node $R$ onto which all the column nodes are attached.
+Take special note of how the secondary column objects are linking to themselves on line~\ref{algosecondary}.
+
+\begin{algorithm}[H]
+	\caption{Create the circular doubly-linked list of columns}
+	\label{algocolumns}
+%	\algsetup{indent=5em}
+	\begin{algorithmic}[1]
+		\STATE $R \leftarrow$ new column object
+		\STATE $T \leftarrow R$
+		\FOR{$i \leftarrow 1$ to the value of the $numcols$ field}
+			\STATE $C \leftarrow$ new column object with index $i$
+			\IF{column $i$ is a primary column}
+				\STATE $C.left \leftarrow T$
+				\STATE $T.right \leftarrow C$
+				\STATE $T \leftarrow C$
+			\ELSE \label{algosecondary}
+				\STATE $C.left \leftarrow C$
+				\STATE $C.right \leftarrow C$
+			\ENDIF
+			\STATE $H[i] \leftarrow C$
+		\ENDFOR
+		\STATE $R.left \leftarrow T$
+		\STATE $T.right \leftarrow R$
+	\end{algorithmic}
+\end{algorithm}
+
+For libdlx to initialize its data structure it must add the nodes row by row by reading them from the left to the right side.
+It starts with the top row and works its way down to the bottom just like you might read a text document.
+
+
+\begin{algorithm}[H]
+	\caption{Create the circular quad-linked node structure}
+	\label{algonodes}
+	\begin{algorithmic}[1]
+		\FOR{$j \leftarrow 1$ to the value of the $numrows$ field}
+			\FOREACH{column index $c$ in row $j$}
+				\STATE $N \leftarrow$ new node object with row index $j$
+				\STATE $C \leftarrow H[c]$
+				\STATE $N.column \leftarrow C$
+				\STATE $C.size \leftarrow C.size + 1$
+				\STATE $N.up \leftarrow C.up$
+				\STATE $N.down \leftarrow C$
+				\STATE $C.up.down \leftarrow N$
+				\STATE $C.up \leftarrow N$
+				\IF{$T$ is set}
+					\STATE $N.left \leftarrow T$
+					\STATE $N.right \leftarrow T.right$
+					\STATE $T.right.left \leftarrow N$
+					\STATE $T.right \leftarrow N$
+				\ELSE
+					\STATE $N.left \leftarrow N$  \COMMENT{First node in a row}
+					\STATE $N.right \leftarrow N$
+				\ENDIF
+				\STATE $T \leftarrow N$
+			\ENDFOR
+			\STATE Unset $T$
+		\ENDFOR
+	\end{algorithmic}
+\end{algorithm}
