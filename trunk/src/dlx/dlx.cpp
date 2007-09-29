@@ -3,23 +3,16 @@
 #include "dlx.h"
 #include "node.h"
 #include "column.h"
+#include "util.h"
 
 namespace dlx {
 
 const uint MAX_LEVELS = 128;
 
-Column* r;
+Column* h;
 Node* o[MAX_LEVELS];
 
 using namespace std;
-
-/**
- * Write a message to stderr and exit with a -1 exit code indicating failure.
- */
-void panic(char* msg) {
-	cerr << msg << endl;
-	exit(-1);
-}
 
 /**
  * Print the solutions.
@@ -35,7 +28,7 @@ void print_solution(uint level) {
 			cout << j->getColumn()->getName() << " ";
 		}
 		
-		cout << endl;
+		cout << endl << endl;
 	}
 }
 
@@ -88,8 +81,6 @@ Column* choose_column(Column* header) {
  * Initially invoked with k = 0.
  */
 void search(uint k) {
-	Column* h;
-
 	// Return if all columns have been covered.
 	if (h->getRight() == h) {
 		print_solution(k);
@@ -122,9 +113,14 @@ void search(uint k) {
 /**
  * Read from a file and solve the DLX matrix within.
  */
-int solve(char* file) {
+int solve(const char* file) {
 	// Use own file processing code from different compilation unit to
 	// verify the file format and create the column and node objects.
+//	h = new Column();
+	int result = read_file(file, h);
+	if (result != 0)
+		return result;
+	
 	
 	// Do the dance.
 	search(0);

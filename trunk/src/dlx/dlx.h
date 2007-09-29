@@ -3,10 +3,7 @@
 
 namespace dlx {
 
-typedef unsigned int uint;
-
-int solve(char* file);
-void panic(char* msg);
+int solve(const char* file);
 
 } /*namespace dlx*/
 

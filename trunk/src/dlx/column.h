@@ -1,9 +1,9 @@
-#ifndef COLUMN_H_
-#define COLUMN_H_
+#ifndef DLX_COLUMN_H_
+#define DLX_COLUMN_H_
 
 #include <string>
-#include "dlx.h"
 #include "node.h"
+#include "util.h"
 
 namespace dlx {
 
@@ -26,4 +26,4 @@ private:
 
 } /*namespace dlx*/
 
-#endif /*COLUMN_H_*/
+#endif /*DLX_COLUMN_H_*/

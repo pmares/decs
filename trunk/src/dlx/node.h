@@ -1,5 +1,5 @@
-#ifndef NODE_H_
-#define NODE_H_
+#ifndef DLX_NODE_H_
+#define DLX_NODE_H_
 
 namespace dlx {
 
@@ -34,4 +34,4 @@ private:
 
 } /*namespace dlx*/
 
-#endif /*NODE_H_*/
+#endif /*DLX_NODE_H_*/
