@@ -3,8 +3,10 @@
 DLX Matrix Examples
 ==========
 
+
 Introduction
 ----------
+
 The files in this folder can be used together with the dance program. They
 contain a boolean matrix representation of a specific exact cover problem. Given
 enough time the Dancing Links algorithm used by the dance program will be able
