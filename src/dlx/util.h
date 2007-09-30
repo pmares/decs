@@ -39,7 +39,7 @@ class Column;
 typedef unsigned int uint;
 
 void panic(const char* msg);
-int read_file(const char* file, Column* header);
+int read_file(char* file, Column* header);
 
 } /*namespace dlx*/
 

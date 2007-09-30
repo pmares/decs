@@ -3,7 +3,7 @@
 
 namespace dlx {
 
-int solve(const char* file);
+int solve(char* file);
 
 } /*namespace dlx*/
 

@@ -12,6 +12,7 @@ using namespace std;
 class Column : public Node {
 public:
 	Column();
+	Column(uint index);
 	virtual ~Column();
 	uint getSize() const { return size; }
 	uint getIndex() const { return index; }
