@@ -3,7 +3,7 @@
  the instance of code that it refers to (the DLX library) is
  copyrighted by me and others who actually wrote it.
 
- Also note that the only valid version of the GPL as far as this program
+ Also note that the only valid version of the GPL as far as this library
  is concerned is _this_ particular version of the license (ie v2, not
  v2.2 or v3.x or whatever), unless explicitly otherwise stated.
  
