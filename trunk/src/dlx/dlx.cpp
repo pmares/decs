@@ -9,8 +9,9 @@ namespace dlx {
 
 const uint MAX_LEVELS = 128;
 
-Column* h;
+Column* h = 0;
 Node* o[MAX_LEVELS];
+uint solutions = 0;
 
 using namespace std;
 
@@ -18,18 +19,19 @@ using namespace std;
  * Print the solutions.
  */
 void print_solution(uint level) {
-	cout << "Solution found: " << endl;
-	for (uint i = 0; i < level - 1; i++) {
-		cout << "Level " << i << ": ";
-
-		Node* obj = o[i];
-		cout << obj->getColumn()->getName() << " ";
-		for (Node* j = obj->getRight(); j != obj ; j = j->getRight()) {
-			cout << j->getColumn()->getName() << " ";
-		}
+	solutions++;
+	cout << "Solution: ";
+	for (uint i = 0; i < level; i++) {
+		cout << o[i]->getRow() << " ";
 		
-		cout << endl << endl;
+//		Node* n = o[i];
+//		cout << n->getColumn()->getIndex() << " ";
+//		for (Node* j = n->getRight(); j != n ; j = j->getRight()) {
+//			cout << j->getColumn()->getIndex() << " ";
+//		}
+		
 	}
+	cout << endl;
 }
 
 /**
@@ -63,9 +65,9 @@ void uncover(Column* c) {
  * minimize the branching factor.
  */
 Column* choose_column(Column* header) {
-	Column* c;
+	Column* c = 0;
 	uint s = UINT_MAX;
-
+	
 	for (Node* j = header->getRight(); j != header; j = j->getRight()) {
 		Column* temp = j->getColumn();
 		if (temp->getSize() < s) {
@@ -95,7 +97,7 @@ void search(uint k) {
 	// Cover all columns which had nodes removed from cover(c).
 	for (Node* r = c->getDown(); r != c; r = r->getDown()) {
 		o[k] = r;
-
+		
 		for (Node* j = r->getRight(); j != r; j = j->getRight())
 			cover(j->getColumn());
 		
@@ -106,24 +108,23 @@ void search(uint k) {
 		for (Node* j = r->getLeft(); j != r; j = j->getLeft())
 			uncover(j->getColumn());
 	}
-
+	
 	uncover(c);
 }
 
 /**
  * Read from a file and solve the DLX matrix within.
  */
-int solve(const char* file) {
-	// Use own file processing code from different compilation unit to
-	// verify the file format and create the column and node objects.
-//	h = new Column();
+int solve(char* file) {
+	// Verify the file format and create the column and node objects.
+	h = new Column();
 	int result = read_file(file, h);
-	if (result != 0)
-		return result;
-	
-	
+	if (result) return result;
+
 	// Do the dance.
+	cout << "Searching..." << endl;
 	search(0);
+	cout << "Search complete: " << solutions << " solution(s) found." << endl;
 	return 0;
 }
 
