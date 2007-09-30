@@ -1,6 +1,6 @@
  
  NOTE! The GPL below is copyrighted by the Free Software Foundation, but
- the instance of code that it refers to (the Dance program) is
+ the instance of code that it refers to (the DLX library) is
  copyrighted by me and others who actually wrote it.
 
  Also note that the only valid version of the GPL as far as this program
