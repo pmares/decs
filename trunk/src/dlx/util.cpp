@@ -28,9 +28,9 @@ namespace dlx {
 using namespace std;
 
 struct FileHeader {
-	char fileid[4];
-	char version;
-	char compat;
+	uint fileid;
+	unsigned char version;
+	unsigned char compat;
 	char reserved[2];
 	uint cols;
 	uint rows;
@@ -52,10 +52,10 @@ void panic(const char* msg) {
 int read_file(char* file, Column* header) {
 	ifstream in(file, ios::binary);
 	if (!in) panic("cannot open file");
-
+	
 	FileHeader fh;
 	in.read(reinterpret_cast<char *>(&fh),sizeof(FileHeader));
-
+	
 	cout << "File information" << '\n';
 //	cout << fh.fileid << '\n';
 	cout << "  version = " << int(fh.version) << '\n';
@@ -63,17 +63,35 @@ int read_file(char* file, Column* header) {
 	cout << "  columns = " << fh.cols << '\n';
 	cout << "  rows = " << fh.rows << '\n';
 	cout << "  elements = " << fh.elems << '\n';
+	cout << "  density = " << ( (double)fh.elems / ((double)fh.rows / (1.0 / (double)fh.cols) ) ) << '\n';
 	cout << "  element offset = " << fh.elem_off << '\n';
 	cout << "  name offset = " << fh.name_off << '\n';
 	cout << "  problem id = " << fh.probid << '\n';
 	cout << "  problem offset = " << fh.prob_off << "\n\n";
+
+	if (fh.fileid != FILE_ID) panic("Incompatible file ID");
+	if (fh.version != FILE_VERSION) panic("Incompatible file version");
 	
-	if (fh.fileid[0] != 'D' ||
-		fh.fileid[1] != 'E' ||
-		fh.fileid[2] != 'C' ||
-		fh.fileid[3] != 'S') {
-		cerr << "Incompatible file ID." << endl;
-		return 1;
+	
+	// Read the secondary column list if available.
+	in.seekg(fh.elem_off);
+	uint secol_size;
+	in.read(reinterpret_cast<char *>(&secol_size),sizeof(secol_size));
+	
+	cout << "Found " << secol_size << " secondary columns: ";
+	uint secol[secol_size];
+	for (uint i = 0; i < secol_size; i++) {
+		in.read(reinterpret_cast<char *>(&secol[i]),sizeof(secol[i]));
+		cout << secol[i] << " ";
+	}
+	cout << endl;
+	
+	uint nextcol = 0;
+	uint secol_index = 0;
+	bool secol_ready = false;
+	if (secol_size > 0) {
+		nextcol = secol[0];
+		secol_ready = true;
 	}
 	
 	
@@ -81,17 +99,24 @@ int read_file(char* file, Column* header) {
 	Column* he[fh.cols];
 	Column* t = header;
 	
+	
 	for (uint i = 0; i < fh.cols; i++) {
 		Column* c = new Column(i);
 		he[i] = c;
 		c->setColumn(c);
-		if (true) { // TODO Add primary column test
+		if (!secol_ready || nextcol != i) {  // Primary column test.
 			c->setLeft(t);
 			t->setRight(c);
 			t = c;
-		} else {
+		} else {  // Secondary column.
 			c->setLeft(c);
 			c->setRight(c);
+			secol_index++;
+			if (secol_index < secol_size) {
+				nextcol = secol[secol_index];
+			} else {
+				secol_ready = false;
+			}
 		}
 	}
 	header->setLeft(t);
@@ -100,7 +125,6 @@ int read_file(char* file, Column* header) {
 	
 	// Create the circular quad-linked matrix structure.
 	cout << "Building the circular quad-linked matrix structure" << endl;
-	in.seekg(fh.elem_off);
 	for (uint i = 0; i < fh.rows; i++) {
 		Node* u = 0; // instead of t
 		uint items;
@@ -117,7 +141,7 @@ int read_file(char* file, Column* header) {
 			
 			n->setColumn(c);
 			c->incrementSize();
-		
+			
 			n->setUp(c->getUp());
 			n->setDown(c);
 			c->getUp()->setDown(n);

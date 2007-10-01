@@ -55,6 +55,9 @@ class Column;
 #endif
 
 typedef unsigned int uint;
+const uint FILE_ID = 0x53434544;
+const uint FILE_VERSION = 1;
+const uint FILE_COMPAT = 0;
 
 void panic(const char* msg);
 int read_file(char* file, Column* header);
