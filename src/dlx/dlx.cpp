@@ -30,24 +30,17 @@ const uint MAX_LEVELS = 128;
 Column* h = 0;
 Node* o[MAX_LEVELS];
 uint solutions = 0;
+uint verbose = 1;
 
 using namespace std;
 
 /**
  * Print the solutions.
  */
-void print_solution(uint level) {
-	solutions++;
+void printSolution(uint level) {
 	cout << "Solution: ";
 	for (uint i = 0; i < level; i++) {
 		cout << o[i]->getRow() << " ";
-		
-//		Node* n = o[i];
-//		cout << n->getColumn()->getIndex() << " ";
-//		for (Node* j = n->getRight(); j != n ; j = j->getRight()) {
-//			cout << j->getColumn()->getIndex() << " ";
-//		}
-		
 	}
 	cout << endl;
 }
@@ -82,7 +75,7 @@ void uncover(Column* c) {
  * Choose a column to cover by using the column size heuristic in order to
  * minimize the branching factor.
  */
-Column* choose_column(Column* header) {
+Column* chooseColumn(Column* header) {
 	Column* c = 0;
 	uint s = UINT_MAX;
 	
@@ -103,13 +96,13 @@ Column* choose_column(Column* header) {
 void search(uint k) {
 	// Return if all columns have been covered.
 	if (h->getRight() == h) {
-		print_solution(k);
+		solutions++;
+		if (verbose > 1) printSolution(k);
 		return;
 	}
 	
-	Column* c = choose_column(h);
-	if (!c) panic("No column found");
-	
+	Column* c = chooseColumn(h);
+	if (!c) panic("no column found");
 	cover(c);
 	
 	// Cover all columns which had nodes removed from cover(c).
@@ -131,18 +124,26 @@ void search(uint k) {
 }
 
 /**
+ * Set the verbose level. Higher means more output.
+ * Default is 1.
+ */
+void setVerboseLevel(uint level) {
+	verbose = level;
+}
+
+/**
  * Read from a file and solve the DLX matrix within.
  */
 int solve(char* file) {
 	// Verify the file format and create the column and node objects.
 	h = new Column();
-	int result = read_file(file, h);
+	int result = read_file(file, h, verbose);
 	if (result) return result;
 
 	// Do the dance.
-	cout << "Searching..." << endl;
+	if (verbose > 0) cout << "Searching..." << endl;
 	search(0);
-	cout << "Search complete: " << solutions << " solution(s) found." << endl;
+	if (verbose > 0) cout << "Search complete: " << solutions << " solution(s) found." << endl;
 	return 0;
 }
 
