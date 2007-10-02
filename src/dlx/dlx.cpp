@@ -48,7 +48,7 @@ void printSolution(uint level) {
 /**
  * Cover column c.
  */
-void cover(Column* c) {
+inline void cover(Column* c) {
 	c->unlinkRow();
 	for (Node* i = c->getDown(); i != c; i = i->getDown()) {
 		for (Node* j = i->getRight(); j != i; j = j->getRight()) {
@@ -61,7 +61,7 @@ void cover(Column* c) {
 /**
  * Uncover column c.
  */
-void uncover(Column* c) {
+inline void uncover(Column* c) {
 	for (Node* i = c->getUp(); i != c; i = i->getUp()) {
 		for (Node* j = i->getLeft(); j != i; j = j->getLeft()) {
 			j->getColumn()->incrementSize(); // TODO C++ being an ass...
@@ -74,12 +74,12 @@ void uncover(Column* c) {
 /**
  * Choose a column to cover by using the column size heuristic in order to
  * minimize the branching factor.
- */
-Column* chooseColumn(Column* header) {
+ */ 
+inline Column* chooseColumn() {
 	Column* c = 0;
 	uint s = UINT_MAX;
 	
-	for (Node* j = header->getRight(); j != header; j = j->getRight()) {
+	for (Node* j = h->getRight(); j != h; j = j->getRight()) {
 		Column* temp = j->getColumn();
 		if (temp->getSize() < s) {
 			c = temp;
@@ -101,7 +101,7 @@ void search(uint k) {
 		return;
 	}
 	
-	Column* c = chooseColumn(h);
+	Column* c = chooseColumn();
 	if (!c) panic("no column found");
 	cover(c);
 	
@@ -112,8 +112,9 @@ void search(uint k) {
 		for (Node* j = r->getRight(); j != r; j = j->getRight())
 			cover(j->getColumn());
 		
-		search(k + 1);		
-		r = o[k];
+		search(k + 1);
+		// r = o[k];
+		
 		c = r->getColumn();
 		
 		for (Node* j = r->getLeft(); j != r; j = j->getLeft())
@@ -124,8 +125,7 @@ void search(uint k) {
 }
 
 /**
- * Set the verbose level. Higher means more output.
- * Default is 1.
+ * Set the verbose level. Higher means more output. Default is 1.
  */
 void setVerboseLevel(uint level) {
 	verbose = level;
