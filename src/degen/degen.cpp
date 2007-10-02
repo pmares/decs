@@ -44,9 +44,17 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 	
+	if (setQueens(atoi(argv[1]))) {
+		cerr << "failed to set library parameter 'number of queens' = " << argv[1] << endl;
+		return 1;
+	}
+	
 	cout << "Generating matrix..." << '\n';
-	setQueens(atoi(argv[1]));
-	transform(argv[2]);
+	if (transform(argv[2])) {
+		cerr << "unable to complete transform" << endl;
+		return 1;
+	}
+
 	cout << "Matrix generated and written to the file:" << '\n';
 	cout << argv[2] << endl;
 	return 0;
