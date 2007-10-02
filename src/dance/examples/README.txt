@@ -50,4 +50,32 @@ Solutions: 0->?
 
 The n queens problem matrices for n=2 to 26. n=26 has yet to be solved. The
 density rapidly decreases with increasing values for n, and for n=8 it's 0.9%
+The list below shows the number of solutions for a given n.
+
+ n	   	solutions
+ 1                   1
+ 2                   0
+ 3                   0
+ 4                   2
+ 5                  10
+ 6                   4
+ 7                  40
+ 8                  92
+ 9                 352
+10                 724
+11                2680
+12               14200
+13               73712
+14              365596
+15             2279184
+16            14772512
+17            95815104
+18           666090624
+19          4968057848
+20         39029188884
+21        314666222712
+22       2691008701644
+23      24233937684440
+24     227514171973736
+25    2207893435808352
 
