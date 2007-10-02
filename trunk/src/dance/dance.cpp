@@ -19,7 +19,7 @@
 #include <iostream>
 #include "dlx.h"
 
-const char* version = "1.0";
+const char* version = "0.2";
 
 using namespace std; 
 
