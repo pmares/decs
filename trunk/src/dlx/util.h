@@ -60,7 +60,7 @@ const uint FILE_VERSION = 1;
 const uint FILE_COMPAT = 0;
 
 void panic(const char* msg);
-int read_file(char* file, Column* header);
+int read_file(char* file, Column* header, uint verbose);
 
 } /*namespace dlx*/
 

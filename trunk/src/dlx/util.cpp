@@ -49,25 +49,27 @@ void panic(const char* msg) {
 	exit(1);
 }
 
-int read_file(char* file, Column* header) {
+int read_file(char* file, Column* header, uint verbose) {
 	ifstream in(file, ios::binary);
 	if (!in) panic("cannot open file");
 	
 	FileHeader fh;
 	in.read(reinterpret_cast<char *>(&fh),sizeof(FileHeader));
 	
-	cout << "File information" << '\n';
-//	cout << fh.fileid << '\n';
-	cout << "  version = " << int(fh.version) << '\n';
-	cout << "  compat = " << int(fh.compat) << '\n';
-	cout << "  columns = " << fh.cols << '\n';
-	cout << "  rows = " << fh.rows << '\n';
-	cout << "  elements = " << fh.elems << '\n';
-	cout << "  density = " << ( (double)fh.elems / ((double)fh.rows / (1.0 / (double)fh.cols) ) ) << '\n';
-	cout << "  element offset = " << fh.elem_off << '\n';
-	cout << "  name offset = " << fh.name_off << '\n';
-	cout << "  problem id = " << fh.probid << '\n';
-	cout << "  problem offset = " << fh.prob_off << "\n\n";
+	if (verbose > 1) { 
+		cout << "File information" << '\n';
+//		cout << fh.fileid << '\n';
+		cout << "  version = " << int(fh.version) << '\n';
+		cout << "  compat = " << int(fh.compat) << '\n';
+		cout << "  columns = " << fh.cols << '\n';
+		cout << "  rows = " << fh.rows << '\n';
+		cout << "  elements = " << fh.elems << '\n';
+		cout << "  density = " << ( (double)fh.elems / ((double)fh.rows / (1.0 / (double)fh.cols) ) ) << '\n';
+		cout << "  element offset = " << fh.elem_off << '\n';
+		cout << "  name offset = " << fh.name_off << '\n';
+		cout << "  problem id = " << fh.probid << '\n';
+		cout << "  problem offset = " << fh.prob_off << "\n\n";
+	}
 
 	if (fh.fileid != FILE_ID) panic("Incompatible file ID");
 	if (fh.version != FILE_VERSION) panic("Incompatible file version");
@@ -78,13 +80,13 @@ int read_file(char* file, Column* header) {
 	uint secol_size;
 	in.read(reinterpret_cast<char *>(&secol_size),sizeof(secol_size));
 	
-	cout << "Found " << secol_size << " secondary columns: ";
+	if (verbose > 1) cout << "Found " << secol_size << " secondary columns: ";
 	uint secol[secol_size];
 	for (uint i = 0; i < secol_size; i++) {
 		in.read(reinterpret_cast<char *>(&secol[i]),sizeof(secol[i]));
-		cout << secol[i] << " ";
+		if (verbose > 1) cout << secol[i] << " ";
 	}
-	cout << endl;
+	if (verbose > 1) cout << endl;
 	
 	uint nextcol = 0;
 	uint secol_index = 0;
@@ -98,8 +100,6 @@ int read_file(char* file, Column* header) {
 	// Create the circular doubly-linked list of columns.
 	Column* he[fh.cols];
 	Column* t = header;
-	
-	
 	for (uint i = 0; i < fh.cols; i++) {
 		Column* c = new Column(i);
 		he[i] = c;
@@ -124,19 +124,21 @@ int read_file(char* file, Column* header) {
 	
 	
 	// Create the circular quad-linked matrix structure.
-	cout << "Building the circular quad-linked matrix structure" << endl;
+	if (verbose > 1) cout << "Building the circular quad-linked matrix structure" << endl;
 	for (uint i = 0; i < fh.rows; i++) {
 		Node* u = 0; // instead of t
 		uint items;
 		in.read(reinterpret_cast<char *>(&items),sizeof(items));
-		cout << "  Row " << i << " [size = " << items << "] = ";
+		if (verbose > 1) cout << "  Row " << i << " [size = " << items << "] = ";
 		for (uint j = 0; j < items; j++) {
 			Node* n = new Node(i);
 			
 			uint column;
 			in.read(reinterpret_cast<char *>(&column),sizeof(column));
-			cout << column << " ";
-			cout.flush();
+			if (verbose > 1) {
+				cout << column << " ";
+				cout.flush();
+			}
 			Column* c = he[column];
 			
 			n->setColumn(c);
@@ -158,9 +160,9 @@ int read_file(char* file, Column* header) {
 			}
 			u = n;
 		}
-		cout << '\n';
+		if (verbose > 1) cout << '\n';
 	}
-	cout << endl;
+	if (verbose > 1) cout << endl;
 	
 	return 0;
 }

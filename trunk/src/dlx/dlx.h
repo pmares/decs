@@ -21,7 +21,10 @@
 
 namespace dlx {
 
+typedef unsigned int uint;
+
 int solve(char* file);
+void setVerboseLevel(uint level);
 
 } /*namespace dlx*/
 
