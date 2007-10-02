@@ -19,7 +19,7 @@
 #include <iostream>
 #include "nqdecs.h"
 
-const char* version = "1.0";
+const char* version = "0.2";
 
 using namespace std; 
 
