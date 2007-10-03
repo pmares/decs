@@ -19,27 +19,44 @@
 #include <iostream>
 #include "dlx.h"
 
+typedef unsigned int uint;
 const char* version = "0.2";
+uint verbose = 1;
 
 using namespace std; 
 
 void print_usage() {
-	cout << "Usage: dance.exe <file.decs>" << '\n';
+	cout << "Usage: dance.exe [options] <file.decs>\n\n";
+	cout << "Options:\n";
+	cout << "    -v   Verbose output.\n";
+	cout << "    -q   Quiet. Don't output to stdout.\n";
 }
 
 int main(int argc, char* argv[]) {
-	cout << "Dance v" << version << '\n';
-	cout << "Copyright (c) 2007  Jan Magne Tjensvold" << "\n\n";
-	cout.flush();
+	if (argc > 2) {
+		if (!strcmp(argv[1],"-q")) {
+			verbose = 0;
+		} else if (!strcmp(argv[1],"-v")) {
+			verbose = 2;
+		}
+	}
 	
-	if (argc != 2) {
+	if (verbose > 0) {
+		cout << "Dance v" << version << '\n';
+		cout << "Copyright (c) 2007  Jan Magne Tjensvold\n\n";
+	}
+	
+	if (argc < 2) {
 		cerr << "No file specified on the command line" << endl;
 		print_usage();
 		return 1;
 	}
 	
-	cout << "Dancing to the rhythm of" << '\n';
-	cout << argv[1] << "\n\n";
-	dlx::solve(argv[1]);
+	if (verbose > 0) { 
+		cout << "Dancing to the rhythm of" << '\n';
+		cout << argv[argc-1] << "\n\n";
+	}
+	dlx::setVerboseLevel(verbose);
+	dlx::solve(argv[argc-1]);
 	return 0;
 }
