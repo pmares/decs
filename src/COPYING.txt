@@ -1,7 +1,7 @@
  
  NOTE! The GPL below is copyrighted by the Free Software Foundation, but
- the instance of code that it refers to (the Degen program) is
- copyrighted by me and others who actually wrote it.
+ the instance of code that it refers to (the DECS system) is copyrighted
+ by me and others who actually wrote it.
 
  Also note that the only valid version of the GPL as far as this program
  is concerned is _this_ particular version of the license (ie v2, not
