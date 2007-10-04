@@ -11,6 +11,6 @@ add_executable( dance ${dance_SRCS} )
 target_link_libraries( dance dlx )
 
 install( TARGETS dance DESTINATION ${BIN_OUTPUT_PATH} )
-install( FILES README.txt RENAME README-DANCE.txt DESTINATION ${DATA_OUTPUT_PATH} )
+install( FILES README.txt RENAME README-DANCE.txt DESTINATION ${DOC_OUTPUT_PATH} )
 
 add_subdirectory( examples )

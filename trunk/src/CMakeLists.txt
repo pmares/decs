@@ -29,14 +29,35 @@ set( CMAKE_EXE_LINKER_FLAGS_RELEASE -s )
 set( CMAKE_SHARED_LINKER_FLAGS_RELEASE -s )
 set( CMAKE_MODULE_LINKER_FLAGS_RELEASE -s )
 
+# Standard directory variables, most of which are unused
+# See the GNU make documentation and the File Hierarchy Standard for
+# more information about standard directory variables
+# http://www.gnu.org/software/make/manual/make.html#Directory-Variables
+# http://www.pathname.com/fhs/
+
+set( BIN_OUTPUT_PATH ${CMAKE_INSTALL_PREFIX}/bin )
+set( LIB_OUTPUT_PATH ${CMAKE_INSTALL_PREFIX}/lib )
+set( INCLUDE_OUTPUT_PATH ${CMAKE_INSTALL_PREFIX}/include )
+set( DATA_OUTPUT_PATH ${CMAKE_INSTALL_PREFIX}/share/decs )
+set( DOC_OUTPUT_PATH ${DATA_OUTPUT_PATH}/doc/decs-${DECS_VERSION} )
+set( INFO_OUTPUT_PATH ${DATA_OUTPUT_PATH}/info )
+set( MAN_OUTPUT_PATH ${DATA_OUTPUT_PATH}/man )
+set( MAN1_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man1 )
+set( MAN2_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man2 )
+set( MAN3_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man3 )
+set( MAN4_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man4 )
+set( MAN5_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man5 )
+set( MAN6_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man6 )
+set( MAN7_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man7 )
+set( MAN8_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man8 )
+set( MAN9_OUTPUT_PATH ${MAN_OUTPUT_PATH}/man9 )
+
 if(WIN32)
 	set( BIN_OUTPUT_PATH ${CMAKE_INSTALL_PREFIX} )
 	set( LIB_OUTPUT_PATH ${CMAKE_INSTALL_PREFIX} )
 	set( DATA_OUTPUT_PATH ${CMAKE_INSTALL_PREFIX} )
-else(WIN32)
-	set( BIN_OUTPUT_PATH bin )
-	set( LIB_OUTPUT_PATH lib )
-	set( DATA_OUTPUT_PATH share/doc/decs-${DECS_VERSION} )
+	set( DOC_OUTPUT_PATH ${DATA_OUTPUT_PATH} )
+	# INFO and MAN paths are not supported in Windows
 endif(WIN32)
 
 
