@@ -79,9 +79,10 @@ int read_file(char* file, Column* header, uint verbose) {
 	in.seekg(fh.elem_off);
 	uint secol_size;
 	in.read(reinterpret_cast<char *>(&secol_size),sizeof(secol_size));
-	
+
 	if (verbose > 1) cout << "Found " << secol_size << " secondary columns: ";
-	uint secol[secol_size];
+	uint* secol = new uint[secol_size];
+
 	for (uint i = 0; i < secol_size; i++) {
 		in.read(reinterpret_cast<char *>(&secol[i]),sizeof(secol[i]));
 		if (verbose > 1) cout << secol[i] << " ";
@@ -98,7 +99,8 @@ int read_file(char* file, Column* header, uint verbose) {
 	
 	
 	// Create the circular doubly-linked list of columns.
-	Column* he[fh.cols];
+//	Column* he[fh.cols];
+	Column** he = new Column*[fh.cols];
 	Column* t = header;
 	for (uint i = 0; i < fh.cols; i++) {
 		Column* c = new Column(i);
@@ -121,7 +123,8 @@ int read_file(char* file, Column* header, uint verbose) {
 	}
 	header->setLeft(t);
 	t->setRight(header);
-	
+	delete secol;
+
 	
 	// Create the circular quad-linked matrix structure.
 	if (verbose > 1) cout << "Building the circular quad-linked matrix structure" << endl;
@@ -163,7 +166,8 @@ int read_file(char* file, Column* header, uint verbose) {
 		if (verbose > 1) cout << '\n';
 	}
 	if (verbose > 1) cout << endl;
-	
+	delete he;
+
 	return 0;
 }
 
