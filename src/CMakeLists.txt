@@ -36,7 +36,7 @@ if(WIN32)
 else(WIN32)
 	set( BIN_OUTPUT_PATH bin )
 	set( LIB_OUTPUT_PATH lib )
-	set( DATA_OUTPUT_PATH share/doc )
+	set( DATA_OUTPUT_PATH share/doc/decs-${DECS_VERSION} )
 endif(WIN32)
 
 
