@@ -24,7 +24,7 @@ const char* version = "0.2";
 using namespace std; 
 
 void print_usage() {
-	cout << "Usage: degen.exe <params> <file.decs>\n\n";
+	cout << "Usage: degen.exe <options> <file.decs>\n\n";
 	cout << "libnqdecs options:\n";
 	cout << "  number of queens\n";
 	cout << endl;
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 		cerr << "No file specified on the command line" << endl;
 		print_usage();
 		return 1;
-	} else if (!strcmpi(argv[1],"--HELP")) {
+	} else if (!strcmp(argv[1],"--help") || !strcmp(argv[1],"-h") ) {
 		print_usage();
 		return 0;
 	}
