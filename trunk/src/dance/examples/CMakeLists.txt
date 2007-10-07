@@ -1,5 +1,6 @@
 install( FILES
 	README.txt
+	knuthx.decs
 	tiny.decs	
 	micro.decs
 	queens2.decs
