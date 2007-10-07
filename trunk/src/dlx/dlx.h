@@ -23,8 +23,13 @@ namespace dlx {
 
 typedef unsigned int uint;
 
+const uint MAX_LEVELS = 128;
+
 int solve(char* file);
 void setVerboseLevel(uint level);
+uint getUpdates();
+uint getMaxLevel();
+uint getProfile(uint level);
 
 } /*namespace dlx*/
 
