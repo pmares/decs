@@ -27,6 +27,16 @@ is a general cover problem in contrast to exact cover problems which have no
 
 CRED format: columns x rows (secondary columns), non-zero elements, density
 
+
+knuthx.decs
+----------
+CRED: 7x6, 16, 38.1%
+Solutions: 1 [0 3 4]
+
+This is the example matrix used by Donald E. Knuth in his "Dancing Links" paper.
+The matrix is shown in (3) and figure 2, 3 and 4 in the paper.
+
+
 micro.decs
 ----------
 CRED: 4x6, 9, 37.5%
@@ -38,7 +48,7 @@ A very small and simple matrix used to test the dance program.
 tiny.decs
 ----------
 CRED: 6x10, 26, 43.3%
-Solutions: 2 [1 7] [6 5]
+Solutions: 2 [1 7] [5 6]
 
 A very simple matrix used for testing the dance program.
 
