@@ -97,7 +97,7 @@ inline Column* chooseColumn() {
 
 /**
  * Search through the remaining matrix for a solution.
- * Initially invoked with k = 0.
+ * Initially invoked when level = 0.
  */
 void search() {
 	if (level > maxLevel) maxLevel = level; 
