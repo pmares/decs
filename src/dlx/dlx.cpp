@@ -25,19 +25,21 @@
 
 namespace dlx {
 
-const uint MAX_LEVELS = 128;
-
 Column* h = 0;
 Node* o[MAX_LEVELS];
 uint solutions = 0;
 uint verbose = 1;
+uint updates = 0;
+uint profile[MAX_LEVELS];
+uint maxLevel = 0;
+uint level = 0;
 
 using namespace std;
 
 /**
  * Print the solutions.
  */
-void printSolution(uint level) {
+void printSolution() {
 	cout << "Solution: ";
 	for (uint i = 0; i < level; i++) {
 		cout << o[i]->getRow() << " ";
@@ -50,12 +52,16 @@ void printSolution(uint level) {
  */
 inline void cover(Column* c) {
 	c->unlinkRow();
+	uint k = 0;
 	for (Node* i = c->getDown(); i != c; i = i->getDown()) {
 		for (Node* j = i->getRight(); j != i; j = j->getRight()) {
 			j->unlinkColumn();
+			k++;
 			j->getColumn()->decrementSize(); // TODO C++ being an ass...
 		}
 	}
+	updates += k;
+	profile[level] += k;
 }
 
 /**
@@ -93,11 +99,13 @@ inline Column* chooseColumn() {
  * Search through the remaining matrix for a solution.
  * Initially invoked with k = 0.
  */
-void search(uint k) {
+void search() {
+	if (level > maxLevel) maxLevel = level; 
+	
 	// Return if all columns have been covered.
 	if (h->getRight() == h) {
 		solutions++;
-		if (verbose > 1) printSolution(k);
+		if (verbose > 1) printSolution();
 		return;
 	}
 	
@@ -107,12 +115,14 @@ void search(uint k) {
 	
 	// Cover all columns which had nodes removed from cover(c).
 	for (Node* r = c->getDown(); r != c; r = r->getDown()) {
-		o[k] = r;
+		o[level] = r;
 		
 		for (Node* j = r->getRight(); j != r; j = j->getRight())
 			cover(j->getColumn());
 		
-		search(k + 1);
+		level++;
+		search();
+		level--;
 		// r = o[k];
 		
 		c = r->getColumn();
@@ -131,6 +141,18 @@ void setVerboseLevel(uint level) {
 	verbose = level;
 }
 
+uint getUpdates() {
+	return updates;
+}
+
+uint getMaxLevel() {
+	return maxLevel;
+}
+
+uint getProfile(uint level) {
+	return profile[level];
+}
+
 /**
  * Read from a file and solve the DLX matrix within.
  */
@@ -142,7 +164,7 @@ int solve(char* file) {
 
 	// Do the dance.
 	if (verbose > 0) cout << "Searching..." << endl;
-	search(0);
+	search();
 	if (verbose > 0) cout << "Search complete: " << solutions << " solution(s) found." << endl;
 	return 0;
 }
