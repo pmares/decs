@@ -45,13 +45,13 @@ struct FileHeader {
  * Write a message to stderr and exit with an exit code of 1 to indicate failure.
  */
 void panic(const char* msg) {
-	cerr << msg << endl;
+	cerr << "Error: " << msg << endl;
 	exit(1);
 }
 
 int read_file(char* file, Column* header, uint verbose) {
 	ifstream in(file, ios::binary);
-	if (!in) panic("cannot open file");
+	if (!in) panic("Cannot open file");
 	
 	FileHeader fh;
 	in.read(reinterpret_cast<char *>(&fh),sizeof(FileHeader));
@@ -80,7 +80,11 @@ int read_file(char* file, Column* header, uint verbose) {
 	uint secol_size;
 	in.read(reinterpret_cast<char *>(&secol_size),sizeof(secol_size));
 
-	if (verbose > 1) cout << "Found " << secol_size << " secondary columns: ";
+	if (verbose > 1) {
+		cout << "Found " << secol_size << " secondary columns";
+		if (secol_size > 0) cout << ": ";
+	}
+	
 	uint* secol = new uint[secol_size];
 
 	for (uint i = 0; i < secol_size; i++) {
@@ -99,7 +103,6 @@ int read_file(char* file, Column* header, uint verbose) {
 	
 	
 	// Create the circular doubly-linked list of columns.
-//	Column* he[fh.cols];
 	Column** he = new Column*[fh.cols];
 	Column* t = header;
 	for (uint i = 0; i < fh.cols; i++) {
@@ -124,10 +127,10 @@ int read_file(char* file, Column* header, uint verbose) {
 	header->setLeft(t);
 	t->setRight(header);
 	delete secol;
-
+	
 	
 	// Create the circular quad-linked matrix structure.
-	if (verbose > 1) cout << "Building the circular quad-linked matrix structure" << endl;
+	if (verbose > 1) cout << "Building the circular quad-linked matrix structure\n";
 	for (uint i = 0; i < fh.rows; i++) {
 		Node* u = 0; // instead of t
 		uint items;
@@ -165,7 +168,7 @@ int read_file(char* file, Column* header, uint verbose) {
 		}
 		if (verbose > 1) cout << '\n';
 	}
-	if (verbose > 1) cout << endl;
+	if (verbose > 1) cout << '\n';
 	delete he;
 
 	return 0;

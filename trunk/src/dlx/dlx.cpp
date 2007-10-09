@@ -52,7 +52,7 @@ void printSolution() {
  */
 inline void cover(Column* c) {
 	c->unlinkRow();
-	uint k = 0;
+	uint k = 1;
 	for (Node* i = c->getDown(); i != c; i = i->getDown()) {
 		for (Node* j = i->getRight(); j != i; j = j->getRight()) {
 			j->unlinkColumn();
@@ -80,9 +80,9 @@ inline void uncover(Column* c) {
 /**
  * Choose a column to cover by using the column size heuristic in order to
  * minimize the branching factor.
- */ 
+ */
 inline Column* chooseColumn() {
-	Column* c = 0;
+	Column* c = NULL;
 	uint s = UINT_MAX;
 	
 	for (Node* j = h->getRight(); j != h; j = j->getRight()) {
@@ -110,7 +110,7 @@ void search() {
 	}
 	
 	Column* c = chooseColumn();
-	if (!c) panic("no column found");
+	if (!c) panic("Unable to choose a column because no columns could be found");
 	cover(c);
 	
 	// Cover all columns which had nodes removed from cover(c).
@@ -153,6 +153,21 @@ uint getProfile(uint level) {
 	return profile[level];
 }
 
+uint countSolutions() {
+	return solutions;
+}
+
+/**
+ * Returns the number of columns currently in the linked list. This is the
+ * number of uncovered columns.
+ */
+uint countColumns() {
+	uint cols = 0;
+	for (Node* c = h->getRight(); c != h; c = c->getRight())
+		cols++;
+	return cols;
+}
+
 /**
  * Read from a file and solve the DLX matrix within.
  */
@@ -163,9 +178,7 @@ int solve(char* file) {
 	if (result) return result;
 
 	// Do the dance.
-	if (verbose > 0) cout << "Searching..." << endl;
 	search();
-	if (verbose > 0) cout << "Search complete: " << solutions << " solution(s) found." << endl;
 	return 0;
 }
 

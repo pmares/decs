@@ -30,6 +30,8 @@ void setVerboseLevel(uint level);
 uint getUpdates();
 uint getMaxLevel();
 uint getProfile(uint level);
+uint countSolutions();
+uint countColumns();
 
 } /*namespace dlx*/
 
