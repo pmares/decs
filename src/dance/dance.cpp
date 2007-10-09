@@ -98,8 +98,12 @@ int main(int argc, char* argv[]) {
 	}
 	
 	dlx::setVerboseLevel(verbose);
+	if (verbose > 0) cout << "Searching...\n";
 	dlx::solve(file);
-	
+
+	if (verbose > 0) cout << "Search complete: " << dlx::countSolutions() << " solution(s) found\n";
+	if (verbose > 0) cout << "\nFinal column length: " << dlx::countColumns();
+
 	uint updates = dlx::getUpdates();
 	
 	if (showProfile) {
