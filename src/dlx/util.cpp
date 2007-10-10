@@ -169,7 +169,7 @@ int read_file(char* file, Column* header, uint verbose) {
 		if (verbose > 1) cout << '\n';
 	}
 	if (verbose > 1) cout << '\n';
-	delete he;
+	delete[] he;
 
 	return 0;
 }
