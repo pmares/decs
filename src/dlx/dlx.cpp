@@ -115,7 +115,7 @@ void search() {
 		if (h->getRight() == h) {
 			solutions++;
 			if (verbose > 1) printSolution();
-			return;
+			break;
 		}
 		
 		level++;
