@@ -44,7 +44,7 @@ void printSolution() {
 	for (uint i = 0; i <= level; i++) {
 		cout << o[i]->getRow() << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 /**
