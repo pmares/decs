@@ -22,15 +22,13 @@ namespace dlx {
 
 Column::Column():
 	size(0),
-	index(0),
-	name()
+	index(0)
 {
 	setColumn(this);
 }
 Column::Column(uint index):
 	size(0),
-	index(index),
-	name()
+	index(index)
 {
 	setColumn(this);
 }

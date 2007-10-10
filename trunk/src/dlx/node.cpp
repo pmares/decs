@@ -94,7 +94,7 @@ void Node::unlinkRow() {
  */
 void Node::expose() {
 	std::cout << "[row] = [" << ", " << row << "] ";
-	std::cout << "[this,left,right,up,down] = [" << this << ", " << left << ", " << right << ", " << up << ", " << down << "]" << std::endl;
+	std::cout << "[this,left,right,up,down] = [" << this << ", " << left << ", " << right << ", " << up << ", " << down << "]\n";
 }
 
 } /*namespace dlx*/
