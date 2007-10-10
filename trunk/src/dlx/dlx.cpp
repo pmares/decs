@@ -119,14 +119,11 @@ void search() {
 			level++;
 			search();
 			level--;
-//			r = o[level];
-//			c = r->getColumn();
 		}
 		
 		for (Node* j = r->getLeft(); j != r; j = j->getLeft())
 			uncover(j->getColumn());
 	}
-	
 	uncover(c);
 }
 
