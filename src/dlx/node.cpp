@@ -17,7 +17,6 @@
  */
 
 #include "node.h"
-#include <iostream>
 
 namespace dlx {
 
@@ -36,15 +35,11 @@ Node::Node(uint row):
 }
 
 Node::~Node() {
-	if (left) left->right = 0;
-	if (right) right->left = 0;
-	if (up) up->down = 0;
-	if (down) down->up = 0;
-	
 	left = 0;
 	right = 0;
 	up = 0;
 	down = 0;
+	col = 0;
 }
 
 /**
@@ -87,14 +82,6 @@ void Node::linkRow() {
 void Node::unlinkRow() {
 	right->left = left;
 	left->right = right;
-}
-
-/**
- * Print out the nodes this node is linked to.
- */
-void Node::expose() {
-	std::cout << "[row] = [" << ", " << row << "] ";
-	std::cout << "[this,left,right,up,down] = [" << this << ", " << left << ", " << right << ", " << up << ", " << down << "]\n";
 }
 
 } /*namespace dlx*/

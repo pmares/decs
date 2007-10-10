@@ -126,7 +126,7 @@ int read_file(char* file, Column* header, uint verbose) {
 	}
 	header->setLeft(t);
 	t->setRight(header);
-	delete secol;
+	delete[] secol;
 	
 	
 	// Create the circular quad-linked matrix structure.

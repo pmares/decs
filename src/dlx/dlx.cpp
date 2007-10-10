@@ -111,18 +111,17 @@ void search() {
 		for (Node* j = r->getRight(); j != r; j = j->getRight())
 			cover(j->getColumn());
 		
-		// Return if all columns have been covered.
+		// Check for a solution.
 		if (h->getRight() == h) {
 			solutions++;
 			if (verbose > 1) printSolution();
-			break;
+		} else {
+			level++;
+			search();
+			level--;
+//			r = o[level];
+//			c = r->getColumn();
 		}
-		
-		level++;
-		search();
-		level--;
-//		r = o[level];
-//		c = r->getColumn();
 		
 		for (Node* j = r->getLeft(); j != r; j = j->getLeft())
 			uncover(j->getColumn());
@@ -166,14 +165,41 @@ uint countColumns() {
 }
 
 /**
+ * Deallocate space used for the matrix data structure and reset global
+ * variables.
+ */
+void cleanup() {
+	solutions = updates = maxLevel = level = 0;
+	
+	for (uint i = 0; i < MAX_LEVELS; i++) {
+		o[i] = 0;
+		profile[i] = 0;
+	}
+	
+	if (!h) return;
+	
+	for (Node* c = h->getLeft(); c != h ; c = h->getLeft()) {
+		for (Node* r = c->getUp(); r != c; r = c->getUp()) {
+			r->unlinkColumn();
+			delete r;
+		}
+		c->unlinkRow();
+		delete c;
+	}
+	delete h;
+}
+
+/**
  * Read from a file and solve the DLX matrix within.
  */
 int solve(char* file) {
+	if (h) cleanup();
+	
 	// Verify the file format and create the column and node objects.
 	h = new Column();
 	int result = read_file(file, h, verbose);
 	if (result) return result;
-
+	
 	// Do the dance.
 	search();
 	return 0;
