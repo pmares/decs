@@ -22,10 +22,6 @@
 namespace dlx {
 
 Node::Node():
-	left(),
-	right(),
-	up(),
-	down(),
 	col(),
 	row(0)
 {
@@ -33,10 +29,6 @@ Node::Node():
 }
 
 Node::Node(uint row):
-	left(),
-	right(),
-	up(),
-	down(),
 	col(),
 	row(row)
 {
@@ -57,70 +49,44 @@ Node::~Node() {
 
 /**
  * Link the node back into the column list. It changes the links from its up and
- * down nodes to point to itself. It returns 0 on success and 1 if either
- * one or both of the up and down pointers are null. If one of the pointers are
- * null the linking may only be partially completed.  
+ * down nodes to point to itself. If one of the pointers are null the linking
+ * may only be partially completed.
  */
-int Node::linkColumn() {
-	if (!up || !down)
-		return 1;
-	
+void Node::linkColumn() {
 //	col->incrementSize();  // TODO This should work, but C++ is being an ass.
 	down->up = this;
 	up->down = this;
-	
-	return 0;
 }
 
 /**
  * Unlink the node from the column list. It changes the links from its up and
- * down node to point to its down and up node respectively. It returns 0 on
- * success and 1 if either one or both of the up and down pointers are null.
- * If one of the pointers are null the unlinking may only be partially
- * completed.  
+ * down node to point to its down and up node respectively. If one of the
+ * pointers are null the unlinking may only be partially completed.
  */
-int Node::unlinkColumn() {
-	if (!up || !down)
-		return 1;
-	
+void Node::unlinkColumn() {
 	down->up = up;
 	up->down = down;
 //	col->decrementSize();  // TODO This should work, but C++ is being an ass.
-	
-	return 0;	
 }
 
 /**
  * Link the node back into the row list. It changes the links from its left and
- * right node to point to itself. It returns 0 on success and 1 if either
- * one or both of the left and right pointers are null. If one of the pointers
- * are null the linking may only be partially completed.  
+ * right node to point to itself. If one of the pointers are null the linking
+ * may only be partially completed.
  */
-int Node::linkRow() {
-	if (!right || !left)
-		return 1;
-	
+void Node::linkRow() {
 	right->left = this;
 	left->right = this;
-	
-	return 0;
 }
 
 /**
  * Unlink the node from the row list. It changes the links from its left and
- * right node to point to its right and left node respectively. It returns 0 on
- * success and 1 if either one or both of the left and right pointers are
- * null. If one of the pointers are null the unlinking may only be partially
- * completed.  
+ * right node to point to its right and left node respectively. If one of the
+ * pointers are null the unlinking may only be partially completed.
  */
-int Node::unlinkRow() {
-	if (!right || !left)
-		return 1;
-	
+void Node::unlinkRow() {
 	right->left = left;
 	left->right = right;
-	
-	return 0;
 }
 
 /**
