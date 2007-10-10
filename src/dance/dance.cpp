@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
 	
 	if (showProfile) {
 		cout << "\nLink update profile:\n";
-		uint maxLevel = dlx::getMaxLevel();
+		uint maxLevel = dlx::getMaxLevel() + 1;
 		for (uint i = 0; i < maxLevel; i++) {
 			uint upd = dlx::getProfile(i);
 			cout << i << '\t' << upd << " (" << (double(upd) / double(updates)) * 100.0 << "%)\n"; 
