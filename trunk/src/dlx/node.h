@@ -46,7 +46,6 @@ public:
 	void unlinkColumn();
 	void linkRow();
 	void unlinkRow();
-	void expose();
 private:
 	Node* left;
 	Node* right;
