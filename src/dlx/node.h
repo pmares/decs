@@ -42,10 +42,10 @@ public:
 	void setUp(Node* node) { up = node; }
 	void setDown(Node* node) { down = node; }
 	void setColumn(Column* column) { col = column; }
-	int linkColumn();
-	int unlinkColumn();
-	int linkRow();
-	int unlinkRow();
+	void linkColumn();
+	void unlinkColumn();
+	void linkRow();
+	void unlinkRow();
 	void expose();
 private:
 	Node* left;
