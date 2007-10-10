@@ -86,10 +86,9 @@ inline Column* chooseColumn() {
 	uint s = UINT_MAX;
 	
 	for (Node* j = h->getRight(); j != h; j = j->getRight()) {
-		Column* temp = j->getColumn();
-		if (temp->getSize() < s) {
-			c = temp;
-			s = temp->getSize();
+		if (j->getColumn()->getSize() < s) {
+			c = j->getColumn();
+			s = c->getSize();
 		}
 	}
 	return c;
@@ -123,9 +122,8 @@ void search() {
 		level++;
 		search();
 		level--;
-		// r = o[k];
-		
-		c = r->getColumn();
+//		r = o[level];
+//		c = r->getColumn();
 		
 		for (Node* j = r->getLeft(); j != r; j = j->getLeft())
 			uncover(j->getColumn());
