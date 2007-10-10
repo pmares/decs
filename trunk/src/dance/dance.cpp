@@ -87,27 +87,30 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	
-	if (file == NULL) {
+	if (!file) {
 		cerr << "No file specified on the command line\n";
 		usage_error();
 	}
 	
+	dlx::setVerboseLevel(verbose);
+	
 	if (verbose > 0) {
-		cout << "Dancing to the rhythm of\n";
-		cout << file << "\n\n";
+		cout << "Dancing to the rhythm of\n" << file << "\n\n";
+		cout << "Searching...\n";
 	}
 	
-	dlx::setVerboseLevel(verbose);
-	if (verbose > 0) cout << "Searching...\n";
 	dlx::solve(file);
-
-	if (verbose > 0) cout << "Search complete: " << dlx::countSolutions() << " solution(s) found\n";
-	if (verbose > 0) cout << "\nFinal column length: " << dlx::countColumns();
-
-	uint updates = dlx::getUpdates();
 	
+	if (verbose > 0) {
+		cout << "Search complete\n";
+		cout << "\nNumber of solutions: " << dlx::countSolutions();
+		cout << "\nFinal primary column size: " << dlx::countColumns();
+	}
+	
+	uint updates = dlx::getUpdates();
+	if (countUpdates) cout << "\nTotal link updates: " << updates;
 	if (showProfile) {
-		cout << "\nLink update profile:\n";
+		cout << "\n\nLink update profile:\n";
 		uint maxLevel = dlx::getMaxLevel() + 1;
 		for (uint i = 0; i < maxLevel; i++) {
 			uint upd = dlx::getProfile(i);
@@ -115,7 +118,5 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	
-	if (countUpdates) cout << "\nTotal link updates: " << updates;
-
 	return 0;
 }
