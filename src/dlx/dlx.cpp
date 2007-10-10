@@ -41,7 +41,7 @@ using namespace std;
  */
 void printSolution() {
 	cout << "Solution: ";
-	for (uint i = 0; i < level; i++) {
+	for (uint i = 0; i <= level; i++) {
 		cout << o[i]->getRow() << " ";
 	}
 	cout << endl;
@@ -99,25 +99,24 @@ inline Column* chooseColumn() {
  * Initially invoked when level = 0.
  */
 void search() {
-	if (level > maxLevel) maxLevel = level; 
-	
-	// Return if all columns have been covered.
-	if (h->getRight() == h) {
-		solutions++;
-		if (verbose > 1) printSolution();
-		return;
-	}
-	
 	Column* c = chooseColumn();
 	if (!c) panic("Unable to choose a column because no columns could be found");
+	if (level > maxLevel) maxLevel = level; 
 	cover(c);
 	
-	// Cover all columns which had nodes removed from cover(c).
 	for (Node* r = c->getDown(); r != c; r = r->getDown()) {
 		o[level] = r;
 		
+		// Cover all columns which had nodes removed from cover(c).
 		for (Node* j = r->getRight(); j != r; j = j->getRight())
 			cover(j->getColumn());
+		
+		// Return if all columns have been covered.
+		if (h->getRight() == h) {
+			solutions++;
+			if (verbose > 1) printSolution();
+			return;
+		}
 		
 		level++;
 		search();
