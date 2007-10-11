@@ -70,11 +70,11 @@ int solve_error(uint code) {
 		cerr << "Incompatible file ID";
 		return 1;
 		break;
-	case ERR_COL_IDX_OUB:
+	case ERR_COL_IDX_OOB:
 		cerr << "Out of bounds column index encountered while reading from file";
 		return 1;
 		break;
-	case ERR_COL_COUNT_OUB:
+	case ERR_COL_COUNT_OOB:
 		cerr << "Out of bounds column count encountered while reading from file";
 		return 1;
 		break;
@@ -82,7 +82,7 @@ int solve_error(uint code) {
 		cerr << "Unsorted column index encountered while reading from file";
 		return 1;
 		break;
-	case ERR_ELEMS_OUB:
+	case ERR_ELEMS_OOB:
 		cerr << "Number of elements read from the file is out of bounds";
 		return 1;
 		break;
