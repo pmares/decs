@@ -19,7 +19,7 @@
 #include <iostream>
 #include "dlx.h"
 
-const char* version = "0.2";
+const char* version = "0.3";
 
 using namespace std;
 using namespace dlx;
@@ -35,6 +35,7 @@ void print_usage() {
 			"  -q, --quiet        Quiet. Don't output to stdout.\n"
 			"  --count-updates    Print the number of link updates.\n"
 			"  --profile          Print the link update profile.\n"
+			"  --no-heuristic     Disable the column selection by size heuristic.\n"
 			"  --help             Print help information and exit.\n"
 			"  --version          Print program version and exit.\n"
 			"\n"
@@ -86,9 +87,6 @@ int solve_error(uint code) {
 		cerr << "Number of elements read from the file is out of bounds";
 		return 1;
 		break;
-		
- // 
-
 	default:
 		cerr << "Unknown error returned by libdlx";
 		return 1;
@@ -118,6 +116,8 @@ int main(int argc, char* argv[]) {
 			countUpdates = true;
 		} else if (!strcmp(argv[i], "--profile")) {
 			showProfile = true;
+		} else if (!strcmp(argv[i], "--no-heuristic")) {
+			setHeuristic(false);
 		} else if (i == argc-1) {
 			file = argv[i];
 		} else {
@@ -141,6 +141,7 @@ int main(int argc, char* argv[]) {
 	uint result = solve(file);
 	if (result != ERR_SUCCESS) return solve_error(result);
 	
+	// Output results from the solving.
 	if (verbose > 0) {
 		cout << "Search complete\n";
 		cout << "\nNumber of solutions: " << countSolutions();
