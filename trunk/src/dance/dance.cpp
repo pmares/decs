@@ -19,11 +19,10 @@
 #include <iostream>
 #include "dlx.h"
 
-typedef unsigned int uint;
-
 const char* version = "0.2";
 
-using namespace std; 
+using namespace std;
+using namespace dlx;
 
 /**
  * Prints command line options.
@@ -55,6 +54,46 @@ void print_version() {
 void usage_error() {
 	print_usage();
 	exit(1);
+}
+
+int solve_error(uint code) {
+	switch (code) {
+	case ERR_FILE_OPEN:
+		cerr << "Unable to open the specified file";
+		return 1;
+		break;
+	case ERR_FILE_VERSION:
+		cerr << "Incompatible file version";
+		return 1;
+		break;
+	case ERR_FILE_ID:
+		cerr << "Incompatible file ID";
+		return 1;
+		break;
+	case ERR_COL_IDX_OUB:
+		cerr << "Out of bounds column index encountered while reading from file";
+		return 1;
+		break;
+	case ERR_COL_COUNT_OUB:
+		cerr << "Out of bounds column count encountered while reading from file";
+		return 1;
+		break;
+	case ERR_COL_UNSORTED:
+		cerr << "Unsorted column index encountered while reading from file";
+		return 1;
+		break;
+	case ERR_ELEMS_OUB:
+		cerr << "Number of elements read from the file is out of bounds";
+		return 1;
+		break;
+		
+ // 
+
+	default:
+		cerr << "Unknown error returned by libdlx";
+		return 1;
+		break;
+	}
 }
 
 int main(int argc, char* argv[]) {
@@ -92,28 +131,29 @@ int main(int argc, char* argv[]) {
 		usage_error();
 	}
 	
-	dlx::setVerboseLevel(verbose);
+	setVerboseLevel(verbose);
 	
 	if (verbose > 0) {
 		cout << "Dancing to the rhythm of\n" << file << "\n\n";
-		cout << "Searching...\n";
+		cout << "Searching..." << endl;
 	}
 	
-	dlx::solve(file);
+	uint result = solve(file);
+	if (result != ERR_SUCCESS) return solve_error(result);
 	
 	if (verbose > 0) {
 		cout << "Search complete\n";
-		cout << "\nNumber of solutions: " << dlx::countSolutions();
-		cout << "\nFinal primary column size: " << dlx::countColumns();
+		cout << "\nNumber of solutions: " << countSolutions();
+		cout << "\nFinal primary column size: " << countColumns();
 	}
 	
-	uint updates = dlx::getUpdates();
+	uint updates = getUpdates();
 	if (countUpdates) cout << "\nTotal link updates: " << updates;
 	if (showProfile) {
 		cout << "\n\nLink update profile:\n";
-		uint maxLevel = dlx::getMaxLevel() + 1;
+		uint maxLevel = getMaxLevel() + 1;
 		for (uint i = 0; i < maxLevel; i++) {
-			uint upd = dlx::getProfile(i);
+			uint upd = getProfile(i);
 			cout << i << '\t' << upd << " (" << (double(upd) / double(updates)) * 100.0 << "%)\n"; 
 		}
 	}
