@@ -25,6 +25,16 @@ typedef unsigned int uint;
 
 const uint MAX_LEVELS = 128;
 
+// Error codes which can be returned from the solve() method.
+const uint ERR_SUCCESS = 0;          // No error.
+const uint ERR_FILE_OPEN = 1;        // Unable to open the specified file.
+const uint ERR_FILE_VERSION = 2;     // The file version is incompatible.
+const uint ERR_FILE_ID = 3;          // Unknown file ID (the first 4 bytes was not 'DECS').
+const uint ERR_COL_IDX_OUB = 4;      // A column index read from the file is out of bounds.
+const uint ERR_COL_COUNT_OUB = 5;    // The number of columns in a row read from the file is out of bounds.
+const uint ERR_COL_UNSORTED = 6;     // The column indexes read from the file is not sorted.
+const uint ERR_ELEMS_OUB = 7;        // The number of elements read from the file is out of bounds.
+
 int solve(char* file);
 void setVerboseLevel(uint level);
 uint getUpdates();
