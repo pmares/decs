@@ -22,6 +22,7 @@
 #include "util.h"
 #include "column.h"
 #include "node.h"
+#include "dlx.h"
 
 namespace dlx {
 
@@ -51,7 +52,7 @@ void panic(const char* msg) {
 
 int read_file(char* file, Column* header, uint verbose) {
 	ifstream in(file, ios::binary);
-	if (!in) panic("Cannot open file");
+	if (!in) return ERR_FILE_OPEN;
 	
 	FileHeader fh;
 	in.read(reinterpret_cast<char *>(&fh),sizeof(FileHeader));
@@ -68,27 +69,30 @@ int read_file(char* file, Column* header, uint verbose) {
 		cout << "  element offset = " << fh.elem_off << '\n';
 		cout << "  name offset = " << fh.name_off << '\n';
 		cout << "  problem id = " << fh.probid << '\n';
-		cout << "  problem offset = " << fh.prob_off << "\n\n";
+		cout << "  problem offset = " << fh.prob_off << '\n' << endl;
 	}
-
-	if (fh.fileid != FILE_ID) panic("Incompatible file ID");
-	if (fh.version != FILE_VERSION) panic("Incompatible file version");
 	
+	if (fh.fileid != FILE_ID) return ERR_FILE_ID;
+	if (fh.version != FILE_VERSION) return ERR_FILE_VERSION;
+	if (fh.elems > fh.cols * fh.rows) return ERR_ELEMS_OUB;
 	
 	// Read the secondary column list if available.
 	in.seekg(fh.elem_off);
 	uint secol_size;
 	in.read(reinterpret_cast<char *>(&secol_size),sizeof(secol_size));
-
+	if (secol_size > fh.cols) return ERR_COL_COUNT_OUB;  // TODO Can the number of secondary columns be equal to the total number of columns?
+	
 	if (verbose > 1) {
 		cout << "Found " << secol_size << " secondary columns";
 		if (secol_size > 0) cout << ": ";
 	}
 	
 	uint* secol = new uint[secol_size];
-
+	
 	for (uint i = 0; i < secol_size; i++) {
 		in.read(reinterpret_cast<char *>(&secol[i]),sizeof(secol[i]));
+		if (secol[i] >= fh.cols) return ERR_COL_IDX_OUB;
+		if (i > 0 && secol[i] <= secol[i-1]) return ERR_COL_UNSORTED;
 		if (verbose > 1) cout << secol[i] << " ";
 	}
 	if (verbose > 1) cout << endl;
@@ -108,7 +112,6 @@ int read_file(char* file, Column* header, uint verbose) {
 	for (uint i = 0; i < fh.cols; i++) {
 		Column* c = new Column(i);
 		he[i] = c;
-		c->setColumn(c);
 		if (!secol_ready || nextcol != i) {  // Primary column test.
 			c->setLeft(t);
 			t->setRight(c);
@@ -130,21 +133,33 @@ int read_file(char* file, Column* header, uint verbose) {
 	
 	
 	// Create the circular quad-linked matrix structure.
-	if (verbose > 1) cout << "Building the circular quad-linked matrix structure\n";
+	if (verbose > 1) cout << "Building the circular quad-linked matrix structure" << endl;
+	uint itemstot = 0;
 	for (uint i = 0; i < fh.rows; i++) {
 		Node* u = 0; // instead of t
+		
 		uint items;
 		in.read(reinterpret_cast<char *>(&items),sizeof(items));
-		if (verbose > 1) cout << "  Row " << i << " [size = " << items << "] = ";
+		if (items > fh.cols) return ERR_COL_COUNT_OUB;
+		itemstot += items;
+		if (itemstot > fh.elems) return ERR_ELEMS_OUB;
+		
+		if (verbose > 1) cout << "  Row " << i << " [size = " << items << "] = ", cout.flush();
+		uint tmpcol = 0;
 		for (uint j = 0; j < items; j++) {
 			Node* n = new Node(i);
 			
 			uint column;
 			in.read(reinterpret_cast<char *>(&column),sizeof(column));
+			if (column >= fh.cols) return ERR_COL_IDX_OUB;
+			if (j > 0 && column <= tmpcol) return ERR_COL_UNSORTED;
+			tmpcol = column;
+			
 			if (verbose > 1) {
 				cout << column << " ";
 				cout.flush();
 			}
+			
 			Column* c = he[column];
 			
 			n->setColumn(c);
@@ -166,10 +181,11 @@ int read_file(char* file, Column* header, uint verbose) {
 			}
 			u = n;
 		}
-		if (verbose > 1) cout << '\n';
+		if (verbose > 1) cout << endl;
 	}
-	if (verbose > 1) cout << '\n';
+	if (verbose > 1) cout << endl;
 	delete[] he;
+	if (itemstot < fh.elems) return ERR_ELEMS_OUB;
 
 	return 0;
 }

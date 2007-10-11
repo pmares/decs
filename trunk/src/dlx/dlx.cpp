@@ -111,7 +111,7 @@ void search() {
 		for (Node* j = r->getRight(); j != r; j = j->getRight())
 			cover(j->getColumn());
 		
-		// Check for a solution.
+		// Do we have a solution?
 		if (h->getRight() == h) {
 			solutions++;
 			if (verbose > 1) printSolution();
@@ -121,6 +121,7 @@ void search() {
 			level--;
 		}
 		
+		// Uncover all columns which had nodes removed from cover(c).
 		for (Node* j = r->getLeft(); j != r; j = j->getLeft())
 			uncover(j->getColumn());
 	}
@@ -128,7 +129,7 @@ void search() {
 }
 
 /**
- * Set the verbose level. Higher means more output. Default is 1.
+ * Set the verbose level. Higher equals more output. Default: 1.
  */
 void setVerboseLevel(uint level) {
 	verbose = level;
@@ -151,13 +152,12 @@ uint countSolutions() {
 }
 
 /**
- * Returns the number of columns currently in the linked list. This is the
- * number of uncovered columns.
+ * Returns the number of columns currently in the linked list. Covered columns
+ * and secondary columns will not be counted.
  */
 uint countColumns() {
 	uint cols = 0;
-	for (Node* c = h->getRight(); c != h; c = c->getRight())
-		cols++;
+	for (Node* c = h->getRight(); c != h; c = c->getRight()) cols++;
 	return cols;
 }
 
