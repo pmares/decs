@@ -74,13 +74,13 @@ int read_file(char* file, Column* header, uint verbose) {
 	
 	if (fh.fileid != FILE_ID) return ERR_FILE_ID;
 	if (fh.version != FILE_VERSION) return ERR_FILE_VERSION;
-	if (fh.elems > fh.cols * fh.rows) return ERR_ELEMS_OUB;
+	if (fh.elems > fh.cols * fh.rows) return ERR_ELEMS_OOB;
 	
 	// Read the secondary column list if available.
 	in.seekg(fh.elem_off);
 	uint secol_size;
 	in.read(reinterpret_cast<char *>(&secol_size),sizeof(secol_size));
-	if (secol_size > fh.cols) return ERR_COL_COUNT_OUB;  // TODO Can the number of secondary columns be equal to the total number of columns?
+	if (secol_size > fh.cols) return ERR_COL_COUNT_OOB;  // TODO Can the number of secondary columns be equal to the total number of columns?
 	
 	if (verbose > 1) {
 		cout << "Found " << secol_size << " secondary columns";
@@ -91,7 +91,7 @@ int read_file(char* file, Column* header, uint verbose) {
 	
 	for (uint i = 0; i < secol_size; i++) {
 		in.read(reinterpret_cast<char *>(&secol[i]),sizeof(secol[i]));
-		if (secol[i] >= fh.cols) return ERR_COL_IDX_OUB;
+		if (secol[i] >= fh.cols) return ERR_COL_IDX_OOB;
 		if (i > 0 && secol[i] <= secol[i-1]) return ERR_COL_UNSORTED;
 		if (verbose > 1) cout << secol[i] << " ";
 	}
@@ -140,9 +140,9 @@ int read_file(char* file, Column* header, uint verbose) {
 		
 		uint items;
 		in.read(reinterpret_cast<char *>(&items),sizeof(items));
-		if (items > fh.cols) return ERR_COL_COUNT_OUB;
+		if (items > fh.cols) return ERR_COL_COUNT_OOB;
 		itemstot += items;
-		if (itemstot > fh.elems) return ERR_ELEMS_OUB;
+		if (itemstot > fh.elems) return ERR_ELEMS_OOB;
 		
 		if (verbose > 1) cout << "  Row " << i << " [size = " << items << "] = ", cout.flush();
 		uint tmpcol = 0;
@@ -151,7 +151,7 @@ int read_file(char* file, Column* header, uint verbose) {
 			
 			uint column;
 			in.read(reinterpret_cast<char *>(&column),sizeof(column));
-			if (column >= fh.cols) return ERR_COL_IDX_OUB;
+			if (column >= fh.cols) return ERR_COL_IDX_OOB;
 			if (j > 0 && column <= tmpcol) return ERR_COL_UNSORTED;
 			tmpcol = column;
 			
@@ -185,7 +185,7 @@ int read_file(char* file, Column* header, uint verbose) {
 	}
 	if (verbose > 1) cout << endl;
 	delete[] he;
-	if (itemstot < fh.elems) return ERR_ELEMS_OUB;
+	if (itemstot < fh.elems) return ERR_ELEMS_OOB;
 
 	return 0;
 }
