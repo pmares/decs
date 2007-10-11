@@ -39,6 +39,8 @@ const uint ERR_ELEMS_OOB = 7;        // The number of elements read from the fil
 
 int solve(char* file);
 void setVerboseLevel(uint level);
+void setHeuristic(bool value);
+bool getHeuristic();
 uint getUpdates();
 uint getMaxLevel();
 uint getProfile(uint level);

@@ -48,7 +48,6 @@ Node::~Node() {
  * may only be partially completed.
  */
 void Node::linkColumn() {
-//	col->incrementSize();  // TODO This should work, but C++ is being an ass.
 	down->up = this;
 	up->down = this;
 }
@@ -61,7 +60,6 @@ void Node::linkColumn() {
 void Node::unlinkColumn() {
 	down->up = up;
 	up->down = down;
-//	col->decrementSize();  // TODO This should work, but C++ is being an ass.
 }
 
 /**

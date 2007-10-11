@@ -33,6 +33,7 @@ uint updates = 0;
 uint profile[MAX_LEVELS];
 uint maxLevel = 0;
 uint level = 0;
+bool heuristic = true;
 
 using namespace std;
 
@@ -57,7 +58,7 @@ inline void cover(Column* c) {
 		for (Node* j = i->getRight(); j != i; j = j->getRight()) {
 			j->unlinkColumn();
 			k++;
-			j->getColumn()->decrementSize(); // TODO C++ being an ass...
+			if (heuristic) j->getColumn()->decrementSize();
 		}
 	}
 	updates += k;
@@ -70,7 +71,7 @@ inline void cover(Column* c) {
 inline void uncover(Column* c) {
 	for (Node* i = c->getUp(); i != c; i = i->getUp()) {
 		for (Node* j = i->getLeft(); j != i; j = j->getLeft()) {
-			j->getColumn()->incrementSize(); // TODO C++ being an ass...
+			if (heuristic) j->getColumn()->incrementSize();
 			j->linkColumn();
 		}
 	}
@@ -99,8 +100,17 @@ inline Column* chooseColumn() {
  * Initially invoked when level = 0.
  */
 void search() {
-	Column* c = chooseColumn();
+	Column* c;
+	if (heuristic) {
+		c = chooseColumn();
+	} else {
+		c = h->getRight()->getColumn();
+	}
 	if (!c) panic("Unable to choose a column because no columns could be found");
+//	if (c->getSize() == 0) {
+//		uncover(c);
+//		return;
+//	}
 	if (level > maxLevel) maxLevel = level; 
 	cover(c);
 	
@@ -135,6 +145,14 @@ void setVerboseLevel(uint level) {
 	verbose = level;
 }
 
+void setHeuristic(bool value) {
+	heuristic = value;
+}
+
+bool getHeuristic() {
+	return heuristic;
+}
+
 uint getUpdates() {
 	return updates;
 }
@@ -150,6 +168,7 @@ uint getProfile(uint level) {
 uint countSolutions() {
 	return solutions;
 }
+
 
 /**
  * Returns the number of columns currently in the linked list. Covered columns
