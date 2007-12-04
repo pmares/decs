@@ -2,6 +2,7 @@
 
 % Import packages
 \usepackage{amsmath, amsfonts, amssymb, amsthm}  % AMS math libraries
+\usepackage{multirow}      % Row spanning in tables.
 \usepackage{graphicx}      % Extended graphics library
 \usepackage{textcomp}
 \usepackage{varioref}      % Use \vref instead of \ref
@@ -19,7 +20,6 @@
 	pdflang={en},
 	bookmarks,
 	bookmarksnumbered,
-	colorlinks
 ]{hyperref}  % Sets pdfTeX to include bookmarks in the output file (Should always be the last package included)
 
 \graphicspath{{./}{images/}}
@@ -64,7 +64,7 @@
 \include{conclusion}
 
 
-% How to organize the paper:
+% How to organize the report:
 % - Describe what problem or type of problem we are trying to solve and why.
 % - Describe how we are going to solve it.
 %   - The DLX algorithm.
@@ -76,7 +76,7 @@
 
 % BibTeX compiles the bibliography
 \addcontentsline{toc}{chapter}{\bibname}
-\bibliographystyle{custom}  % custom bibliography
+\bibliographystyle{custom-r2}  % custom bibliography
 \bibliography{local}  % import local.bib
 
 \end{document}

@@ -1,8 +1,18 @@
 
 \chapter{Implementation details}
 \label{implementation}
-
 % Here we describe some of the important implementation details.
+
+
+\section{Architecture}
+
+
+\begin{figure}[htb]
+	\centering 
+	\includegraphics[width=1.0\textwidth]{Architecture.png}
+	\caption{Architecture of the Distributed Exact Cover Solver system}
+	\label{fig:architecture}
+\end{figure}
 
 
 
@@ -10,6 +20,7 @@
 
 
 \subsection{N queens}
+\label{queens_trans}
 
 % [Begin Wikipedia quote] Consider a matrix with one column for each of the n ranks of the board, one column for each of the n files, and one column for each of the 4n-6 nontrivial diagonals of the board. The matrix has n^2 rows: one for each possible queen placement, and each row has a 1 in the  columns corresponding to that square's rank, file, and diagonals and a 0 in  all the other columns. Then the n queens problem is equivalent to choosing a subset of the rows of this  matrix such that every column has a 1 in precisely one of the chosen rows;  this is an exact cover problem. [end Wikipedia quote]
 
@@ -17,13 +28,27 @@
 % -- http://www.imtek.de/simulation//mathematica/IMSweb/imsTOC/Game%20Theory/ExactCoverDocu.html
 
 
+
 \subsection{Polyominoes}
+\label{poly_trans}
+
+Solomon W. Golomb practically invented the concept of polyominoes and made it widely available in his book \cite{Polyominoes}.
 
 
 \subsection{Latin square}
+\label{latin_trans}
 
 % Application of Exact Cover to Solving the Latin Square Puzzle
 % -- http://www.imtek.de/simulation//mathematica/IMSweb/imsTOC/Game%20Theory/ExactCoverDocu.html
+
+Latin square puzzles - Special types of Latin squares can be used as error correcting codes for power line communication (sending radio signals over electric power lines) \cite{Colbourn04}
+
+
+\subsection{Sudoku}
+\label{sudoku_trans}
+
+% Sudoku (special case of Latin squares)
+Granted Sudoku 
 
 
 \section{File format}
@@ -49,7 +74,7 @@ However, when the same value is stored in 2 bytes of memory the difference is cl
 	\centering
 	\begin{tabular}{|l||l|l||l|}
 		\hline
-		\bf Byte order & \bf 1 byte & \bf 2 byte & \bf 4 byte \\ \hline
+		\bf Byte order & \bf 1 byte & \bf 2 bytes & \bf 4 bytes \\ \hline
 		Big-endian    & 7E & 00 7E & 12 34 56 78 \\ \hline
 		Little-endian & 7E & 7E 00 & 78 56 34 12 \\ \hline
 	\end{tabular}
@@ -80,7 +105,7 @@ For more information on how the matrix data structure is constructed see Section
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{|r|r|l|p{2.7in}|}
+	\begin{tabular}{|r|r|l|p{2.6in}|}
 		\hline
 		\bf Offset & \bf Length & \bf Field & \bf Description \\ \hline
 		0  & 4 & fileid & File type ID: ``DECS'' \\ \hline
@@ -140,7 +165,7 @@ In the following description of the
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{|r|r|l|p{2.7in}|}
+	\begin{tabular}{|r|r|l|p{2.6in}|}
 		\hline
 		\bf Offset & \bf Length & \bf Field & \bf Description \\ \hline
 		0     & $B_c$ & colnames & Number of column names \\ \hline
@@ -193,8 +218,9 @@ Here we will look at the external interface to libdlx and some of its internals.
 
 % Challenges
 % - Node and column objects. How to find the correct row number to reduce data sent back to the server.
-% - Building the boolean matrix.
+% - Building the boolean matrix. (Description almost done).
 % - Memory requirements in terms of the number of nodes and how it scales.
+
 
 \subsection{Building the boolean matrix}
 \label{matrix_construction}
@@ -210,7 +236,7 @@ I starts by creating the root node $R$ onto which all the column nodes are attac
 Take special note of how the secondary column objects are linking to themselves on line~\\ref{algosecondary}.
 
 \begin{algorithm}[H]
-	\caption{Create the circular doubly-linked list of columns}
+	\caption{Create the circular doubly-linked list of columns.}
 	\label{algocolumns}
 %	\algsetup{indent=5em}
 	\begin{distribalgo}[1]
@@ -234,11 +260,10 @@ Take special note of how the secondary column objects are linking to themselves 
 \end{algorithm}
 
 For libdlx to initialize its data structure it must add the nodes row by row by reading them from the left to the right side.
-It starts with the top row and works its way down to the bottom just like you might read a text document.
-
+It starts with the top row and works its way down to the bottom just like one might read a text document.
 
 \begin{algorithm}[H]
-	\caption{Create the circular quad-linked node structure}
+	\caption{Create the circular quad-linked node structure.}
 	\label{algonodes}
 	\begin{distribalgo}[1]
 		\FOR{$i \leftarrow 1$ to the value of the $numrows$ field}
