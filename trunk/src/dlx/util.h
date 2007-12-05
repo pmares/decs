@@ -56,11 +56,14 @@ class Column;
 
 typedef unsigned int uint;
 const uint FILE_ID = 0x53434544;
-const uint FILE_VERSION = 1;
+const uint FILE_VERSION = 2;
 const uint FILE_COMPAT = 0;
 
 void panic(const char* msg);
-int read_file(char* file, Column* header, uint verbose);
+int read_file(char* file, Column* header, uint verbose, bool &init);
+uint initv_size();
+uint get_initv(uint index);
+void util_cleanup();
 
 } /*namespace dlx*/
 

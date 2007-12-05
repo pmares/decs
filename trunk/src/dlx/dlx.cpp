@@ -139,6 +139,48 @@ void search() {
 }
 
 /**
+ * Search through the remaining matrix and return a list of .
+ * Initially invoked when level = 0.
+ */
+void psearch() {
+	Column* c;
+	
+	uint depth = initv_size();
+	for (uint k = 0; k < depth; k++) {
+		if (heuristic) {
+			c = chooseColumn();
+		} else {
+			c = h->getRight()->getColumn();
+		}
+		if (!c) panic("Unable to choose a column because no columns could be found");
+		cover(c);
+		
+		
+		o[k] = 0;
+		uint irow = get_initv(k);
+		Node* r;
+		
+		for (r = c->getDown(); r != c; r = r->getDown()) {
+			if (r->getRow() == irow) {
+				o[k] = r;
+				break;
+			}
+		}
+		
+		if (!o[k]) panic("Unable to choose a column because no columns could be found");
+		
+		// Cover all columns which had nodes removed from cover(c).
+		for (Node* j = r->getRight(); j != r; j = j->getRight())
+			cover(j->getColumn());
+	}
+	
+	level = depth;
+	search();
+	level = 0;
+}
+
+
+/**
  * Set the verbose level. Higher equals more output. Default: 1.
  */
 void setVerboseLevel(uint level) {
@@ -185,6 +227,8 @@ uint countColumns() {
  * variables.
  */
 void cleanup() {
+	util_cleanup();
+	
 	solutions = updates = maxLevel = level = 0;
 	
 	for (uint i = 0; i < MAX_LEVELS; i++) {
@@ -213,11 +257,16 @@ int solve(char* file) {
 	
 	// Verify the file format and create the column and node objects.
 	h = new Column();
-	int result = read_file(file, h, verbose);
+	bool init;
+	int result = read_file(file, h, verbose, init);
 	if (result) return result;
 	
 	// Do the dance.
-	search();
+	if (init)
+		psearch();
+	else
+		search();
+	
 	return 0;
 }
 
