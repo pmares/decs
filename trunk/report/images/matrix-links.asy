@@ -1,7 +1,7 @@
 size(250,0);
 
-real dotsize = 1.5;
-real arrowsize = 5;
+real dotsize = 2;
+real arrowsize = 6;
 real bmaxx = 11;
 real bminx = 0;
 real bmaxy = 16;
