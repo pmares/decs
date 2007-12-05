@@ -18,9 +18,13 @@ The most common way to compile and install DECS is by typing the following
 commands in the source directory (the directory where you found this document):
 
 cd build/
-cmake .. -G <generator>
+cmake ..
 make
 make install
+
+If you have several generators installed you can run:
+
+cmake .. -G <generator>
 
 Where <generator> is one of the available makefile generators for your platform.
 You can see a list of all available generators by running the cmake command
