@@ -115,6 +115,7 @@ int read_file(char* file, Column* header, uint verbose, bool &init) {
 		if (i > 0 && initv[i] <= initv[i-1]) return ERR_ROW_UNSORTED;
 		if (verbose > 1) cout << initv[i] << " ";			
 	}	
+	if (verbose > 1) cout << endl;
 	
 	
 	// Read the secondary column list if available.
