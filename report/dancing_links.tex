@@ -152,7 +152,7 @@ Knuth uses what he refers to as the $S$ heuristic, which is to always picking th
 This approach has proved to work well in a large number of cases so it is a reasonable rule to make use of in practice.
 
 Using matrix (\ref{eq:cover_example}) as an example, we wish to demonstrate how Algorithm X works.
-The rows and columns of the matrix has been numbered so that they are more recognizable.
+The columns and rows have been numbered to make it easier to keep track of them when the matrix is modified.
 \begin{equation}
 	\label{eq:ces1}
 	\begin{array}{r} 1\\ 2\\ 3\\ 4\\ 5\\ 6 \end{array}
@@ -190,7 +190,7 @@ So we remove column 1, row 1 and row 3 which results in the following matrix
 \end{equation}
 This time we choose column 2 and row 2 so the partial solution is $\{ 1, 2 \}$.
 Row 2 conflicts with all the remaining rows (row 5 in column 2 and row 4 and 6 in column 3).
-After all the conflicts has been resolved the matrix itself is empty, but not the column list $H$.
+After all the conflicts have been resolved the matrix itself is empty, but not the column list $H$.
 Because there are no non-zero elements left the recursive call will return immediately (the loop condition at line 5 is not satisfied) and matrix (\ref{eq:ces2}) is restored.
 This time we choose row 5 giving the partial solution $\{ 1, 5 \}$.
 Row 5 conflicts with row 2 in column 2 and by eliminating the conflicts we get the following matrix
@@ -212,7 +212,7 @@ This tells us that $\{ 1, 5, 4 \}$ is one solution to this problem.
 
 By continuing in the same manner we eventually find all the solutions and the search tree in Figure \ref{fig:ex_tree} emerges.
 Each node $i,j$, for row $i$ and column $j$, indicates the choices made and the rectangular nodes is where the solutions were found.
-The search tree is a binary tree only because of the small size of the 
+The search tree is a binary tree as a result of the small matrix used in this example so this is not something that can be generalized.
 \begin{figure}[H]
 	\centering 
 	\includegraphics[width=0.85\textwidth]{search-tree-ex.pdf}
@@ -230,8 +230,9 @@ To solve these problems Knuth introduced the Dancing Links algorithm.
 \section{Dancing Links}
 \label{dlx}
 
-The Dancing Links (DLX) algorithm is based on a simple, yet powerful, technique which allows one to reverse any operation made to a doubly linked list.
-If $x$ points to an element in such a list then $x.left$ and $x.right$ points to the previous and next element, respectively.
+The Dancing Links (DLX) algorithm is based on Algorithm X, but it contains some significant modifications which makes it more suitable for practical applications.
+DLX is based on a simple, yet powerful, technique which allows one to reverse any operation made to a doubly-linked list.
+If $x$ represents an element in such a list then $x.left$ and $x.right$ points to the previous and next element, respectively.
 To remove element $x$ from the list the following two operations are applied:
 \begin{equation}
 	\label{eq:remove}
@@ -241,25 +242,25 @@ To remove element $x$ from the list the following two operations are applied:
 	\end{array}
 \end{equation}
 
-Applying these two operations to the linked list in Figure \ref{fig:linked} results in the linked list in Figure \ref{fig:linked_del}.
-These operations change the links pointing to element $x$ so that iteration through the list will no longer traverse through this element, but instead skip right past it.
+Applying these two operations to the linked list in Figure \ref{fig:linked} results in the list in Figure \ref{fig:linked_del}.
+These operations modify the links pointing to element $x$ so that an iteration through the list will no longer traverse through this element, but instead skip right past it.
 \begin{figure}[H]
 	\centering 
 	\includegraphics[width=0.8\textwidth]{doubly-linked-list.pdf}
-	\caption{Doubly linked list}
+	\caption{Doubly-linked list}
 	\label{fig:linked}
 \end{figure}
 \begin{figure}[H]
 	\centering 
 	\includegraphics[width=0.8\textwidth]{doubly-linked-list-del.pdf}
-	\caption{Doubly linked list with element $x$ removed}
+	\caption{Doubly-linked list with element $x$ removed}
 	\label{fig:linked_del}
 \end{figure}
 
-In a program one might be tempted to set $x.left$ and $x.right$ to a null value and delete the $x$ object or let the garbage collector do its thing.
+When programming one might be tempted to set $x.left$ and $x.right$ to a null value and delete the $x$ object or let the garbage collector do its thing.
 However, smart as that might seem it would prevent one from applying a second set of operations.
 In \cite{Hitotumatu79} Hitotumatu and Noshita introduced a pair of operations which allows one to insert an element back into the list in exactly the same place it was removed from.
-The following two operations works as the inverse of the operations in (\ref{eq:remove}) by adding $x$ back to the list
+The following two operations work as the inverse of the operations in (\ref{eq:remove}) by adding $x$ back to the list.
 \begin{equation}
 	\label{eq:add}
 	\begin{array}{rcl}
@@ -268,30 +269,47 @@ The following two operations works as the inverse of the operations in (\ref{eq:
 	\end{array}
 \end{equation}
 
-Knuth uses the operations in (\ref{eq:remove}) and (\ref{eq:add}) to maintain the state information for the matrix.
+Knuth makes use of the operations in (\ref{eq:remove}) and (\ref{eq:add}) to maintain the state information for the matrix.
 The $x$ element is preserved so that the algorithm can reverse the remove operations, which is used to reduce the matrix.
-The matrix itself is stored as a collection of several circular doubly linked lists where each non-zero value in the matrix is an element in the lists.
-Using this sparse matrix representation saves a lot of memory because the number of zero elements normally outnumber the non-zero elements.
-Every row and column is stored as linked lists.
-In addition there is a set of column headers which is also stored as a linked list.
-
-Each element $x$ in the linked lists have five attributes: $x.left$, $x.right$, $x.up$, $x.down$ and $x.column$.
-The first four attributes contains a pointer to an element in the respective linked list.
-$x.column$ is a pointer to the column header 
-% TODO Continue here.
-
-The matrix in \ref{eq:cover_example} 
 
 
-%If you keep a reference to $x$ in your program after it has been removed from the list you can 
+\subsection{Data structure}
+\label{dlx_struct}
+
+DLX stores the matrix as a collection of several circular doubly-linked lists where each non-zero value in the matrix is an element in the lists.
+Using this sparse matrix representation saves a lot of memory because the number of zero elements usually outnumber the non-zero elements.
+This advantage will normally grow when the size of the matrix increases.
+As an example the $N$ queens problem for $N=10$ has 396 non-zero elements, but they only account for 7.33\% of the total number of elements.
+
+Each row and column in the matrix is represented by a separate list.
+In addition the set of column headers is also stored in a list.
+Each element $x$ in the linked lists have six attributes: $x.left$, $x.right$, $x.up$, $x.down$, $x.column$ and $x.row$.
+The $x.row$ attribute is an addition to Knuth's original algorithm to enable detection of the row number.
+The first four attributes contains a pointer to an element in the respective list.
+$x.left$ and $x.right$ belongs to the row list and $x.up$ and $x.down$ belongs to the column list.
+$x.column$ is a pointer to the column header and $x.row$ is a non-negative integer storing the row number of the element.
+The column headers $c$ has the additional $c.name$ (column name/number) and $c.size$ (number of elements in column) attributes.
+There is also a special column header element $h$ which acts as a root element.
+
+Figure \ref{fig:matrix_links} shows shows how the matrix in (\ref{eq:cover_example}) can be represented using this data structure.
+To avoid clutter the $x.column$ links pointing to the column headers is not displayed.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.55\textwidth]{matrix-links.pdf}
+	\caption{Sparse boolean matrix circular quad-linked list representation of the example matrix}
+	\label{fig:matrix_links}
+\end{figure}
 
 
+\subsection{Algorithm}
 
-% Description of Donald Knuth's Dancing Links (DLX) algorithm.
-
-
-
-
+The DLX algorithm is very similar in nature to Algorithm X and in essence the two algorithms work exactly in the same way.
+Given the example matrix (\ref{eq:cover_example}) the DLX algorithm will follow the same path as shown in Figure \ref{fig:ex_tree}.
+The difference is that DLX uses a specialized data structure, and the operations in (\ref{eq:remove}) and (\ref{eq:add}) to save and restore the state of the matrix.
+Comparing the pseudo code for the DLX algorithm below with Algorithm X reveals that they are very similar.
+The algorithm is initially called with $k = 0$ and $h$ is initialized with the contents of the matrix.
+See Section \ref{matrix_construction} for details on how $h$ is initialized.
+Printing the solution using the $x.row$ attribute is done by printing $O_{i}.row$ for $i = \{1, 2, \ldots, k\}$.
 \begin{algorithm}[H]
 	\caption{Dancing Links recursive search.}
 	\label{dlx_search}
@@ -300,25 +318,26 @@ The matrix in \ref{eq:cover_example}
 			\IF{$h.right = h$}
 				\STATE Print solution and return.  \COMMENT{Base case for the recursion}
 			\ENDIF
-			\STATE $c \leftarrow choose\_column()$
-			\STATE $cover(c)$
+			\STATE $c \leftarrow$ choose\_column()
+			\STATE cover($c$)
 			\FOREACH{$r \leftarrow c.down, c.down.down, \ldots,$ \textbf{while} $r \neq c$}
-				\STATE $O_k \leftarrow r$
+				\STATE $O_k \leftarrow r$  \COMMENT{Add $r$ to partial solution}
 				\FOREACH{$j \leftarrow r.right, r.right.right, \ldots,$ \textbf{while} $j \neq r$}
-					\STATE $cover(j.column)$
+					\STATE cover($j.column$)
 				\ENDFOR
-				\STATE $search(k + 1)$
+				\STATE search($k + 1$)
 				\FOREACH{$j \leftarrow r.left, r.left.left, \ldots,$ \textbf{while} $j \neq r$}
-					\STATE $uncover(j.column)$
+					\STATE uncover($j.column$)
 				\ENDFOR
 			\ENDFOR
-			\STATE $uncover(c)$
+			\STATE uncover($c$)
 		\ENDPROC
 	\end{distribalgo}
 \end{algorithm}
 
+Column selection is done using the $S$ heuristic, which picks the column with the lowest value for $c.size$, as described in Knuth's paper.
 \begin{algorithm}[H]
-	\caption{Select a column using the $S$ heuristic.}
+	\caption{Column selection using the $S$ heuristic.}
 	\label{dlx_column}
 	\begin{distribalgo}[1]
 		\FUNCTION{choose\_column()}
@@ -334,6 +353,9 @@ The matrix in \ref{eq:cover_example}
 	\end{distribalgo}
 \end{algorithm}
 
+The cover($c$) and uncover($c$) algorithms are the main differences compared to Algorithm X.
+The purpose of cover($c$) is to remove column $c$ from the column header list and to resolve any conflicts in the column.
+It uses the operations in (\ref{eq:remove}) to remove the conflicting elements from the column lists.
 \begin{algorithm}[H]
 	\caption{Cover column $c$.}
 	\label{dlx_cover}
@@ -352,6 +374,9 @@ The matrix in \ref{eq:cover_example}
 	\end{distribalgo}
 \end{algorithm}
 
+The uncover($c$) algorithm restores the state of the matrix using the operations in (\ref{eq:add}).
+Notice that this algorithm walks up and left in the lists while cover($c$) walks down and right.
+This ensures that all the elements are put back in the reverse order in which they were removed.
 \begin{algorithm}[H]
 	\caption{Uncover column $c$.}
 	\label{dlx_uncover}
@@ -371,8 +396,66 @@ The matrix in \ref{eq:cover_example}
 \end{algorithm}
 
 
+
 \section{Parallel Dancing Links}
 
+Certain exact cover problems are so large that it is not feasible to solve them on a single computer given the current available processing power.
+To still be able to solve the problem we need to find a way to break up the problem.
+Maus and Aas in \cite{maus-prp} investigates recursive procedures as the unit for parallelizing.
 
 
-\cite{Colbourn04}
+ 
+(DLX has variable fan-out)
+Because DLX is a recursive algorithm 
+To be able to solve an exact cover problem 
+
+\begin{algorithm}[H]
+	\caption{Dancing Links parallel recursive search.}
+	\label{dlx_dsearch}
+	\begin{distribalgo}[1]
+		\PROCEDURE{psearch($k, d$)}
+			\IF{$h.right = h$}
+				\STATE Print solution and return.  \COMMENT{Base case for the recursion}
+			\ENDIF
+			\STATE $c \leftarrow$ choose\_column()
+			\STATE cover($c$)
+			\FOREACH{$r \leftarrow c.down, c.down.down, \ldots,$ \textbf{while} $r \neq c$}
+				\STATE $O_k \leftarrow r$  \COMMENT{Add $r$ to partial solution}
+				\FOREACH{$j \leftarrow r.right, r.right.right, \ldots,$ \textbf{while} $j \neq r$}
+					\STATE cover($j.column$)
+				\ENDFOR
+				\IF{$k = d$ and $h.right \neq h$}
+					\STATE Print partial solution.
+				\ELSE
+					\STATE psearch($k + 1$)
+				\ENDIF
+				\FOREACH{$j \leftarrow r.left, r.left.left, \ldots,$ \textbf{while} $j \neq r$}
+					\STATE uncover($j.column$)
+				\ENDFOR
+			\ENDFOR
+			\STATE uncover($c$)
+		\ENDPROC
+	\end{distribalgo}
+\end{algorithm}
+
+Each partial solution can then be used as initialization vectors for the modified search procedure search\_init($O$).
+$O$ is the initialization vector and $p$ is the length of the vector.
+The initialization vectors and the matrix can be distributed and this procedure can be run in parallel on each computer.
+
+\begin{algorithm}[H]
+	\caption{Dancing Links search initialization.}
+	\label{dlx_isearch}
+	\begin{distribalgo}[1]
+		\PROCEDURE{search\_init($O$)}
+			\FOR{$k \leftarrow 0$}{$p-1$}
+				\STATE $c \leftarrow$ choose\_column()
+				\STATE cover($c$)
+				\STATE $r \leftarrow O_k$
+				\FOREACH{$j \leftarrow r.right, r.right.right, \ldots,$ \textbf{while} $j \neq r$}
+					\STATE cover($j.column$)
+				\ENDFOR
+			\ENDFOR
+			\STATE search($p$)  \COMMENT{Do actual search}
+		\ENDPROC
+	\end{distribalgo}
+\end{algorithm}
