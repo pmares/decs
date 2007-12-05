@@ -23,6 +23,7 @@ typedef unsigned int uint;
 typedef unsigned char byte;
 
 int setQueens(uint queens);
+int setOrganPipe(bool enable);
 int transform(char* file);
 
 #endif /*NQDECS_H_*/
