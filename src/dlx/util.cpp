@@ -30,17 +30,29 @@ using namespace std;
 
 struct FileHeader {
 	uint fileid;
-	unsigned char version;
-	unsigned char compat;
-	char reserved[2];
+	byte version;
+	byte compat;
+	byte reserved[2];
 	uint cols;
 	uint rows;
 	uint elems;
 	uint elem_off;
+	uint init_off;
 	uint name_off;
 	uint probid;
 	uint prob_off;
 };
+
+uint* initv = 0;
+uint init_size = 0;
+
+uint initv_size() {
+	return init_size;
+}
+
+uint get_initv(uint index) {
+	return initv[index];
+}
 
 /**
  * Write a message to stderr and exit with an exit code of 1 to indicate failure.
@@ -50,7 +62,12 @@ void panic(const char* msg) {
 	exit(1);
 }
 
-int read_file(char* file, Column* header, uint verbose) {
+void util_cleanup() {
+	if (initv) delete[] initv;
+	init_size = 0;
+}
+
+int read_file(char* file, Column* header, uint verbose, bool &init) {
 	ifstream in(file, ios::binary);
 	if (!in) return ERR_FILE_OPEN;
 	
@@ -67,6 +84,7 @@ int read_file(char* file, Column* header, uint verbose) {
 		cout << "  elements = " << fh.elems << '\n';
 		cout << "  density = " << ( (double)fh.elems / ((double)fh.rows / (1.0 / (double)fh.cols) ) ) << '\n';
 		cout << "  element offset = " << fh.elem_off << '\n';
+		cout << "  init offset = " << fh.init_off << '\n';
 		cout << "  name offset = " << fh.name_off << '\n';
 		cout << "  problem id = " << fh.probid << '\n';
 		cout << "  problem offset = " << fh.prob_off << '\n' << endl;
@@ -75,6 +93,29 @@ int read_file(char* file, Column* header, uint verbose) {
 	if (fh.fileid != FILE_ID) return ERR_FILE_ID;
 	if (fh.version != FILE_VERSION) return ERR_FILE_VERSION;
 	if (fh.elems > fh.cols * fh.rows) return ERR_ELEMS_OOB;
+	
+	
+	// Read the initialization vector, if available.
+	init_size = 0;
+	if (fh.init_off > 0) {
+		in.seekg(fh.init_off);
+		in.read(reinterpret_cast<char *>(&init_size),sizeof(init_size));
+	}
+	
+	if (verbose > 1) {
+		cout << "Found " << init_size << " initializer rows";
+		if (init_size > 0) cout << ": ";
+	}
+	
+	initv = new uint[init_size];
+	init = (init_size > 0);
+	
+	for (uint i = 0; i < init_size; i++) {
+		in.read(reinterpret_cast<char *>(&initv[i]),sizeof(initv[i]));
+		if (i > 0 && initv[i] <= initv[i-1]) return ERR_ROW_UNSORTED;
+		if (verbose > 1) cout << initv[i] << " ";			
+	}	
+	
 	
 	// Read the secondary column list if available.
 	in.seekg(fh.elem_off);

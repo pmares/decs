@@ -21,6 +21,7 @@
 
 namespace dlx {
 
+typedef unsigned char byte;
 typedef unsigned int uint;
 
 const uint MAX_LEVELS = 128;
@@ -36,6 +37,7 @@ const uint ERR_COL_IDX_OOB = 4;      // A column index read from the file is out
 const uint ERR_COL_COUNT_OOB = 5;    // The number of columns in a row read from the file is out of bounds.
 const uint ERR_COL_UNSORTED = 6;     // The column indexes read from the file is not sorted.
 const uint ERR_ELEMS_OOB = 7;        // The number of elements read from the file is out of bounds.
+const uint ERR_ROW_UNSORTED = 8;     // The row indexes read from the file is not sorted.
 
 int solve(char* file);
 void setVerboseLevel(uint level);
