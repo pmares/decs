@@ -31,6 +31,7 @@ struct FileHeader {
 	uint rows;
 	uint elems;
 	uint elem_off;
+	uint init_off;
 	uint name_off;
 	uint probid;
 	uint prob_off;
@@ -39,16 +40,18 @@ struct FileHeader {
 struct ProbInfo {
 	byte version;
 	byte queens;
-	byte reserved[6];
+	byte oporder;  // Is it using organ pipe ordering?
+	byte reserved[5];
 };
 
 const uint FILE_ID = 0x53434544;
-const byte FILE_VERSION = 1;
+const byte FILE_VERSION = 2;
 const byte FILE_COMPAT = 0;
-const byte LIB_VERSION = 0;
+const byte LIB_VERSION = 1;
 const uint PROB_ID = 0x10;
 
 uint queens = 2;
+bool organ = false;
 
 /**
  * Write a message to stderr and exit with an exit code of 1 to indicate failure.
@@ -72,6 +75,11 @@ int setQueens(uint n) {
 	}
 }
 
+int setOrganPipe(bool enable) {
+	if (enable) return 1;  // Organ pipe ordering currently not supported.
+	return 0;
+}
+
 int transform(char* file) {
 	ofstream out(file, ios::binary);
 	if (!out) panic("cannot open file");
@@ -81,6 +89,7 @@ int transform(char* file) {
 	fh.version = FILE_VERSION;
 	fh.compat = FILE_COMPAT;
 	fh.reserved[0] = fh.reserved[1] = 0;
+	fh.init_off = 0;
 	fh.name_off = 0;
 	fh.cols = 6 * queens - 6;
 
@@ -90,8 +99,9 @@ int transform(char* file) {
 	fh.prob_off = sizeof(FileHeader);
 	pi.version = LIB_VERSION;
 	pi.queens = queens;
+	pi.oporder = organ ? 1 : 0;
 	pi.reserved[0] = pi.reserved[1] = pi.reserved[2] = pi.reserved[3]
-			= pi.reserved[4] = pi.reserved[5] = 0;
+			= pi.reserved[4] = 0;
 	out.seekp(fh.prob_off);
 	out.write(reinterpret_cast<char *>(&pi),sizeof(ProbInfo));
 	
