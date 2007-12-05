@@ -87,8 +87,12 @@ int solve_error(uint code) {
 		cerr << "Number of elements read from the file is out of bounds";
 		return 1;
 		break;
+	case ERR_ROW_UNSORTED:
+		cerr << "Unsorted row index encountered while reading from file";
+		return 1;
+		break;
 	default:
-		cerr << "Unknown error returned by libdlx";
+		cerr << "Unknown error code returned by libdlx: " << code;
 		return 1;
 		break;
 	}
