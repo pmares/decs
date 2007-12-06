@@ -3,6 +3,11 @@ install( FILES
 	knuthx.decs
 	tiny.decs	
 	micro.decs
+	queens5p1.decs
+	queens5p2.decs
+	queens5p3.decs
+	queens5p4.decs
+	queens5p5.decs
 	queens2.decs
 	queens3.decs
 	queens4.decs
