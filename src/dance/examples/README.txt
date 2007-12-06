@@ -91,3 +91,14 @@ The list below shows the number of solutions for a given n as well as RCED.
 24     227514171973736    576 x 138 (90), 2300,  2.89%
 25    2207893435808352    625 x 144 (94), 2496,  2.77%
 26                   ?    676 x 150 (98), 2700,  2.67%
+
+
+queens5p[1-5].decs
+----------
+RCED: See table above for n=5.
+Solutions: Each matrix has 2 solutions. Total number of solutions is 10.
+
+A set of matrices for parallel processing. All the matrices are identical, but
+they have been given different initialization vectors. That way they will only
+process part of the original matrix and the total set of solutions is the same
+as for the conventional queens5.decs matrix.
