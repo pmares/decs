@@ -1,0 +1,40 @@
+
+\chapter{Introduction}
+
+This report details the design and implementation of a distributed computing system to solve exact cover problems.
+Donald Knuth's Dancing Links (DLX) algorithm \cite{knuth00dancing} is used to solve the exact cover problem.
+Distributed computing with this algorithm is accomplished by making use of the recursive nature of DLX to split the problem into smaller pieces.
+The Generic Distributed Exact Cover Solver (DECS) then takes advantage of a distributed computing middleware called BOINC \cite{boinc} to handle the work distribution and result collection process.
+The report explains in detail how the DLX algorithm works and some concrete types of problems it can be applied to.
+It also explains how DLX is used together with BOINC to construct a complete distributed computing system.
+
+
+
+\section{Related work}
+
+There are numerous implementations of the Dancing Links algorithm available with and without source code.
+In addition to Knuth's own implementation in CWEB \cite{cweb} a quick search found source code for Java, Python, C, C++, Ruby, Lisp, MATLAB and Mathematica.
+Some of the implementations were generic while others aimed for a specific application (mostly Sudoku).
+Common for all these implementations is that none of them were made for parallel processing.
+
+Alfred Wassermann developed a parallel version of Knuth's algorithm in \cite{wassermann99covering} by using PVM \cite{pvm} to solve a problem presented in Knuth's original paper.
+However, he only published the solutions to the problem and not the actual implementation.
+The only available open source parallel version is written by Owen O'Malley for the Apache Hadoop project \cite{hadoop} in May 2007.
+O'Malley's implementation uses the MapReduce framework \cite{map-reduce} provided by Hadoop to do the computations in parallel.
+The details of this implementation and how it divides the problem into smaller pieces has not been documented.
+%The documentation for this implementation is lacking and it is pretty ...
+% TODO Maybe some reasons here why O'Malley's implementation wasn't good enough, or had the required amound of academical rigor.
+
+
+
+\section{Report organization}
+
+This report is organized into several chapters.
+Chapter \ref{dancing_links} describes the Dancing Links algorithm.
+Chapter \ref{distributed_computing} explains the distributed computing concept.
+Chapter \ref{implementation} discusses different aspects of the implementation.
+Chapter \ref{testing} describes the test results with the system and Chapter \ref{conclusion} concludes this report.
+
+
+
+
