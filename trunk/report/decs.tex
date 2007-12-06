@@ -1,14 +1,12 @@
 \documentclass[a4paper]{report}
 
 % Import packages
-\usepackage{amsmath, amsfonts, amssymb, amsthm}  % AMS math libraries
+\usepackage{amsmath, amsfonts, amsthm}  % AMS math libraries
+\usepackage{amssymb}       % Large extended set of symbols: http://home.online.no/~pjacklam/latex/textcomp.pdf
 \usepackage{multirow}      % Row spanning in tables.
 \usepackage{graphicx}      % Extended graphics library
-\usepackage{textcomp}
-\usepackage{varioref}      % Use \vref instead of \ref
-\usepackage{algorithm}     % Pseudocode float environment
-\usepackage{algorithmic}   % Pseudocode
-\usepackage[noend, nobraces]{javadistalgo}  % Java style pseudocode
+%\usepackage{textcomp}      % Extended set of symbols: http://home.online.no/~pjacklam/latex/textcomp.pdf
+%\usepackage{varioref}      % Use \vref instead of \ref
 %\usepackage{wrapfig}
 %\usepackage{subfigure}
 %\usepackage{url}
@@ -21,9 +19,14 @@
 	bookmarks,
 	bookmarksnumbered,
 ]{hyperref}  % Sets pdfTeX to include bookmarks in the output file (Should always be the last package included)
+\usepackage{algorithm}     % Pseudocode float environment
+\usepackage{algorithmic}   % Pseudocode
+\usepackage[noend, nobraces]{javadistalgo}  % Java style pseudocode
 
 \graphicspath{{./}{images/}}
 
+% Limit the depth of the table of contents
+%\setcounter{tocdepth}{1}
 
 % Custom commands
 
@@ -58,10 +61,10 @@
 % Include external files
 \include{introduction}
 \include{dancing_links}
-\include{distributed_computing}
-\include{implementation}
-\include{testing}
-\include{conclusion}
+%\include{distributed_computing}
+%\include{implementation}
+%\include{testing}
+%\include{conclusion}
 
 
 % How to organize the report:
@@ -75,8 +78,9 @@
 
 
 % BibTeX compiles the bibliography
+\phantomsection
 \addcontentsline{toc}{chapter}{\bibname}
-\bibliographystyle{custom-r2}  % custom bibliography
+\bibliographystyle{custom-r2}  % custom bibliography style
 \bibliography{local}  % import local.bib
 
 \end{document}

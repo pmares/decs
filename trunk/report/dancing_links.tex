@@ -5,14 +5,14 @@
 Dancing Links (DLX) is an algorithm invented by Donald Knuth to solve any exact cover problem.
 It was first described in \cite{knuth00dancing} where he looks at the details of the algorithm and uses it to solve some practical problems.
 Before we look at the DLX algorithm in more detail we need to explain what an exact cover problem is.
-The following section describes the exact cover problem in more detail.
+%The following section describes the exact cover problem in more detail.
 
 
 
 \section{Exact cover}
 \label{exact_cover}
 
-Exact cover is a general type of problem which has application in several areas.
+Exact cover is a general type of problem which hcan be applied to a wide area of problems.
 It can be used to solve problems like $N$ queens, polyomino tiling, Latin square puzzles, Sudoku, set packing and set partitioning.
 More detailed information about how exact cover can be applied to $N$ queens, polyomino tiling, latin square and Sudoku can be found in Section \ref{queens_trans}, \ref{poly_trans}, \ref{latin_trans} and \ref{sudoku_trans} respectively.
 
@@ -88,6 +88,26 @@ In this matrix $\{ 2, 3 \}$ is one solution (exact cover) because the subset con
 \]
 has exactly one non-zero element in each column.
 By adopting a trial and error approach one can find that the full set of solutions for the matrix is $\{ \{1, 4, 5 \}, \{ 2, 3\}, \{ 3, 5, 6\} \}$.
+
+
+\subsection{Generalized exact cover}
+
+A generalized form of the exact cover problem is sometimes better suited to solve certain types of problems.
+The generalized problem can be translated to an exact cover problem by adding additional rows, but translating in the opposite direction is not always possible.
+The generalized cover problem divides the matrix into primary and secondary columns.
+Each primary column in the solution must have exactly one non-zero element, like before.
+However, each secondary column in a solution can have either zero or one non-zero element, instead of exactly one.
+
+Let $C_P$ be the set of primary columns and $C_S$ the set of secondary columns in matrix $A$ and $B$.
+The subset of rows $R_B$ is an exact cover iff the following two equations are satisfied
+\[
+	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \forall j \in C_P  \;\;\; \wedge \;\;\;  \sum_{i = 1}^{k} b_{i,j} \leq 1 \;\;\; \forall j \in C_S
+\]
+
+
+$N$ queens (see Section \ref{queens_trans}) is one type of problem the generalized cover problem can be applied to.
+By creating a secondary column for each diagonal on the chess board will reduce the number of rows in the final matrix.
+Given a smaller matrix the DLX algorithm will have to do less processing to find the solutions which results in better performance.
 
 
 
@@ -295,7 +315,7 @@ Figure \ref{fig:matrix_links} shows shows how the matrix in (\ref{eq:cover_examp
 To avoid clutter the $x.column$ links pointing to the column headers is not displayed.
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.55\textwidth]{matrix-links.pdf}
+	\includegraphics[width=0.8\textwidth]{matrix-links.pdf}
 	\caption{Sparse boolean matrix circular quad-linked list representation of the example matrix}
 	\label{fig:matrix_links}
 \end{figure}
@@ -307,9 +327,9 @@ The DLX algorithm is very similar in nature to Algorithm X and in essence the tw
 Given the example matrix (\ref{eq:cover_example}) the DLX algorithm will follow the same path as shown in Figure \ref{fig:ex_tree}.
 The difference is that DLX uses a specialized data structure, and the operations in (\ref{eq:remove}) and (\ref{eq:add}) to save and restore the state of the matrix.
 Comparing the pseudo code for the DLX algorithm below with Algorithm X reveals that they are very similar.
-The algorithm is initially called with $k = 0$ and $h$ is initialized with the contents of the matrix.
-See Section \ref{matrix_construction} for details on how $h$ is initialized.
-Printing the solution using the $x.row$ attribute is done by printing $O_{i}.row$ for $i = \{1, 2, \ldots, k\}$.
+The algorithm is initially called with $k = 0$ (recursion level 0) and $h$ is initialized with the contents of the matrix.
+See Section \ref{matrix_construction} for details on how the contents of $h$ is initialized.
+Printing a solution using the $x.row$ attribute is done by printing $O_{i}.row$ for $i = \{1, 2, \ldots, k\}$.
 \begin{algorithm}[H]
 	\caption{Dancing Links recursive search.}
 	\label{dlx_search}
@@ -336,6 +356,7 @@ Printing the solution using the $x.row$ attribute is done by printing $O_{i}.row
 \end{algorithm}
 
 Column selection is done using the $S$ heuristic, which picks the column with the lowest value for $c.size$, as described in Knuth's paper.
+The algorithm simply steps through each column header looking for the lowest size.
 \begin{algorithm}[H]
 	\caption{Column selection using the $S$ heuristic.}
 	\label{dlx_column}
@@ -356,6 +377,8 @@ Column selection is done using the $S$ heuristic, which picks the column with th
 The cover($c$) and uncover($c$) algorithms are the main differences compared to Algorithm X.
 The purpose of cover($c$) is to remove column $c$ from the column header list and to resolve any conflicts in the column.
 It uses the operations in (\ref{eq:remove}) to remove the conflicting elements from the column lists.
+The cover algorithm also increments the value of $updates$ which is used to measure how many operations the search algorithm requires to complete.
+One update equals four link changes or one application of both (\ref{eq:remove}) and (\ref{eq:add}).
 \begin{algorithm}[H]
 	\caption{Cover column $c$.}
 	\label{dlx_cover}
@@ -368,6 +391,7 @@ It uses the operations in (\ref{eq:remove}) to remove the conflicting elements f
 					\STATE $j.down.up \leftarrow j.up$
 					\STATE $j.up.down \leftarrow j.down$
 					\STATE $j.column.size \leftarrow j.column.size - 1$
+					\STATE $updates \leftarrow updates + 1$
 				\ENDFOR
 			\ENDFOR
 		\ENDPROC
@@ -399,18 +423,21 @@ This ensures that all the elements are put back in the reverse order in which th
 
 \section{Parallel Dancing Links}
 
-Certain exact cover problems are so large that it is not feasible to solve them on a single computer given the current available processing power.
-To still be able to solve the problem we need to find a way to break up the problem.
-Maus and Aas in \cite{maus-prp} investigates recursive procedures as the unit for parallelizing.
+To be able to solve more complex exact cover problems the solution process must be distributed to a larger number of computers.
+To accomplish this we must first break the problem into smaller pieces.
+In \cite{maus-prp} Maus and Aas investigates recursive procedures as the unit for parallelizing.
+They introduce some techniques on how to split the recursion tree which can be directly applied to the search tree in DLX.
+The main idea is that the algorithm is first run in a breath-first mode so that the search tree is explored one level at a time.
+When a certain number of nodes has been discovered they are distributed to a set computers and solved in parallel.
 
-
- 
-(DLX has variable fan-out)
-Because DLX is a recursive algorithm 
-To be able to solve an exact cover problem 
-
+The search procedure of DLX is a backtrack algorithm which explores the search tree depth-first.
+Making this a breath-first algorithm can be achieved by not allowing it to proceed deeper than a certain level in the search tree.
+When the given level is reached the partial solution is printed.
+It can then be used to initialize a separate process running DLX on a different computer (or another processor on the same computer).
+As long as the predefined depth $d$ is not too deep or shallow the partial solutions can be used to efficiently solve the exact cover problem in a distributed manner.
+If $d$ is too deep (high) the algorithm will find all solutions before the splitting happens, and if it is too shallow (low) the number of partial solutions might be too low to be of any use.
 \begin{algorithm}[H]
-	\caption{Dancing Links parallel recursive search.}
+	\caption{Dancing Links parallel recursive splitter.}
 	\label{dlx_dsearch}
 	\begin{distribalgo}[1]
 		\PROCEDURE{psearch($k, d$)}
@@ -438,16 +465,16 @@ To be able to solve an exact cover problem
 	\end{distribalgo}
 \end{algorithm}
 
-Each partial solution can then be used as initialization vectors for the modified search procedure search\_init($O$).
-$O$ is the initialization vector and $p$ is the length of the vector.
-The initialization vectors and the matrix can be distributed and this procedure can be run in parallel on each computer.
-
+Each partial solution can then be used as initialization vectors for the modified search procedure search\_init($O$) in Algorithm \ref{algo:dlx_isearch}.
+$O$ is the initialization vector and $p$ is the length of the vector (number of rows in the partial solution).
+The initialization vectors and the matrix can be distributed and the modified search procedure can be run in parallel on each computer.
+If required each computer can do further splitting locally to take advantage of multiple processors.
 \begin{algorithm}[H]
 	\caption{Dancing Links search initialization.}
-	\label{dlx_isearch}
+	\label{algo:dlx_isearch}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search\_init($O$)}
-			\FOR{$k \leftarrow 0$}{$p-1$}
+			\FOR{$k \leftarrow 0$ to $p-1$}
 				\STATE $c \leftarrow$ choose\_column()
 				\STATE cover($c$)
 				\STATE $r \leftarrow O_k$
@@ -459,3 +486,9 @@ The initialization vectors and the matrix can be distributed and this procedure 
 		\ENDPROC
 	\end{distribalgo}
 \end{algorithm}
+
+This approach does not guarantee that each initialization vector provides a similar amount of work.
+Unfortunately there is straight forward method to estimate the complexity of the subtree given by a specific initialization vector.
+In \cite{knuth75backtracking} Knuth uses a Monte Carlo approach to estimate the running time of backtrack algorithms.
+By doing random walks in the subtree he is able to estimate the cost of backtracking.
+It would be worth investigating this approach in more detail if DECS was to be extended.
