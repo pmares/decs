@@ -139,8 +139,8 @@ void search() {
 }
 
 /**
- * Search through the remaining matrix and return a list of .
- * Initially invoked when level = 0.
+ * Initialize the search with an initialization vector (partial solution) and
+ * do the actual searching.
  */
 void psearch() {
 	Column* c;
@@ -167,13 +167,14 @@ void psearch() {
 			}
 		}
 		
-		if (!o[k]) panic("Unable to choose a column because no columns could be found");
+		if (!o[k]) panic("Unable to choose the correct row from the initialization vector");
 		
 		// Cover all columns which had nodes removed from cover(c).
 		for (Node* j = r->getRight(); j != r; j = j->getRight())
 			cover(j->getColumn());
 	}
 	
+	solutions = updates = 0;  // Ignore changes made in this procedure.
 	level = depth;
 	search();
 	level = 0;
