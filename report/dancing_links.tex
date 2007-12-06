@@ -14,15 +14,15 @@ Before we look at the DLX algorithm in more detail we need to explain what an ex
 
 Exact cover is a general type of problem which hcan be applied to a wide area of problems.
 It can be used to solve problems like $N$ queens, polyomino tiling, Latin square puzzles, Sudoku, set packing and set partitioning.
-More detailed information about how exact cover can be applied to $N$ queens, polyomino tiling, latin square and Sudoku can be found in Section \ref{queens_trans}, \ref{poly_trans}, \ref{latin_trans} and \ref{sudoku_trans} respectively.
+For more detailed information about how exact cover can be applied to $N$ queens, polyomino tiling, Latin square and Sudoku, see Section \ref{queens_trans}, \ref{poly_trans}, \ref{latin_trans} and \ref{sudoku_trans} respectively.
 
 To represent an exact cover problem we use a matrix in which each element is either zero or one (non-zero).
 This type of matrix is called a boolean, binary, logical or \{0,1\}-matrix.
-We use matrix in the rest of this report to mean a boolean matrix and non-zero to mean one since a boolean matrix can only have elements zero or one.
+We use ``matrix'' in the rest of this report to mean a boolean matrix and ``non-zero'' to mean one since a boolean matrix can only have elements zero and one.
 The idea is that each column in the matrix represents a specific constraint and each row is a way to fill some of the constraints.
 
 For the general matrix
-\begin{equation}
+\[
 A =
 \left[
 \begin{array}{ccccc}
@@ -33,15 +33,14 @@ A =
 	a_{m,1} & a_{m,2} & a_{m,3} & \cdots & a_{m,n} \\
 \end{array}
 \right]
-\label{eq:gen_cover_matrix}
-\end{equation}
+\]
 $a_{i,j}$ is an element in the matrix at row $i$, column $j$ where $a_{i,j} \in \{0,1\}$.
 The number of rows is $m$ and the number of columns is $n$.
 
 A subset of rows from a matrix is an exact cover iff (if and only if) each column has exactly one non-zero (one) element.
 Let $R_A$ and $R_B$ be the set of rows in matrix $A$ and $B$ respectively.
-When $R_B \subseteq R_A$ matrix $B$ forms the following matrix
-\begin{equation}
+If $R_B \subseteq R_A$ then $B$ forms the following matrix
+\[
 	B =
 	\left[
 	\begin{array}{ccccc}
@@ -52,8 +51,7 @@ When $R_B \subseteq R_A$ matrix $B$ forms the following matrix
 		b_{k,1} & b_{k,2} & b_{k,3} & \cdots & b_{k,n} \\
 	\end{array}
 	\right]
-	\label{eq:cover_matrix}
-\end{equation}
+\]
 $B$ is a reduced matrix of $A$ where the number of rows $k \leq m$.
 The number of columns in $A$ and $B$ is always the same.
 The subset $R_B$ is an exact cover iff the following equation is satisfied
@@ -62,7 +60,7 @@ The subset $R_B$ is an exact cover iff the following equation is satisfied
 \]
 
 In practical applications we are usually given an initial matrix $A$ and tasked with finding all the subsets of rows which are exact covers.
-For example the matrix
+For example the following matrix
 \begin{equation}
 	\left[
 	\begin{array}{cccc}
@@ -77,7 +75,7 @@ For example the matrix
 	\label{eq:cover_example}
 \end{equation}
 represents a specific exact cover problem.
-In this matrix $\{ 2, 3 \}$ is one solution (exact cover) because the subset consisting of rows 2 and 3, and thus the reduced matrix
+In this matrix $\{ 2, 3 \}$ is a valid solution (exact cover) because the subset consisting of rows 2 and 3, and thus the reduced matrix
 \[
 \left[
 \begin{array}{cccc}
@@ -87,27 +85,28 @@ In this matrix $\{ 2, 3 \}$ is one solution (exact cover) because the subset con
 \right]
 \]
 has exactly one non-zero element in each column.
-By adopting a trial and error approach one can find that the full set of solutions for the matrix is $\{ \{1, 4, 5 \}, \{ 2, 3\}, \{ 3, 5, 6\} \}$.
+By adopting a trial and error approach one can find that the full set of solutions for the matrix in (\ref{eq:cover_example}) is $\{ \{1, 4, 5 \}, \{ 2, 3\}, \{ 3, 5, 6\} \}$.
 
 
 \subsection{Generalized exact cover}
 
 A generalized form of the exact cover problem is sometimes better suited to solve certain types of problems.
-The generalized problem can be translated to an exact cover problem by adding additional rows, but translating in the opposite direction is not always possible.
+The generalized cover problem can be translated to an exact cover problem by adding additional rows, but translating in the opposite direction is not always possible.
 The generalized cover problem divides the matrix into primary and secondary columns.
 Each primary column in the solution must have exactly one non-zero element, like before.
-However, each secondary column in a solution can have either zero or one non-zero element, instead of exactly one.
+However, each secondary column in the solution can have either zero or one non-zero element, instead of exactly one.
 
 Let $C_P$ be the set of primary columns and $C_S$ the set of secondary columns in matrix $A$ and $B$.
-The subset of rows $R_B$ is an exact cover iff the following two equations are satisfied
+The subset of rows $R_B$ is an exact cover iff both of the following equations are satisfied
 \[
 	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \forall j \in C_P  \;\;\; \wedge \;\;\;  \sum_{i = 1}^{k} b_{i,j} \leq 1 \;\;\; \forall j \in C_S
 \]
 
 
 $N$ queens (see Section \ref{queens_trans}) is one type of problem the generalized cover problem can be applied to.
-By creating a secondary column for each diagonal on the chess board will reduce the number of rows in the final matrix.
+Creating a secondary column for each diagonal on the chess board will reduce the number of rows in the final matrix.
 Given a smaller matrix the DLX algorithm will have to do less processing to find the solutions which results in better performance.
+The DLX algorithm itself does not require any modifications to solve generalized cover problems, but the matrix construction procedure requires some minor adjustments (see Section \ref{matrix_construction}).
 
 
 
@@ -122,21 +121,21 @@ The exact number of sets is $2^{m}-1$ given a matrix with $m$ rows.
 The eight queens problem (see Section \ref{queens_trans}) which has a matrix consisting of 63 rows, gives an immense 9~223~372~036~854~775~808 sets.
 Given that only 92 of these are valid solutions this simple algorithm can hardly be recommended.
 
-Another approach, which is presented in Knuth's paper, is the Algorithm X (for the lack of a better name).
+Another approach, which is presented in Knuth's paper, is Algorithm X (for the lack of a better name).
 This backtrack algorithm uses a more intelligent elimination method to ``wriggle'' its way through the matrix and find all the solutions.
-Looking at matrix (\ref{eq:cover_example}) we can easily determine that row 1 and 3 never can be in the same set.
+Looking at matrix (\ref{eq:cover_example}) we can easily determine that row 1 and 3 can never be in the same set.
 They are in conflict with each other because both of them have a non-zero element in the first column.
-Since there must be exactly one non-zero element in each column we can rule out any sets with both row 1 and 3.
+Since there must be exactly one non-zero element in each column we can rule out any set containing both row 1 and 3.
 
-Algorithm X uses similar logic to recursively traverse a search tree by backtracking.
-A modified version of Knuth's original algorithm is presented below.
+Algorithm X uses similar logic to recursively traverse the search tree by backtracking.
+A modified version of Knuth's original algorithm is presented in Algorithm \ref{alg:algox}.
 Changes are made to improve the readability, logical consistency and to make it easier to compare with the Dancing Links algorithm.
-The algorithm is initially called with the matrix $A$ and the column header list $H$.
+Algorithm X is initially called with the matrix $A$ and the column header list $H$.
 $H$ is initialized with the numbers $1, 2, \ldots, n-1, n$, where $n$ is the number of columns in $A$.
 
-\begin{algorithm}[H]
+\begin{algorithm}[htbp]
 	\caption{Algorithm X recursive search procedure.}
-	\label{algox_code}
+	\label{alg:algox}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search($A, H$)}
 			\IF{$H$ is empty}
@@ -162,18 +161,18 @@ $H$ is initialized with the numbers $1, 2, \ldots, n-1, n$, where $n$ is the num
 \end{algorithm}
 
 If $H$ is empty the partial solution is an exact cover and the algorithm returns.
-Otherwise, the algorithm chooses a column $c$ and loops through each row $r$ in $c$ with a non-zero element.
-Any conflict between row $r$ and the remaining rows are resolved on lines 7 to 11.
+Otherwise, the algorithm chooses a column $c$ and loops through each row $r$ which has a non-zero element in column $c$.
+Any conflict between row $r$ and the remaining rows are resolved at line 8 to 12.
 The algorithm then calls itself recursively with the reduced matrix and column list.
 This continues until all the rows with non-zero elements in column $c$ have been tested, in which case all the branches in the search tree have been traversed.
 
 Any rule for choosing column $c$ will produce all the solutions, but there are some rules that work better than others.
-Knuth uses what he refers to as the $S$ heuristic, which is to always picking the column with the least amount of non-zero elements.
+Knuth uses what he refers to as the $S$ heuristic, which is to always choose the column with the least amount of non-zero elements.
 This approach has proved to work well in a large number of cases so it is a reasonable rule to make use of in practice.
 
 Using matrix (\ref{eq:cover_example}) as an example, we wish to demonstrate how Algorithm X works.
 The columns and rows have been numbered to make it easier to keep track of them when the matrix is modified.
-\begin{equation}
+\begin{equation*}
 	\label{eq:ces1}
 	\begin{array}{r} 1\\ 2\\ 3\\ 4\\ 5\\ 6 \end{array}
 	\stackrel{
@@ -188,12 +187,12 @@ The columns and rows have been numbered to make it easier to keep track of them 
 			0 & 0 & 1 & 0 \\
 		\end{bmatrix}
 	}
-\end{equation}
+\end{equation*}
 We begin by choosing column 1.
 Looking at this column we choose row 1 where there is a non-zero element.
 Our partial solution is now $\{ 1 \}$.
 Row 1 only has one conflicting row which is row 3, which has a conflict in column 1.
-So we remove column 1, row 1 and row 3 which results in the following matrix
+We remove column 1, row 1 and row 3 which results in the following matrix
 \begin{equation}
 	\label{eq:ces2}
 	\begin{array}{r} 2\\ 4\\ 5\\ 6 \end{array}
@@ -208,13 +207,13 @@ So we remove column 1, row 1 and row 3 which results in the following matrix
 		\end{bmatrix}
 	}
 \end{equation}
-This time we choose column 2 and row 2 so the partial solution is $\{ 1, 2 \}$.
+This time we choose column 2 and then row 2 so that the partial solution becomes $\{ 1, 2 \}$.
 Row 2 conflicts with all the remaining rows (row 5 in column 2 and row 4 and 6 in column 3).
-After all the conflicts have been resolved the matrix itself is empty, but not the column list $H$.
-Because there are no non-zero elements left the recursive call will return immediately (the loop condition at line 5 is not satisfied) and matrix (\ref{eq:ces2}) is restored.
-This time we choose row 5 giving the partial solution $\{ 1, 5 \}$.
+After all the conflicts have been resolved the matrix itself is empty, but the column list $H$ is not.
+Because there are no non-zero elements left in the matrix the recursive call will return immediately (the loop condition at line 5 is not satisfied) and matrix (\ref{eq:ces2}) is restored.
+This time we choose row 5 which results in the partial solution $\{ 1, 5 \}$.
 Row 5 conflicts with row 2 in column 2 and by eliminating the conflicts we get the following matrix
-\begin{equation}
+\begin{equation*}
 	\label{eq:ces3}
 	\begin{array}{r} 4\\ 6 \end{array}
 	\stackrel{
@@ -225,15 +224,16 @@ Row 5 conflicts with row 2 in column 2 and by eliminating the conflicts we get t
 			1 & 0 \\
 		\end{bmatrix}
 	}
-\end{equation}
-We choose column 3 and row 4 which gives the partial solution $\{ 1, 5, 4 \}$.
+\end{equation*}
+We choose column 3 and then row 4 which gives us the partial solution $\{ 1, 5, 4 \}$.
 After all the conflicts are resolved the matrix is completely empty along with the column header list.
-This tells us that $\{ 1, 5, 4 \}$ is one solution to this problem.
+This tells us that $\{ 1, 5, 4 \}$ is one of the solutions to this problem.
 
-By continuing in the same manner we eventually find all the solutions and the search tree in Figure \ref{fig:ex_tree} emerges.
-Each node $i,j$, for row $i$ and column $j$, indicates the choices made and the rectangular nodes is where the solutions were found.
-The search tree is a binary tree as a result of the small matrix used in this example so this is not something that can be generalized.
-\begin{figure}[H]
+The search tree in Figure \ref{fig:ex_tree} emerges as we continue in the same manner, until all the solutions have been found.
+Each node $i,j$, for row $i$ and column $j$, indicates the choices made by the algorithm.
+The rectangular nodes is where each of the solutions were found.
+The search tree is a binary tree as a result of the small matrix used in this example so this behavior cannot be generalized.
+\begin{figure}[htbp]
 	\centering 
 	\includegraphics[width=0.85\textwidth]{search-tree-ex.pdf}
 	\caption{Algorithm X search tree for the example matrix}
@@ -252,7 +252,7 @@ To solve these problems Knuth introduced the Dancing Links algorithm.
 
 The Dancing Links (DLX) algorithm is based on Algorithm X, but it contains some significant modifications which makes it more suitable for practical applications.
 DLX is based on a simple, yet powerful, technique which allows one to reverse any operation made to a doubly-linked list.
-If $x$ represents an element in such a list then $x.left$ and $x.right$ points to the previous and next element, respectively.
+If $x$ represents an element in such a list then $x.left$ and $x.right$ points to the previous and next element respectively.
 To remove element $x$ from the list the following two operations are applied:
 \begin{equation}
 	\label{eq:remove}
@@ -264,13 +264,13 @@ To remove element $x$ from the list the following two operations are applied:
 
 Applying these two operations to the linked list in Figure \ref{fig:linked} results in the list in Figure \ref{fig:linked_del}.
 These operations modify the links pointing to element $x$ so that an iteration through the list will no longer traverse through this element, but instead skip right past it.
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering 
 	\includegraphics[width=0.8\textwidth]{doubly-linked-list.pdf}
 	\caption{Doubly-linked list}
 	\label{fig:linked}
 \end{figure}
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering 
 	\includegraphics[width=0.8\textwidth]{doubly-linked-list-del.pdf}
 	\caption{Doubly-linked list with element $x$ removed}
@@ -280,7 +280,7 @@ These operations modify the links pointing to element $x$ so that an iteration t
 When programming one might be tempted to set $x.left$ and $x.right$ to a null value and delete the $x$ object or let the garbage collector do its thing.
 However, smart as that might seem it would prevent one from applying a second set of operations.
 In \cite{Hitotumatu79} Hitotumatu and Noshita introduced a pair of operations which allows one to insert an element back into the list in exactly the same place it was removed from.
-The following two operations work as the inverse of the operations in (\ref{eq:remove}) by adding $x$ back to the list.
+The following two operations work as the inverse of the operations in (\ref{eq:remove}) by adding $x$ back into the list.
 \begin{equation}
 	\label{eq:add}
 	\begin{array}{rcl}
@@ -290,7 +290,7 @@ The following two operations work as the inverse of the operations in (\ref{eq:r
 \end{equation}
 
 Knuth makes use of the operations in (\ref{eq:remove}) and (\ref{eq:add}) to maintain the state information for the matrix.
-The $x$ element is preserved so that the algorithm can reverse the remove operations, which is used to reduce the matrix.
+The $x$ element is preserved so that the algorithm can reverse the remove operations, which are used to reduce the matrix.
 
 
 \subsection{Data structure}
@@ -306,16 +306,17 @@ In addition the set of column headers is also stored in a list.
 Each element $x$ in the linked lists have six attributes: $x.left$, $x.right$, $x.up$, $x.down$, $x.column$ and $x.row$.
 The $x.row$ attribute is an addition to Knuth's original algorithm to enable detection of the row number.
 The first four attributes contains a pointer to an element in the respective list.
-$x.left$ and $x.right$ belongs to the row list and $x.up$ and $x.down$ belongs to the column list.
+$x.left$ and $x.right$ belongs to a row list and $x.up$ and $x.down$ belongs to a column list.
 $x.column$ is a pointer to the column header and $x.row$ is a non-negative integer storing the row number of the element.
-The column headers $c$ has the additional $c.name$ (column name/number) and $c.size$ (number of elements in column) attributes.
-There is also a special column header element $h$ which acts as a root element.
+A column header $c$ has the additional $c.name$ (column name/number) and $c.size$ (number of elements in column) attributes.
+Secondary column headers used by the generalized cover problem have their $c.left$ and $c.right$ attributes pointing to $c$ (itself).
+The special column header element $h$ acts as a root element for the rest of the data structure.
 
 Figure \ref{fig:matrix_links} shows shows how the matrix in (\ref{eq:cover_example}) can be represented using this data structure.
-To avoid clutter the $x.column$ links pointing to the column headers is not displayed.
+To avoid clutter the $x.column$ links pointing to the column headers are not displayed in the figure.
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{matrix-links.pdf}
+	\includegraphics[width=0.48\textwidth]{matrix-links.pdf}
 	\caption{Sparse boolean matrix circular quad-linked list representation of the example matrix}
 	\label{fig:matrix_links}
 \end{figure}
@@ -325,14 +326,15 @@ To avoid clutter the $x.column$ links pointing to the column headers is not disp
 
 The DLX algorithm is very similar in nature to Algorithm X and in essence the two algorithms work exactly in the same way.
 Given the example matrix (\ref{eq:cover_example}) the DLX algorithm will follow the same path as shown in Figure \ref{fig:ex_tree}.
-The difference is that DLX uses a specialized data structure, and the operations in (\ref{eq:remove}) and (\ref{eq:add}) to save and restore the state of the matrix.
-Comparing the pseudo code for the DLX algorithm below with Algorithm X reveals that they are very similar.
+The difference is that DLX uses a specialized data structure and the operations in (\ref{eq:remove}) and (\ref{eq:add}) to save and restore the state of the matrix.
+Comparing the pseudo code in Algorithm \ref{alg:algox} and \ref{alg:search} reveals that they are very similar in nature.
+
 The algorithm is initially called with $k = 0$ (recursion level 0) and $h$ is initialized with the contents of the matrix.
 See Section \ref{matrix_construction} for details on how the contents of $h$ is initialized.
-Printing a solution using the $x.row$ attribute is done by printing $O_{i}.row$ for $i = \{1, 2, \ldots, k\}$.
-\begin{algorithm}[H]
+Printing a solution using the $x.row$ attribute is done by printing $O_{i}.row$ for all $i \in \{1, 2, \ldots, k\}$.
+\begin{algorithm}[p]
 	\caption{Dancing Links recursive search.}
-	\label{dlx_search}
+	\label{alg:search}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search($k$)}
 			\IF{$h.right = h$}
@@ -356,10 +358,10 @@ Printing a solution using the $x.row$ attribute is done by printing $O_{i}.row$ 
 \end{algorithm}
 
 Column selection is done using the $S$ heuristic, which picks the column with the lowest value for $c.size$, as described in Knuth's paper.
-The algorithm simply steps through each column header looking for the lowest size.
-\begin{algorithm}[H]
+Algorithm \ref{alg:column} simply steps through each column header looking for the lowest size.
+\begin{algorithm}[p]
 	\caption{Column selection using the $S$ heuristic.}
-	\label{dlx_column}
+	\label{alg:column}
 	\begin{distribalgo}[1]
 		\FUNCTION{choose\_column()}
 			\STATE $s \leftarrow \infty$
@@ -374,14 +376,16 @@ The algorithm simply steps through each column header looking for the lowest siz
 	\end{distribalgo}
 \end{algorithm}
 
-The cover($c$) and uncover($c$) algorithms are the main differences compared to Algorithm X.
+The cover($c$) and uncover($c$) algorithms are the main differences between DLX and Algorithm X.
 The purpose of cover($c$) is to remove column $c$ from the column header list and to resolve any conflicts in the column.
 It uses the operations in (\ref{eq:remove}) to remove the conflicting elements from the column lists.
-The cover algorithm also increments the value of $updates$ which is used to measure how many operations the search algorithm requires to complete.
-One update equals four link changes or one application of both (\ref{eq:remove}) and (\ref{eq:add}).
-\begin{algorithm}[H]
+The cover($c$) algorithm also increments the value of $updates$ which is used to measure how many operations the search algorithm requires to complete.
+One update equals four link modifications or one application of both operation (\ref{eq:remove}) and (\ref{eq:add}).
+The $size$ column header attribute is maintained by both the cover($c$) and uncover($c$) algorithms so that the $S$ heuristic works properly.
+Algorithm \ref{alg:cover} contains the pseudo code for the cover procedure.
+\begin{algorithm}[p]
 	\caption{Cover column $c$.}
-	\label{dlx_cover}
+	\label{alg:cover}
 	\begin{distribalgo}[1]
 		\PROCEDURE{cover($c$)}
 			\STATE $c.right.left \leftarrow c.left$
@@ -399,11 +403,12 @@ One update equals four link changes or one application of both (\ref{eq:remove})
 \end{algorithm}
 
 The uncover($c$) algorithm restores the state of the matrix using the operations in (\ref{eq:add}).
-Notice that this algorithm walks up and left in the lists while cover($c$) walks down and right.
-This ensures that all the elements are put back in the reverse order in which they were removed.
-\begin{algorithm}[H]
+Notice that Algorithm \ref{alg:uncover} walks up and left in the lists while Algorithm \ref{alg:cover} walks down and right.
+This ensures that the elements are put back in the reverse order in which they were removed.
+This is the only way to make sure that all the links are restored to their original state.
+\begin{algorithm}[p]
 	\caption{Uncover column $c$.}
-	\label{dlx_uncover}
+	\label{alg:uncover}
 	\begin{distribalgo}[1]
 		\PROCEDURE{uncover($c$)}
 			\FOREACH{$i \leftarrow c.up, c.up.up \ldots,$ \textbf{while} $i \neq c$}
@@ -428,17 +433,18 @@ To accomplish this we must first break the problem into smaller pieces.
 In \cite{maus-prp} Maus and Aas investigates recursive procedures as the unit for parallelizing.
 They introduce some techniques on how to split the recursion tree which can be directly applied to the search tree in DLX.
 The main idea is that the algorithm is first run in a breath-first mode so that the search tree is explored one level at a time.
-When a certain number of nodes has been discovered they are distributed to a set computers and solved in parallel.
+When a certain number of nodes has been discovered the search stops and the nodes are distributed to a set computers and solved in parallel.
 
 The search procedure of DLX is a backtrack algorithm which explores the search tree depth-first.
 Making this a breath-first algorithm can be achieved by not allowing it to proceed deeper than a certain level in the search tree.
-When the given level is reached the partial solution is printed.
-It can then be used to initialize a separate process running DLX on a different computer (or another processor on the same computer).
+When the given level is reached the partial solution $O$ is printed.
+$O$ can then be used to initialize a separate process by running DLX on a different computer (or another processor on the same computer).
 As long as the predefined depth $d$ is not too deep or shallow the partial solutions can be used to efficiently solve the exact cover problem in a distributed manner.
 If $d$ is too deep (high) the algorithm will find all solutions before the splitting happens, and if it is too shallow (low) the number of partial solutions might be too low to be of any use.
-\begin{algorithm}[H]
+Adding line 10 to 12 in Algorithm \ref{alg:psearch} is the only changes required to make the original Algorithm \ref{alg:search} support this scheme.
+\begin{algorithm}[htbp]
 	\caption{Dancing Links parallel recursive splitter.}
-	\label{dlx_dsearch}
+	\label{alg:psearch}
 	\begin{distribalgo}[1]
 		\PROCEDURE{psearch($k, d$)}
 			\IF{$h.right = h$}
@@ -451,8 +457,8 @@ If $d$ is too deep (high) the algorithm will find all solutions before the split
 				\FOREACH{$j \leftarrow r.right, r.right.right, \ldots,$ \textbf{while} $j \neq r$}
 					\STATE cover($j.column$)
 				\ENDFOR
-				\IF{$k = d$ and $h.right \neq h$}
-					\STATE Print partial solution.
+				\IF{$k \geq d$ and $h.right \neq h$}
+					\STATE Print partial solution.  \COMMENT{Prevent further recursion}
 				\ELSE
 					\STATE psearch($k + 1$)
 				\ENDIF
@@ -465,16 +471,16 @@ If $d$ is too deep (high) the algorithm will find all solutions before the split
 	\end{distribalgo}
 \end{algorithm}
 
-Each partial solution can then be used as initialization vectors for the modified search procedure search\_init($O$) in Algorithm \ref{algo:dlx_isearch}.
-$O$ is the initialization vector and $p$ is the length of the vector (number of rows in the partial solution).
+Each partial solution produced by psearch($k, d$) can be used as an initialization vector for the modified search procedure search\_init($O$) in Algorithm \ref{algo:isearch}.
+$O$ is the initialization vector and $O.size$ is the length of the vector (number of rows in the partial solution).
 The initialization vectors and the matrix can be distributed and the modified search procedure can be run in parallel on each computer.
 If required each computer can do further splitting locally to take advantage of multiple processors.
-\begin{algorithm}[H]
+\begin{algorithm}[htbp]
 	\caption{Dancing Links search initialization.}
-	\label{algo:dlx_isearch}
+	\label{algo:isearch}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search\_init($O$)}
-			\FOR{$k \leftarrow 0$ to $p-1$}
+			\FOR{$k \leftarrow 0$ \textbf{to} $O.size - 1$}
 				\STATE $c \leftarrow$ choose\_column()
 				\STATE cover($c$)
 				\STATE $r \leftarrow O_k$
@@ -482,13 +488,13 @@ If required each computer can do further splitting locally to take advantage of 
 					\STATE cover($j.column$)
 				\ENDFOR
 			\ENDFOR
-			\STATE search($p$)  \COMMENT{Do actual search}
+			\STATE search($O.size$)  \COMMENT{Do actual search}
 		\ENDPROC
 	\end{distribalgo}
 \end{algorithm}
 
-This approach does not guarantee that each initialization vector provides a similar amount of work.
-Unfortunately there is straight forward method to estimate the complexity of the subtree given by a specific initialization vector.
-In \cite{knuth75backtracking} Knuth uses a Monte Carlo approach to estimate the running time of backtrack algorithms.
+This approach does not guarantee that each initialization vector provides the same amount of work.
+Unfortunately there is no straight forward method to estimate the complexity of the subtree given by a specific initialization vector.
+In \cite{knuth75backtracking} Knuth uses a Monte Carlo approach to estimate the running time of a backtrack algorithm.
 By doing random walks in the subtree he is able to estimate the cost of backtracking.
-It would be worth investigating this approach in more detail if DECS was to be extended.
+This approach would be worth investigating for a future version of DECS.
