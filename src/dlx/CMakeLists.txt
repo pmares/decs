@@ -7,7 +7,7 @@ set( dlx_SRCS
 	util.cpp
 )
 
-add_library( dlx SHARED ${dlx_SRCS} )
+add_library( dlx STATIC ${dlx_SRCS} )
 set_target_properties( dlx PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
 install( TARGETS dlx DESTINATION ${LIB_OUTPUT_PATH} )
