@@ -24,8 +24,6 @@
 
 namespace dlx {
 
-using namespace std;
-
 class Column : public Node {
 public:
 	Column();
