@@ -19,10 +19,10 @@
 #ifndef DLX_H_
 #define DLX_H_
 
-namespace dlx {
-
 typedef unsigned char byte;
 typedef unsigned int uint;
+
+namespace dlx {
 
 const uint MAX_LEVELS = 128;
 
