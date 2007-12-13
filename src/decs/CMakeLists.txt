@@ -1,0 +1,15 @@
+project( libdecs )
+
+set(SOURCES 
+	dfileio.cpp
+	dformat.cpp
+	dlx.cpp
+	sbcolumn.cpp
+	sbmatrix.cpp
+	sbnode.cpp
+)
+
+add_library( libdecs STATIC ${SOURCES} )
+set_target_properties( libdecs PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+
+install( TARGETS libdecs DESTINATION ${LIB_OUTPUT_PATH} )
