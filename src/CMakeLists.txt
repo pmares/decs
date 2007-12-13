@@ -2,7 +2,7 @@ project(decs)
 
 # Set version number
 set( DECS_VERSION_MAJOR 0 )
-set( DECS_VERSION_MINOR 2 )
+set( DECS_VERSION_MINOR 3 )
 set( DECS_VERSION_RELEASE 0 )
 set( DECS_VERSION "${DECS_VERSION_MAJOR}.${DECS_VERSION_MINOR}.${DECS_VERSION_RELEASE}" )
 set( DECS_VERSION_STRING "${DECS_VERSION} (DECS Beta)" )
@@ -25,9 +25,9 @@ set( CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE ON )
 
 # Add -s to omit symbol information in the release version
 # This should reduce their size quite a bit
-set( CMAKE_EXE_LINKER_FLAGS_RELEASE -s )
-set( CMAKE_SHARED_LINKER_FLAGS_RELEASE -s )
-set( CMAKE_MODULE_LINKER_FLAGS_RELEASE -s )
+#set( CMAKE_EXE_LINKER_FLAGS_RELEASE -s )
+#set( CMAKE_SHARED_LINKER_FLAGS_RELEASE -s )
+#set( CMAKE_MODULE_LINKER_FLAGS_RELEASE -s )
 
 # Standard directory variables, most of which are unused
 # See the GNU make documentation and the File Hierarchy Standard for
@@ -65,8 +65,10 @@ endif(WIN32)
 
 # List the subdirectories
 add_subdirectory( dance )
-add_subdirectory( dlx )
-add_subdirectory( degen )
-add_subdirectory( nqdecs )
+add_subdirectory( bdance )
+# add_subdirectory( degen )
+# add_subdirectory( nqdecs )
+add_subdirectory( decs )
+add_subdirectory( external )
 
 install( FILES COPYING.txt DESTINATION ${DOC_OUTPUT_PATH} )
