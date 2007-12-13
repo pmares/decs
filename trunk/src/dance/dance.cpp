@@ -154,13 +154,13 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	
+	
 	dfio_load_file(f);
-	SBMatrix* matrix = 0;
+	SBMatrix* matrix = new SBMatrix();
 	dfio_read_matrix(matrix);
 	dfio_cleanup();
 
 	if (verbose > 0) cout << "Searching..." << endl;
-
 	uint result = dlx_solve(matrix);
 	if (result != DFIO_ERR_SUCCESS) return solve_error(result);
 	
