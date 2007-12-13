@@ -56,7 +56,7 @@ $B$ is a reduced matrix of $A$ where the number of rows $k \leq m$.
 The number of columns in $A$ and $B$ is always the same.
 The subset $R_B$ is an exact cover iff the following equation is satisfied
 \[
-	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \forall j \in \{ 1, 2, \ldots, n-1, n \}
+	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \text{for all } j \in \{ 1, 2, \ldots, n-1, n \}
 \]
 
 In practical applications we are usually given an initial matrix $A$ and tasked with finding all the subsets of rows which are exact covers.
@@ -99,7 +99,7 @@ However, each secondary column in the solution can have either zero or one non-z
 Let $C_P$ be the set of primary columns and $C_S$ the set of secondary columns in matrix $A$ and $B$.
 The subset of rows $R_B$ is an exact cover iff both of the following equations are satisfied
 \[
-	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \forall j \in C_P  \;\;\; \wedge \;\;\;  \sum_{i = 1}^{k} b_{i,j} \leq 1 \;\;\; \forall j \in C_S
+	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \text{for all } j \in C_P  \;\;\;\;\;\; \text{and} \;\;\;\;\;\;  \sum_{i = 1}^{k} b_{i,j} \leq 1 \;\;\; \text{for all } j \in C_S
 \]
 
 
@@ -433,7 +433,7 @@ To accomplish this we must first break the problem into smaller pieces.
 In \cite{maus-prp} Maus and Aas investigates recursive procedures as the unit for parallelizing.
 They introduce some techniques on how to split the recursion tree which can be directly applied to the search tree in DLX.
 The main idea is that the algorithm is first run in a breath-first mode so that the search tree is explored one level at a time.
-When a certain number of nodes has been discovered the search stops and the nodes are distributed to a set computers and solved in parallel.
+When a certain number of nodes has been discovered the search stops and the nodes are distributed to a set of computers and solved in parallel.
 
 The search procedure of DLX is a backtrack algorithm which explores the search tree depth-first.
 Making this a breath-first algorithm can be achieved by not allowing it to proceed deeper than a certain level in the search tree.
