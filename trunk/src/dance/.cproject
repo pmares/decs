@@ -21,7 +21,7 @@
 <builder buildPath="${workspace_loc:/dance/Debug}" id="cdt.managedbuild.tool.gnu.builder.mingw.base.2033729738" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
 <tool id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.539758260" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug">
 <option id="gnu.both.asm.option.include.paths.1545686318" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/dlx}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/decs}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.927109689" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
@@ -30,7 +30,7 @@
 <option id="gnu.cpp.compiler.mingw.exe.debug.option.optimization.level.1028595981" name="Optimization Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.445779855" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.include.paths.1116074331" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/dlx}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/decs}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.968992840" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
@@ -38,18 +38,18 @@
 <option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.mingw.exe.debug.option.optimization.level.2020835719" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.debug.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.mingw.exe.debug.option.debugging.level.923035380" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 <option id="gnu.c.compiler.option.include.paths.956619752" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/dlx}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/decs}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.702271461" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.114408172" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.1640220104" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 <option id="gnu.cpp.link.option.paths.412317680" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/dlx/Debug}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/decs/Debug}&quot;"/>
 </option>
 <option id="gnu.cpp.link.option.userobjs.1917114992" name="Other objects" superClass="gnu.cpp.link.option.userobjs"/>
 <option id="gnu.cpp.link.option.libs.891724050" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-<listOptionValue builtIn="false" value="libdlx"/>
+<listOptionValue builtIn="false" value="decs"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.458460499" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -61,10 +61,10 @@
 </configuration>
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings">
-<externalSettings containerId="dlx;cdt.managedbuild.config.gnu.mingw.so.debug.522728708" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+<externalSettings containerId="decs;cdt.managedbuild.config.gnu.mingw.lib.debug.558177993" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 <externalSetting>
-<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/dlx"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/dlx/Debug"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/decs"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/decs/Debug"/>
 </externalSetting>
 </externalSettings>
 </storageModule>
@@ -483,6 +483,7 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
+
 <storageModule moduleId="org.eclipse.cdt.core.language.mapping">
 <project-mappings/>
 </storageModule>
@@ -505,7 +506,7 @@
 <builder buildPath="${workspace_loc:/dance/Release}" id="cdt.managedbuild.tool.gnu.builder.mingw.base.798331019" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
 <tool id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.release.1176461456" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.release">
 <option id="gnu.both.asm.option.include.paths.155370901" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/dlx}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/decs}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.1889839526" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
@@ -514,7 +515,7 @@
 <option id="gnu.cpp.compiler.mingw.exe.release.option.optimization.level.1448694555" name="Optimization Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.mingw.exe.release.option.debugging.level.2126591967" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.include.paths.1650210373" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/dlx}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/decs}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1589160834" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
@@ -522,17 +523,17 @@
 <option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.mingw.exe.release.option.optimization.level.807615013" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.release.option.optimization.level" valueType="enumerated"/>
 <option id="gnu.c.compiler.mingw.exe.release.option.debugging.level.2050726296" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.release.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
 <option id="gnu.c.compiler.option.include.paths.70782128" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/dlx}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/decs}&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.156307370" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.623294610" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.1212590100" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 <option id="gnu.cpp.link.option.paths.1876126514" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/dlx/Debug}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/decs/Release}&quot;"/>
 </option>
 <option id="gnu.cpp.link.option.libs.2072559085" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-<listOptionValue builtIn="false" value="libdlx"/>
+<listOptionValue builtIn="false" value="decs"/>
 </option>
 <option id="gnu.cpp.link.option.strip.876381600" name="Omit all symbol information (-s)" superClass="gnu.cpp.link.option.strip" value="true" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1410420435" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
@@ -545,10 +546,10 @@
 </configuration>
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings">
-<externalSettings containerId="dlx;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+<externalSettings containerId="decs;cdt.managedbuild.config.gnu.mingw.lib.release.498414094" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 <externalSetting>
-<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/dlx"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/dlx/Debug"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/decs"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/decs/Release"/>
 </externalSetting>
 </externalSettings>
 </storageModule>
@@ -967,6 +968,7 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
+
 <storageModule moduleId="org.eclipse.cdt.core.language.mapping">
 <project-mappings/>
 </storageModule>

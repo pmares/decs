@@ -17,12 +17,14 @@
  */
 
 #include <iostream>
-#include "dlx.h"
 
-const char* version = "0.3";
+#include "dlx.h"
+#include "dfileio.h"
+#include "sbmatrix.h"
+
+const char* VERSION = "0.3";
 
 using namespace std;
-using namespace dlx;
 
 /**
  * Prints command line options.
@@ -46,7 +48,7 @@ void print_usage() {
  * Prints version and copyright notice.
  */
 void print_version() {
-	cout << "dance (DECS toolkit) " << version << "\n"
+	cout << "dance (DECS toolkit) " << VERSION << "\n"
 			"Copyright (C) 2007 Jan Magne Tjensvold\n"
 			"This is free software; See the source for copying conditions. There is NO\n"
 			"WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
@@ -59,35 +61,35 @@ void usage_error() {
 
 int solve_error(uint code) {
 	switch (code) {
-	case ERR_FILE_OPEN:
+	case DFIO_ERR_FILE_OPEN:
 		cerr << "Unable to open the specified file";
 		return 1;
 		break;
-	case ERR_FILE_VERSION:
+	case DFIO_ERR_FILE_VERSION:
 		cerr << "Incompatible file version";
 		return 1;
 		break;
-	case ERR_FILE_ID:
+	case DFIO_ERR_FILE_ID:
 		cerr << "Incompatible file ID";
 		return 1;
 		break;
-	case ERR_COL_IDX_OOB:
+	case DFIO_ERR_OOB_COL_IDX:
 		cerr << "Out of bounds column index encountered while reading from file";
 		return 1;
 		break;
-	case ERR_COL_COUNT_OOB:
+	case DFIO_ERR_OOB_COLUMNS:
 		cerr << "Out of bounds column count encountered while reading from file";
 		return 1;
 		break;
-	case ERR_COL_UNSORTED:
+	case DFIO_ERR_COL_UNSORTED:
 		cerr << "Unsorted column index encountered while reading from file";
 		return 1;
 		break;
-	case ERR_ELEMS_OOB:
+	case DFIO_ERR_OOB_ELEMS:
 		cerr << "Number of elements read from the file is out of bounds";
 		return 1;
 		break;
-	case ERR_ROW_UNSORTED:
+	case DFIO_ERR_ROW_UNSORTED:
 		cerr << "Unsorted row index encountered while reading from file";
 		return 1;
 		break;
@@ -121,7 +123,7 @@ int main(int argc, char* argv[]) {
 		} else if (!strcmp(argv[i], "--profile")) {
 			showProfile = true;
 		} else if (!strcmp(argv[i], "--no-heuristic")) {
-			setHeuristic(false);
+			dlx_set_heuristic(false);
 		} else if (i == argc-1) {
 			file = argv[i];
 		} else {
@@ -135,30 +137,47 @@ int main(int argc, char* argv[]) {
 		usage_error();
 	}
 	
-	setVerboseLevel(verbose);
+	dlx_set_verbose_level(verbose);
 	
 	if (verbose > 0) {
 		cout << "Dancing to the rhythm of\n" << file << "\n\n";
-		cout << "Searching..." << endl;
+		cout << "Loading..." << endl;
 	}
 	
-	uint result = solve(file);
-	if (result != ERR_SUCCESS) return solve_error(result);
+#ifdef _WIN32
+	FILE* f = fopen(file, "rb");
+#else
+	FILE* f = fopen(file, "r");
+#endif
+	if (!f) {
+		cerr << "Unable to open file for reading '" << file << "'\n";
+		return 1;
+	}
+	
+	dfio_load_file(f);
+	SBMatrix* matrix = 0;
+	dfio_read_matrix(matrix);
+	dfio_cleanup();
+
+	if (verbose > 0) cout << "Searching..." << endl;
+
+	uint result = dlx_solve(matrix);
+	if (result != DFIO_ERR_SUCCESS) return solve_error(result);
 	
 	// Output results from the solving.
 	if (verbose > 0) {
 		cout << "Search complete\n";
-		cout << "\nNumber of solutions: " << countSolutions();
-		cout << "\nFinal primary column size: " << countColumns();
+		cout << "\nNumber of solutions: " << dlx_count_solutions();
+		cout << "\nFinal primary column size: " << dlx_count_columns();
 	}
 	
-	uint updates = getUpdates();
+	uint updates = dlx_get_updates();
 	if (countUpdates) cout << "\nTotal link updates: " << updates;
 	if (showProfile) {
 		cout << "\n\nLink update profile:\n";
-		uint maxLevel = getMaxLevel() + 1;
+		uint maxLevel = dlx_get_max_level() + 1;
 		for (uint i = 0; i < maxLevel; i++) {
-			uint upd = getProfile(i);
+			uint upd = dlx_get_profile(i);
 			cout << i << '\t' << upd << " (" << (double(upd) / double(updates)) * 100.0 << "%)\n"; 
 		}
 	}

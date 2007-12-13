@@ -3,7 +3,7 @@
 	<name>dance</name>
 	<comment></comment>
 	<projects>
-		<project>dlx</project>
+		<project>decs</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
