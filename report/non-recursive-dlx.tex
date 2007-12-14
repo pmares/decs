@@ -123,7 +123,7 @@ Can you find a way to eliminate the last goto statement as well?
 					\STATE $j \leftarrow j.right$
 				\ENDWHILE
 				\IF{$h.right = h$}
-					\STATE Print solution.
+					\STATE Print solution.  \COMMENT{Former recursion base case}
 				\ELSE
 					\STATE $k \leftarrow k + 1$
 					\STATE $S.push(r)$
