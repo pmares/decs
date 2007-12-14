@@ -9,7 +9,7 @@ set(SOURCES
 	gutil_text.C
 	reduce_lib.C
 	reduce_main.C
-	texfont.c
+	texfont.C
 	texture.C
 	tgalib.C
 	txf_util.C
