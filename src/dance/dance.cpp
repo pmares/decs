@@ -35,8 +35,8 @@ void print_usage() {
 			"Options:\n"
 			"  -v, --verbose      Verbose output.\n"
 			"  -q, --quiet        Quiet. Don't output to stdout.\n"
-			"  --count-updates    Print the number of link updates.\n"
-			"  --profile          Print the link update profile.\n"
+			"  --statistics       Print the number of nodes and link updates.\n"
+			"  --profile          Print the node count and link update profile.\n"
 			"  --no-heuristic     Disable the column selection by size heuristic.\n"
 			"  --help             Print help information and exit.\n"
 			"  --version          Print program version and exit.\n"
@@ -102,7 +102,7 @@ int solve_error(uint code) {
 
 int main(int argc, char* argv[]) {
 	uint verbose = 1;
-	bool countUpdates = false;
+	bool showStats = false;
 	bool showProfile = false;
 	char* file = 0;
 	
@@ -118,8 +118,8 @@ int main(int argc, char* argv[]) {
 		} else if (!strcmp(argv[i], "--version")) {
 			print_version();
 			return 0;
-		} else if (!strcmp(argv[i], "--count-updates")) {
-			countUpdates = true;
+		} else if (!strcmp(argv[i], "--statistics")) {
+			showStats = true;
 		} else if (!strcmp(argv[i], "--profile")) {
 			showProfile = true;
 		} else if (!strcmp(argv[i], "--no-heuristic")) {
@@ -164,21 +164,56 @@ int main(int argc, char* argv[]) {
 	uint result = dlx_solve(matrix);
 	if (result != DFIO_ERR_SUCCESS) return solve_error(result);
 	
+
 	// Output results from the solving.
+	uint updates = dlx_get_updates();
+	uint nodes = dlx_get_nodes();
+	uint solutions =  dlx_count_solutions();
+
 	if (verbose > 0) {
 		cout << "Search complete\n";
-		cout << "\nNumber of solutions: " << dlx_count_solutions();
-		cout << "\nFinal primary column size: " << dlx_count_columns();
+		cout << "\nNumber of solutions: " << solutions;
 	}
-	
-	uint updates = dlx_get_updates();
-	if (countUpdates) cout << "\nTotal link updates: " << updates;
+	if (showStats) {
+		cout << "\nTotal nodes: " << nodes;
+		cout << "\nTotal link updates: " << updates;
+	}
 	if (showProfile) {
-		cout << "\n\nLink update profile:\n";
+		cout << "\n\nLink, update and solution profile:\n";
+		cout << "Level        Nodes               Updates             Solutions\n"; 
 		uint maxLevel = dlx_get_max_level() + 1;
 		for (uint i = 0; i < maxLevel; i++) {
-			uint upd = dlx_get_profile(i);
-			cout << i << '\t' << upd << " (" << (double(upd) / double(updates)) * 100.0 << "%)\n"; 
+			uint upd = dlx_get_update_profile(i);
+			uint nod = dlx_get_node_profile(i);
+			uint sol = dlx_get_solution_profile(i);
+			printf(" %3u  %10u (%5.1f%%)  %10u (%5.1f%%)  %10u (%5.1f%%)\n", i,
+				nod, double(nod) / double(nodes) * 100,
+				upd, double(upd) / double(updates) * 100,
+				sol, double(sol) / double(solutions) * 100);
+		}
+
+		cout << "\n\nFanout profile:\n";
+		cout << "Level    Nodes      Updates     Solutions\n"; 
+		uint upd1 = dlx_get_update_profile(0);
+		uint nod1 = dlx_get_node_profile(0);
+		uint sol1 = dlx_get_solution_profile(0);
+		for (uint i = 1; i < maxLevel; i++) {
+			uint upd = dlx_get_update_profile(i);
+			uint nod = dlx_get_node_profile(i);
+			uint sol = dlx_get_solution_profile(i);
+			if (sol1 > 0)
+				printf(" %3u  %8.1f%  %8.1f%  %8.1f%\n", i,
+					double(nod) / double(nod1) * 100,
+					double(upd) / double(upd1) * 100,
+					double(sol) / double(sol1) * 100);
+			else
+				printf(" %3u  %8.1f%  %8.1f%\n", i,
+					double(nod) / double(nod1) * 100,
+					double(upd) / double(upd1) * 100);
+			upd1 = upd;
+			nod1 = nod;
+			sol1 = sol;
+//			cout << i << '\t' << upd << " (" << () * 100.0 << "%)" << '\t' << nod << " (" << (double(nod) / double(nodes)) * 100.0 << "%)\n"; 
 		}
 	}
 	
