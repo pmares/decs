@@ -38,6 +38,17 @@
 
 %\DeclareMathOperator{\lcm}{lcm}
 
+% Degree symbol for LaTeX and math mode
+\newcommand{\degree}{\ensuremath{^\circ}}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
 % Document info
 \title{Generic Distributed Exact Cover Solver}
 \author{Jan Magne Tjensvold}
@@ -60,8 +71,8 @@
 
 % Include external files
 \include{introduction}
-\include{dancing_links}
-\include{distributed_computing}
+\include{dancing-links}
+\include{distributed-computing}
 \include{implementation}
 \include{testing}
 \include{conclusion}
