@@ -24,13 +24,18 @@
 #include "sbcolumn.h"
 #include "sbmatrix.h"
 
+// The number of different types of profiles.
+// Profiles: Link updates, nodes and solutions.
+const uint PROFILE_TYPES = 3;
+
 SBMatrix* m = 0;
 SBColumn* h = 0;
 SBNode* o[MAX_LEVELS];
 uint solutions = 0;
 uint verbose = 1;
 uint updates = 0;
-uint profile[MAX_LEVELS];
+uint nodes = 0;
+uint profile[MAX_LEVELS][PROFILE_TYPES];
 uint maxLevel = 0;
 uint level = 0;
 bool heuristic = true;
@@ -73,7 +78,7 @@ inline void cover(SBColumn* c) {
 		}
 	}
 	updates += k;
-	profile[level] += k;
+	profile[level][0] += k;
 }
 
 /**
@@ -111,6 +116,8 @@ inline SBColumn* choose_column() {
  * Initially invoked when level = 0.
  */
 void search() {
+	nodes++;
+	profile[level][1]++;
 	SBColumn* c;
 	if (heuristic) {
 		c = choose_column();
@@ -135,6 +142,7 @@ void search() {
 		// Do we have a solution?
 		if (h->getRight() == h) {
 			solutions++;
+			profile[level][2]++;
 			if (verbose > 1) print_solution();
 		} else {
 			level++;
@@ -184,7 +192,7 @@ void psearch() {
 			cover(j->getColumn());
 	}
 	
-	solutions = updates = 0;  // Ignore changes made in this procedure.
+	solutions = updates = nodes = 0;  // Ignore changes made in this procedure.
 	level = depth;
 	search();
 	level = 0;
@@ -210,12 +218,24 @@ uint dlx_get_updates() {
 	return updates;
 }
 
+uint dlx_get_nodes() {
+	return nodes;
+}
+
 uint dlx_get_max_level() {
 	return maxLevel;
 }
 
-uint dlx_get_profile(uint level) {
-	return profile[level];
+uint dlx_get_update_profile(uint level) {
+	return profile[level][0];
+}
+
+uint dlx_get_node_profile(uint level) {
+	return profile[level][1];
+}
+
+uint dlx_get_solution_profile(uint level) {
+	return profile[level][2];
 }
 
 uint dlx_count_solutions() {
@@ -245,11 +265,12 @@ bool dlx_working() {
 void cleanup() {
 //	util_cleanup();
 	
-	solutions = updates = maxLevel = level = 0;
+	solutions = updates = nodes = maxLevel = level = 0;
 	
 	for (uint i = 0; i < MAX_LEVELS; i++) {
 		o[i] = 0;
-		profile[i] = 0;
+		for (uint j = 0; j < PROFILE_TYPES; j++)
+			profile[i][j] = 0;
 	}
 	
 // This should be done by the caller since that's where the matrix was created.
