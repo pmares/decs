@@ -1,5 +1,10 @@
 \documentclass[a4paper]{report}
 
+% Just because I'm too lazy to update the author and title name two places :)
+\newcommand{\thisAuthor}{Jan Magne Tjensvold}
+\newcommand{\thisTitle}{Generic Distributed Exact Cover Solver}
+
+
 % Import packages
 \usepackage{amsmath, amsfonts, amsthm}  % AMS math libraries
 \usepackage{amssymb}       % Large extended set of symbols: http://home.online.no/~pjacklam/latex/textcomp.pdf
@@ -10,20 +15,24 @@
 %\usepackage{wrapfig}
 %\usepackage{subfigure}
 %\usepackage{url}
+\usepackage{float}         % Nust be included manually before hyperref so that the algorithm packages work properly.
 \usepackage[pdftex,
-	pdfauthor={Jan Magne Tjensvold},
-	pdftitle={Generic Distributed Exact Cover Solver},
+	pdfauthor={\thisAuthor},
+	pdftitle={\thisTitle},
 	pdfkeywords={Distributed; Computing; Distributed computing; Exact Cover; Dancing Links; DLX},
 	pdfsubject={Distributed computing},
 	pdflang={en},
 	bookmarks,
 	bookmarksnumbered,
 ]{hyperref}  % Sets pdfTeX to include bookmarks in the output file (Should always be the last package included)
+\usepackage[all]{hypcap}   % Links to figures now point at the top of the figure instead of the caption.
 \usepackage{algorithm}     % Pseudocode float environment
 \usepackage{algorithmic}   % Pseudocode
 \usepackage[noend, nobraces]{javadistalgo}  % Java style pseudocode
 
+
 \graphicspath{{./}{images/}}
+
 
 % Limit the depth of the table of contents
 %\setcounter{tocdepth}{1}
@@ -39,8 +48,9 @@
 %\DeclareMathOperator{\lcm}{lcm}
 
 % Degree symbol for LaTeX and math mode
-\newcommand{\degree}{\ensuremath{^\circ}}
+%\newcommand{\degree}{\ensuremath{^\circ}}
 
+% Some useful environments.
 \newenvironment{definition}[1][Definition]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 \newenvironment{example}[1][Example]{\begin{trivlist}
@@ -49,11 +59,10 @@
 \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
 
-% Document info
-\title{Generic Distributed Exact Cover Solver}
-\author{Jan Magne Tjensvold}
+% Document main page
+\title{\thisTitle}
+\author{\thisAuthor}
 \date{\today}
-
 
 
 % Here the actual document begins.
@@ -67,7 +76,7 @@
 % Table of contents, tables and figures
 \tableofcontents
 %\listoftables
-%\listoffigures
+\listoffigures
 
 % Include external files
 \include{introduction}
@@ -76,16 +85,6 @@
 \include{implementation}
 \include{testing}
 \include{conclusion}
-
-
-% How to organize the report:
-% - Describe what problem or type of problem we are trying to solve and why.
-% - Describe how we are going to solve it.
-%   - The DLX algorithm.
-%   - The Grid computing system for distributing the workload.
-% - Describe some of the important implementation details.
-% - Describe test results.
-
 
 
 % BibTeX compiles the bibliography
