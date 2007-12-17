@@ -133,8 +133,8 @@ C =& \{ \{ 1, 5, 16 \}, \{ 1, 6, 9, 17 \}, \{ 1, 7, 10, 18 \}, \{ 1, 8, 11 \}, \
 \end{align*}
 
 Running this though the DLX algorithm provides two solutions $S_1$ and $S_2$.
-Notice that in each of the solutions the numbers 1 through 8, which is the primary columns, are present exactly once.
-Only eight out of the ten secondary columns are present in the solutions.
+%Notice that in each of the solutions the numbers 1 through 8, which is the primary columns, are present exactly once.
+%Only eight out of the ten secondary columns are present in the solutions.
 Using the first two numbers in each set (the rank and file) we can find out what the solutions look like.
 Figure \ref{fig:4queens} shows the board layout of the two solutions.
 \begin{align*}
@@ -144,7 +144,7 @@ S_2 = \{ \{ 1, 6, 9, 17 \}, \{ 2, 8, 12, 18 \}, \{ 3, 5, 10, 14 \}, \{ 4, 7, 13,
 
 \begin{figure}[hptb]
 	\centering 
-	\includegraphics[width=0.79\textwidth]{queens-4x4.pdf}
+	\includegraphics[width=0.44\textwidth]{queens-4x4.pdf}
 	\caption{The two solutions $S_1$ (left) and $S_2$ (right) to the 4-queens problem}
 	\label{fig:4queens}
 \end{figure}
@@ -152,19 +152,19 @@ S_2 = \{ \{ 1, 6, 9, 17 \}, \{ 2, 8, 12, 18 \}, \{ 3, 5, 10, 14 \}, \{ 4, 7, 13,
 \end{example}
 
 
-\newpage
+
 \section{Algorithm X}
 \label{algox}
 
 Exact cover is a type of problem known to be NP-complete \cite{np-comp-theory}.
-Several methods exist which finds all the solutions to an exact cover problem.
-optical device
+Several methods exist to find all the solutions to an exact cover problem.
 To find all the solutions to an exact cover problem the most straight forward algorithm is to check all possible sets of rows.
 Given a set we then check to see if there is exactly one non-zero element in each column.
 However, as the size of the matrix increases we will experience a combinatorial explosion on the number of possible sets to test.
 The exact number of sets is $2^{m}-1$ given a matrix with $m$ rows.
 The 8-queens problem (see Section \ref{queens_trans}) which has a matrix consisting of 63 rows, gives an immense 9~223~372~036~854~775~808 sets.
 Given that only 92 of these are valid solutions this simple algorithm can hardly be recommended.
+However, in \cite{oltean-2007} Mihai Oltean and Oana Muntean proposes a design for an optical device which should be able to solve some exact cover problems using this technique.
 
 Another approach, which is presented in \cite{knuth00dancing}, is Algorithm X (for the lack of a better name).
 This backtrack algorithm uses a more intelligent elimination method to ``wriggle'' its way through the matrix and find all the solutions.
