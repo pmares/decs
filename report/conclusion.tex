@@ -4,12 +4,40 @@
 
 % Description of important/interesting implementation details.
 
+
+
 \section{Future work}
 
-\subsection*{Sub-bit precision packing}
+\subsection*{Implement a compression scheme}
 
-To make the file format explanation easy to understand the conventional bit packing technique was chosen over sub-bit precision packing.
-With sub-bit precision packing we can achieve an even better file size reduction at the expense of a few more CPU cycles.
-This is especially important for problems having very large DLX matrices.
-By implementing this extension to the conventional technique we will increase the performance of the system.
+To ease the file format explanation and implementation no compression technique was implemented.
+In cases where an exact cover problem has a very large number of solutions it would be an advantage to have some sort of compression.
+A technique called bit packing described in \cite{gdip_bitpack, gpg_bitpack} provides a way to do some simple compression with a very low performance overhead.
+By applying this technique we can exploit the otherwise unused bits.
+The bit packing scheme can also be generalized to pack the data even more densely by doing sub-bit precision packing.
+The trade off between processing overhead and file size can be beneficial in cases where the number of solutions is large and where storage and bandwidth resources are scarce.
+It might also be worth looking into other compression schemes which are easy to implement.
 
+
+\subsection*{Implement more transforms}
+
+Currently only the $n$-queens transform has been implemented.
+The other transforms explained in the report could be implemented as well making DECS more useful.
+
+
+\subsection*{Improve the Petri net simulation model}
+
+The Petri net model could be made more complete by incorporating other aspects of distributed computing as well.
+Simulating client failure or malicious clients submitting incorrect data could be a possible extension.
+That would require a certain piece of the problem to be sent to multiple clients for redundancy and verification.
+It would also be a good idea to try to eliminate some of assumptions currently present in the simulation.
+This would make the simulation results more accurate and true to the actual system.
+
+
+
+
+%\subsection*{Implement a matrix hashing function}
+
+%To 
+% TODO Describe caching idea.
+% Equivalence of matrixes with same solutions. Translations give same matrix, etc.

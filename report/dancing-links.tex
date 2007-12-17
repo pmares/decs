@@ -92,6 +92,7 @@ By adopting a trial and error approach one can find that the full set of solutio
 
 
 \subsection{Generalized exact cover}
+\label{general_exact_cover}
 
 A generalized form of the exact cover problem is sometimes better suited to solve certain types of problems.
 The generalized problem can be translated to an exact cover problem by adding additional rows, but translating in the opposite direction is not always possible.
@@ -522,13 +523,13 @@ Adding line 10 to 12 in Algorithm \ref{alg:psearch} is the only changes required
 	\end{distribalgo}
 \end{algorithm}
 
-Each partial solution produced by psearch($k, d$) can be used as an initialization vector for the modified search procedure search\_init($O$) in Algorithm \ref{algo:isearch}.
+Each partial solution produced by psearch($k, d$) can be used as an initialization vector for the modified search procedure search\_init($O$) in Algorithm \ref{alg:isearch}.
 $O$ is the initialization vector and $O.size$ is the length of the vector (number of rows in the partial solution).
 The initialization vectors and the matrix can be distributed and the modified search procedure can be run in parallel on each computer.
 If required each computer can do further splitting locally to take advantage of multiple processors.
 \begin{algorithm}[htbp]
 	\caption{Dancing Links search initialization.}
-	\label{algo:isearch}
+	\label{alg:isearch}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search\_init($O$)}
 			\FOR{$k \leftarrow 0$ \textbf{to} $O.size - 1$}

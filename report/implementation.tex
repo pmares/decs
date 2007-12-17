@@ -3,38 +3,115 @@
 \label{implementation}
 % Here we describe some of the important implementation details.
 
-Implemented in C/C++.
+DECS has been implemented in the C++ programming language and the source code is available at \url{http://decs.googlecode.com/} licensed under the GNU General Public License version 2.
+The DECS software suite consists of several parts:
+\begin{description}
+	\item[libdecs]
+		This static library contains all the essential parts of DECS like the DLX algorithm, the sparse boolean matrix representation code and the file input/output functionality.
+	\item[dance]
+		The dance command line program can solve exact covers stored in the DECS file format.
+		It can also display various information about the content of a DECS file.
+	\item[bdance]
+		The bdance program is integrated with the BOINC framework.
+		This is the program that any BOINC client connected to the DECS project will download and use.
+		It simply reads from the file in.decs, solves the exact cover and writes the solutions to the out.decs file.
+	\item[degen]
+		The DECS matrix generator is a command line program which can build exact cover matrices and save them in the DECS file format.
+		It can also do reverse transforms and analyze DECS result files from previous computations.
+		It relies on a set of libraries to do forward and reverse transforms on the specific type of problem.
+		Currently the only library available is for the $n$-queens problem.
+\end{description}
 
-dance, bdance, degen
-static libraries libdecs and libnqdecs.
+
 
 \section{Architecture}
 
+The DECS system architecture is layer based as shown in Figure \ref{fig:architecture}.
+The application layer is where external applications produce exact cover problems and where the final solutions ends up.
+The transformation layer is where the degen program and its libraries operate.
+The generalization step is when degen receives a problem and turns it into an exact cover problem and outputs the matrix in the DECS format.
+This file is then handed to libdecs where the DLX parallel recursive splitter (Algorithm \ref{alg:psearch}) produces a number of work units.
+Each of the work units are handed to the BOINC system which makes sure that they are available for clients connected to the BOINC server provided by DECS.
+When a client receives a work unit it runs the DLX algorithm (Algorithm \ref{alg:isearch}) to find all the solutions.
+The client then sends the solutions back the the BOINC server where they are verified for correctness and stored until the solutions to all the related work units has been received.
+BOINC then hands the solutions back to libdecs which reads and analyzes the solution files and merges them into a single file.
+Finally it passes the resulting file to the degen program which runs a reverse transform on the solutions.
+degen then writes the final results in whatever format the application needs.
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 	\centering 
-	\includegraphics[width=1.0\textwidth]{Architecture.png}
+	\includegraphics[width=1.0\textwidth]{architecture.pdf}
 	\caption{Generic Distributed Exact Cover Solver system architecture}
 	\label{fig:architecture}
 \end{figure}
 
-% TODO Describe caching idea.
-% Equivalence of matrixes with same solutions. Translations give same matrix, etc.
 
 \section{Transforms}
 \label{transforms}
+
+To turn a specific problem into an exact cover problem it needs an algorithm that understands that specific problem.
+This algorithm then turns the problem into an exact cover matrix which can be solved by the DLX algorithm.
+When the solutions to the matrix has been found they need to be translated back (reverse transform) into the domain of the original problem so that it is possible to understand the end result.
+The degen program makes use of a set of libraries to accomplish these two task.
 
 
 \subsection{\texorpdfstring{$n$}{n}-queens}
 \label{queens_trans}
 
+The $n$-queens problem has been described in detail in Section \ref{intro_queens} along with an example in Section \ref{general_exact_cover}.
+It was originally proposed by the chess player Max Bezzel in 1848.
+Since that time many people has made an effort to find the number of solutions for steadily increasing values of $n$.
+The next unsolved puzzle is for $n = 26$ which is expected to have somewhere around $2 \times 10^{16}$ solutions.
+Trying to parallelize the $n$-queens problem is nothing new.
+As early as 1989 Bruce Abramson and Moti Yung presented a divide and conquer algorithm in \cite{Abramson89} which in principle could be used to do parallel processing.
+A Danish bachelor project from the spring of 2007 \cite{queens-mig} tried to solve the problem for $n=26$ on the MiG \cite{mig} Grid computing platform.
+One of the most promising projects lately is the BOINC based NQueens@Home \cite{nqueensathome} project.
+About 13 years of CPU time has been registered by the project after running for only 3 months.
 
-Placing $n$ queens on an $n \times n$ chessboard so that none of them are attacking each other. ensures that each row and column on the board can only be occupied by exactly one queen.
-By assigning each diagonal on the chess board to a secondary column the number of rows in the final matrix is reduced.
+Algorithm \ref{alg:nqeens-cover} shows how the $n$-queens transform takes place.
+The parameter $A$ is a matrix with all elements set to zero, $i \times j$ rows, $2n$ primary columns and $4n - 6$ secondary columns (for the two diagonals).
+The elements of $A$ is accessed by $A[i,j]$ where $i$ is the row and $j$ is the column.
+Each iteration through the inner loop generates one row in the matrix for each file on the chessboard.
+The outer loop steps through all the ranks on the board so by multiplying the number of ranks and files we get $n^2$ rows in the final matrix.
+Each of these rows represents a unique placement of a queen on the chessboard.
+The algorithm is made a bit complex by the calculation of each of the two diagonals.
+At the end of the algorithm the matrix $A$ can be saved to file and made ready for further processing.
 
+\begin{algorithm}[H]
+	\caption{Transforming $n$-queens into the exact cover matrix $A$.}
+	\label{alg:nqeens-cover}
+%	\algsetup{indent=5em}
+	\begin{distribalgo}[1]
+		\PROCEDURE{queens($n$, $A$)}
+			\FOR{$i \leftarrow 0$ \textbf{to} $n - 1$}
+				\FOR{$j \leftarrow 0$ \textbf{to} $n - 1$}
+					\STATE $row \leftarrow i \times j + 1$
+					\STATE $A[row,i+1] \leftarrow 1$  \COMMENT{The rank}
+					\STATE $A[row,j+n+1] \leftarrow 1$  \COMMENT{The file}
+					\STATE $d_1 \leftarrow i + j$  \COMMENT{The first diagonal}
+					\IF{$d_1 \neq 0$ and $d_1 \neq 2n - 2$}
+						\IF{$d_1 < 2n - 2$}
+							\STATE $A[row,d_1 + 2n] \leftarrow 1$
+						\ELSE
+							\STATE $A[row,d_1 + 2n - 1] \leftarrow 1$
+						\ENDIF
+					\ENDIF
+					\STATE $d_2 \leftarrow n - i + j - 1$  \COMMENT{The second diagonal}
+					\IF{$d_2 \neq 0$ and $d_2 \neq 2n - 2$}
+						\IF{$d_2 < 2n - 2$}
+							\STATE $A[row,d_2 + 4n - 3] \leftarrow 1$
+						\ELSE
+							\STATE $A[row,d_2 + 4n - 4] \leftarrow 1$
+						\ENDIF
+					\ENDIF
+				\ENDFOR
+			\ENDFOR
+		\ENDPROC
+	\end{distribalgo}
+\end{algorithm}
 
-{3, 15, 20, 26, 49, 61, 32, 46}
-
+\begin{example}
+Running the matrix of the 8-queens through the DLX algorithm by using the dance program gives us a list of 92 solutions like this
 \begin{verbatim}
 $ dance --verbose examples/queens8.decs
 [...]
@@ -44,37 +121,36 @@ Search complete
 
 Number of solutions: 92
 \end{verbatim}
+The solutions contain the row numbers from the matrix and not the entire content of the rows.
+The row numbers given in the output are zero based.
+The solution $\{3, 15, 20, 26, 49, 61, 32, 46\}$ shown in the output represents the chessboard shown in Figure \ref{fig:8queens}.
 
 
 
-% [Begin Wikipedia quote] Consider a matrix with one column for each of the n ranks of the board, one column for each of the n files, and one column for each of the 4n-6 nontrivial diagonals of the board. The matrix has n^2 rows: one for each possible queen placement, and each row has a 1 in the  columns corresponding to that square's rank, file, and diagonals and a 0 in  all the other columns. Then the n queens problem is equivalent to choosing a subset of the rows of this  matrix such that every column has a 1 in precisely one of the chosen rows;  this is an exact cover problem. [end Wikipedia quote]
-
-% Actually, the Wikipedia entry contains an error in the argumentation. On  an n by n board, we will place at most n queens. They will avoid each other by being in separate rows and columns.  But we have a total of 2n-3 parallel diagonals which have to be guarded by the n queens. Which means  that all diagonals will not be occupied. The exact cover procedure will not  find any solutions. So, in order to turn the problem into a correct exact  cover problem, we will add 4n-6 lines with a 1 only in each of the columns corresponding to the  diagonals. This will allow the algorithm to complete its search for a  complete cover by adding these rows, which we can then delete afterwards  (these will be the only rows with only a single column entry). 
-% -- http://www.imtek.de/simulation//mathematica/IMSweb/imsTOC/Game%20Theory/ExactCoverDocu.html
+\end{example}
 
 
+%\subsection{Polyominoes}
+%\label{poly_trans}
 
-\subsection{Polyominoes}
-\label{poly_trans}
-
-Solomon W. Golomb practically invented the concept of polyominoes and made it widely available in his book \cite{Polyominoes}.
+%Solomon W. Golomb practically invented the concept of polyominoes and made it widely available in his book \cite{Polyominoes}.
 
 
-\subsection{Latin square}
-\label{latin_trans}
+%\subsection{Latin square}
+%\label{latin_trans}
 
-\cite{Colbourn04}
+%\cite{Colbourn04}
 % Application of Exact Cover to Solving the Latin Square Puzzle
 % -- http://www.imtek.de/simulation//mathematica/IMSweb/imsTOC/Game%20Theory/ExactCoverDocu.html
 
-Latin square puzzles - Special types of Latin squares can be used as error correcting codes for power line communication (sending radio signals over electric power lines) \cite{Colbourn04}
+%Latin square puzzles - Special types of Latin squares can be used as error correcting codes for power line communication (sending radio signals over electric power lines) \cite{Colbourn04}
 
 
-\subsection{Sudoku}
-\label{sudoku_trans}
+%\subsection{Sudoku}
+%\label{sudoku_trans}
 
 % Sudoku (special case of Latin squares)
-Granted Sudoku 
+%Granted Sudoku 
 
 
 \section{File format}
@@ -169,26 +245,6 @@ This information can be used by the BOINC client to display graphical informatio
 For example it can use the problem type ID to identify the correct transform, and when the DLX algorithm finds a solution it can run the reverse transform and display the solution graphically.
 BOINC has built-in support for OpenGL rendering and the solution can be displayed as part of a special BOINC screen saver.
 
-\subsubsection{Bit packing}
-
-If we allow the number of bits used to store the column and row numbers to be an arbitrary integer (instead of 8, 16 or 32) we can achieve a reduction in file size without too much additional work.
-By applying a technique known as bit packing, a form of lossless compression, we can exploit the otherwise unused bits.
-As long as we know the range of our values, as we do with the numcols and numrows fields, we can easily apply this technique.
-In the May 2002 edition of Game Developer Magazine Jonathan Blow wrote, in The Inner Product column, about how bit packing can be implemented \cite{gdip_bitpack}.
-He also explained a generalization of the bit packing scheme which packs the data even more densely by doing sub-bit precision packing.
-For the sake of simplicity sub-bit precision packing will not be implemented at this time.
-The ``Bit Packing: A Network Compression Technique'' article \cite{gpg_bitpack} by Pete Isensee in Game Programming Gems 4 gives a framework for implementing bit packing in C/C++.
-Other techniques for lossless compression 
-
-By using bit packing we incur an extra processing overhead when reading and writing the file as the program will have to apply some bit shifting and modulus operations to retrieve the actual values.
-The trade off between processing overhead and file size can be beneficial in cases where the number of non-zero elements, rows and/or columns is large and where storage and bandwidth resources are scarce.
-A bit packing framework will need to determine how many bits are required to accommodate the values of the colnum and rownum fields.
-For column and row indexes starting at 1 this means that $B \geq 1 + \log_2{n}$, where $B$ is the number of bits used to store the indexes and $n$ is the total number of row or columns.
-Optimal bit packing is achieved when $B = 1 + \lfloor \log_2{n} \rfloor$, but for the non-conventional sub-bit precision packing this will be sub optimal unless $B = 1 + \log_2{n}$.
-
-In the following description of the 
-
-
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{|r|r|l|p{2.6in}|}
@@ -204,48 +260,32 @@ In the following description of the
 
 
 
-
-
 \section{libdecs}
 
 
-%\subsection{Modes of operation}
+\subsection{Modes of operation}
 
 % TODO: Fix this if we are able to return only the row numbers from the computing nodes (the DLX library).
-%DECS has two basic modes of operation regarding how it handles the return values of the system.
-%In the first mode, which is the most common, the system will store and forward all the solutions it finds back to the DECS server.
-%This provides the calling application with the full set of solutions so that it can run a detailed analysis on them or save them for later use.
-%For problems which generates a very large number of solutions or solutions this approach can cause a huge strain on the system.
-%The storage and bandwidth capacities of the computing nodes and the DECS server could cause considerable delays.
-%In extreme cases it might even cause some or all of the solutions to never be returned.
+DECS has two basic modes of operation regarding how it handles the return values in the system.
+In the first mode each client will store and forward all the solutions it finds back to the BOINC server.
+This provides the calling application with the full set of solutions so that it can run a detailed analysis on them or save them for later use.
+For problems which generates a very large number of solutions this approach can cause a huge strain on the system.
+The storage and bandwidth capacities of the computing nodes and the BOINC server would quickly become a bottleneck if there are too many solutions.
+In extreme cases it might even cause some of the solutions to never be returned because the system is unable to handle the load.
+A policy of not accepting overly large problem matrices could be implemented to prevent this problem.
 
-%A policy of not accepting overly large problem matrices could be implemented to prevent this problem.
-%This works well because the memory requirements of the DLX algorithm is proportional to the size of the problem matrix.
-%However, it does not do us much good because the problem will remain unsolved.
+The second mode of operation will discard the actual results, but instead keep a count on how many solutions has been found.
+When a matrix has been solved it only returns the value holding the number of solutions to the server.
+This drastically reduces the bandwidth and storage requirements for the clients and servers, but it also makes it impossible to analyze the final solutions.
+This is the default mode used by the $n$-queens library because there we are usually not interested an an individual solution.
+Instead we only want to know what the total number of solutions is.
 
-%The second mode of operation will simply discard the solution matrices, but it keeps a count on the number of solutions
-%It will only keep a count
+A possible extension to this would be to add other return values than the number of solutions.
+Each solution the DLX algorithm finds could be further analyzed so that other aspects of the solutions could be returned.
 
-%A possible extension to this would be to add other return values than number of solutions.
-%Each solution the DLX algorithm arrives at could be further analyzed so that other aspects of the solutions could be returned.
-
-
-
-\section{BOINC}
-
-\subsection{Architecture}
-
-
-\section{libdlx}
-
-The main purpose of libdlx is to parse a file with the problem matrix and to apply the DLX algorithm in order to solve it.
-The theory behind the DLX algorithm has been covered in Chapter \ref{dancing_links}.
-Here we will look at the external interface to libdlx and some of its internals.
-
-% Challenges
-% - Node and column objects. How to find the correct row number to reduce data sent back to the server.
-% - Building the boolean matrix. (Description almost done).
-% - Memory requirements in terms of the number of nodes and how it scales.
+%The main purpose of libdlx is to parse a file with the problem matrix and to apply the DLX algorithm in order to solve it.
+%The theory behind the DLX algorithm has been covered in Chapter \ref{dancing_links}.
+%Here we will look at the external interface to libdlx and some of its internals.
 
 
 \subsection{Building the boolean matrix}
@@ -317,3 +357,25 @@ It starts with the top row and works its way down to the bottom just like one mi
 		\ENDFOR
 	\end{distribalgo}
 \end{algorithm}
+
+
+
+
+
+
+
+\section{BOINC}
+
+\subsection{Architecture}
+
+Components of a BOINC server
+\begin{itemize}
+	\item Feeder
+	\item Transitioner
+	\item File deleter
+	\item Application
+	\item Work generator
+	\item Validator
+	\item Assimilator
+\end{itemize}
+
