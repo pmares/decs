@@ -431,7 +431,7 @@ This indicates that no solutions has been stored in the file.
 		\hline
 		\bf Offset & \bf Length & \bf Description \\ \hline
 		8  & 4 & \texttt{results\_num} - Number of results. \\ \hline
-		12 & 4 & \texttt{results\_off} - Byte offset to the results list. 0 if unavailable. \\ \hline
+		12 & 4 & \texttt{results\_off} - Byte offset to the list of solutions. 0 if unavailable. \\ \hline
 		16 & 4 & \texttt{prob\_id} - Problem type ID. Each problem type has a unique ID so that the correct transform can be chosen and the problem specific information can be decoded. \\ \hline
 		20 & 4 & \texttt{prob\_off} - Byte offset to problem specific information. 0 if unavailable. \\ \hline
 	\end{tabular}
@@ -448,6 +448,9 @@ This indicates that no solutions has been stored in the file.
 
 
 
-The structure of the data pointed to by many of the offsets are simple lists that consists of unsigned 32-bit integers.
-This format is used by the matrix element list (\texttt{elems\_off}), secondary column list (\texttt{secol\_off}), initialization vector list (\texttt{init\_off}) and the result/solution list (\texttt{results\_off}).
-The first value is 
+The structure of the data pointed to by many of the byte offsets are simple lists that consists of unsigned 32-bit integers.
+This format is used by the solution list (\texttt{results\_off}), matrix element list (\texttt{elems\_off}), secondary column list (\texttt{secol\_off}) and the initialization vector list (\texttt{init\_off}).
+The first value $n$ is the size of the list indicating how many unsigned 32-bit integers it contains.
+Reading the following $n$ values ($4n$ bytes) provides all the elements of the list.
+The solution list and matrix element list are actually a sequence of lists where each list represents one solution (set of rows) or one row in the matrix (set of columns numbers for elements with non-zero values).
+By using the value read from the respective header fields \texttt{results\_num} or \texttt{rows\_num} the correct number of lists can be read from the file.
