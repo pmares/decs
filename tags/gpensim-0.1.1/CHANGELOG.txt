@@ -1,0 +1,22 @@
+
+==========
+DECS GPenSIM
+Version Change History
+==========
+
+
+0.1.1 (2007-12-18)
+----------
+
+- Fixed a calculation bug in the bandwidth limitations used to set the firing
+  times for transitions tTX and tRX.
+
+
+0.1 (2007-12-17)
+----------
+
+- Initial public release.
+
+
+
+--------------------------------------------------------------------------------
