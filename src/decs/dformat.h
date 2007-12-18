@@ -64,16 +64,16 @@ struct DFIOMatrixHeader_3_0 {
 	uint rows;
 	uint elems;
 	uint elem_off;
-	uint secol_off;  // Readded so that it is separate from the element data.
+	uint secol_off;  // Readded: Keep the  so that it is separate from the element data.
 	uint init_off;
 	uint name_off;
 	uint probid;
 	uint prob_off;
-	ubyte flags; // New: Only return number of solutions indication.
+	uint flags; // New: If LSB set "conserver bandwidth" is on and only the number of solutions is returned.
 };
 
 
-/** Result header format version 2. */
+/** Result header format version 1. */
 struct DFIOResultHeader_1_0 {
 	uint results;
 	uint result_off;
@@ -86,7 +86,7 @@ struct DFIOResultHeader_1_0 {
 typedef DFIOMatrixHeader_2_0 DFIOMatrixHeader;
 typedef DFIOResultHeader_1_0 DFIOResultHeader;
 
-/** File type ID. This is a 32 bit hex representation for the ASCII "DECS". */
+/** File type ID. This is a 32-bit hex representation for the ASCII "DECS". */
 const uint DFIO_FILE_ID = 0x53434544;
 
 /** The major file format version implemented by this library. */
