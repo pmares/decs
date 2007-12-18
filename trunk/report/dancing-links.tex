@@ -108,7 +108,7 @@ The subset of rows $R_B$ is an exact cover iff both of the following equations a
 
 
 $n$-queens (see Section \ref{queens_trans}) is one type of problem the generalized cover problem can be applied to.
-Creating a secondary column for each diagonal on the chess board will reduce the number of rows in the final matrix.
+Creating a secondary column for each diagonal on the chessboard will reduce the number of rows in the final matrix.
 Given a smaller matrix the DLX algorithm will have to do less processing to find the solutions which results in better performance.
 The DLX algorithm itself does not require any modifications to solve generalized cover problems, but the matrix construction procedure requires some minor adjustments (see Section \ref{matrix_construction}).
 
@@ -117,7 +117,7 @@ In the 4-queens problem each of the four ranks (rows) and four files (columns) o
 Each rank and file can only contain one queen, otherwise the queens would attack each other either horizontally or vertically in that rank or file.
 Placing 4 queens on a $4 \times 4$ board means that each rank and file must contain exactly one queen.
 However, queens can also attack diagonally, but the number of diagonals is larger than the number of queens.
-The solution to the 8-queens problem in Figure \ref{fig:8queens} clearly shows that several of the diagonals have no queens.
+The solution to the 8-queens problem in Figure \ref{fig:8queens} shows that several of the diagonals are unoccupied.
 To model this part of the problem we can use the generalized form of the exact cover problem and assign each diagonal to a secondary column.
 
 Primary columns 1 to 4 represents the ranks 1 through 4, and primary columns 5 to 8 represents the files A to D.
@@ -133,7 +133,7 @@ C =& \{ \{ 1, 5, 16 \}, \{ 1, 6, 9, 17 \}, \{ 1, 7, 10, 18 \}, \{ 1, 8, 11 \}, \
 &\{ 4, 5, 11 \}, \{ 4, 6, 12, 14 \}, \{ 4, 7, 13, 15 \}, \{ 4, 8, 16 \} \}
 \end{align*}
 
-Running this though the DLX algorithm provides two solutions $S_1$ and $S_2$.
+Running this though the DLX algorithm provides the solutions $S_1$ and $S_2$.
 %Notice that in each of the solutions the numbers 1 through 8, which is the primary columns, are present exactly once.
 %Only eight out of the ten secondary columns are present in the solutions.
 Using the first two numbers in each set (the rank and file) we can find out what the solutions look like.
@@ -386,7 +386,21 @@ Printing a solution using the $x.row$ attribute is done by printing $O_{i}.row$ 
 Column selection is done using the $S$ heuristic, which picks the column with the lowest value for $c.size$.
 Algorithm \ref{alg:column} simply steps through each column header looking for the lowest size.
 
-\begin{algorithm}[htbp]
+The cover($c$) and uncover($c$) algorithms are the main differences between DLX and Algorithm X.
+The purpose of cover($c$) is to remove column $c$ from the column header list and to resolve any conflicts in the column.
+It uses the operations in (\ref{eq:remove}) to remove the conflicting elements from the column lists.
+The cover($c$) algorithm also increments the value of $updates$ which is used to measure how many operations the search algorithm requires to complete.
+One update equals four link modifications or one application of both the linked list remove and add operations.
+The $size$ column header attribute is maintained by both the cover($c$) and uncover($c$) algorithms so that the $S$ heuristic works properly.
+Algorithm \ref{alg:cover} contains the pseudo code for the cover procedure.
+
+
+The uncover($c$) algorithm restores the state of the matrix using the operations in (\ref{eq:add}).
+Notice that Algorithm \ref{alg:uncover} walks up and left in the lists while Algorithm \ref{alg:cover} walks down and right.
+This ensures that the elements are put back in the reverse order in which they were removed.
+This is the only way to make sure that all the links are restored to their original state.
+
+\begin{algorithm}[p]
 	\caption{Dancing Links recursive search.}
 	\label{alg:search}
 	\begin{distribalgo}[1]
@@ -411,7 +425,7 @@ Algorithm \ref{alg:column} simply steps through each column header looking for t
 	\end{distribalgo}
 \end{algorithm}
 
-\begin{algorithm}[htbp]
+\begin{algorithm}[p]
 	\caption{Column selection using the $S$ heuristic.}
 	\label{alg:column}
 	\begin{distribalgo}[1]
@@ -428,14 +442,7 @@ Algorithm \ref{alg:column} simply steps through each column header looking for t
 	\end{distribalgo}
 \end{algorithm}
 
-The cover($c$) and uncover($c$) algorithms are the main differences between DLX and Algorithm X.
-The purpose of cover($c$) is to remove column $c$ from the column header list and to resolve any conflicts in the column.
-It uses the operations in (\ref{eq:remove}) to remove the conflicting elements from the column lists.
-The cover($c$) algorithm also increments the value of $updates$ which is used to measure how many operations the search algorithm requires to complete.
-One update equals four link modifications or one application of both the linked list remove and add operations.
-The $size$ column header attribute is maintained by both the cover($c$) and uncover($c$) algorithms so that the $S$ heuristic works properly.
-Algorithm \ref{alg:cover} contains the pseudo code for the cover procedure.
-\begin{algorithm}[htbp]
+\begin{algorithm}[p]
 	\caption{Cover column $c$.}
 	\label{alg:cover}
 	\begin{distribalgo}[1]
@@ -454,11 +461,7 @@ Algorithm \ref{alg:cover} contains the pseudo code for the cover procedure.
 	\end{distribalgo}
 \end{algorithm}
 
-The uncover($c$) algorithm restores the state of the matrix using the operations in (\ref{eq:add}).
-Notice that Algorithm \ref{alg:uncover} walks up and left in the lists while Algorithm \ref{alg:cover} walks down and right.
-This ensures that the elements are put back in the reverse order in which they were removed.
-This is the only way to make sure that all the links are restored to their original state.
-\begin{algorithm}[htbp]
+\begin{algorithm}[p]
 	\caption{Uncover column $c$.}
 	\label{alg:uncover}
 	\begin{distribalgo}[1]
@@ -494,7 +497,7 @@ $O$ can then be used to initialize a separate process by running DLX on a differ
 As long as the predefined depth $d$ is not too deep or shallow the partial solutions can be used to efficiently solve the exact cover problem in a distributed manner.
 If $d$ is too deep (high) the algorithm will find all solutions before the splitting happens, and if it is too shallow (low) the number of partial solutions might be too low to be of any use.
 Adding line 10 to 12 in Algorithm \ref{alg:psearch} is the only changes required to make the original Algorithm \ref{alg:search} support this scheme.
-\begin{algorithm}[htbp]
+\begin{algorithm}[p]
 	\caption{Dancing Links parallel recursive splitter.}
 	\label{alg:psearch}
 	\begin{distribalgo}[1]
@@ -527,7 +530,7 @@ Each partial solution produced by psearch($k, d$) can be used as an initializati
 $O$ is the initialization vector and $O.size$ is the length of the vector (number of rows in the partial solution).
 The initialization vectors and the matrix can be distributed and the modified search procedure can be run in parallel on each computer.
 If required each computer can do further splitting locally to take advantage of multiple processors.
-\begin{algorithm}[htbp]
+\begin{algorithm}[p]
 	\caption{Dancing Links search initialization.}
 	\label{alg:isearch}
 	\begin{distribalgo}[1]
