@@ -21,7 +21,7 @@
 %%% Solver (DECS) model.
 %%% 
 %%% DECS GPenSIM
-%%% Version 0.1
+%%% Version 0.1.1
 %%%%
 %%
 %% The petri net definition files (PDFs) are programmed separately:
