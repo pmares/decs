@@ -1,0 +1,162 @@
+\documentclass[a4paper]{article}
+
+% Import packages
+\usepackage{amsmath, amsfonts, amsthm}  % AMS math libraries
+\usepackage{amssymb}       % Large extended set of symbols: http://home.online.no/~pjacklam/latex/textcomp.pdf
+\usepackage{multirow}      % Row spanning in tables.
+\usepackage{graphicx}      % Extended graphics library
+%\usepackage{textcomp}      % Extended set of symbols: http://home.online.no/~pjacklam/latex/textcomp.pdf
+%\usepackage{varioref}      % Use \vref instead of \ref
+%\usepackage{wrapfig}
+%\usepackage{subfigure}
+%\usepackage{url}
+\usepackage[pdftex,
+	pdfauthor={Jan Magne Tjensvold},
+	pdftitle={Non-Recursive Dancing Links},
+	pdfkeywords={Iterative; Recursive; Dancing Links; DLX},
+	pdfsubject={Algorithms},
+	pdflang={en},
+	bookmarks,
+	bookmarksnumbered,
+]{hyperref}  % Sets pdfTeX to include bookmarks in the output file (Should always be the last package included)
+\usepackage{algorithm}     % Pseudocode float environment
+\usepackage{algorithmic}   % Pseudocode
+\usepackage[noend, nobraces]{javadistalgo}  % Java style pseudocode
+
+\graphicspath{{./}{images/}}
+
+% Limit the depth of the table of contents
+%\setcounter{tocdepth}{1}
+
+% Custom commands
+
+%\renewcommand{\bmod}{\mbox{ mod }}
+
+%\makeatletter
+%\def\imod#1{\allowbreak\mkern10mu({\operator@font mod}\,\,#1)}
+%\makeatother
+
+%\DeclareMathOperator{\lcm}{lcm}
+
+% Document info
+\title{Non-Recursive Dancing Links}
+\author{Jan Magne Tjensvold}
+\date{\today}
+
+
+
+% Here the actual document begins.
+\begin{document}
+
+\maketitle  % Report titlepage
+
+% Include external file
+%\include{abstract}  % Abstract
+
+% Table of contents, tables and figures
+%\tableofcontents
+%\listoftables
+%\listoffigures
+
+In \cite{knuth00dancing} Donald Knuth explains a backtracking algorithm he calls Dancing Links.
+As a result of being a backtracking algorithm it is recursive as shown in Algorithm \ref{alg:search}.
+To turn it into a non-recursive algorithm the recursive call can be eliminated by adding \textbf{goto} statements and using a stack.
+The resulting Algorithm \ref{alg:nrsearch} is a non-recursive Dancing Links algorithm.
+In this algorithm each of the \textbf{foreach} loops has been replaced with equivalent \textbf{while} loops.
+
+The use of goto statements is generally frowned upon because they have a tendency to make the code very hard to understand, and harder still to modify and debug.
+To limit the number of goto statements the recursive base case has been moved inside the while loop.
+Another goto statement has been eliminated by using the \textbf{continue} keyword, present in many modern programming languages, to jump to the beginning of the while loop.
+The continue keyword is basically a limited goto statement and it is considered more acceptable in use than goto.
+
+That leaves one goto statement that I have been unable to eliminate.
+Unfortunately it is quite disruptive as it jumps into the while loop which might result in variables not being properly initialized.
+However, this should not be a problem if all the variables have been declared outside the while loop.
+Algorithm \ref{alg:nrsearch} has eliminated the recursive call, but given the remaining goto it is more appropriate to call it non-recursive than iterative.
+Call it a hybrid if you will, or maybe Frankenstein monster is more appropriate.
+
+Testing and validating the correctness of the modified algorithm is left as an exercise for the reader.
+Can you find a way to eliminate the last goto statement as well?
+
+
+\begin{algorithm}[p]
+	\caption{Dancing Links recursive search.}
+	\label{alg:search}
+	\begin{distribalgo}[1]
+		\PROCEDURE{search($k$)}
+			\IF{$h.right = h$}
+				\STATE Print solution and return.  \COMMENT{Base case for the recursion}
+			\ENDIF
+			\STATE $c \leftarrow$ choose\_column()
+			\STATE cover($c$)
+			\FOREACH{$r \leftarrow c.down, c.down.down, \ldots,$ \textbf{while} $r \neq c$}
+				\STATE $O_k \leftarrow r$  \COMMENT{Add $r$ to partial solution}
+				\FOREACH{$j \leftarrow r.right, r.right.right, \ldots,$ \textbf{while} $j \neq r$}
+					\STATE cover($j.column$)
+				\ENDFOR
+				\STATE search($k + 1$)
+				\FOREACH{$j \leftarrow r.left, r.left.left, \ldots,$ \textbf{while} $j \neq r$}
+					\STATE uncover($j.column$)
+				\ENDFOR
+			\ENDFOR
+			\STATE uncover($c$)
+		\ENDPROC
+	\end{distribalgo}
+\end{algorithm}
+
+
+\begin{algorithm}[p]
+	\caption{Dancing Links non-recursive search.}
+	\label{alg:nrsearch}
+	\begin{distribalgo}[1]
+		\PROCEDURE{search()}
+			\STATE $k \leftarrow 0$
+			\STATE $S \leftarrow$ new stack
+			\STATE $c \leftarrow$ choose\_column()
+			\STATE cover($c$)
+			\STATE $r \leftarrow c.down$
+			\WHILE{$r \neq c$}
+				\STATE $O_k \leftarrow r$  \COMMENT{Add $r$ to partial solution}
+				\STATE $j \leftarrow r.right$
+				\WHILE{$j \neq r$}
+					\STATE cover($j.column$)
+					\STATE $j \leftarrow j.right$
+				\ENDWHILE
+				\IF{$h.right = h$}
+					\STATE Print solution.  \COMMENT{Former recursion base case}
+				\ELSE
+					\STATE $k \leftarrow k + 1$
+					\STATE $S.push(r)$
+					\STATE $c \leftarrow$ choose\_column()
+					\STATE cover($c$)
+					\STATE $r \leftarrow c.down$
+					\STATE \textbf{continue}  \COMMENT{Go to the beginning of the while loop}
+					\STATE kitchen\_sink:  \COMMENT{Here we removed the recursive call}
+					\STATE $r \leftarrow S.pop()$
+					\STATE $c \leftarrow r.column$
+					\STATE $k \leftarrow k - 1$
+				\ENDIF
+				\STATE $j \leftarrow r.left$
+				\WHILE{$j \neq r$}
+					\STATE uncover($j.column$)
+					\STATE $j \leftarrow j.left$
+				\ENDWHILE
+				\STATE $r \leftarrow r.down$
+			\ENDWHILE
+			\STATE uncover($c$)
+			\IF{$k > 0$}
+				\STATE \textbf{goto} kitchen\_sink  \COMMENT{Here there be monsters}
+			\ENDIF
+		\ENDPROC
+	\end{distribalgo}
+\end{algorithm}
+
+
+
+% BibTeX compiles the bibliography
+%\phantomsection
+%\addcontentsline{toc}{section}{References}
+\bibliographystyle{custom-r2}  % custom bibliography style
+\bibliography{local}  % import local.bib
+
+\end{document}

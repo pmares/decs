@@ -1,0 +1,100 @@
+\documentclass[a4paper]{report}
+
+% Just because I'm too lazy to update the author and title name two places :)
+\newcommand{\thisAuthor}{Jan Magne Tjensvold}
+\newcommand{\thisTitle}{Generic Distributed Exact Cover Solver}
+
+
+% Import packages
+\usepackage{amsmath, amsfonts, amsthm}  % AMS math libraries
+\usepackage{amssymb}       % Large extended set of symbols: http://home.online.no/~pjacklam/latex/textcomp.pdf
+\usepackage{multirow}      % Row spanning in tables.
+\usepackage{graphicx}      % Extended graphics library
+%\usepackage{textcomp}      % Extended set of symbols: http://home.online.no/~pjacklam/latex/textcomp.pdf
+%\usepackage{varioref}      % Use \vref instead of \ref
+%\usepackage{wrapfig}
+%\usepackage{subfigure}
+%\usepackage{url}
+\usepackage{float}         % Nust be included manually before hyperref so that the algorithm packages work properly.
+\usepackage[pdftex,
+	pdfauthor={\thisAuthor},
+	pdftitle={\thisTitle},
+	pdfkeywords={Distributed; Computing; Distributed computing; Exact Cover; Dancing Links; DLX},
+	pdfsubject={Distributed computing},
+	pdflang={en},
+	bookmarks,
+	bookmarksnumbered,
+]{hyperref}  % Sets pdfTeX to include bookmarks in the output file (Should always be the last package included)
+\usepackage[all]{hypcap}   % Links to figures now point at the top of the figure instead of the caption.
+\usepackage{algorithm}     % Pseudocode float environment
+\usepackage{algorithmic}   % Pseudocode
+\usepackage[noend, nobraces]{javadistalgo}  % Java style pseudocode
+
+
+\graphicspath{{./}{images/}}
+
+
+
+% Limit the depth of the table of contents
+%\setcounter{tocdepth}{1}
+
+% Custom commands
+
+\renewcommand{\bmod}{\mbox{ mod }}
+
+%\makeatletter
+%\def\imod#1{\allowbreak\mkern10mu({\operator@font mod}\,\,#1)}
+%\makeatother
+
+%\DeclareMathOperator{\lcm}{lcm}
+
+% Degree symbol for LaTeX and math mode
+%\newcommand{\degree}{\ensuremath{^\circ}}
+
+% Some useful environments.
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+% Document title page information
+\title{\thisTitle}
+\author{\thisAuthor}
+\date{\today}
+
+% Here the actual document begins.
+\begin{document}
+
+
+\pagenumbering{roman}
+\maketitle  % Document title page
+
+\setcounter{page}{2}
+\include{abstract}  % Abstract
+
+% Table of contents, tables and figures
+\tableofcontents
+%\listoftables
+\listoffigures
+
+\cleardoublepage
+\pagenumbering{arabic} \setcounter{page}{1}
+
+% Include external files
+\include{introduction}
+\include{dancing-links}
+\include{implementation}
+\include{testing}
+\include{conclusion}
+
+
+% BibTeX compiles the bibliography
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{custom-r2}  % custom bibliography style
+\bibliography{local,nqueens}  % import local.bib
+
+\end{document}
