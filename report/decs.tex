@@ -34,6 +34,7 @@
 \graphicspath{{./}{images/}}
 
 
+
 % Limit the depth of the table of contents
 %\setcounter{tocdepth}{1}
 
@@ -59,26 +60,28 @@
 \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
 
-% Document main page
+% Document title page information
 \title{\thisTitle}
 \author{\thisAuthor}
 \date{\today}
 
-
 % Here the actual document begins.
 \begin{document}
 
-\maketitle  % Report titlepage
 
-% TODO: Add acknowledgement.
-% Include external file
-%\include{abstract}  % Abstract
+\pagenumbering{roman}
+\maketitle  % Document title page
 
+\setcounter{page}{2}
+\include{abstract}  % Abstract
 
 % Table of contents, tables and figures
 \tableofcontents
 %\listoftables
 \listoffigures
+
+\cleardoublepage
+\pagenumbering{arabic} \setcounter{page}{1}
 
 % Include external files
 \include{introduction}
