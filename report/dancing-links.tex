@@ -184,6 +184,7 @@ $H$ is initialized with the numbers $1, 2, \ldots, n$, where $n$ is the number o
 \begin{algorithm}[htbp]
 	\caption{Algorithm X recursive search procedure.}
 	\label{alg:algox}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search($A, H$)}
 			\IF{$H$ is empty}
@@ -403,6 +404,7 @@ This is the only way to make sure that all the links are restored to their origi
 \begin{algorithm}[p]
 	\caption{Dancing Links recursive search.}
 	\label{alg:search}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search($k$)}
 			\IF{$h.right = h$}
@@ -428,6 +430,7 @@ This is the only way to make sure that all the links are restored to their origi
 \begin{algorithm}[p]
 	\caption{Column selection using the $S$ heuristic.}
 	\label{alg:column}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\FUNCTION{choose\_column()}
 			\STATE $s \leftarrow \infty$
@@ -445,6 +448,7 @@ This is the only way to make sure that all the links are restored to their origi
 \begin{algorithm}[p]
 	\caption{Cover column $c$.}
 	\label{alg:cover}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{cover($c$)}
 			\STATE $c.right.left \leftarrow c.left$  \COMMENT{Remove column $c$}
@@ -464,6 +468,7 @@ This is the only way to make sure that all the links are restored to their origi
 \begin{algorithm}[p]
 	\caption{Uncover column $c$.}
 	\label{alg:uncover}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{uncover($c$)}
 			\FOREACH{$i \leftarrow c.up, c.up.up \ldots,$ \textbf{while} $i \neq c$}
@@ -500,6 +505,7 @@ Adding line 10 to 12 in Algorithm \ref{alg:psearch} is the only changes required
 \begin{algorithm}[p]
 	\caption{Dancing Links parallel recursive splitter.}
 	\label{alg:psearch}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{psearch($k, d$)}
 			\IF{$h.right = h$}
@@ -533,6 +539,7 @@ If required each computer can do further splitting locally to take advantage of 
 \begin{algorithm}[p]
 	\caption{Dancing Links search initialization.}
 	\label{alg:isearch}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search\_init($O$)}
 			\FOR{$k \leftarrow 0$ \textbf{to} $O.size - 1$}

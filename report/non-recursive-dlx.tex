@@ -82,6 +82,7 @@ Can you find a way to eliminate the last goto statement as well?
 \begin{algorithm}[p]
 	\caption{Dancing Links recursive search.}
 	\label{alg:search}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search($k$)}
 			\IF{$h.right = h$}
@@ -108,6 +109,7 @@ Can you find a way to eliminate the last goto statement as well?
 \begin{algorithm}[p]
 	\caption{Dancing Links non-recursive search.}
 	\label{alg:nrsearch}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{search()}
 			\STATE $k \leftarrow 0$
@@ -130,7 +132,7 @@ Can you find a way to eliminate the last goto statement as well?
 					\STATE $c \leftarrow$ choose\_column()
 					\STATE cover($c$)
 					\STATE $r \leftarrow c.down$
-					\STATE \textbf{continue}  \COMMENT{Go to the beginning of the while loop}
+					\STATE \textbf{continue}  \COMMENT{Go to the beginning of the while loop at line 7}
 					\STATE kitchen\_sink:  \COMMENT{Here we removed the recursive call}
 					\STATE $r \leftarrow S.pop()$
 					\STATE $c \leftarrow r.column$

@@ -101,7 +101,7 @@ At the end of the algorithm the matrix $A$ can be saved to file and made ready f
 \begin{algorithm}[H]
 	\caption{Transforming $n$-queens into the exact cover matrix $A$.}
 	\label{alg:nqeens-cover}
-%	\algsetup{indent=5em}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{queens-tf($n$, $A$)}
 			\FOR{$i \leftarrow 0$ \textbf{to} $n - 1$}
@@ -137,7 +137,7 @@ It uses zero based row numbers and provides zero based rank and file values as a
 \begin{algorithm}[H]
 	\caption{Reverse transforming $n$-queens to chessboard placements.}
 	\label{alg:nqeens-reverse}
-%	\algsetup{indent=5em}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\PROCEDURE{queens-rtf($S, n$)}
 			\FOREACH{row $i$ in $S$}
@@ -401,7 +401,7 @@ Take special note of how the secondary column objects are linking to themselves 
 \begin{algorithm}[H]
 	\caption{Create the circular doubly-linked list of columns.}
 	\label{alg:columns}
-%	\algsetup{indent=5em}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\STATE $R \leftarrow$ new column object
 		\STATE $T \leftarrow R$
@@ -429,6 +429,7 @@ It also makes use of the column header array $H$ which was initialized in Algori
 \begin{algorithm}[H]
 	\caption{Create the circular quad-linked node structure.}
 	\label{alg:nodes}
+	\algsetup{indent=6mm}
 	\begin{distribalgo}[1]
 		\FOR{$i \leftarrow 1$ \textbf{to} the value of the \texttt{rows\_num} field}
 			\FOREACH{column index $j$ in row $i$}
