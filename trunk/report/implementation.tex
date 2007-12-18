@@ -46,6 +46,25 @@ degen then writes the final results in whatever format the application needs.
 \end{figure}
 
 
+
+%\section{BOINC}
+
+% TODO: Do this.
+%\subsection{Architecture}
+
+%Components of a BOINC server
+%\begin{itemize}
+%	\item Feeder
+%	\item Transitioner
+%	\item File deleter
+%	\item Application
+%	\item Work generator
+%	\item Validator
+%	\item Assimilator
+%\end{itemize}
+
+
+
 \section{Transforms}
 \label{transforms}
 
@@ -69,8 +88,8 @@ One of the most promising projects lately is the BOINC based NQueens@Home \cite{
 About 13 years of CPU time has been registered by the project after running for only 3 months.
 
 Algorithm \ref{alg:nqeens-cover} shows how the $n$-queens transform takes place.
-The parameter $A$ is a matrix with all elements set to zero, $i \times j$ rows, $2n$ primary columns and $4n - 6$ secondary columns (for the two diagonals).
-The elements of $A$ is accessed by $A[i,j]$ where $i$ is the row and $j$ is the column.
+The parameter $A$ is a matrix (or two dimmensional array) with all elements set to zero, $i \times j$ rows, $2n$ primary columns and $4n - 6$ secondary columns (for the two diagonals).
+The elements in $A$ are accessed by $A[i,j]$ where $i$ is the row, $j$ is the column and both values start at zero.
 Each iteration through the inner loop generates one row in the matrix for each file on the chessboard.
 The outer loop steps through all the ranks on the board so by multiplying the number of ranks and files we get $n^2$ rows in the final matrix.
 Each of these rows represents a unique placement of a queen on the chessboard.
@@ -82,26 +101,26 @@ At the end of the algorithm the matrix $A$ can be saved to file and made ready f
 	\label{alg:nqeens-cover}
 %	\algsetup{indent=5em}
 	\begin{distribalgo}[1]
-		\PROCEDURE{queens($n$, $A$)}
+		\PROCEDURE{queens-tf($n$, $A$)}
 			\FOR{$i \leftarrow 0$ \textbf{to} $n - 1$}
 				\FOR{$j \leftarrow 0$ \textbf{to} $n - 1$}
-					\STATE $row \leftarrow i \times j + 1$
-					\STATE $A[row,i+1] \leftarrow 1$  \COMMENT{The rank}
-					\STATE $A[row,j+n+1] \leftarrow 1$  \COMMENT{The file}
+					\STATE $row \leftarrow i \times j$
+					\STATE $A[row,i] \leftarrow 1$  \COMMENT{The rank}
+					\STATE $A[row,j+n] \leftarrow 1$  \COMMENT{The file}
 					\STATE $d_1 \leftarrow i + j$  \COMMENT{The first diagonal}
 					\IF{$d_1 \neq 0$ and $d_1 \neq 2n - 2$}
 						\IF{$d_1 < 2n - 2$}
-							\STATE $A[row,d_1 + 2n] \leftarrow 1$
-						\ELSE
 							\STATE $A[row,d_1 + 2n - 1] \leftarrow 1$
+						\ELSE
+							\STATE $A[row,d_1 + 2n - 2] \leftarrow 1$
 						\ENDIF
 					\ENDIF
 					\STATE $d_2 \leftarrow n - i + j - 1$  \COMMENT{The second diagonal}
 					\IF{$d_2 \neq 0$ and $d_2 \neq 2n - 2$}
 						\IF{$d_2 < 2n - 2$}
-							\STATE $A[row,d_2 + 4n - 3] \leftarrow 1$
-						\ELSE
 							\STATE $A[row,d_2 + 4n - 4] \leftarrow 1$
+						\ELSE
+							\STATE $A[row,d_2 + 4n - 5] \leftarrow 1$
 						\ENDIF
 					\ENDIF
 				\ENDFOR
@@ -110,8 +129,27 @@ At the end of the algorithm the matrix $A$ can be saved to file and made ready f
 	\end{distribalgo}
 \end{algorithm}
 
+Algorithm \ref{alg:nqeens-reverse} shows how to place the queens on correct place on the $8 \times 8$ chess board.
+As a parameter it takes a solution $S$ which is a set of row numbers and the number of queens $n$.
+The algorithm assumes that the row numbers are zero based which results in zero based rank and file values as well.
+\begin{algorithm}[H]
+	\caption{Reverse transforming $n$-queens to chessboard placements.}
+	\label{alg:nqeens-reverse}
+%	\algsetup{indent=5em}
+	\begin{distribalgo}[1]
+		\PROCEDURE{queens-rtf($S, n$)}
+			\FOREACH{row $i$ in $S$}
+				\STATE $f \leftarrow i \imod n$
+				\STATE $r \leftarrow \frac{i - r}{n}$
+				\STATE Place queen at file $f$ and rank $r$.
+			\ENDFOR
+			\STATE Show chessboard.
+		\ENDPROC
+	\end{distribalgo}
+\end{algorithm}
+
 \begin{example}
-Running the matrix of the 8-queens through the DLX algorithm by using the dance program gives us a list of 92 solutions like this
+Using the dance program to solve to the 8-queens problem gives us a list of 92 solutions like this
 \begin{verbatim}
 $ dance --verbose examples/queens8.decs
 [...]
@@ -121,13 +159,13 @@ Search complete
 
 Number of solutions: 92
 \end{verbatim}
-The solutions contain the row numbers from the matrix and not the entire content of the rows.
+The solutions contains the row numbers from the matrix and not the entire content of the rows.
 The row numbers given in the output are zero based.
-The solution $\{3, 15, 20, 26, 49, 61, 32, 46\}$ shown in the output represents the chessboard shown in Figure \ref{fig:8queens}.
-
-
-
+Using the above algorithm with $S = \{3, 15, 20, 26, 49, 61, 32, 46\}$ and $n = 8$ the queens are placed on the chessboard where they belong.
+Working though that example reveals the same chessboard as shown in Figure \ref{fig:8queens}.
 \end{example}
+
+
 
 
 %\subsection{Polyominoes}
@@ -153,119 +191,12 @@ The solution $\{3, 15, 20, 26, 49, 61, 32, 46\}$ shown in the output represents 
 %Granted Sudoku 
 
 
-\section{File format}
-
-In order to store and transfer a DLX problem matrix efficiently a file format had to be defined for this specific purpose.
-
-
-\subsection{Byte ordering}
-
-Several challenges arise when defining a file format, but one of the most common is that of byte ordering.
-Different platforms use different byte ordering, meaning that the order of the bytes in variables bigger than 1 byte may differ from one system to another.
-
-Byte ordering deals with how the bytes for individual variables are ordered in memory.
-For 1 byte long variables the byte ordering is irrelevant as it is only possible to order that single byte one way.
-For variables longer that 1 byte the order the bytes appear in when read from and written to memory follow one of the two major conventions: big-endian or little-endian.
-
-Big-endian stores the most significant byte (MSB) first and the least significant byte (LSB) last while little-endian does it the other way around.
-In Table \ref{tab:endian} we can see that the value 0x7E, when stored in a single byte of memory, is represented in the same way for both types of byte ordering.
-However, when the same value is stored in 2 bytes of memory the difference is clearly visible.
-
-
-\begin{table}[htbp]
-	\centering
-	\begin{tabular}{|l||l|l||l|}
-		\hline
-		\bf Byte order & \bf 1 byte & \bf 2 bytes & \bf 4 bytes \\ \hline
-		Big-endian    & 7E & 00 7E & 12 34 56 78 \\ \hline
-		Little-endian & 7E & 7E 00 & 78 56 34 12 \\ \hline
-	\end{tabular}
-	\caption{Difference in representation between little and big endian when storing the value 0x7E and 0x12345678.}
-	\label{tab:endian}
-\end{table}
-
-In order to achieve portability between different processor and operating system platforms one has to choose either big-endian, little-endian or a bit to indicate the byte ordering used in the file.
-It is also possible to use a endian-neutral format like ASCII text or the External Data Representation (XDR) \cite{RFC4506} standard.
-
-To make the file format consistent across platforms little-endian was chosen.
-Following the recommendations of Intel's Endianness White Paper \cite{intel-endian} the proper byte swapping methods for big-endian systems has been implemented.
-
-%\cite{IEN137}
-% TODO: This is where my actual decision and rationale should be stated.
-
-
-
-\subsection{Storing sparse boolean matrices}
-
-The storage format for the sparse boolean problem matrix has been designed for fast and efficient reading.
-For more information on how the matrix data structure is constructed see Section \ref{matrix_construction}.
-
-%Challenges:
-%- Format version
-%- Storage of the boolean matrix (for efficient operation we first need to find out how the circular quad linked list of objects are most efficiently built. From top-left to bottom-right.
-
-
-\begin{table}[htbp]
-	\centering
-	\begin{tabular}{|r|r|l|p{2.6in}|}
-		\hline
-		\bf Offset & \bf Length & \bf Field & \bf Description \\ \hline
-		0  & 4 & fileid & File type ID: ``DECS'' \\ \hline
-		4  & 1 & version & File format version. \\ \hline
-		5  & 1 & compat & Lowest possible compatible file format version. \\ \hline
-		6  & 2 & & Reserved. \\ \hline
-		8  & 4 & numcols & Number of columns $> 1$. \\ \hline
-		12 & 4 & numrows & Number of rows $> 1$. \\ \hline
-		16 & 4 & numelems & Number of non-zero values in the matrix $> 1$. \\ \hline
-		20 & 4 & elements & Byte offset to the matrix element entries. Should never be 0. \\ \hline
-		24 & 4 & names & Byte offset to the column and row name list. 0 if unavailable. \\ \hline
-		28 & 4 & probid & Problem type ID. Each problem type has a unique ID so that the correct transform can be chosen and the problem specific information can be decoded. \\ \hline
-		32 & 4 & probinfo & Byte offset to problem specific information. 0 if unavailable. \\ \hline
-%		36 & 4 & blind & Byte offset to problem specific information. 0 if unavailable. \\ \hline
-%		26 & 2 & Number & Job ID. Each problem type has a unique ID so that the correct transform is selected. \\ \hline
-	\end{tabular}
-	\caption{File header format. Offset and length in bytes.}
-	\label{tab:header}
-\end{table}
-
-The file header format is made as simple as possible to allow future extensions to be made without breaking backwards compatibility.
-The compat field indicates the lowest possible file format version implemented which will be able to read this version of the file.
-This means that if the file format version implemented in a program is lower than the compat field it will not be able to read and process it correctly.
-
-\begin{figure}[htb]
-	\centering
-	\includegraphics[width=0.6\textwidth]{headerformat.pdf}
-	\caption{File header format structure}
-	\label{fig:header}
-\end{figure}
-
-
-The DLX algorithm itself does not use the column and row names or the problem type ID and the problem specific information.
-This information can be used by the BOINC client to display graphical information during the computation.
-For example it can use the problem type ID to identify the correct transform, and when the DLX algorithm finds a solution it can run the reverse transform and display the solution graphically.
-BOINC has built-in support for OpenGL rendering and the solution can be displayed as part of a special BOINC screen saver.
-
-\begin{table}[htbp]
-	\centering
-	\begin{tabular}{|r|r|l|p{2.6in}|}
-		\hline
-		\bf Offset & \bf Length & \bf Field & \bf Description \\ \hline
-		0     & $B_c$ & colnames & Number of column names \\ \hline
-		$B_c$ & 4     &  & Number of column names \\ \hline
-		4     & 4     &   & Byte offset to problem specific information. 0 if unavailable. \\ \hline
-	\end{tabular}
-	\caption{File format for column and row names}
-	\label{tab:colrowformat}
-\end{table}
-
-
 
 \section{libdecs}
 
 
 \subsection{Modes of operation}
 
-% TODO: Fix this if we are able to return only the row numbers from the computing nodes (the DLX library).
 DECS has two basic modes of operation regarding how it handles the return values in the system.
 In the first mode each client will store and forward all the solutions it finds back to the BOINC server.
 This provides the calling application with the full set of solutions so that it can run a detailed analysis on them or save them for later use.
@@ -363,19 +294,119 @@ It starts with the top row and works its way down to the bottom just like one mi
 
 
 
+\section{File format}
 
-\section{BOINC}
+In order to store and transfer a DLX problem matrix efficiently a file format had to be defined for this specific purpose.
 
-\subsection{Architecture}
 
-Components of a BOINC server
-\begin{itemize}
-	\item Feeder
-	\item Transitioner
-	\item File deleter
-	\item Application
-	\item Work generator
-	\item Validator
-	\item Assimilator
-\end{itemize}
+\subsection{Byte ordering}
+
+Several challenges arise when defining a file format, but one of the most common is that of byte ordering.
+Different platforms use different byte ordering, meaning that the order of the bytes in variables bigger than 1 byte may differ from one system to another.
+
+Byte ordering deals with how the bytes for individual variables are ordered in memory.
+For 1 byte long variables the byte ordering is irrelevant as it is only possible to order that single byte one way.
+For variables longer that 1 byte the order the bytes appear in when read from and written to memory follow one of the two major conventions: big-endian or little-endian.
+
+Big-endian stores the most significant byte (MSB) first and the least significant byte (LSB) last while little-endian does it the other way around.
+In Table \ref{tab:endian} we can see that the value 0x7E, when stored in a single byte of memory, is represented in the same way for both types of byte ordering.
+However, when the same value is stored in 2 bytes of memory the difference is clearly visible.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|l||l|l||l|}
+		\hline
+		\bf Byte order & \bf 1 byte & \bf 2 bytes & \bf 4 bytes \\ \hline
+		Big-endian    & 7E & 00 7E & 12 34 56 78 \\ \hline
+		Little-endian & 7E & 7E 00 & 78 56 34 12 \\ \hline
+	\end{tabular}
+	\caption{Difference in representation between little and big endian when storing the value 0x7E and 0x12345678.}
+	\label{tab:endian}
+\end{table}
+
+In order to achieve portability between different processor and operating system platforms one has to choose either big-endian, little-endian or a bit to indicate the byte ordering used in the file.
+It is also possible to use a endian-neutral format like ASCII text or the External Data Representation (XDR) \cite{RFC4506} standard.
+To make the file format consistent across platforms little-endian was chosen.
+Following the recommendations of Intel's Endianness White Paper \cite{intel-endian} the proper byte swapping methods for big-endian systems has been implemented.
+
+
+\subsection{Storing sparse boolean matrices}
+
+The storage format for the sparse boolean problem matrix has been designed for fast and efficient reading.
+For more information on how the matrix data structure is constructed when it is read from file see Section \ref{matrix_construction}.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|r|r|p{3.2in}|}
+		\hline
+		\bf Offset & \bf Length & \bf Description \\ \hline
+		0  & 4 & \texttt{fileid} - File type ID: ``DECS'' \\ \hline
+		4  & 2 & \texttt{version} - File format version. \\ \hline
+		6  & 1 & \texttt{type} - 0 for exact cover matrix and 1 for result/solutions. \\ \hline
+		7  & 1 & \texttt{reserved} - Reserved for future use. \\ \hline
+	\end{tabular}
+	\caption{Main file header format. Offset and length in bytes.}
+	\label{tab:header-main}
+\end{table}
+
+The main file header format is made as simple as possible to allow future extensions to be made without breaking backwards compatibility.
+Currently only the first byte of the version field is used, and the byte version number starts at 1.
+In a future version both the version field bytes are planned to be ASCII characters 
+%The version field indicates the lowest possible file format version implemented which will be able to read this version of the file.
+%This means that if the file format version implemented in a program is lower than the compat field it will not be able to read and process it correctly.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{header-main.pdf}
+	\caption{Main file header format structure}
+	\label{fig:header-main}
+\end{figure}
+
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|r|r|p{3.2in}|}
+		\hline
+		\bf Offset & \bf Length & \bf Description \\ \hline
+		8  & 4 & \texttt{cols\_num} - Number of columns $> 1$. \\ \hline
+		12 & 4 & \texttt{rows\_num} - Number of rows $> 1$. \\ \hline
+		16 & 4 & \texttt{elems\_num} - Number of non-zero values in the matrix $> 1$. \\ \hline
+		20 & 4 & \texttt{elems\_off} - Byte offset to the matrix element entries. Should never be 0. \\ \hline
+		24 & 4 & \texttt{secol\_off} - Byte offset to the secondary column list. 0 if unavailable. \\ \hline
+		28 & 4 & \texttt{init\_off} -  Byte offset to the initialization vector. 0 if unavailable. \\ \hline
+		32 & 4 & \texttt{name\_off} - Byte offset to the column and row name list. 0 if unavailable. \\ \hline
+		36 & 4 & \texttt{prob\_id} - Problem type ID. Each problem type has a unique ID so that the correct transform can be chosen and the problem specific information can be decoded. \\ \hline
+		40 & 4 & \texttt{prob\_off} - Byte offset to problem specific information. 0 if unavailable. \\ \hline
+		44 & 4 & \texttt{flags} - Bit flags for various purposes. \\ \hline
+	\end{tabular}
+	\caption{Matrix file header format. Offset and length in bytes.}
+	\label{tab:header-matrix}
+\end{table}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{header-matrix.pdf}
+	\caption{Matrix file header format structure including the main header}
+	\label{fig:header-matrix}
+\end{figure}
+
+
+The DLX algorithm itself does not use the column and row names or the problem type ID and the problem specific information.
+This information can be used by the BOINC client to display graphical information during the computation.
+For example it can use the problem type ID to identify the correct transform, and when the DLX algorithm finds a solution it can run the reverse transform and display the solution graphically.
+BOINC has built-in support for OpenGL rendering and the solution can be displayed as part of a special BOINC screen saver.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|r|r|l|p{2.6in}|}
+		\hline
+		\bf Offset & \bf Length & \bf Field & \bf Description \\ \hline
+		0     & $B_c$ & colnames & Number of column names \\ \hline
+		$B_c$ & 4     &  & Number of column names \\ \hline
+		4     & 4     &   & Byte offset to problem specific information. 0 if unavailable. \\ \hline
+	\end{tabular}
+	\caption{File format for column and row names}
+	\label{tab:colrowformat}
+\end{table}
 
