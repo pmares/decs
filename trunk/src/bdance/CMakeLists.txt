@@ -14,7 +14,7 @@ include_directories(
 )
 
 add_executable( bdance ${SOURCES} )
-target_link_libraries( bdance libdecs libboinc libboinc_api )
+target_link_libraries( bdance decs boinc boinc_api )
 
 install( TARGETS bdance DESTINATION ${BIN_OUTPUT_PATH} )
 # install( FILES README.txt RENAME README-BDANCE.txt DESTINATION ${DOC_OUTPUT_PATH} )
