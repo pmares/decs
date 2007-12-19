@@ -4,11 +4,13 @@ set( SOURCES
 	bdance.cpp
 )
 
+set(BOINC_DIR ${CMAKE_SOURCE_DIR}/boinc/boinc)
+
 include_directories( 
 	${CMAKE_SOURCE_DIR}/decs
-	${CMAKE_SOURCE_DIR}/external/boinc
-	${CMAKE_SOURCE_DIR}/external/boinc/lib
-	${CMAKE_SOURCE_DIR}/external/boinc/api
+	${BOINC_DIR}
+	${BOINC_DIR}/lib
+	${BOINC_DIR}/api
 )
 link_directories(
 	${CMAKE_BINARY_DIR}/decs

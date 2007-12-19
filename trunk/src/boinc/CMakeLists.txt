@@ -1,8 +1,8 @@
 project( boinc )
 
 
-set(BOINC_DIR ${CMAKE_SOURCE_DIR}/external/boinc)
-set(BOINC_SAMPLE_DIR ${CMAKE_SOURCE_DIR}/external/boinc_samples)
+set(BOINC_DIR ${CMAKE_SOURCE_DIR}/boinc/boinc)
+set(BOINC_SAMPLE_DIR ${CMAKE_SOURCE_DIR}/boinc/boinc_samples)
 set(BOINCAPI_DIR ${BOINC_DIR}/api)
 set(BOINCLIB_DIR ${BOINC_DIR}/lib)
 

@@ -69,6 +69,6 @@ add_subdirectory( bdance )
 # add_subdirectory( degen )
 # add_subdirectory( nqdecs )
 add_subdirectory( decs )
-add_subdirectory( external )
+add_subdirectory( boinc )
 
 install( FILES COPYING.txt DESTINATION ${DOC_OUTPUT_PATH} )
