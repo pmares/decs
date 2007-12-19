@@ -12,4 +12,4 @@ set(SOURCES
 add_library( libdecs STATIC ${SOURCES} )
 set_target_properties( libdecs PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install( TARGETS libdecs DESTINATION ${LIB_OUTPUT_PATH} )
+install( TARGETS decs DESTINATION ${LIB_OUTPUT_PATH} )

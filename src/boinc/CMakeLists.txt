@@ -52,7 +52,7 @@ set(BOINC_API_SOURCES
 	${BOINC_API_DIR}/graphics2_util.C
 )
 
-add_library( libboinc_api STATIC ${BOINC_API_SOURCES} )
+add_library( boinc_api STATIC ${BOINC_API_SOURCES} )
 
 
 
@@ -85,7 +85,7 @@ else(UNIX)
 	endif(WIN32)
 endif(UNIX)
 
-add_library( libboinc_graphics_api STATIC ${BOINC_GRAPHICS_API_SOURCES} )
+add_library( boinc_graphics_api STATIC ${BOINC_GRAPHICS_API_SOURCES} )
 
 
 
@@ -98,7 +98,7 @@ set(BOINC_GRAPHICS_LIB_SOURCES
 	${BOINC_API_DIR}/reduce_main.C
 )
 
-add_library( libboinc_graphics_lib STATIC ${BOINC_GRAPHICS_LIB_SOURCES} )
+add_library( boinc_graphics_lib STATIC ${BOINC_GRAPHICS_LIB_SOURCES} )
 
 
 
@@ -130,7 +130,7 @@ else(UNIX)
 	endif(WIN32)
 endif(UNIX)
 
-add_library( libboinc_graphics_impl STATIC ${BOINC_GRAPHICS_IMPL_SOURCES} )
+add_library( boinc_graphics_impl STATIC ${BOINC_GRAPHICS_IMPL_SOURCES} )
 
 
 
@@ -153,7 +153,7 @@ if(UNIX)
 	)
 endif(UNIX)
 
-add_library( libboinc_graphics2 STATIC ${BOINC_GRAPHICS2_SOURCES} )
+add_library( boinc_graphics2 STATIC ${BOINC_GRAPHICS2_SOURCES} )
 
 
 
@@ -200,5 +200,5 @@ else(UNIX)
 endif(UNIX)
 
 
-add_library( libboinc STATIC ${BOINCLIB_SOURCES} )
+add_library( boinc STATIC ${BOINCLIB_SOURCES} )
 
