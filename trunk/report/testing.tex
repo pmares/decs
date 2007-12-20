@@ -2,14 +2,8 @@
 \chapter{Testing and simulation}
 \label{testing}
 
-% Description of what tests has been performed.
-
 
 \section{Simulation}
-
-%This Petri net model, simulation and analysis project has been inspired by the author's current work in the Generic Distributed Exact Cover Solver (DECS) \cite{decs-web} project.
-%DECS details the implementation of a distributed computing system to solve exact cover problems by using Donald Knuth's Dancing Links (DLX) \cite{knuth00dancing} algorithm.
-%Figure \ref{fig:architecture} provides the basic architecture of this distributed computing system.
 
 DECS mainly works by dividing a problem into smaller pieces and through BOINC \cite{boinc} it distributes these pieces to a collection of client systems.
 BOINC also handles the result collection process.
@@ -36,12 +30,10 @@ From ``The eight fallacies of distributed computing'' \cite{distributed-fallacie
 	\item The network is reliable.
 	\item Topology does not change.
 \end{itemize}
-
 We assume that all the hardware and the software in the distributed system is reliable.
 Without this assumption we would have to take into account all sorts of failure scenarios which would cause the Petri net model to become overly complex.
 The model also assumes that the network topology does not change significantly.
 BOINC itself can deal with several different changes to topology, like disconnected clients and wireless roaming clients, etc., but to make the model simple we assume that the clients are always reachable through the network.
-
 However, there are some of the eight fallacies we do NOT make assumptions about or which do not apply to this project:
 
 \begin{itemize}
@@ -52,7 +44,6 @@ However, there are some of the eight fallacies we do NOT make assumptions about 
 	\item Transport cost is zero.
 	\item The network is homogeneous.
 \end{itemize}
-
 Zero latency is not assumed because the latency of the distributed system is modeled by the firing time of each of the transitions.
 In the cases where it counts we do not assume infinite bandwidth.
 However, it is difficult to accurately model both the bandwidth limitation and the latency between the clients and the server without making the model significantly harder to understand.
@@ -82,7 +73,7 @@ When all the solutions have arrived they are merged together by $t_{mrg}$ and th
 The weight of the arc from $p_{col}$ to $t_{mrg}$ will also have to be $m$ in order to ensure that the merging process does not take place before all the solutions has arrived.
 From $p_{rtr}$ the generic solution is transformed back into the domain of the specific problem by $t_{rtr}$ and returned to the application in $p_{res}$.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 	\centering 
 	\includegraphics[width=0.6\textwidth]{petri-server.pdf}
 	\caption{Petri net for the distributed computing server}
@@ -92,13 +83,6 @@ From $p_{rtr}$ the generic solution is transformed back into the domain of the s
 
 \subsubsection{Network model}
 
-\begin{figure}[htbp]
-	\centering 
-	\includegraphics[width=0.6\textwidth]{petri-network.pdf}
-	\caption{Petri net for the distributed computing network}
-	\label{fig:petri-network}
-\end{figure}
-
 In an attempt to model the bandwidth limitation on the server side the Petri net in Figure \ref{fig:petri-network} has been designed.
 It is a primitive bandwidth throttling device and with the correct firing times it should be able to regulate the flow of data coming from and going to the server.
 $t_{tx}$ and $p_{tx}$ model the transmit limit and $t_{rx}$ and $p_{rx}$ model the receive limit.
@@ -106,15 +90,15 @@ It is assumed that the network communication channel is full duplex\footnote{Ful
 In other words we assume that the bottleneck is on the server side, which is true in most cases where the number of clients is high.
 The individual bandwidth limitations for each client and the complete operation of the TCP/IP and HTTP protocols are not modeled.
 
+\begin{figure}[tbp]
+	\centering 
+	\includegraphics[width=0.55\textwidth]{petri-network.pdf}
+	\caption{Petri net for the distributed computing network}
+	\label{fig:petri-network}
+\end{figure}
+
 
 \subsubsection{Client model}
-
-\begin{figure}[htbp]
-	\centering 
-	\includegraphics[width=0.7\textwidth]{petri-client.pdf}
-	\caption{Petri net for a single distributed computing client}
-	\label{fig:petri-client}
-\end{figure}
 
 Figure \ref{fig:petri-client} shows the Petri net model of a single computing client.
 To model a system with more than one client the client model is duplicated as many times as there are clients.
@@ -125,6 +109,13 @@ This model assumes that the computing program is only able to process one proble
 When a computation is complete the resulting solution is placed in $p_{sol,i}$ and then sent to the server by $t_{put,i}$.
 $p_{free,i}$ is used to control the number of simultaneous pieces that a client can work on at the same time.
 The get and put operations are assumed to be running in a separate thread so that they do not significantly impact the running time of a computation.
+
+\begin{figure}[tbp]
+	\centering 
+	\includegraphics[width=0.65\textwidth]{petri-client.pdf}
+	\caption{Petri net for a single distributed computing client}
+	\label{fig:petri-client}
+\end{figure}
 
 
 \subsubsection{Petri net definition}
@@ -201,12 +192,12 @@ It takes about 7 seconds to distribute the initial 24 pieces\footnote{Each of th
 
 \begin{figure}[htbp]
 	\centering 
-	\includegraphics[width=1.0\textwidth]{initial_distribution.png}
-	\caption{Initial distribution during the first 10 seconds}
+	\includegraphics[width=0.9\textwidth]{initial_distribution.png}
+	\caption{Work distribution during the first 10 seconds}
 	\label{fig:initdist}
 \end{figure}
 
-A complete simulation in GPenSIM takes 364 steps and depending on the random timing it finishes around 67 minutes.
+\noindent A complete simulation in GPenSIM takes 364 steps and depending on the random timing it finishes around 67 minutes.
 Figure \ref{fig:complete_sim} shows a complete simulation which only took 63 minutes.
 You can clearly see the stages when each of the clients finish their work and request a new piece from the server.
 Another simulation shown in Figure \ref{fig:complete_sim2} with the same parameters appears to have distributed the distribute and collect operations more evenly in time.
@@ -214,14 +205,14 @@ This would no doubt have caused less stress on the server and its bandwidth, but
 
 \begin{figure}[htbp]
 	\centering 
-	\includegraphics[width=0.9\textwidth]{complete_sim.png}
+	\includegraphics[width=0.85\textwidth]{complete_sim.png}
 	\caption{Complete simulation of the distribution and collection completed in 63 minutes}
 	\label{fig:complete_sim}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering 
-	\includegraphics[width=0.9\textwidth]{complete_sim2.png}
+	\includegraphics[width=0.85\textwidth]{complete_sim2.png}
 	\caption{Another simulation of the distribution and collection completed in 67 minutes}
 	\label{fig:complete_sim2}
 \end{figure}
@@ -251,10 +242,31 @@ Figure \ref{fig:sim-48clients-1free} shows the result of this simulation which t
 \end{figure}
 
 
-The main challenge in modeling this system is the distribution and collection mechanism and making sure that the latency and bandwidth limitations were preserved.
 
+\section{Testing}
 
+During the development of the DECS system several tests has been done to measure the performance of the system.
+To measure the performance of the DLX algorithm with and without the $S$ heuristic a few tests were done using the $n$-queens matrices.
+In Figure \ref{fig:heuristic-test} the number of updates is shown for $14$-queens with and without the $S$ heuristic.
+The number of updates is roughly proportional to the running time of the algorithm with the same settings ($S$ heuristic enabled or disabled).
+With the $S$ heuristic enabled the running time was 7.9 seconds and the total number of link updates was 166~103~511.
+Without the $S$ heuristic the running time was 15.6 seconds and 421~253~213 link updates in total.
+This gives about 21 million updates pr. second with the $S$ heuristic and 27 million updates pr. second without it.
+The slower speed with the $S$ heuristic is because it requires that the column sizes are maintained and that the column selection takes more time.
+Even with 22\% less updates pr. second the $S$ heuristic makes the algorithm about twice as fast for this problem.
+Figure \ref{fig:queens-test} shows how the number of updates increases with increasing values of $n$ using the $S$ heuristic.
+Solving the $15$-queens problem takes about 40 seconds and the $16$-queens takes about 5 minutes.
 
-%\section{Performance}
-% TODO: Semi-Important - Write a bit about performance of the dance program.
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=0.8\textwidth]{heuristic-test.pdf}
+	\caption{Number of updates with and without the $S$ heuristic for $14$-queens}
+	\label{fig:heuristic-test}
+\end{figure}
 
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=0.8\textwidth]{queens-test.pdf}
+	\caption{Log plot of updates with the $S$ heuristic for increasing values of $n$ in $n$-queens}
+	\label{fig:queens-test}
+\end{figure}

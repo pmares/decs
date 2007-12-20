@@ -18,11 +18,9 @@ We use ``matrix'' in the rest of this report to mean a boolean matrix and to pre
 \begin{definition}
 Given a collection of subsets $E$ of a set $U$, an exact cover is a subset $S$ of $E$ such that each element of $U$ appears once in $S$.
 \end{definition}
-
 The set $U$ is the set of columns $U = \{ 1, 2, \ldots, n \}$.
 $E$ is the collection of rows where each set contains the number of the columns which has non-zero values.
 The idea is that each column in the matrix represents a specific constraint and each row is a way to satisfy some of the constraints.
-
 For the general $m \times n$ matrix
 \[
 A =
@@ -57,7 +55,7 @@ $k \leq m$ so that $B$ is a reduced matrix of $A$ or, in the case where $k = m$,
 The number of columns in $A$ and $B$ is always the same.
 The subset $R_B$ is an exact cover iff the following equation is satisfied
 \[
-	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \text{for all } j \in \{ 1, 2, \ldots, n \}
+	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \forall j \in \{ 1, 2, \ldots, n \}
 \]
 
 \begin{example}
@@ -91,12 +89,12 @@ By adopting a trial and error approach one can find that the full set of solutio
 \end{example}
 
 
-\subsection{Generalized exact cover}
+\section{Generalized cover}
 \label{general_exact_cover}
 
-A generalized form of the exact cover problem is sometimes better suited to solve certain types of problems.
-The generalized problem can be translated to an exact cover problem by adding additional rows, but translating in the opposite direction is not always possible.
-The generalized problem divides the matrix into primary and secondary columns which are subject to two different sets of constraints.
+A generalized form of exact cover, called generalized cover, is sometimes better suited to solve certain types of problems.
+Any generalized cover problem can be translated to an exact cover problem by adding additional rows.
+The generalized cover problem divides the matrix into primary and secondary columns which are subject to two different sets of constraints.
 Each primary column in the solution must have exactly one non-zero element, as before.
 However, each secondary column in the solution can have either zero or one non-zero element, instead of exactly one.
 
@@ -105,34 +103,31 @@ The subset of rows $R_B$ is an exact cover iff both of the following equations a
 \[
 	\sum_{i = 1}^{k} b_{i,j} = 1 \;\;\; \forall j \in C_P  \;\;\;\; \wedge \;\;\;\;  \sum_{i = 1}^{k} b_{i,j} \leq 1 \;\;\; \forall j \in C_S
 \]
-
-
-$n$-queens (see Section \ref{queens_trans}) is one type of problem the generalized cover problem can be applied to.
+$n$-queens (see Section \ref{queens_trans}) is one type of problem that generalized cover can be applied to.
 Creating a secondary column for each diagonal on the chessboard will reduce the number of rows in the final matrix.
-Given a smaller matrix the DLX algorithm will have to do less processing to find the solutions which results in better performance.
+Given a smaller matrix the DLX algorithm will have to do less processing to find the solutions, which in turn results in better performance.
 The DLX algorithm itself does not require any modifications to solve generalized cover problems, but the matrix construction procedure requires some minor adjustments (see Section \ref{matrix_construction}).
 
 \begin{example}
-In the 4-queens problem each of the four ranks (rows) and four files (columns) on the board corresponds to a primary column in the exact cover matrix.
+In the 4-queens problem each of the four ranks (rows) and four files (columns) on the chessboard corresponds to a primary column in the exact cover matrix.
 Each rank and file can only contain one queen, otherwise the queens would attack each other either horizontally or vertically in that rank or file.
-Placing 4 queens on a $4 \times 4$ board means that each rank and file must contain exactly one queen.
-However, queens can also attack diagonally, but the number of diagonals is larger than the number of queens.
-The solution to the 8-queens problem in Figure \ref{fig:8queens} shows that several of the diagonals are unoccupied.
-To model this part of the problem we can use the generalized form of the exact cover problem and assign each diagonal to a secondary column.
+Placing four queens on a $4 \times 4$ board means that each rank and file must contain exactly one queen.
+Because queens also attack diagonally each diagonal is also assigned a column in the matrix.
+Some of the diagonals will be unoccupied because the number of diagonals is larger than eight.
+To account for this we have to relax the constraints placed on the columns by letting the columns representing the diagonals be secondary columns.
 
 Primary columns 1 to 4 represents the ranks 1 through 4, and primary columns 5 to 8 represents the files A to D.
 On a $4 \times 4$ board there are ten diagonals if we ignore each of the four corners diagonals, which has only a single square.
-The way each diagonal is numbered is unimportant as they are only needed to represent the problem and are not required in order to interpret the final solutions.
+The way each diagonal is numbered is unimportant as they are only needed to represent the problem and are not required to interpret the final solutions.
 We assign each of the ten diagonals to the secondary columns 9 to 18.
 Following the exact cover definition the set $U$ is the set of columns $U = \{ 1, 2, \ldots, 18 \}$.
 $E$ is the collection of rows where each set contains the column numbers with non-zero elements in that row.
 \begin{align*}
-C =& \{ \{ 1, 5, 16 \}, \{ 1, 6, 9, 17 \}, \{ 1, 7, 10, 18 \}, \{ 1, 8, 11 \}, \\
+E =& \{ \{ 1, 5, 16 \}, \{ 1, 6, 9, 17 \}, \{ 1, 7, 10, 18 \}, \{ 1, 8, 11 \}, \\
 &\{ 2, 5, 9, 15 \}, \{ 2, 6, 10, 16 \}, \{ 2, 7, 11, 17 \}, \{ 2, 8, 12, 18 \}, \\
 &\{ 3, 5, 10, 14 \}, \{ 3, 6, 11, 15 \}, \{ 3, 7, 12, 16 \}, \{ 3, 8, 13, 17 \}, \\
 &\{ 4, 5, 11 \}, \{ 4, 6, 12, 14 \}, \{ 4, 7, 13, 15 \}, \{ 4, 8, 16 \} \}
 \end{align*}
-
 Running this though the DLX algorithm provides the solutions $S_1$ and $S_2$.
 %Notice that in each of the solutions the numbers 1 through 8, which is the primary columns, are present exactly once.
 %Only eight out of the ten secondary columns are present in the solutions.
@@ -157,31 +152,7 @@ S_2 = \{ \{ 1, 6, 9, 17 \}, \{ 2, 8, 12, 18 \}, \{ 3, 5, 10, 14 \}, \{ 4, 7, 13,
 \section{Algorithm X}
 \label{algox}
 
-Exact cover is a type of problem known to be NP-complete \cite{np-comp-theory}.
-Several methods exist to find all the solutions to an exact cover problem.
-To find all the solutions to an exact cover problem the most straight forward algorithm is to check all possible sets of rows.
-Given a set we then check to see if there is exactly one non-zero element in each column.
-However, as the size of the matrix increases we will experience a combinatorial explosion on the number of possible sets to test.
-The exact number of sets is $2^{m}-1$ given a matrix with $m$ rows.
-The 8-queens problem (see Section \ref{queens_trans}) which has a matrix consisting of 63 rows, gives an immense 9~223~372~036~854~775~808 sets.
-Given that only 92 of these are valid solutions this simple algorithm can hardly be recommended.
-However, in \cite{oltean-2007} Mihai Oltean and Oana Muntean proposes a design for an optical device which should be able to solve some exact cover problems using this technique.
-
-Another approach, which is presented in \cite{knuth00dancing}, is Algorithm X (for the lack of a better name).
-This backtrack algorithm uses a more intelligent elimination method to ``wriggle'' its way through the matrix and find all the solutions.
-Looking at matrix (\ref{eq:cover_example}) we can easily determine that row 1 and 3 can never be in the same set.
-They are in conflict with each other because both of them have a non-zero element in the first column.
-Since there must be exactly one non-zero element in each column we can rule out any set containing both row 1 and 3.
-
-Algorithm X uses similar logic to recursively traverse the search tree by backtracking.
-Backtracking is the process of exploring all possible paths in a search tree to locate solutions.
-When a path in the search does not yield any solutions the algorithm backtracks and starts searching the next available path in the tree.
-A modified version of Algorithm X is presented in Algorithm \ref{alg:algox}.
-Changes are made to improve the readability, logical consistency and to make it easier to compare with the Dancing Links algorithm.
-Algorithm X is initially called with the matrix $A$ and the column header list $H$.
-$H$ is initialized with the numbers $1, 2, \ldots, n$, where $n$ is the number of columns in $A$.
-
-\begin{algorithm}[htbp]
+\begin{algorithm}[tbp]
 	\caption{Algorithm X recursive search procedure.}
 	\label{alg:algox}
 	\algsetup{indent=6mm}
@@ -208,6 +179,31 @@ $H$ is initialized with the numbers $1, 2, \ldots, n$, where $n$ is the number o
 		\ENDPROC
 	\end{distribalgo}
 \end{algorithm}
+
+Exact cover is a type of problem known to be NP-complete \cite{np-comp-theory}.
+Several methods exist to find all the solutions to an exact cover problem.
+The most straight forward algorithm is to check all possible subsets of rows.
+Given a subset we then check to see if there is exactly one non-zero element in each column.
+However, as the size of the matrix increases we will experience a combinatorial explosion on the number of possible subset to test.
+Given a matrix with $m$ unique rows the total number of subset to test would be $2^{m}-1$ .
+The 8-queens problem, which has a matrix consisting of 64 rows, gives an immense 18~446~744~073~709~551~615 sets.
+Given that only 92 of these are valid solutions this simple algorithm can hardly be recommended.
+Surprisingly Mihai Oltean and Oana Muntean has proposed a design for an optical device in \cite{oltean-2007} which might be able to solve some exact cover problems using this technique.
+Their idea is to harness the massive parallelism of light, but certain technical challenges remain before a working prototype can be constructed.
+
+Another approach, which is presented in \cite{knuth00dancing}, is Algorithm X (for the lack of a better name).
+This backtrack algorithm uses a more intelligent elimination method to ``wriggle'' its way through the matrix and find all the solutions.
+Looking at matrix (\ref{eq:cover_example}) we can easily determine that row 1 and 3 can never be in the same set.
+They are in conflict with each other because both of them have a non-zero element in the first column.
+Since there must be exactly one non-zero element in each column we can rule out any set containing both row 1 and 3.
+
+Algorithm X uses similar logic to recursively traverse the search tree by backtracking.
+Backtracking is the process of exploring all possible paths in a search tree to locate solutions.
+When a path in the search does not yield any solutions the algorithm backtracks and starts searching the next available path in the tree.
+A modified version of Algorithm X is presented in Algorithm \ref{alg:algox}.
+Changes are made to improve the readability, logical consistency and to make it easier to compare with the Dancing Links algorithm.
+Algorithm X is initially called with the matrix $A$ and the column header list $H$.
+$H$ is initialized with the numbers $1, 2, \ldots, n$, where $n$ is the number of columns in $A$.
 
 If $H$ is empty the partial solution is an exact cover and the algorithm returns.
 Otherwise, the algorithm chooses a column $c$ and loops through each row $r$ which has a non-zero element in column $c$.
@@ -291,7 +287,6 @@ The search tree is a binary tree as a result of the small matrix used in this ex
 \end{figure}
 
 \end{example}
-
 One issue when trying to implement Algorithm X is that the state of the matrix needs to be saved and restored multiple times during the backtrack process.
 Each time the algorithm returns the old state must be restored before another path can be explored.
 Searching through the matrix to find the non-zero elements is also very time consuming if the matrix is stored as a two dimensional array.
@@ -313,7 +308,6 @@ To remove element $x$ from the list the following two operations are applied:
 		x.left.right &\leftarrow& x.right \\
 	\end{array}
 \end{equation}
-
 Applying these two operations to the linked list in Figure \ref{fig:linked} results in the list in Figure \ref{fig:linked_del}.
 These operations modify the links pointing to element $x$ so that an iteration through the list will no longer traverse through this element, but instead skip right past it.
 \begin{figure}[htbp]
@@ -322,6 +316,7 @@ These operations modify the links pointing to element $x$ so that an iteration t
 	\caption{Doubly-linked list}
 	\label{fig:linked}
 \end{figure}
+
 \begin{figure}[htbp]
 	\centering 
 	\includegraphics[width=0.8\textwidth]{doubly-linked-list-del.pdf}
@@ -329,7 +324,7 @@ These operations modify the links pointing to element $x$ so that an iteration t
 	\label{fig:linked_del}
 \end{figure}
 
-When programming one might be tempted to set $x.left$ and $x.right$ to a null value and delete the $x$ object or let the garbage collector do its thing.
+\noindent When programming one might be tempted to set $x.left$ and $x.right$ to a null value and delete the $x$ object or let the garbage collector do its thing.
 However, smart as that might seem it would prevent one from applying a second set of operations.
 In \cite{Hitotumatu79} Hitotumatu and Noshita introduced a pair of operations which allows one to insert an element back into the list in exactly the same place it was removed from.
 The following two operations work as the inverse of the operations in (\ref{eq:remove}) by adding $x$ back into the list.
@@ -340,7 +335,6 @@ The following two operations work as the inverse of the operations in (\ref{eq:r
 		x.left.right &\leftarrow& x \\
 	\end{array}
 \end{equation}
-
 To maintain the state information for the matrix the DLX algorithm uses the operations in (\ref{eq:remove}) and (\ref{eq:add}).
 The $x$ element is preserved so that the algorithm can reverse the remove operations, which are used to reduce the matrix.
 
@@ -369,8 +363,8 @@ Figure \ref{fig:matrix_links} shows shows how the matrix in (\ref{eq:cover_examp
 To avoid clutter the $x.column$ links pointing to the column headers are not displayed in the figure.
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.52\textwidth]{matrix-links.pdf}
-	\caption{Sparse boolean matrix circular quad-linked list representation of the example matrix}
+	\includegraphics[width=0.5\textwidth]{matrix-links.pdf}
+	\caption{Circular quad-linked list representation of the example matrix}
 	\label{fig:matrix_links}
 \end{figure}
 

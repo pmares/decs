@@ -26,6 +26,13 @@ The DECS software suite consists of several parts:
 
 \section{Architecture}
 
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=1.0\textwidth]{architecture.pdf}
+	\caption{Generic Distributed Exact Cover Solver system architecture}
+	\label{fig:architecture}
+\end{figure}
+
 The DECS system architecture is layer based as shown in Figure \ref{fig:architecture}.
 The application layer is where external applications produce exact cover problems and where the final solutions end up.
 The transformation layer is where the degen program and its libraries operate.
@@ -37,13 +44,6 @@ The client then sends the solutions back the the BOINC server where they are ver
 BOINC then hands the solutions back to libdecs which reads and analyzes the solution files and merges them into a single file.
 Finally it passes the resulting file to the degen program which runs a reverse transform on the solutions.
 It then writes the final results in whatever format the application needs.
-
-\begin{figure}[htbp]
-	\centering 
-	\includegraphics[width=0.85\textwidth]{architecture.pdf}
-	\caption{Generic Distributed Exact Cover Solver system architecture}
-	\label{fig:architecture}
-\end{figure}
 
 
 
@@ -97,7 +97,6 @@ The outer loop steps through all the ranks on the board and by multiplying the n
 Each of these rows represents a unique placement of a queen on the chessboard.
 The algorithm is made a bit complex by the calculation of each of the two diagonals.
 At the end of the algorithm the matrix $A$ can be saved to file and made ready for further processing.
-
 \begin{algorithm}[H]
 	\caption{Transforming $n$-queens into the exact cover matrix $A$.}
 	\label{alg:nqeens-cover}
@@ -130,8 +129,7 @@ At the end of the algorithm the matrix $A$ can be saved to file and made ready f
 		\ENDPROC
 	\end{distribalgo}
 \end{algorithm}
-
-Algorithm \ref{alg:nqeens-reverse} shows how to place the queens on the $8 \times 8$ chessboard when a solution has been found.
+\noindent Algorithm \ref{alg:nqeens-reverse} shows how to place the queens on the $8 \times 8$ chessboard when a solution has been found.
 The input parameters to the algorithms is the solution $S$, which is a set of row numbers, and the number of queens $n$.
 It uses zero based row numbers and provides zero based rank and file values as a result.
 \begin{algorithm}[H]
@@ -224,7 +222,7 @@ However, when the same value is stored in 2 bytes of memory the difference is cl
 	\label{tab:endian}
 \end{table}
 
-In order to achieve portability between different processor and operating system platforms one has to choose either big-endian, little-endian or a bit to indicate the byte ordering used in the file.
+\noindent In order to achieve portability between different processor and operating system platforms one has to choose either big-endian, little-endian or a bit to indicate the byte ordering used in the file.
 It is also possible to use a endian-neutral format like ASCII text or the External Data Representation (XDR) \cite{RFC4506} standard.
 To make the file format consistent across platforms little-endian was chosen.
 Following the recommendations of Intel's Endianness White Paper \cite{intel-endian} the proper byte swapping methods for big-endian systems has been implemented.
@@ -236,17 +234,7 @@ The storage format for the sparse boolean problem matrix has been designed for f
 All values are unsigned integers unless explicitly stated otherwise.
 For more information on how the matrix data structure is constructed when it is read from file, see Section \ref{matrix_construction}.
 
-The main file header format is made as simple as possible to allow future extensions to be made without breaking backwards compatibility.
-In every DECS formatted file the 8 first bytes of the file are occupied by the main header as shown in Table \ref{tab:header-main} and Figure \ref{fig:header-main}.
-Currently only the first byte of the version field is used.
-In a future versions both bytes in the version field are planned to be ASCII characters so that a separate ASCII format can be defined.
-The type field indicates how the data following the header will look like.
-When the ASCII format is defined it will probably use the two ASCII characters ``M'' and ``R'' to indicate the type of file.
-
-%The version field indicates the lowest possible file format version implemented which will be able to read this version of the file.
-%This means that if the file format version implemented in a program is lower than the compat field it will not be able to read and process it correctly.
-
-\begin{table}[htbp]
+\begin{table}[tbp]
 	\centering
 	\begin{tabular}{|r|r|p{3.1in}|}
 		\hline
@@ -260,12 +248,22 @@ When the ASCII format is defined it will probably use the two ASCII characters `
 	\label{tab:header-main}
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.57\textwidth]{header-main.pdf}
-	\caption{Main file header format structure}
+	\includegraphics[width=0.7\textwidth]{header-main.pdf}
+	\caption{Structure of the main file header}
 	\label{fig:header-main}
 \end{figure}
+
+The main file header format is made as simple as possible to allow future extensions to be made without breaking backwards compatibility.
+In every DECS formatted file the 8 first bytes of the file are occupied by the main header as shown in Table \ref{tab:header-main} and Figure \ref{fig:header-main}.
+Currently only the first byte of the version field is used.
+In a future versions both bytes in the version field are planned to be ASCII characters so that a separate ASCII format can be defined.
+The type field indicates how the data following the header will look like.
+When the ASCII format is defined it will probably use the two ASCII characters ``M'' and ``R'' to indicate the type of file.
+
+%The version field indicates the lowest possible file format version implemented which will be able to read this version of the file.
+%This means that if the file format version implemented in a program is lower than the compat field it will not be able to read and process it correctly.
 
 
 \subsubsection{Matrix file format}
@@ -289,7 +287,7 @@ If the conserve bandwidth flag is not set then every single solution is stored i
 This setting can be overridden by the presence of a special command line argument.
 The rest of the bits are yet to be assigned a value and meaning.
 
-\begin{table}[htbp]
+\begin{table}[tbp]
 	\centering
 	\begin{tabular}{|r|r|p{3.2in}|}
 		\hline
@@ -309,10 +307,10 @@ The rest of the bits are yet to be assigned a value and meaning.
 	\label{tab:header-matrix}
 \end{table}
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.57\textwidth]{header-matrix.pdf}
-	\caption{Matrix file header format structure including the main header}
+	\includegraphics[width=0.7\textwidth]{header-matrix.pdf}
+	\caption{Structure of the matrix file header combined with the main header}
 	\label{fig:header-matrix}
 \end{figure}
 
@@ -325,6 +323,13 @@ The size of the result header is 16 bytes as shown in Table \ref{tab:header-resu
 When the DLX algorithm has solved an exact cover problem it stores the results in a file using the result file format.
 If the conserve bandwidth flag is set in the matrix file then \texttt{results\_off} will be zero.
 This indicates that no solutions are stored in the file.
+
+The structure of the data pointed to by many of the byte offsets are simple lists that consists of unsigned 32-bit integers.
+This format is used by the solution list (\texttt{results\_off}), matrix element list (\texttt{elems\_off}), secondary column list (\texttt{secol\_off}) and the initialization vector list (\texttt{init\_off}).
+The first value $n$ is the size of the list indicating how many unsigned 32-bit integers it contains.
+Reading the following $n$ values ($4n$ bytes) provides all the elements of the list.
+The solution list and matrix element list are actually a sequence of lists where each list represents one solution (set of rows) or one row in the matrix (set of columns numbers for elements with non-zero values).
+By using the value read from the respective header fields \texttt{results\_num} or \texttt{rows\_num} the correct number of lists can be obtained from the file.
 
 \begin{table}[htbp]
 	\centering
@@ -342,19 +347,10 @@ This indicates that no solutions are stored in the file.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.57\textwidth]{header-result.pdf}
-	\caption{Result file header format structure including the main header}
+	\includegraphics[width=0.7\textwidth]{header-result.pdf}
+	\caption{Structure of the result file header combined with the main header}
 	\label{fig:header-result}
 \end{figure}
-
-
-
-The structure of the data pointed to by many of the byte offsets are simple lists that consists of unsigned 32-bit integers.
-This format is used by the solution list (\texttt{results\_off}), matrix element list (\texttt{elems\_off}), secondary column list (\texttt{secol\_off}) and the initialization vector list (\texttt{init\_off}).
-The first value $n$ is the size of the list indicating how many unsigned 32-bit integers it contains.
-Reading the following $n$ values ($4n$ bytes) provides all the elements of the list.
-The solution list and matrix element list are actually a sequence of lists where each list represents one solution (set of rows) or one row in the matrix (set of columns numbers for elements with non-zero values).
-By using the value read from the respective header fields \texttt{results\_num} or \texttt{rows\_num} the correct number of lists can be obtained from the file.
 
 
 
@@ -397,8 +393,7 @@ To the right of the root node all the column header nodes are added in the order
 Algorithm~\ref{alg:columns} shows how the circular doubly-linked column list is created.
 It starts by creating the root node $R$ onto which all the column nodes are attached.
 Take special note of how the secondary column objects are linking to themselves on line 10 and 11.
-
-\begin{algorithm}[H]
+\begin{algorithm}[htbp]
 	\caption{Create the circular doubly-linked list of columns.}
 	\label{alg:columns}
 	\algsetup{indent=6mm}
@@ -426,7 +421,7 @@ To initialize the data structure the nodes must be added row by row by reading t
 The algorithm starts with the top row and works its way down to the bottom.
 It also makes use of the column header array $H$ which was initialized in Algorithm \ref{alg:columns}.
 
-\begin{algorithm}[H]
+\begin{algorithm}[htbp]
 	\caption{Create the circular quad-linked node structure.}
 	\label{alg:nodes}
 	\algsetup{indent=6mm}
