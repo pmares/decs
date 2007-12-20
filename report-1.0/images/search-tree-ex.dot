@@ -1,0 +1,31 @@
+digraph search_tree_ex {
+	size = "6,4";
+	ratio = fill;
+//	nodesep = 1.0;
+	"22left" [ label = "2,2"];
+	"22right" [ label = "2,2", shape=box];
+	"52left" [ label = "5,2"];
+	"52right" [ label = "5,2"];
+	"63left" [ label = "6,3"];
+	"63right" [ label = "6,3", shape=box];
+	"43" [label = "4,3", shape=box];
+	
+	x11 [label="",width=.1,style=invis]
+	x12 [label="",width=.1,style=invis]
+	"root" -> x11 [style=invis];
+
+	"root" -> "1,1";
+	"root" -> "3,1";
+	{rank=same "1,1" ->  x11 -> "3,1" [style=invis]}
+
+	"1,1" -> "22left";
+	"1,1" -> "52left";
+	"3,1" -> "22right";
+	"3,1" -> "52right";
+	{rank=same "22left" ->  "52left" -> "22right" -> "52right" [style=invis]}
+
+	"52left" -> "43";
+	"52left" -> "63left";
+	"52right" -> "63right";
+	{rank=same "43" ->  "63left" -> "63right" [style=invis]}
+}
