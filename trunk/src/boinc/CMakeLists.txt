@@ -10,6 +10,7 @@ set(BOINC_LIB_DIR ${BOINC_DIR}/lib)
 
 include_directories( 
 	${BOINC_DIR}
+	${BOINC_DIR}/client
 	${BOINC_DIR}/openssl/include
 	${BOINC_API_DIR}
 	${BOINC_LIB_DIR}
@@ -35,7 +36,6 @@ endif(UNIX)
 
 add_definitions( 
 	-DBOINC_APP_GRAPHICS
-	-DCLIENT
 	-DHAVE_STD_MAX
 	-DHAVE_STD_MIN
 	-D_CONSOLE
@@ -166,9 +166,9 @@ set(BOINCLIB_SOURCES
 	${BOINC_LIB_DIR}/crypt.C
 	${BOINC_LIB_DIR}/diagnostics.C
 	${BOINC_LIB_DIR}/filesys.C
-	${BOINC_LIB_DIR}/gui_rpc_client.C
-	${BOINC_LIB_DIR}/gui_rpc_client_ops.C
-	${BOINC_LIB_DIR}/gui_rpc_client_print.C
+#	${BOINC_LIB_DIR}/gui_rpc_client.C
+#	${BOINC_LIB_DIR}/gui_rpc_client_ops.C
+#	${BOINC_LIB_DIR}/gui_rpc_client_print.C
 	${BOINC_LIB_DIR}/hostinfo.C
 	${BOINC_LIB_DIR}/md5.c
 	${BOINC_LIB_DIR}/md5_file.C
