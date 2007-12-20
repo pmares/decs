@@ -58,7 +58,7 @@
 
 using std::string;
 
-const char* VERSION = "0.3";
+const char* APP_VERSION = "0.3";
 
 const char* CHECKPOINT_FILE = "bdance_state";
 const char* INPUT_FILE = "in.decs";
