@@ -1,5 +1,9 @@
 project(decs)
 
+# Define CMake options for DECS
+OPTION( BUILD_BOINC "Build the bdance BOINC application together with the required BOINC dependencies" NO)
+OPTION( BUILD_UTILS "Build the DECS utility programs: dance and degen and any required dependencies" YES)
+
 # Set version number
 set( DECS_VERSION_MAJOR 0 )
 set( DECS_VERSION_MINOR 3 )
@@ -58,13 +62,17 @@ if(WIN32)
 	# INFO and MAN paths are not supported in Windows
 endif(WIN32)
 
-
 # List the subdirectories
-add_subdirectory( dance )
-add_subdirectory( bdance )
-# add_subdirectory( degen )
-# add_subdirectory( nqdecs )
 add_subdirectory( decs )
-add_subdirectory( boinc )
+if(BUILD_UTILS)
+	add_subdirectory( dance )
+#	add_subdirectory( degen )
+#	add_subdirectory( nqdecs )
+endif(BUILD_UTILS)
+
+if(BUILD_BOINC)
+	add_subdirectory( bdance )
+	add_subdirectory( boinc )
+endif(BUILD_BOINC)
 
 install( FILES COPYING.txt DESTINATION ${DOC_OUTPUT_PATH} )
