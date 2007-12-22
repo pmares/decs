@@ -19,6 +19,7 @@
 #ifndef DECS_TYPE_H_
 #define DECS_TYPE_H_
 
+typedef unsigned long long uxlong;
 typedef unsigned int uint;  /* TODO We're assuming that an int is 32 bit */
 typedef unsigned char ubyte;
 //typedef char byte;

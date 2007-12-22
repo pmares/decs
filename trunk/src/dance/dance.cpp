@@ -166,9 +166,9 @@ int main(int argc, char* argv[]) {
 	
 
 	// Output results from the solving.
-	uint updates = dlx_get_updates();
-	uint nodes = dlx_get_nodes();
-	uint solutions =  dlx_count_solutions();
+	uxlong updates = dlx_get_updates();
+	uxlong nodes = dlx_get_nodes();
+	uxlong solutions =  dlx_count_solutions();
 
 	if (verbose > 0) {
 		cout << "Search complete\n";
@@ -183,9 +183,9 @@ int main(int argc, char* argv[]) {
 		cout << "Level        Nodes               Updates             Solutions\n"; 
 		uint maxLevel = dlx_get_max_level() + 1;
 		for (uint i = 0; i < maxLevel; i++) {
-			uint upd = dlx_get_update_profile(i);
-			uint nod = dlx_get_node_profile(i);
-			uint sol = dlx_get_solution_profile(i);
+			uxlong upd = dlx_get_update_profile(i);
+			uxlong nod = dlx_get_node_profile(i);
+			uxlong sol = dlx_get_solution_profile(i);
 			printf(" %3u  %10u (%5.1f%%)  %10u (%5.1f%%)  %10u (%5.1f%%)\n", i,
 				nod, double(nod) / double(nodes) * 100,
 				upd, double(upd) / double(updates) * 100,
@@ -194,13 +194,13 @@ int main(int argc, char* argv[]) {
 
 		cout << "\n\nFanout profile:\n";
 		cout << "Level    Nodes      Updates     Solutions\n"; 
-		uint upd1 = dlx_get_update_profile(0);
-		uint nod1 = dlx_get_node_profile(0);
-		uint sol1 = dlx_get_solution_profile(0);
+		uxlong upd1 = dlx_get_update_profile(0);
+		uxlong nod1 = dlx_get_node_profile(0);
+		uxlong sol1 = dlx_get_solution_profile(0);
 		for (uint i = 1; i < maxLevel; i++) {
-			uint upd = dlx_get_update_profile(i);
-			uint nod = dlx_get_node_profile(i);
-			uint sol = dlx_get_solution_profile(i);
+			uxlong upd = dlx_get_update_profile(i);
+			uxlong nod = dlx_get_node_profile(i);
+			uxlong sol = dlx_get_solution_profile(i);
 			if (sol1 > 0)
 				printf(" %3u  %8.1f%  %8.1f%  %8.1f%\n", i,
 					double(nod) / double(nod1) * 100,
