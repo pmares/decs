@@ -31,11 +31,11 @@ const uint PROFILE_TYPES = 3;
 SBMatrix* m = 0;
 SBColumn* h = 0;
 SBNode* o[MAX_LEVELS];
-uint solutions = 0;
+uxlong solutions = 0;
 uint verbose = 1;
-uint updates = 0;
-uint nodes = 0;
-uint profile[MAX_LEVELS][PROFILE_TYPES];
+uxlong updates = 0;
+uxlong nodes = 0;
+uxlong profile[MAX_LEVELS][PROFILE_TYPES];
 uint maxLevel = 0;
 uint level = 0;
 bool heuristic = true;
@@ -214,11 +214,11 @@ bool dlx_get_heuristic() {
 	return heuristic;
 }
 
-uint dlx_get_updates() {
+uxlong dlx_get_updates() {
 	return updates;
 }
 
-uint dlx_get_nodes() {
+uxlong dlx_get_nodes() {
 	return nodes;
 }
 
@@ -226,19 +226,19 @@ uint dlx_get_max_level() {
 	return maxLevel;
 }
 
-uint dlx_get_update_profile(uint level) {
+uxlong dlx_get_update_profile(uint level) {
 	return profile[level][0];
 }
 
-uint dlx_get_node_profile(uint level) {
+uxlong dlx_get_node_profile(uint level) {
 	return profile[level][1];
 }
 
-uint dlx_get_solution_profile(uint level) {
+uxlong dlx_get_solution_profile(uint level) {
 	return profile[level][2];
 }
 
-uint dlx_count_solutions() {
+uxlong dlx_count_solutions() {
 	return solutions;
 }
 
