@@ -52,6 +52,14 @@ set(BOINC_API_SOURCES
 	${BOINC_API_DIR}/graphics2_util.C
 )
 
+if(UNIX)
+	LIST( APPEND BOINC_API_SOURCES
+		${BOINC_LIB_DIR}/diagnostics.C
+		${BOINC_LIB_DIR}/shmem.C
+	)
+	link_libraries(boinc_api pthread)
+endif(UNIX)
+
 add_library( boinc_api STATIC ${BOINC_API_SOURCES} )
 
 
