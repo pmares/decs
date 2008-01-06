@@ -64,7 +64,7 @@ struct DFIOMatrixHeader_3_0 {
 	uint rows;
 	uint elems;
 	uint elem_off;
-	uint secol_off;  // Readded: Keep the  so that it is separate from the element data.
+	uint secol_off;  // Readded: Separate it from the element data.
 	uint init_off;
 	uint name_off;
 	uint probid;
@@ -81,16 +81,27 @@ struct DFIOResultHeader_1_0 {
 	uint prob_off;
 };
 
+/** Result header format version 2. */
+/** Experimental: Work in progress */
+struct DFIOResultHeader_2_0 {
+	uxlong results;  // Changed from ulong to uxlong
+	uint result_off;
+	uint profile_size;  // New: Indicates the size of the profile. It consists entirely of 64-bit unsigned integers.
+	uint profile_off;   // New: Added profile: <nodes> <updates> <solutions> for each recursion level (starting from 0 to profile_size - 1)
+	uint probid;
+	uint prob_off;
+};
+
 
 /** The current file header versions. */
 typedef DFIOMatrixHeader_2_0 DFIOMatrixHeader;
-typedef DFIOResultHeader_1_0 DFIOResultHeader;
+typedef DFIOResultHeader_2_0 DFIOResultHeader;
 
 /** File type ID. This is a 32-bit hex representation for the ASCII "DECS". */
 const uint DFIO_FILE_ID = 0x53434544;
 
 /** The major file format version implemented by this library. */
-const uint DFIO_FILE_VERSION = 2;
+const uint DFIO_FILE_VERSION = 3;
 
 /** Deprecated: Minor file format version implemented by this library. */
 const uint DFIO_FILE_MINOR = 0;

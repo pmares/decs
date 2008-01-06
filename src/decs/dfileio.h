@@ -247,8 +247,8 @@ char* dfio_error_msg();
  */
 uint dfio_has_prop(uint prop);
 /* uint decs_fio_get_prop(uint property, uint* value); */
-uint dfio_get_prop(DFIOProperty prop);
-uint dfio_set_prop(DFIOProperty prop, uint value);
+uxlong dfio_get_prop(DFIOProperty prop);
+uint dfio_set_prop(DFIOProperty prop, uxlong value);
 
 /**
  * Returns the version compatibility mode currently in effect. The DFIO_COMP_*

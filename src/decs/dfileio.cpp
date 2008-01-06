@@ -292,13 +292,13 @@ uint dfio_has_prop(uint prop) {
 };
 
 
-uint dfio_get_prop(DFIOProperty prop) {
+uxlong dfio_get_prop(DFIOProperty prop) {
 	if ((dfio_has_prop(prop) & (uint)prop) != (uint)prop) {
 		err_last = DFIO_ERR_NO_PROP;
 		return 0;
 	}
 
-	uint value = 0;
+	uxlong value = 0;
 
 	switch (prop) {
 		case DFIO_PROP_FILEID: return header->id;
@@ -312,13 +312,13 @@ uint dfio_get_prop(DFIOProperty prop) {
 		case DFIO_PROP_SECOLS_NUM:
 			value = dfio_get_prop(DFIO_PROP_SECOLS_OFF);
 			if (!value) return dfio_set_last_err(DFIO_ERR_NO_PROP, 0);
-			return dfio_read_uint_rewind(value);
+			return dfio_read_uint_rewind((long)value);
 		case DFIO_PROP_SECOLS_OFF: return mheader->elem_off;  // Treat as part of elems in version 1 and 2. TODO: Fix for v3.
 		case DFIO_PROP_INIT_OFF: return mheader->init_off;
 		case DFIO_PROP_INIT_NUM:
 			value = dfio_get_prop(DFIO_PROP_INIT_OFF);
 			if (!value) return dfio_set_last_err(DFIO_ERR_NO_PROP, 0);
-			return dfio_read_uint_rewind(value);
+			return dfio_read_uint_rewind((long)value);
 		case DFIO_PROP_NAMES_OFF: return mheader->name_off;
 		case DFIO_PROP_PROB_ID: 
 			if (file_type == DFIO_TYPE_MATRIX) {
@@ -342,7 +342,7 @@ uint dfio_get_prop(DFIOProperty prop) {
 }
 
 
-uint dfio_set_prop(DFIOProperty prop, uint value) {
+uint dfio_set_prop(DFIOProperty prop, uxlong value) {
 	if ((dfio_has_prop(prop) & (uint)prop) != (uint)prop) {
 		err_last = DFIO_ERR_NO_PROP;
 		return 0;
@@ -398,10 +398,10 @@ uint dfio_read_matrix(SBMatrix* matrix) {
 	if (dfio_has_prop(props) != props)
 		return (err_last = DFIO_ERR_NO_PROP);
 	
-	uint cols = dfio_get_prop(DFIO_PROP_COLS_NUM);
-	uint rows = dfio_get_prop(DFIO_PROP_ROWS_NUM);
-	uint elems = dfio_get_prop(DFIO_PROP_ELEMS_NUM);
-	uint elem_off = dfio_get_prop(DFIO_PROP_ELEMS_OFF);
+	uint cols = (uint)dfio_get_prop(DFIO_PROP_COLS_NUM);
+	uint rows = (uint)dfio_get_prop(DFIO_PROP_ROWS_NUM);
+	uint elems = (uint)dfio_get_prop(DFIO_PROP_ELEMS_NUM);
+	uint elem_off = (uint)dfio_get_prop(DFIO_PROP_ELEMS_OFF);
 
 	if (cols == 0) return (err_last = DFIO_ERR_OOB_COLUMNS);
 	if (rows == 0) return (err_last = DFIO_ERR_OOB_ROWS);
@@ -410,10 +410,10 @@ uint dfio_read_matrix(SBMatrix* matrix) {
 	
 	
 	// Read the initialization vector, if available.
-	uint init_size = dfio_get_prop(DFIO_PROP_INIT_NUM);
+	uint init_size = (uint)dfio_get_prop(DFIO_PROP_INIT_NUM);
 	uint* initv = new uint[init_size];
 
-	uint init_off = dfio_get_prop(DFIO_PROP_INIT_OFF);
+	uint init_off = (uint)dfio_get_prop(DFIO_PROP_INIT_OFF);
 	if (init_off) {
 		// Read all initialization vector data.
 		fseek(file, init_off + sizeof(uint), SEEK_SET);
@@ -429,11 +429,11 @@ uint dfio_read_matrix(SBMatrix* matrix) {
 
 	
 	// Read the secondary column list if available.
-	uint secol_size = dfio_get_prop(DFIO_PROP_SECOLS_NUM);
+	uint secol_size = (uint)dfio_get_prop(DFIO_PROP_SECOLS_NUM);
 	if (secol_size > cols) return (err_last = DFIO_ERR_OOB_COLUMNS);
 	uint* secol = new uint[secol_size];
 
-	uint secol_off = dfio_get_prop(DFIO_PROP_SECOLS_OFF);
+	uint secol_off = (uint)dfio_get_prop(DFIO_PROP_SECOLS_OFF);
 	if (secol_off) {
 		// Read all secondary column data.
 		fseek(file, secol_off + sizeof(uint), SEEK_SET);
