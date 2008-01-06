@@ -1,10 +1,10 @@
 project( degen )
 
-set( degen_SRCS
+set(SOURCES 
 	degen.cpp
+	nqdecs.cpp
 )
 
-add_executable( degen ${degen_SRCS} )
-target_link_libraries( degen decs nqdecs )
+add_executable( degen ${SOURCES} )
 
 install( TARGETS degen DESTINATION ${BIN_OUTPUT_PATH} )
