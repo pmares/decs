@@ -162,7 +162,7 @@ void worker() {
 
 	// Solve
 	dlx_solve(matrix);
-	uint solutions = dlx_count_solutions();
+	uxlong solutions = dlx_count_solutions();
 	delete matrix;
 
 
