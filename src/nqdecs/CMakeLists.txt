@@ -1,10 +1,10 @@
 project( nqdecs )
 
-set( nqdecs_SRCS
+set(SOURCES 
 	nqdecs.cpp
 )
 
-add_library( nqdecs STATIC ${nqdecs_SRCS} )
+add_library( nqdecs STATIC ${SOURCES} )
 set_target_properties( nqdecs PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install( TARGETS nqdecs DESTINATION ${LIB_OUTPUT_PATH} )
+#install( TARGETS nqdecs DESTINATION ${LIB_OUTPUT_PATH} )
