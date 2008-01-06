@@ -67,7 +67,6 @@ add_subdirectory( decs )
 if(BUILD_UTILS)
 	add_subdirectory( dance )
 	add_subdirectory( degen )
-	add_subdirectory( nqdecs )
 endif(BUILD_UTILS)
 
 if(BUILD_BOINC)
