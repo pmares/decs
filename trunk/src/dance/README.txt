@@ -19,7 +19,7 @@ Usage
 
 The dance program takes the path to a DECS file as a parameter.
 
-dance.exe [options] <file.decs>
+dance [options] <file.decs>
 
 Try some of the example DECS files in the example directory.
 

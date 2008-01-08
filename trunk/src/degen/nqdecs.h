@@ -1,6 +1,6 @@
 /**
- * libnqdecs - DECS transform for the n-queens problem.
- * Copyright (C) 2007  Jan Magne Tjensvold
+ * degen - Exact cover matrix generator for the DECS library.
+ * Copyright (C) 2007-2008 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -19,11 +19,10 @@
 #ifndef NQDECS_H_
 #define NQDECS_H_
 
-typedef unsigned int uint;
-typedef unsigned char byte;
+#include "type.h"
 
-int setQueens(uint queens);
-int setOrganPipe(bool enable);
-int transform(char* file);
+int nq_set_queens(uint queens);
+int nq_set_organ_pipe_order(bool enable);
+uint nq_transform(char* file);
 
 #endif /*NQDECS_H_*/

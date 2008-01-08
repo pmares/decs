@@ -30,28 +30,30 @@ using namespace std;
  * Prints command line options.
  */
 void print_usage() {
-	cout << "Usage: dance [OPTIONS] [FILE]\n"
-			"\n"
-			"Options:\n"
-			"  -v, --verbose      Verbose output.\n"
-			"  -q, --quiet        Quiet. Don't output to stdout.\n"
-			"  --statistics       Print the number of nodes and link updates.\n"
-			"  --profile          Print the node count and link update profile.\n"
-			"  --no-heuristic     Disable the column selection by size heuristic.\n"
-			"  --help             Print help information and exit.\n"
-			"  --version          Print program version and exit.\n"
-			"\n"
-			"Report bugs to <http://code.google.com/p/decs/issues/list>.";
+	cout << 
+		"Usage: dance [options] [file]\n"
+		"\n"
+		"Options:\n"
+		"  -v, --verbose      Verbose output.\n"
+		"  -q, --quiet        Quiet. Don't output to stdout.\n"
+		"  --statistics       Print the number of nodes and link updates.\n"
+		"  --profile          Print the node count and link update profile.\n"
+		"  --no-heuristic     Disable the column selection by size heuristic.\n"
+		"  --help             Print help information and exit.\n"
+		"  --version          Print program version and exit.\n"
+		"\n"
+		"Report bugs to http://code.google.com/p/decs/issues/list.";
 }
 
 /**
  * Prints version and copyright notice.
  */
 void print_version() {
-	cout << "dance (DECS toolkit) " << VERSION << "\n"
-			"Copyright (C) 2007 Jan Magne Tjensvold\n"
-			"This is free software; See the source for copying conditions. There is NO\n"
-			"WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
+	cout << 
+		"dance (DECS toolkit) " << VERSION << "\n"
+		"Copyright (C) 2007-2008 Jan Magne Tjensvold\n"
+		"This is free software; See the source for copying conditions. There is NO\n"
+		"WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.";
 }
 
 void usage_error() {
@@ -165,7 +167,7 @@ int main(int argc, char* argv[]) {
 	if (result != DFIO_ERR_SUCCESS) return solve_error(result);
 	
 
-	// Output results from the solving.
+	// Output results and statistics from the solving.
 	uxlong updates = dlx_get_updates();
 	uxlong nodes = dlx_get_nodes();
 	uxlong solutions =  dlx_count_solutions();
@@ -179,7 +181,7 @@ int main(int argc, char* argv[]) {
 		cout << "\nTotal link updates: " << updates;
 	}
 	if (showProfile) {
-		cout << "\n\nLink, update and solution profile:\n";
+		cout << "\n\Node, link update and solution profile:\n";
 		cout << "Level        Nodes               Updates             Solutions\n"; 
 		uint maxLevel = dlx_get_max_level() + 1;
 		for (uint i = 0; i < maxLevel; i++) {

@@ -19,7 +19,7 @@
 #include <iostream>
 #include "nqdecs.h"
 
-const char* version = "0.2";
+const char* VERSION = "0.2";
 
 using namespace std; 
 
@@ -63,14 +63,14 @@ void print_usage() {
  */
 void print_version() {
 	cout <<
-		"degen (DECS toolkit) " << version << "\n"
+		"degen (DECS toolkit) " << VERSION << "\n"
 		"Copyright (C) 2007 Jan Magne Tjensvold\n"
 		"This is free software; See the source for copying conditions. There is NO\n"
 		"WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.";
 }
 
 void print_transforms() {
-	cout << "degen (DECS toolkit) " << version << "\n"
+	cout << "degen (DECS toolkit) " << VERSION << "\n"
 		"Transforms:\n"
 		"nqueens";
 }

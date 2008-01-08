@@ -1,6 +1,6 @@
 /**
- * sbmatrix - Sparse boolean matrix data structure library for DECS.
- * Copyright (C) 2007  Jan Magne Tjensvold
+ * libdecs - Exact cover solver library using the Dancing Links algorithm.
+ * Copyright (C) 2007-2008 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -19,7 +19,7 @@
 #ifndef DECS_TYPE_H_
 #define DECS_TYPE_H_
 
-typedef unsigned long long uxlong;
+typedef unsigned long long uxlong; /* TODO We're assuming this is 64 bit */
 typedef unsigned int uint;  /* TODO We're assuming that an int is 32 bit */
 typedef unsigned char ubyte;
 //typedef char byte;

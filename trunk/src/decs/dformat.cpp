@@ -1,6 +1,6 @@
 /**
- * fileio - Library for reading and writing DECS files.
- * Copyright (C) 2007  Jan Magne Tjensvold
+ * libdecs - Exact cover solver library using the Dancing Links algorithm.
+ * Copyright (C) 2007-2008 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -48,10 +48,24 @@ inline bool dfio_is_big_endian() {
 
 
 inline uint dfio_bswap_uint(uint value) {
-	return (((value) >> 24) & 0x000000FF) 
-		| (((value) >> 8) & 0x0000FF00)
-		| (((value) << 8) & 0x00FF0000)
+	return
+		  (((value) >> 24) & 0x000000FF) 
+		| (((value) >>  8) & 0x0000FF00)
+		| (((value) <<  8) & 0x00FF0000)
 		| (((value) << 24) & 0xFF000000);
+}
+
+
+inline uxlong dfio_bswap_uxlong(uxlong value) {
+	return
+		  (((value) >> 56) & 0x00000000000000FF)
+		| (((value) >> 40) & 0x000000000000FF00)
+		| (((value) >> 24) & 0x0000000000FF0000)
+		| (((value) >>  8) & 0x00000000FF000000)
+		| (((value) <<  8) & 0x000000FF00000000)
+		| (((value) << 24) & 0x0000FF0000000000)
+		| (((value) << 40) & 0x00FF000000000000)
+		| (((value) << 56) & 0xFF00000000000000);
 }
 
 
@@ -60,6 +74,31 @@ uint dfio_cbswap_uint(uint value) {
 		return value;
 	} else {
 		return dfio_cbswap_uint(value);
+	}
+}
+
+
+uxlong dfio_cbswap_uxlong(uxlong value) {
+	if (!dfio_is_big_endian()) {
+		return value;
+	} else {
+		return dfio_bswap_uxlong(value);
+	}
+}
+
+
+void dfio_bswap_uints(uint* ary, uint elements) {
+	if (!dfio_is_big_endian()) return;
+	for (uint i = 0; i < elements; i++) {
+		ary[i] = dfio_bswap_uint(ary[i]);
+	}
+}
+
+
+void dfio_bswap_uxlong(uxlong* ary, uint elements) {
+	if (!dfio_is_big_endian()) return;
+	for (uint i = 0; i < elements; i++) {
+		ary[i] = dfio_bswap_uxlong(ary[i]);
 	}
 }
 
@@ -85,16 +124,8 @@ void dfio_bswap_matrix_header(DFIOMatrixHeader* fh) {
 
 void dfio_bswap_result_header(DFIOResultHeader* fh) {
 	if (!dfio_is_big_endian()) return;
-	fh->results = dfio_bswap_uint(fh->results);
+	fh->results = dfio_bswap_uxlong(fh->results);
 	fh->result_off = dfio_bswap_uint(fh->result_off);
 	fh->probid = dfio_bswap_uint(fh->probid);
 	fh->prob_off = dfio_bswap_uint(fh->prob_off);
-}
-
-
-void dfio_bswap_uints(uint* ary, uint elements) {
-	if (!dfio_is_big_endian()) return;
-	for (uint i = 0; i < elements; i++) {
-		ary[i] = dfio_bswap_uint(ary[i]);
-	}
 }
