@@ -1,6 +1,6 @@
 /**
- * degen - Exact cover matrix generator for the Dancing Links library.
- * Copyright (C) 2007  Jan Magne Tjensvold
+ * degen - Exact cover matrix generator for the DECS library.
+ * Copyright (C) 2007-2008 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -27,29 +27,52 @@ using namespace std;
  * Prints command line options.
  */
 void print_usage() {
-	cout << "Usage: degen [OPTIONS] [FILE]\n"
-			"Transform: F = forward, R = reverse, B = bidirectional\n"
-			"\n"
-			"Options:\n"
-			"  --forward          Perform a forward transform (default).\n"
-			"  --reverse          Perform a reverse transform.\n"
-			"  --help             Print help information and exit.\n"
-			"  --version          Print program version and exit.\n"
-			"\n"
-			"libnqdecs (F) options:\n"
-			"F  --queens <n>      n number of queens\n"
-			"\n"
-			"Report bugs to <http://code.google.com/p/decs/issues/list>.";
+	cout <<
+		"Usage:\n"
+		"degen [options] [file]\n"
+		"degen <transform> [--forward] [transform-options] <outfile>\n"
+		"degen [transform] --reverse [transform-options] <infile> [outfile]\n"
+		"\n"
+		"Options:\n"
+		"  --forward          Perform a forward transform (default).\n"
+		"  --reverse          Perform a reverse transform.\n"
+		"  --transforms       List the available transforms.\n"
+		"  --split <level>    Splits a matrix into sub-matrices at the specified\n"
+		"                       recursive level and writes output to file_x.decs where x\n"
+		"                       goes from 1 to the total number of sub-matrices found.\n"
+		"  --help             Print help information and exit.\n"
+		"  --version          Print program version and exit.\n"
+		"\n"
+		"Transform options: \n"
+		"F = forward, R = reverse, B = bidirectional (both ways)\n"
+		"nqueens transform options:\n"
+		"F  --queens <n>      n number of queens\n"
+		"\n"
+		"Examples:\n"
+		"degen --transforms\n"
+		"degen nqueens --forward --queens 20 --split 4 queens20.decs\n"
+		"degen nqueens --reverse queens8-solutions.decs solutions.txt\n"
+		"\n"
+		"Report bugs to http://code.google.com/p/decs/issues/list.";
+	//   --------------------------------------------------------------------------------
+	//   80 chars long line
 }
 
 /**
  * Prints version and copyright notice.
  */
 void print_version() {
+	cout <<
+		"degen (DECS toolkit) " << version << "\n"
+		"Copyright (C) 2007 Jan Magne Tjensvold\n"
+		"This is free software; See the source for copying conditions. There is NO\n"
+		"WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.";
+}
+
+void print_transforms() {
 	cout << "degen (DECS toolkit) " << version << "\n"
-			"Copyright (C) 2007 Jan Magne Tjensvold\n"
-			"This is free software; See the source for copying conditions. There is NO\n"
-			"WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
+		"Transforms:\n"
+		"nqueens";
 }
 
 void usage_error() {
@@ -59,7 +82,11 @@ void usage_error() {
 
 int main(int argc, char* argv[]) {
 	char* file = 0;
+	char* file2 = 0;
 	bool forward = true;
+	bool reverse = false;
+
+	// Transform specific variables.
 	uint queens = 0;
 	
 	// Interpret command line parameters.
@@ -70,12 +97,17 @@ int main(int argc, char* argv[]) {
 		} else if (!strcmp(argv[i], "--version")) {
 			print_version();
 			return 0;
+		} else if (!strcmp(argv[i], "--transforms")) {
+			print_transforms();
+			return 0;
 		} else if (!strcmp(argv[i], "--reverse")) {
+			reverse = true;
 			forward = false;
 		} else if (!strcmp(argv[i], "--forward")) {
+			reverse = false;
 			forward = true;
 			
-		/* Library parameters */
+		/* Transform parameters */
 		} else if (!strcmp(argv[i],"--queens")) {
 			if (i+1 < argc) {
 				i++;
@@ -84,8 +116,10 @@ int main(int argc, char* argv[]) {
 				cerr << "'--queens' was not followed by a number\n";
 				usage_error();
 			}
-		} else if (i+1 == argc) {
+		} else if (i+2 >= argc) {
 			file = argv[i];
+		} else if (file != 0 && i+1 == argc) {
+			file2 = argv[i];
 		} else {
 			cerr << "Unknown command line parameter '" << argv[i] << "'\n";
 			usage_error();
@@ -105,7 +139,7 @@ int main(int argc, char* argv[]) {
 		
 		cout << "Generating matrix..." << '\n';
 		if (transform(file)) {
-			cerr << "Unable to complete forward transform\n";
+			cerr << "Unable to complete forward transform";
 			return 1;
 		}
 		
