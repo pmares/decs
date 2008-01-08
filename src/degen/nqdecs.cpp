@@ -1,6 +1,6 @@
 /**
  * libnqdecs - DECS transform for the n-queens problem.
- * Copyright (C) 2007  Jan Magne Tjensvold
+ * Copyright (C) 2007-2008 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -16,42 +16,23 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
 
-#include <iostream>
-#include <fstream>
+#include <cstdio>
+
 #include "nqdecs.h"
 
 using namespace std;
 
-struct FileHeader {
-	uint fileid;
-	byte version;
-	byte compat;
-	byte reserved[2];
-	uint cols;
-	uint rows;
-	uint elems;
-	uint elem_off;
-	uint init_off;
-	uint name_off;
-	uint probid;
-	uint prob_off;
-};
-
 struct ProbInfo {
-	byte version;
-	byte queens;
-	byte oporder;  // Is it using organ pipe ordering?
-	byte reserved[5];
+	ubyte version;
+	ubyte queens;
+	ubyte oporder;  // Is it using organ pipe ordering?
+	ubyte reserved[5];
 };
 
-const uint FILE_ID = 0x53434544;
-const byte FILE_VERSION = 2;
-const byte FILE_COMPAT = 0;
-const byte LIB_VERSION = 1;
 const uint PROB_ID = 0x10;
 
 uint queens = 2;
-bool organ = false;
+bool organ = false;  // Organ pipe ordering optimization.
 
 /**
  * Write a message to stderr and exit with an exit code of 1 to indicate failure.
@@ -66,7 +47,7 @@ void panic(const char* msg) {
  * The number of queens must be larger than 1 for the operation
  * to succeed.
  */
-int setQueens(uint n) {
+int nq_set_queens(uint n) {
 	if (n > 1) {
 		queens = n;
 		return 0;
@@ -75,22 +56,17 @@ int setQueens(uint n) {
 	}
 }
 
-int setOrganPipe(bool enable) {
+int nq_set_organ_pipe_order(bool enable) {
 	if (enable) return 1;  // Organ pipe ordering currently not supported.
 	return 0;
 }
 
-int transform(char* file) {
-	ofstream out(file, ios::binary);
-	if (!out) panic("cannot open file");
+uint nq_transform(FILE* file) {
+	uint retval = dfio_new_file(file, DFIO_TYPE_MATRIX);
+	if (retval != DFIO_ERR_SUCCESS)
+		return retval;
 
-	FileHeader fh;
-	fh.fileid = FILE_ID;
-	fh.version = FILE_VERSION;
-	fh.compat = FILE_COMPAT;
-	fh.reserved[0] = fh.reserved[1] = 0;
-	fh.init_off = 0;
-	fh.name_off = 0;
+	
 	fh.cols = 6 * queens - 6;
 
 	// Write problem specific information.

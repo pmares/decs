@@ -1,6 +1,6 @@
 /**
- * fileio - Library for reading and writing DECS files.
- * Copyright (C) 2007  Jan Magne Tjensvold
+ * libdecs - Exact cover solver library using the Dancing Links algorithm.
+ * Copyright (C) 2007-2008 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -15,10 +15,6 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
  */
-
-//#include <fstream>
-//#include <iostream>
-//#include <cstdlib>
 
 #include <cstdio>
 
@@ -119,13 +115,13 @@ uint dfio_read_result_header() {
 uint dfio_new_file(FILE* f, DFIOFileType type) {
 	if (file) dfio_cleanup();
 	if (!f) return (err_last = DFIO_ERR_NO_FILE);
-	
 	file = f;
 
 	header = new DFIOHeader();
 	header->id = DFIO_FILE_ID;
 	header->version = DFIO_FILE_VERSION;
 	header->minor = DFIO_FILE_MINOR;
+	header->reserved = 0;
 	dirty_tophead = true;
 
 	if (type == DFIO_TYPE_MATRIX) {
@@ -140,6 +136,7 @@ uint dfio_new_file(FILE* f, DFIOFileType type) {
 		dirty_lowhead = true;
 	} else {
 		file_type = DFIO_TYPE_UNKNOWN;
+		dfio_cleanup();
 		return DFIO_ERR_FILE_TYPE;
 	}
 
@@ -229,7 +226,11 @@ uint dfio_read_uint_rewind(long offset) {
 	return value;
 }
 
-
+/**
+ * Check if a specific set of properties are available.
+ * prop can be an OR'ed value of the properties to check for.
+ * If the returned value is identical to prop then all properties are available.
+ */
 uint dfio_has_prop(uint prop) {
 	uint values = 0;
 	if ((prop & DFIO_PROP_FILEID) != 0) {
