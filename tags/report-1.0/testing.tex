@@ -1,0 +1,272 @@
+
+\chapter{Testing and simulation}
+\label{testing}
+
+
+\section{Simulation}
+
+DECS mainly works by dividing a problem into smaller pieces and through BOINC \cite{boinc} it distributes these pieces to a collection of client systems.
+BOINC also handles the result collection process.
+In BOINC the clients send HTTP GET and POST messages to a web server in order to download more work and upload the results.
+We wish to simulate this system by constructing a Petri net model which represents a simplified version of DECS.
+Petri net, invented in 1962 by Carl Adam Petri \cite{Petri62, Petri66}, is used to model and simulate discrete-event systems.
+
+
+\subsection{Model}
+
+The Petri net model is based on the architecture as shown in Figure \ref{fig:architecture}.
+In order for the simulation to be useful the complete request/response cycle has been modeled.
+The firing times of the transitions have been determined by research and testing.
+
+
+\subsubsection{Assumptions}
+
+To begin with a few assumptions are made regarding the system being modeled.
+This is done in order to make the model simple and easy to understand.
+Because we are dealing with a distributed system we need to be aware of the most common pitfalls we might encounter.
+From ``The eight fallacies of distributed computing'' \cite{distributed-fallacies} the following assumptions apply to our model:
+
+\begin{itemize}
+	\item The network is reliable.
+	\item Topology does not change.
+\end{itemize}
+We assume that all the hardware and the software in the distributed system is reliable.
+Without this assumption we would have to take into account all sorts of failure scenarios which would cause the Petri net model to become overly complex.
+The model also assumes that the network topology does not change significantly.
+BOINC itself can deal with several different changes to topology, like disconnected clients and wireless roaming clients, etc., but to make the model simple we assume that the clients are always reachable through the network.
+However, there are some of the eight fallacies we do NOT make assumptions about or which do not apply to this project:
+
+\begin{itemize}
+	\item Latency is zero.
+	\item Bandwidth is infinite.
+	\item The network is secure.
+	\item There is one administrator.
+	\item Transport cost is zero.
+	\item The network is homogeneous.
+\end{itemize}
+Zero latency is not assumed because the latency of the distributed system is modeled by the firing time of each of the transitions.
+In the cases where it counts we do not assume infinite bandwidth.
+However, it is difficult to accurately model both the bandwidth limitation and the latency between the clients and the server without making the model significantly harder to understand.
+The current solution is a compromise between accuracy and readability.
+BOINC handles all the network communication and carries the burden of securing the distributed system against attacks.
+These security mechanisms are not modeled because they have no direct impact on the performance of the system.
+The ``one administrator'' and ``zero transport cost'' assumptions fall outside the scope of this report.
+The way the system is administered and the infrastructure costs are not our concern.
+As far as BOINC goes it does not care what platform the server or clients run because it is able to supports most major operating systems and hardware platforms.
+Some additional assumptions are presented later under the sections they belong to.
+
+
+\subsubsection{Server model}
+
+We begin by first modeling the server in this distributed computing system.
+It is assumed that there is only one server, even though BOINC in practice can support more than one.
+The server has two ``pipelines'' so to speak: The request pipeline and the response pipeline.
+In Figure \ref{fig:petri-server} shows the complete server model.
+
+The request pipeline begins with the place $p_{req}$ onto which an application may submit a specific exact cover problem to be processed by DECS.
+The specific problem is then transformed into a more generic form by the transition $t_{tr}$ before it is placed in $p_{div}$.
+From there the problem is divided into several smaller problems by $t_{div}$ and the resulting pieces\footnote{BOINC uses the term ``work units'' instead of pieces, but it is essentially the same thing.} are placed in $p_{dist}$ to be distributed to the clients.
+The weight, $m$, of the arc from $t_{div}$ to $p_{dist}$ is the number of pieces the problem is divided into.
+
+The response pipeline starts with the place $p_{col}$ where the solutions from the clients are placed.
+When all the solutions have arrived they are merged together by $t_{mrg}$ and the resulting solution is placed in $p_{rtr}$.
+The weight of the arc from $p_{col}$ to $t_{mrg}$ will also have to be $m$ in order to ensure that the merging process does not take place before all the solutions has arrived.
+From $p_{rtr}$ the generic solution is transformed back into the domain of the specific problem by $t_{rtr}$ and returned to the application in $p_{res}$.
+
+\begin{figure}[tbp]
+	\centering 
+	\includegraphics[width=0.6\textwidth]{petri-server.pdf}
+	\caption{Petri net for the distributed computing server}
+	\label{fig:petri-server}
+\end{figure}
+
+
+\subsubsection{Network model}
+
+In an attempt to model the bandwidth limitation on the server side the Petri net in Figure \ref{fig:petri-network} has been designed.
+It is a primitive bandwidth throttling device and with the correct firing times it should be able to regulate the flow of data coming from and going to the server.
+$t_{tx}$ and $p_{tx}$ model the transmit limit and $t_{rx}$ and $p_{rx}$ model the receive limit.
+It is assumed that the network communication channel is full duplex\footnote{Full duplex allows data to be sent and received at the same time.} and that the combined network bandwidth of all the connected clients is equal to or larger than the bandwidth on the server side.
+In other words we assume that the bottleneck is on the server side, which is true in most cases where the number of clients is high.
+The individual bandwidth limitations for each client and the complete operation of the TCP/IP and HTTP protocols are not modeled.
+
+\begin{figure}[tbp]
+	\centering 
+	\includegraphics[width=0.55\textwidth]{petri-network.pdf}
+	\caption{Petri net for the distributed computing network}
+	\label{fig:petri-network}
+\end{figure}
+
+
+\subsubsection{Client model}
+
+Figure \ref{fig:petri-client} shows the Petri net model of a single computing client.
+To model a system with more than one client the client model is duplicated as many times as there are clients.
+To identify each client they are given a number $i$ from $1$ to $n$.
+When $t_{get,i}$ is fired the HTTP GET request is send to the server and a piece of the problem is returned to the client and placed in $p_{jobs,i}$, which is a job queue.
+$t_{comp,i}$ is the computing program which processes each job from $p_{jobs,i}$ one at a time.
+This model assumes that the computing program is only able to process one problem at the same time, even on multi-processor systems.
+When a computation is complete the resulting solution is placed in $p_{sol,i}$ and then sent to the server by $t_{put,i}$.
+$p_{free,i}$ is used to control the number of simultaneous pieces that a client can work on at the same time.
+The get and put operations are assumed to be running in a separate thread so that they do not significantly impact the running time of a computation.
+
+\begin{figure}[tbp]
+	\centering 
+	\includegraphics[width=0.65\textwidth]{petri-client.pdf}
+	\caption{Petri net for a single distributed computing client}
+	\label{fig:petri-client}
+\end{figure}
+
+
+\subsubsection{Petri net definition}
+
+A Petri net graph is a weighted bipartite graph $(P, T, A, w)$.
+$P$ is the set of places, $T$ is the set of transitions, $A$ is the set of arcs and $w$ is the arc weight function.
+A Petri net model of the system with a single client is shown in Figure \ref{fig:petri-system}.
+If additional clients are added the complexity steadily increases as the client model is duplicated and each client is connected to $p_{tx}$ and $p_{rx}$.
+Below we have defined the Petri net model as shown in the figure.
+
+\begin{align*} 
+P &= \left\{p_{req}, p_{res}, p_{rtr}, p_{div}, p_{dist}, p_{col}, p_{tx}, p_{rx}, p_{free}, p_{jobs}, p_{sol}\right\} \\
+T &= \left\{t_{tr}, t_{rtr}, t_{div}, t_{mrg}, t_{tx}, t_{rx}, t_{get,1}, t_{comp,1}, t_{put,1}\right\} \\
+A &= \{(p_{req}, t_{tr}), (t_{tr}, p_{div}), (p_{div}, t_{div}), (t_{div}, p_{dist}), (p_{col}, t_{mrg}), (t_{mrg}, p_{rtr}), \\
+&(p_{rtr}, t_{rtr}), (t_{rtr}, p_{res}), (p_{dist}, t_{tx}), (t_{rx}, p_{col}), (p_{tx}, t_{get,1}), (t_{put,1}, p_{rx}), \\
+&(t_{get,1}, p_{jobs,1}), (p_{jobs,1}, t_{comp,1}), (t_{comp,1}, p_{free,1}), (p_{free,1}, t_{get,1}), \\
+&(t_{comp,1}, p_{sol,1}), (p_{sol,1}, t_{put,1})\} \\
+w&(t_{div}, p_{dist}) = w(p_{col}, t_{mrg}) = m \\
+\end{align*}
+
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=1.0\textwidth]{petri-system.pdf}
+	\caption{Petri net model of the DECS system with a single client connected}
+	\label{fig:petri-system}
+\end{figure}
+
+
+\subsection{Simulation}
+
+GPenSIM \cite{gpensim} version 2.1 is used in the modeling and simulation of this distributed computing system.
+GPenSIM is a software package for MATLAB which enables one to use all the powerful facilities for statistics and plotting which MATLAB is known for.
+
+
+\subsubsection{Simulation parameters}
+
+To fully define the model a set of different parameters has to be defined.
+These parameters are the firing times of the transitions, arc weights, number of clients and the initial dynamics\footnote{The initial dynamics/markings is the number and location of tokens at the start of the simulation.}.
+
+To be able to find the correct parameters we need to specify what problem we want DECS to solve.
+Lets say that we want to solve the 20-queens problem.
+It should take about 12 hours of CPU time to solve this problem according to the NQueens@Home project \cite{nqueensathome}.
+Although they are using a specialized algorithm instead of the DLX algorithm used by DECS, we assume that the running time is about the same.
+In reality the DLX algorithm is significantly slower than the algorithm used by the NQueens@Home project.
+
+The number of clients is chosen to be $n = 12$, meaning that if this was an ideal system the problem would be solved in 1 hour.
+Each client should use around 10 minutes to solve each piece of the problem so the problem is divided into $m = 72$ pieces.
+The transformation of the specific 20-queens problem to the DLX matrix takes 160 milliseconds so the firing time for $t_{tr}$ is 0.160 seconds.
+The reverse transform, given that the number of solutions is about 39 billions, takes 39 seconds so that the firing time for $t_{rtr}$ is 39.
+The system can also be modeled so that only a value containing the number of solutions is returned from the clients, instead of returning the complete set of solutions.
+Dividing the problem into 72 pieces in DECS gives a firing time of 0.12 seconds for $t_{div}$.
+Merging the solutions in $t_{mrg}$ results in a firing time of 7.2 seconds.
+Since we model the solution of only one problem we have to place one initial token in $p_{req}$.
+
+Each of the problem pieces are 100 kilobit large and the server has a upstream bandwidth of 400 kbps (kilobit per second).
+This gives a throughput of 4 pieces per second which means that the firing time of $t_{tx}$ must be 0.25 second.
+$p_{tx}$ should have a maximum number of tokens so that it better reflects the correct bandwidth when no more HTTP GET requests are being issued by the clients.
+We choose to set the maximum limit to 4, which is the maximum number of pieces that can be send each second.
+The downstream bandwidth of the server is 2000 kbps and each of the solutions has been compressed down to 8000 kilobit.
+The rate of packets downstream will be 0.25 per second, which results in a 4 second firing time of $t_{rx}$.
+
+Each of the clients has an average round trip time (RTT) to the server of about 100 milliseconds.
+For HTTP this gives a latency of $2 \times RTT +$ the time it takes to transfer the file.
+The file transfer times has already been accounted for by $t_{tx}$ and $t_{rx}$.
+Since the RTT will usually vary a bit we use a normal distribution with a mean of 200 milliseconds ($2 \times RTT$) and a standard deviation of 20 to generate random firing times for $t_{get}$ and $t_{put}$.
+The firing time of $t_{comp}$ is a uniform distribution with a minimum of 8 minutes and a maximum of 12.
+We also put two tokens in $p_{free}$ to allow each client to retrieve two pieces of work from the server initially.
+
+
+\subsection{Results}
+
+From Figure \ref{fig:initdist} you can see that the primitive bandwidth throttling is doing its job.
+It takes about 7 seconds to distribute the initial 24 pieces\footnote{Each of the 12 clients requests 2 pieces each to begin with because they have two tokens in $p_{free}$.} from $p_{dist}$ to the clients.
+
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=0.9\textwidth]{initial_distribution.png}
+	\caption{Work distribution during the first 10 seconds}
+	\label{fig:initdist}
+\end{figure}
+
+\noindent A complete simulation in GPenSIM takes 364 steps and depending on the random timing it finishes around 67 minutes.
+Figure \ref{fig:complete_sim} shows a complete simulation which only took 63 minutes.
+You can clearly see the stages when each of the clients finish their work and request a new piece from the server.
+Another simulation shown in Figure \ref{fig:complete_sim2} with the same parameters appears to have distributed the distribute and collect operations more evenly in time.
+This would no doubt have caused less stress on the server and its bandwidth, but unfortunately it also hurts performance as it used 67 minutes in total to solve the problem.
+
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=0.85\textwidth]{complete_sim.png}
+	\caption{Complete simulation of the distribution and collection completed in 63 minutes}
+	\label{fig:complete_sim}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=0.85\textwidth]{complete_sim2.png}
+	\caption{Another simulation of the distribution and collection completed in 67 minutes}
+	\label{fig:complete_sim2}
+\end{figure}
+
+By multiplying the number of clients by 4 so that $n = 48$ one might expect the total time to solve the problem would be reduced by 75\%.
+However, as seen by Figure \ref{fig:sim-48clients} it takes about 24 minutes, which is only a 64\% reduction (relative to a 67 minute simulation with 12 clients).
+Ideally it should have taken 15 minutes, but with the increased amount of clients the limited bandwidth on the server is starting to become a bottleneck.
+The number of pieces is also a problem as there are now 1.5 pieces for each client, and as a result about half of the clients have no work to process during the last stage.
+
+\begin{figure}[tbp]
+	\centering 
+	\includegraphics[width=0.9\textwidth]{sim-48-clients.png}
+	\caption{Simulation of the distribution and collection with 48 clients}
+	\label{fig:sim-48clients}
+\end{figure}
+
+A slight optimization can be done by reducing the number of tokens in $p_{free,i}$ from 2 to 1.
+This will allow the clients who completes the first piece fastest to request a second piece and start working on it.
+This adjustment will cause the 24 slowest clients to not get any work.
+Figure \ref{fig:sim-48clients-1free} shows the result of this simulation which took about 22 $1/2$ minute.
+
+\begin{figure}[tbp]
+	\centering 
+	\includegraphics[width=0.9\textwidth]{sim-48-clients-1-free.png}
+	\caption{Simulation of the distribution and collection with 48 clients and 1 token in $p_{free,i}$}
+	\label{fig:sim-48clients-1free}
+\end{figure}
+
+
+
+\section{Testing}
+
+During the development of the DECS system several tests has been done to measure the performance of the system.
+To measure the performance of the DLX algorithm with and without the $S$ heuristic a few tests were done using the $n$-queens matrices.
+In Figure \ref{fig:heuristic-test} the number of updates is shown for $14$-queens with and without the $S$ heuristic.
+The number of updates is roughly proportional to the running time of the algorithm with the same settings ($S$ heuristic enabled or disabled).
+With the $S$ heuristic enabled the running time was 7.9 seconds and the total number of link updates was 166~103~511.
+Without the $S$ heuristic the running time was 15.6 seconds and 421~253~213 link updates in total.
+This gives about 21 million updates pr. second with the $S$ heuristic and 27 million updates pr. second without it.
+The slower speed with the $S$ heuristic is because it requires that the column sizes are maintained and that the column selection takes more time.
+Even with 22\% less updates pr. second the $S$ heuristic makes the algorithm about twice as fast for this problem.
+Figure \ref{fig:queens-test} shows how the number of updates increases with increasing values of $n$ using the $S$ heuristic.
+Solving the $15$-queens problem takes about 40 seconds and the $16$-queens takes about 5 minutes.
+
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=0.8\textwidth]{heuristic-test.pdf}
+	\caption{Number of updates with and without the $S$ heuristic for $14$-queens}
+	\label{fig:heuristic-test}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering 
+	\includegraphics[width=0.8\textwidth]{queens-test.pdf}
+	\caption{Log plot of updates with the $S$ heuristic for increasing values of $n$ in $n$-queens}
+	\label{fig:queens-test}
+\end{figure}
