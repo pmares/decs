@@ -181,7 +181,7 @@ int main(int argc, char* argv[]) {
 		cout << "\nTotal link updates: " << updates;
 	}
 	if (showProfile) {
-		cout << "\n\Node, link update and solution profile:\n";
+		cout << "\n\nNode, link update and solution profile:\n";
 		cout << "Level        Nodes               Updates             Solutions\n"; 
 		uint maxLevel = dlx_get_max_level() + 1;
 		for (uint i = 0; i < maxLevel; i++) {
