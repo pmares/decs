@@ -62,6 +62,36 @@ if(WIN32)
 	# INFO and MAN paths are not supported in Windows
 endif(WIN32)
 
+
+# CPack configuration
+INCLUDE(InstallRequiredSystemLibraries)
+
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "DECS dance solves exact cover problems using the Dancing Links algorithm.")
+SET(CPACK_PACKAGE_VENDOR "Jan Magne Tjensvold")
+SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/dance/README.txt")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING.txt")
+SET(CPACK_PACKAGE_VERSION_MAJOR DECS_VERSION_MAJOR)
+SET(CPACK_PACKAGE_VERSION_MINOR DECS_VERSION_MINOR)
+SET(CPACK_PACKAGE_VERSION_PATCH DECS_VERSION_RELEASE)
+SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
+IF(WIN32 AND NOT UNIX)
+  # There is a bug in NSI that does not handle full unix paths properly. Make
+  # sure there is at least one set of four (4) backlasshes.
+#  SET(CPACK_PACKAGE_ICON "${CMake_SOURCE_DIR}/Utilities/Release\\\\InstallIcon.bmp")
+  SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\dance.exe")
+  SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} DECS Dance")
+  SET(CPACK_NSIS_HELP_LINK "http:\\\\\\\\decs.googlecode.com")
+  SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\decs.googlecode.com")
+#  SET(CPACK_NSIS_CONTACT "me@my-personal-home-page.com")
+  SET(CPACK_NSIS_MODIFY_PATH ON)
+ELSE(WIN32 AND NOT UNIX)
+  SET(CPACK_STRIP_FILES "bin/dance")
+  SET(CPACK_SOURCE_STRIP_FILES "")
+ENDIF(WIN32 AND NOT UNIX)
+SET(CPACK_PACKAGE_EXECUTABLES "dance" "DECS dance")
+INCLUDE(CPack)
+
+
 # List the subdirectories
 add_subdirectory( decs )
 if(BUILD_UTILS)
