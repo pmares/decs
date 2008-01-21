@@ -1,0 +1,18 @@
+Source: decs-dance
+Section: utils
+Priority: optional
+Maintainer: Jan Magne Tjensvold <jtjens@gmail.com>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
+
+Package: decs-dance
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Exact cover solver using the Dancing Links algorithm
+ The Generic Distributed Exact Cover Solver (DECS) project uses
+ Internet-connected computers to solve exact cover problems. Exact cover is a
+ general type of problem which can be used to solve problems including, but not
+ limited to, n-queens, Latin Square puzzles, Sudoku, polyomino tiling, set
+ packing and set partitioning. The stand alone dance application uses a modified
+ version of Donald Knuth's Dancing Links algorithm. It also comes with the degen
+ application which can be used to create exact cover problems.
