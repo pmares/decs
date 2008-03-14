@@ -19,6 +19,7 @@
 #include <cstdio>
 
 #include "nqdecs.h"
+#include "dfileio.h"
 
 using namespace std;
 
@@ -30,17 +31,10 @@ struct ProbInfo {
 };
 
 const uint PROB_ID = 0x10;
+const uint LIB_VERSION = 2;
 
 uint queens = 2;
 bool organ = false;  // Organ pipe ordering optimization.
-
-/**
- * Write a message to stderr and exit with an exit code of 1 to indicate failure.
- */
-void panic(const char* msg) {
-	cerr << msg << endl;
-	exit(1);
-}
 
 /**
  * Set the number of queens. Returns 1 if the set operation failed.
@@ -66,13 +60,13 @@ uint nq_transform(FILE* file) {
 	if (retval != DFIO_ERR_SUCCESS)
 		return retval;
 
-	
+	DFIOMatrixHeader fh;
 	fh.cols = 6 * queens - 6;
 
 	// Write problem specific information.
 	ProbInfo pi;
 	fh.probid = PROB_ID;
-	fh.prob_off = sizeof(FileHeader);
+	fh.prob_off = sizeof(DFIOHeader);
 	pi.version = LIB_VERSION;
 	pi.queens = queens;
 	pi.oporder = organ ? 1 : 0;
@@ -134,7 +128,7 @@ uint nq_transform(FILE* file) {
 	out.seekp(0);
 	fh.rows = rows;
 	fh.elems = elems;
-	out.write(reinterpret_cast<char *>(&fh),sizeof(FileHeader));
+	out.write(reinterpret_cast<char *>(&fh),sizeof(DFIOHeader));
 	
 	return 0;
 }
