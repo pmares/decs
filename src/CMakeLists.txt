@@ -106,7 +106,7 @@ if(DECS_BUILD_UTILS)
 	add_subdirectory( degen )
 endif(DECS_BUILD_UTILS)
 
-if(DESCS_BUILD_BOINC)
+if(DECS_BUILD_BOINC)
 	add_subdirectory( bdance )
 	add_subdirectory( boinc )
 endif(DECS_BUILD_BOINC)
