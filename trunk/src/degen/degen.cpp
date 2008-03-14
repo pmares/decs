@@ -132,13 +132,13 @@ int main(int argc, char* argv[]) {
 	}
 	
 	if (forward) {  // Perform forward transformation
-		if (setQueens(queens)) {
+		if (nq_set_queens(queens)) {
 			cerr << "Failed to set library parameter 'number of queens' = " << queens << '\n';
 			usage_error();
 		}
 		
 		cout << "Generating matrix..." << '\n';
-		if (transform(file)) {
+		if (nq_transform(file)) {
 			cerr << "Unable to complete forward transform";
 			return 1;
 		}
