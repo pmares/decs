@@ -515,7 +515,7 @@ Adding line 10 to 12 in Algorithm \ref{alg:psearch} is the only changes required
 				\IF{$k \geq d$ and $h.right \neq h$}
 					\STATE Print partial solution.  \COMMENT{Prevent further recursion}
 				\ELSE
-					\STATE psearch($k + 1$)
+					\STATE psearch($k + 1, d$)
 				\ENDIF
 				\FOREACH{$j \leftarrow r.left, r.left.left, \ldots,$ \textbf{while} $j \neq r$}
 					\STATE uncover($j.column$)
