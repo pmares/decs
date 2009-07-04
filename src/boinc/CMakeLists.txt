@@ -1,5 +1,3 @@
-project( boinc )
-
 
 set(BOINC_DIR boinc)
 set(BOINC_SAMPLE_DIR boinc_samples)
@@ -209,4 +207,3 @@ endif(UNIX)
 
 
 add_library( boinc STATIC ${BOINCLIB_SOURCES} )
-

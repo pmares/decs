@@ -1,4 +1,3 @@
-project( degen )
 
 set(SOURCES 
 	degen.cpp
