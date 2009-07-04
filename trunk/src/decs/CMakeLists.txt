@@ -1,11 +1,17 @@
 project( libdecs )
 
 set(SOURCES 
+	dfileio.h
 	dfileio.cpp
+	dformat.h
 	dformat.cpp
+	dlx.h
 	dlx.cpp
+	sbcolumn.h
 	sbcolumn.cpp
+	sbmatrix.h
 	sbmatrix.cpp
+	sbnode.h
 	sbnode.cpp
 )
 
