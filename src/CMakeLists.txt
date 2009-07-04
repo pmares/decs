@@ -1,5 +1,7 @@
 project(decs)
 
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+
 # Define CMake options for DECS
 if(UNIX)
 	OPTION( DECS_PACKAGE_FHS "Package files according to the File Hierarchy Standard (FHS) used by Unix distributions" ON)
@@ -42,6 +44,12 @@ if(DECS_PACKAGE_FHS)
 	set( DATAROOT_OUTPUT_PATH share )
 	set( DATA_OUTPUT_PATH ${DATAROOT_OUTPUT_PATH}/decs-dance )
 	set( DOC_OUTPUT_PATH ${DATAROOT_OUTPUT_PATH}/doc/decs-dance )
+else(DECS_PACKAGE_FHS)
+	set( BIN_OUTPUT_PATH . )
+	set( LIB_OUTPUT_PATH . )
+	set( DATAROOT_OUTPUT_PATH . )
+	set( DATA_OUTPUT_PATH ${DATAROOT_OUTPUT_PATH} )
+	set( DOC_OUTPUT_PATH ${DATAROOT_OUTPUT_PATH} )
 endif(DECS_PACKAGE_FHS)
 
 set( INCLUDE_OUTPUT_PATH include )
