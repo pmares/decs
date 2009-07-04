@@ -2,6 +2,7 @@ project( degen )
 
 set(SOURCES 
 	degen.cpp
+	nqdecs.h
 	nqdecs.cpp
 )
 
