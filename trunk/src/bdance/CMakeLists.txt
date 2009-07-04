@@ -1,4 +1,3 @@
-project( bdance )
 
 set( SOURCES
 	bdance.cpp

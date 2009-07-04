@@ -1,4 +1,3 @@
-project( dance )
 
 set(SOURCES 
 	dance.cpp
