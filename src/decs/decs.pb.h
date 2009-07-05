@@ -29,60 +29,60 @@ void  protobuf_AddDesc_decs_2eproto();
 void protobuf_AssignDesc_decs_2eproto();
 void protobuf_ShutdownFile_decs_2eproto();
 
-class Header;
-class Header_Description;
-class Header_Description_Link;
-class Header_Description_Author;
-class Header_ElementList;
-class Header_Problem;
-class Header_Result;
+class DataFile;
+class DataFile_Description;
+class DataFile_Description_Link;
+class DataFile_Description_Author;
+class DataFile_ElementList;
+class DataFile_Problem;
+class DataFile_Result;
 
-enum Header_Problem_ResultStrategy {
-  Header_Problem_ResultStrategy_COUNT = 0,
-  Header_Problem_ResultStrategy_FULL = 1
+enum DataFile_Problem_ResultStrategy {
+  DataFile_Problem_ResultStrategy_COUNT = 0,
+  DataFile_Problem_ResultStrategy_FULL = 1
 };
-const ::google::protobuf::EnumDescriptor* Header_Problem_ResultStrategy_descriptor();
-bool Header_Problem_ResultStrategy_IsValid(int value);
-const Header_Problem_ResultStrategy Header_Problem_ResultStrategy_ResultStrategy_MIN = Header_Problem_ResultStrategy_COUNT;
-const Header_Problem_ResultStrategy Header_Problem_ResultStrategy_ResultStrategy_MAX = Header_Problem_ResultStrategy_FULL;
+const ::google::protobuf::EnumDescriptor* DataFile_Problem_ResultStrategy_descriptor();
+bool DataFile_Problem_ResultStrategy_IsValid(int value);
+const DataFile_Problem_ResultStrategy DataFile_Problem_ResultStrategy_ResultStrategy_MIN = DataFile_Problem_ResultStrategy_COUNT;
+const DataFile_Problem_ResultStrategy DataFile_Problem_ResultStrategy_ResultStrategy_MAX = DataFile_Problem_ResultStrategy_FULL;
 
-inline const ::std::string& Header_Problem_ResultStrategy_Name(Header_Problem_ResultStrategy value) {
+inline const ::std::string& DataFile_Problem_ResultStrategy_Name(DataFile_Problem_ResultStrategy value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Header_Problem_ResultStrategy_descriptor(), value);
+    DataFile_Problem_ResultStrategy_descriptor(), value);
 }
-inline bool Header_Problem_ResultStrategy_Parse(
-    const ::std::string& name, Header_Problem_ResultStrategy* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Header_Problem_ResultStrategy>(
-    Header_Problem_ResultStrategy_descriptor(), name, value);
+inline bool DataFile_Problem_ResultStrategy_Parse(
+    const ::std::string& name, DataFile_Problem_ResultStrategy* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<DataFile_Problem_ResultStrategy>(
+    DataFile_Problem_ResultStrategy_descriptor(), name, value);
 }
-enum Header_Result_ResultState {
-  Header_Result_ResultState_COMPLETE = 0,
-  Header_Result_ResultState_PARTIAL = 1
+enum DataFile_Result_ResultState {
+  DataFile_Result_ResultState_COMPLETE = 0,
+  DataFile_Result_ResultState_PARTIAL = 1
 };
-const ::google::protobuf::EnumDescriptor* Header_Result_ResultState_descriptor();
-bool Header_Result_ResultState_IsValid(int value);
-const Header_Result_ResultState Header_Result_ResultState_ResultState_MIN = Header_Result_ResultState_COMPLETE;
-const Header_Result_ResultState Header_Result_ResultState_ResultState_MAX = Header_Result_ResultState_PARTIAL;
+const ::google::protobuf::EnumDescriptor* DataFile_Result_ResultState_descriptor();
+bool DataFile_Result_ResultState_IsValid(int value);
+const DataFile_Result_ResultState DataFile_Result_ResultState_ResultState_MIN = DataFile_Result_ResultState_COMPLETE;
+const DataFile_Result_ResultState DataFile_Result_ResultState_ResultState_MAX = DataFile_Result_ResultState_PARTIAL;
 
-inline const ::std::string& Header_Result_ResultState_Name(Header_Result_ResultState value) {
+inline const ::std::string& DataFile_Result_ResultState_Name(DataFile_Result_ResultState value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Header_Result_ResultState_descriptor(), value);
+    DataFile_Result_ResultState_descriptor(), value);
 }
-inline bool Header_Result_ResultState_Parse(
-    const ::std::string& name, Header_Result_ResultState* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Header_Result_ResultState>(
-    Header_Result_ResultState_descriptor(), name, value);
+inline bool DataFile_Result_ResultState_Parse(
+    const ::std::string& name, DataFile_Result_ResultState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<DataFile_Result_ResultState>(
+    DataFile_Result_ResultState_descriptor(), name, value);
 }
 // ===================================================================
 
-class Header_Description_Link : public ::google::protobuf::Message {
+class DataFile_Description_Link : public ::google::protobuf::Message {
  public:
-  Header_Description_Link();
-  virtual ~Header_Description_Link();
+  DataFile_Description_Link();
+  virtual ~DataFile_Description_Link();
   
-  Header_Description_Link(const Header_Description_Link& from);
+  DataFile_Description_Link(const DataFile_Description_Link& from);
   
-  inline Header_Description_Link& operator=(const Header_Description_Link& from) {
+  inline DataFile_Description_Link& operator=(const DataFile_Description_Link& from) {
     CopyFrom(from);
     return *this;
   }
@@ -96,16 +96,16 @@ class Header_Description_Link : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Header_Description_Link& default_instance();
-  void Swap(Header_Description_Link* other);
+  static const DataFile_Description_Link& default_instance();
+  void Swap(DataFile_Description_Link* other);
   
   // implements Message ----------------------------------------------
   
-  Header_Description_Link* New() const;
+  DataFile_Description_Link* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Header_Description_Link& from);
-  void MergeFrom(const Header_Description_Link& from);
+  void CopyFrom(const DataFile_Description_Link& from);
+  void MergeFrom(const DataFile_Description_Link& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -174,18 +174,18 @@ class Header_Description_Link : public ::google::protobuf::Message {
   }
   
   void InitAsDefaultInstance();
-  static Header_Description_Link* default_instance_;
+  static DataFile_Description_Link* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class Header_Description_Author : public ::google::protobuf::Message {
+class DataFile_Description_Author : public ::google::protobuf::Message {
  public:
-  Header_Description_Author();
-  virtual ~Header_Description_Author();
+  DataFile_Description_Author();
+  virtual ~DataFile_Description_Author();
   
-  Header_Description_Author(const Header_Description_Author& from);
+  DataFile_Description_Author(const DataFile_Description_Author& from);
   
-  inline Header_Description_Author& operator=(const Header_Description_Author& from) {
+  inline DataFile_Description_Author& operator=(const DataFile_Description_Author& from) {
     CopyFrom(from);
     return *this;
   }
@@ -199,16 +199,16 @@ class Header_Description_Author : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Header_Description_Author& default_instance();
-  void Swap(Header_Description_Author* other);
+  static const DataFile_Description_Author& default_instance();
+  void Swap(DataFile_Description_Author* other);
   
   // implements Message ----------------------------------------------
   
-  Header_Description_Author* New() const;
+  DataFile_Description_Author* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Header_Description_Author& from);
-  void MergeFrom(const Header_Description_Author& from);
+  void CopyFrom(const DataFile_Description_Author& from);
+  void MergeFrom(const DataFile_Description_Author& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -242,15 +242,15 @@ class Header_Description_Author : public ::google::protobuf::Message {
   inline void set_name(const char* value, size_t size);
   inline ::std::string* mutable_name();
   
-  // repeated .decs.Header.Description.Link links = 2;
+  // repeated .decs.DataFile.Description.Link links = 2;
   inline int links_size() const;
   inline void clear_links();
   static const int kLinksFieldNumber = 2;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link >& links() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link >* mutable_links();
-  inline const ::decs::Header_Description_Link& links(int index) const;
-  inline ::decs::Header_Description_Link* mutable_links(int index);
-  inline ::decs::Header_Description_Link* add_links();
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >& links() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >* mutable_links();
+  inline const ::decs::DataFile_Description_Link& links(int index) const;
+  inline ::decs::DataFile_Description_Link* mutable_links(int index);
+  inline ::decs::DataFile_Description_Link* add_links();
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -258,7 +258,7 @@ class Header_Description_Author : public ::google::protobuf::Message {
   
   ::std::string* name_;
   static const ::std::string _default_name_;
-  ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link > links_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link > links_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
   friend void protobuf_ShutdownFile_decs_2eproto();
@@ -276,18 +276,18 @@ class Header_Description_Author : public ::google::protobuf::Message {
   }
   
   void InitAsDefaultInstance();
-  static Header_Description_Author* default_instance_;
+  static DataFile_Description_Author* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class Header_Description : public ::google::protobuf::Message {
+class DataFile_Description : public ::google::protobuf::Message {
  public:
-  Header_Description();
-  virtual ~Header_Description();
+  DataFile_Description();
+  virtual ~DataFile_Description();
   
-  Header_Description(const Header_Description& from);
+  DataFile_Description(const DataFile_Description& from);
   
-  inline Header_Description& operator=(const Header_Description& from) {
+  inline DataFile_Description& operator=(const DataFile_Description& from) {
     CopyFrom(from);
     return *this;
   }
@@ -301,16 +301,16 @@ class Header_Description : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Header_Description& default_instance();
-  void Swap(Header_Description* other);
+  static const DataFile_Description& default_instance();
+  void Swap(DataFile_Description* other);
   
   // implements Message ----------------------------------------------
   
-  Header_Description* New() const;
+  DataFile_Description* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Header_Description& from);
-  void MergeFrom(const Header_Description& from);
+  void CopyFrom(const DataFile_Description& from);
+  void MergeFrom(const DataFile_Description& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -332,8 +332,8 @@ class Header_Description : public ::google::protobuf::Message {
   
   // nested types ----------------------------------------------------
   
-  typedef Header_Description_Link Link;
-  typedef Header_Description_Author Author;
+  typedef DataFile_Description_Link Link;
+  typedef DataFile_Description_Author Author;
   
   // accessors -------------------------------------------------------
   
@@ -347,25 +347,25 @@ class Header_Description : public ::google::protobuf::Message {
   inline void set_description(const char* value, size_t size);
   inline ::std::string* mutable_description();
   
-  // repeated .decs.Header.Description.Link links = 2;
+  // repeated .decs.DataFile.Description.Link links = 2;
   inline int links_size() const;
   inline void clear_links();
   static const int kLinksFieldNumber = 2;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link >& links() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link >* mutable_links();
-  inline const ::decs::Header_Description_Link& links(int index) const;
-  inline ::decs::Header_Description_Link* mutable_links(int index);
-  inline ::decs::Header_Description_Link* add_links();
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >& links() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >* mutable_links();
+  inline const ::decs::DataFile_Description_Link& links(int index) const;
+  inline ::decs::DataFile_Description_Link* mutable_links(int index);
+  inline ::decs::DataFile_Description_Link* add_links();
   
-  // repeated .decs.Header.Description.Author authors = 3;
+  // repeated .decs.DataFile.Description.Author authors = 3;
   inline int authors_size() const;
   inline void clear_authors();
   static const int kAuthorsFieldNumber = 3;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Author >& authors() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Author >* mutable_authors();
-  inline const ::decs::Header_Description_Author& authors(int index) const;
-  inline ::decs::Header_Description_Author* mutable_authors(int index);
-  inline ::decs::Header_Description_Author* add_authors();
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >& authors() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >* mutable_authors();
+  inline const ::decs::DataFile_Description_Author& authors(int index) const;
+  inline ::decs::DataFile_Description_Author* mutable_authors(int index);
+  inline ::decs::DataFile_Description_Author* add_authors();
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -373,8 +373,8 @@ class Header_Description : public ::google::protobuf::Message {
   
   ::std::string* description_;
   static const ::std::string _default_description_;
-  ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link > links_;
-  ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Author > authors_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link > links_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author > authors_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
   friend void protobuf_ShutdownFile_decs_2eproto();
@@ -392,18 +392,18 @@ class Header_Description : public ::google::protobuf::Message {
   }
   
   void InitAsDefaultInstance();
-  static Header_Description* default_instance_;
+  static DataFile_Description* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class Header_ElementList : public ::google::protobuf::Message {
+class DataFile_ElementList : public ::google::protobuf::Message {
  public:
-  Header_ElementList();
-  virtual ~Header_ElementList();
+  DataFile_ElementList();
+  virtual ~DataFile_ElementList();
   
-  Header_ElementList(const Header_ElementList& from);
+  DataFile_ElementList(const DataFile_ElementList& from);
   
-  inline Header_ElementList& operator=(const Header_ElementList& from) {
+  inline DataFile_ElementList& operator=(const DataFile_ElementList& from) {
     CopyFrom(from);
     return *this;
   }
@@ -417,16 +417,16 @@ class Header_ElementList : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Header_ElementList& default_instance();
-  void Swap(Header_ElementList* other);
+  static const DataFile_ElementList& default_instance();
+  void Swap(DataFile_ElementList* other);
   
   // implements Message ----------------------------------------------
   
-  Header_ElementList* New() const;
+  DataFile_ElementList* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Header_ElementList& from);
-  void MergeFrom(const Header_ElementList& from);
+  void CopyFrom(const DataFile_ElementList& from);
+  void MergeFrom(const DataFile_ElementList& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -482,18 +482,18 @@ class Header_ElementList : public ::google::protobuf::Message {
   }
   
   void InitAsDefaultInstance();
-  static Header_ElementList* default_instance_;
+  static DataFile_ElementList* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class Header_Problem : public ::google::protobuf::Message {
+class DataFile_Problem : public ::google::protobuf::Message {
  public:
-  Header_Problem();
-  virtual ~Header_Problem();
+  DataFile_Problem();
+  virtual ~DataFile_Problem();
   
-  Header_Problem(const Header_Problem& from);
+  DataFile_Problem(const DataFile_Problem& from);
   
-  inline Header_Problem& operator=(const Header_Problem& from) {
+  inline DataFile_Problem& operator=(const DataFile_Problem& from) {
     CopyFrom(from);
     return *this;
   }
@@ -507,16 +507,16 @@ class Header_Problem : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Header_Problem& default_instance();
-  void Swap(Header_Problem* other);
+  static const DataFile_Problem& default_instance();
+  void Swap(DataFile_Problem* other);
   
   // implements Message ----------------------------------------------
   
-  Header_Problem* New() const;
+  DataFile_Problem* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Header_Problem& from);
-  void MergeFrom(const Header_Problem& from);
+  void CopyFrom(const DataFile_Problem& from);
+  void MergeFrom(const DataFile_Problem& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -538,36 +538,36 @@ class Header_Problem : public ::google::protobuf::Message {
   
   // nested types ----------------------------------------------------
   
-  typedef Header_Problem_ResultStrategy ResultStrategy;
-  static const ResultStrategy COUNT = Header_Problem_ResultStrategy_COUNT;
-  static const ResultStrategy FULL = Header_Problem_ResultStrategy_FULL;
+  typedef DataFile_Problem_ResultStrategy ResultStrategy;
+  static const ResultStrategy COUNT = DataFile_Problem_ResultStrategy_COUNT;
+  static const ResultStrategy FULL = DataFile_Problem_ResultStrategy_FULL;
   static inline const ::google::protobuf::EnumDescriptor*
   ResultStrategy_descriptor() {
-    return Header_Problem_ResultStrategy_descriptor();
+    return DataFile_Problem_ResultStrategy_descriptor();
   }
   static inline bool ResultStrategy_IsValid(int value) {
-    return Header_Problem_ResultStrategy_IsValid(value);
+    return DataFile_Problem_ResultStrategy_IsValid(value);
   }
   static inline const ::std::string& ResultStrategy_Name(ResultStrategy value) {
-    return Header_Problem_ResultStrategy_Name(value);
+    return DataFile_Problem_ResultStrategy_Name(value);
   }
   static inline bool ResultStrategy_Parse(const ::std::string& name,
       ResultStrategy* value) {
-    return Header_Problem_ResultStrategy_Parse(name, value);
+    return DataFile_Problem_ResultStrategy_Parse(name, value);
   }
   static const ResultStrategy ResultStrategy_MIN =
-    Header_Problem_ResultStrategy_ResultStrategy_MIN;
+    DataFile_Problem_ResultStrategy_ResultStrategy_MIN;
   static const ResultStrategy ResultStrategy_MAX =
-    Header_Problem_ResultStrategy_ResultStrategy_MAX;
+    DataFile_Problem_ResultStrategy_ResultStrategy_MAX;
   
   // accessors -------------------------------------------------------
   
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   inline bool has_description() const;
   inline void clear_description();
   static const int kDescriptionFieldNumber = 1;
-  inline const ::decs::Header_Description& description() const;
-  inline ::decs::Header_Description* mutable_description();
+  inline const ::decs::DataFile_Description& description() const;
+  inline ::decs::DataFile_Description* mutable_description();
   
   // optional uint32 problem_id = 2;
   inline bool has_problem_id() const;
@@ -597,15 +597,15 @@ class Header_Problem : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 element_count() const;
   inline void set_element_count(::google::protobuf::uint32 value);
   
-  // repeated .decs.Header.ElementList rows = 6;
+  // repeated .decs.DataFile.ElementList rows = 6;
   inline int rows_size() const;
   inline void clear_rows();
   static const int kRowsFieldNumber = 6;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList >& rows() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList >* mutable_rows();
-  inline const ::decs::Header_ElementList& rows(int index) const;
-  inline ::decs::Header_ElementList* mutable_rows(int index);
-  inline ::decs::Header_ElementList* add_rows();
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >& rows() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >* mutable_rows();
+  inline const ::decs::DataFile_ElementList& rows(int index) const;
+  inline ::decs::DataFile_ElementList* mutable_rows(int index);
+  inline ::decs::DataFile_ElementList* add_rows();
   
   // repeated uint32 secondary_columns = 7;
   inline int secondary_columns_size() const;
@@ -627,23 +627,23 @@ class Header_Problem : public ::google::protobuf::Message {
   inline void set_init_vector(int index, ::google::protobuf::uint32 value);
   inline void add_init_vector(::google::protobuf::uint32 value);
   
-  // optional .decs.Header.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
+  // optional .decs.DataFile.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
   inline bool has_result_strategy() const;
   inline void clear_result_strategy();
   static const int kResultStrategyFieldNumber = 9;
-  inline ::decs::Header_Problem_ResultStrategy result_strategy() const;
-  inline void set_result_strategy(::decs::Header_Problem_ResultStrategy value);
+  inline ::decs::DataFile_Problem_ResultStrategy result_strategy() const;
+  inline void set_result_strategy(::decs::DataFile_Problem_ResultStrategy value);
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
-  ::decs::Header_Description* description_;
+  ::decs::DataFile_Description* description_;
   ::google::protobuf::uint32 problem_id_;
   ::google::protobuf::uint32 sub_problem_id_;
   ::google::protobuf::uint32 column_count_;
   ::google::protobuf::uint32 element_count_;
-  ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList > rows_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList > rows_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > secondary_columns_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > init_vector_;
   int result_strategy_;
@@ -664,18 +664,18 @@ class Header_Problem : public ::google::protobuf::Message {
   }
   
   void InitAsDefaultInstance();
-  static Header_Problem* default_instance_;
+  static DataFile_Problem* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class Header_Result : public ::google::protobuf::Message {
+class DataFile_Result : public ::google::protobuf::Message {
  public:
-  Header_Result();
-  virtual ~Header_Result();
+  DataFile_Result();
+  virtual ~DataFile_Result();
   
-  Header_Result(const Header_Result& from);
+  DataFile_Result(const DataFile_Result& from);
   
-  inline Header_Result& operator=(const Header_Result& from) {
+  inline DataFile_Result& operator=(const DataFile_Result& from) {
     CopyFrom(from);
     return *this;
   }
@@ -689,16 +689,16 @@ class Header_Result : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Header_Result& default_instance();
-  void Swap(Header_Result* other);
+  static const DataFile_Result& default_instance();
+  void Swap(DataFile_Result* other);
   
   // implements Message ----------------------------------------------
   
-  Header_Result* New() const;
+  DataFile_Result* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Header_Result& from);
-  void MergeFrom(const Header_Result& from);
+  void CopyFrom(const DataFile_Result& from);
+  void MergeFrom(const DataFile_Result& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -720,36 +720,36 @@ class Header_Result : public ::google::protobuf::Message {
   
   // nested types ----------------------------------------------------
   
-  typedef Header_Result_ResultState ResultState;
-  static const ResultState COMPLETE = Header_Result_ResultState_COMPLETE;
-  static const ResultState PARTIAL = Header_Result_ResultState_PARTIAL;
+  typedef DataFile_Result_ResultState ResultState;
+  static const ResultState COMPLETE = DataFile_Result_ResultState_COMPLETE;
+  static const ResultState PARTIAL = DataFile_Result_ResultState_PARTIAL;
   static inline const ::google::protobuf::EnumDescriptor*
   ResultState_descriptor() {
-    return Header_Result_ResultState_descriptor();
+    return DataFile_Result_ResultState_descriptor();
   }
   static inline bool ResultState_IsValid(int value) {
-    return Header_Result_ResultState_IsValid(value);
+    return DataFile_Result_ResultState_IsValid(value);
   }
   static inline const ::std::string& ResultState_Name(ResultState value) {
-    return Header_Result_ResultState_Name(value);
+    return DataFile_Result_ResultState_Name(value);
   }
   static inline bool ResultState_Parse(const ::std::string& name,
       ResultState* value) {
-    return Header_Result_ResultState_Parse(name, value);
+    return DataFile_Result_ResultState_Parse(name, value);
   }
   static const ResultState ResultState_MIN =
-    Header_Result_ResultState_ResultState_MIN;
+    DataFile_Result_ResultState_ResultState_MIN;
   static const ResultState ResultState_MAX =
-    Header_Result_ResultState_ResultState_MAX;
+    DataFile_Result_ResultState_ResultState_MAX;
   
   // accessors -------------------------------------------------------
   
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   inline bool has_description() const;
   inline void clear_description();
   static const int kDescriptionFieldNumber = 1;
-  inline const ::decs::Header_Description& description() const;
-  inline ::decs::Header_Description* mutable_description();
+  inline const ::decs::DataFile_Description& description() const;
+  inline ::decs::DataFile_Description* mutable_description();
   
   // optional uint32 problem_id = 2;
   inline bool has_problem_id() const;
@@ -772,32 +772,32 @@ class Header_Result : public ::google::protobuf::Message {
   inline ::google::protobuf::uint64 solution_count() const;
   inline void set_solution_count(::google::protobuf::uint64 value);
   
-  // repeated .decs.Header.ElementList solutions = 5;
+  // repeated .decs.DataFile.ElementList solutions = 5;
   inline int solutions_size() const;
   inline void clear_solutions();
   static const int kSolutionsFieldNumber = 5;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList >& solutions() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList >* mutable_solutions();
-  inline const ::decs::Header_ElementList& solutions(int index) const;
-  inline ::decs::Header_ElementList* mutable_solutions(int index);
-  inline ::decs::Header_ElementList* add_solutions();
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >& solutions() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >* mutable_solutions();
+  inline const ::decs::DataFile_ElementList& solutions(int index) const;
+  inline ::decs::DataFile_ElementList* mutable_solutions(int index);
+  inline ::decs::DataFile_ElementList* add_solutions();
   
-  // optional .decs.Header.Result.ResultState state = 6 [default = COMPLETE];
+  // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 6;
-  inline ::decs::Header_Result_ResultState state() const;
-  inline void set_state(::decs::Header_Result_ResultState value);
+  inline ::decs::DataFile_Result_ResultState state() const;
+  inline void set_state(::decs::DataFile_Result_ResultState value);
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
-  ::decs::Header_Description* description_;
+  ::decs::DataFile_Description* description_;
   ::google::protobuf::uint32 problem_id_;
   ::google::protobuf::uint32 sub_problem_id_;
   ::google::protobuf::uint64 solution_count_;
-  ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList > solutions_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList > solutions_;
   int state_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
@@ -816,18 +816,18 @@ class Header_Result : public ::google::protobuf::Message {
   }
   
   void InitAsDefaultInstance();
-  static Header_Result* default_instance_;
+  static DataFile_Result* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class Header : public ::google::protobuf::Message {
+class DataFile : public ::google::protobuf::Message {
  public:
-  Header();
-  virtual ~Header();
+  DataFile();
+  virtual ~DataFile();
   
-  Header(const Header& from);
+  DataFile(const DataFile& from);
   
-  inline Header& operator=(const Header& from) {
+  inline DataFile& operator=(const DataFile& from) {
     CopyFrom(from);
     return *this;
   }
@@ -841,16 +841,16 @@ class Header : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Header& default_instance();
-  void Swap(Header* other);
+  static const DataFile& default_instance();
+  void Swap(DataFile* other);
   
   // implements Message ----------------------------------------------
   
-  Header* New() const;
+  DataFile* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Header& from);
-  void MergeFrom(const Header& from);
+  void CopyFrom(const DataFile& from);
+  void MergeFrom(const DataFile& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -872,47 +872,47 @@ class Header : public ::google::protobuf::Message {
   
   // nested types ----------------------------------------------------
   
-  typedef Header_Description Description;
-  typedef Header_ElementList ElementList;
-  typedef Header_Problem Problem;
-  typedef Header_Result Result;
+  typedef DataFile_Description Description;
+  typedef DataFile_ElementList ElementList;
+  typedef DataFile_Problem Problem;
+  typedef DataFile_Result Result;
   
   // accessors -------------------------------------------------------
   
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   inline bool has_description() const;
   inline void clear_description();
   static const int kDescriptionFieldNumber = 1;
-  inline const ::decs::Header_Description& description() const;
-  inline ::decs::Header_Description* mutable_description();
+  inline const ::decs::DataFile_Description& description() const;
+  inline ::decs::DataFile_Description* mutable_description();
   
-  // repeated .decs.Header.Problem problems = 2;
+  // repeated .decs.DataFile.Problem problems = 2;
   inline int problems_size() const;
   inline void clear_problems();
   static const int kProblemsFieldNumber = 2;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Problem >& problems() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Problem >* mutable_problems();
-  inline const ::decs::Header_Problem& problems(int index) const;
-  inline ::decs::Header_Problem* mutable_problems(int index);
-  inline ::decs::Header_Problem* add_problems();
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >& problems() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >* mutable_problems();
+  inline const ::decs::DataFile_Problem& problems(int index) const;
+  inline ::decs::DataFile_Problem* mutable_problems(int index);
+  inline ::decs::DataFile_Problem* add_problems();
   
-  // repeated .decs.Header.Result results = 3;
+  // repeated .decs.DataFile.Result results = 3;
   inline int results_size() const;
   inline void clear_results();
   static const int kResultsFieldNumber = 3;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Result >& results() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Result >* mutable_results();
-  inline const ::decs::Header_Result& results(int index) const;
-  inline ::decs::Header_Result* mutable_results(int index);
-  inline ::decs::Header_Result* add_results();
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >& results() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >* mutable_results();
+  inline const ::decs::DataFile_Result& results(int index) const;
+  inline ::decs::DataFile_Result* mutable_results(int index);
+  inline ::decs::DataFile_Result* add_results();
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
-  ::decs::Header_Description* description_;
-  ::google::protobuf::RepeatedPtrField< ::decs::Header_Problem > problems_;
-  ::google::protobuf::RepeatedPtrField< ::decs::Header_Result > results_;
+  ::decs::DataFile_Description* description_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem > problems_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result > results_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
   friend void protobuf_ShutdownFile_decs_2eproto();
@@ -930,7 +930,7 @@ class Header : public ::google::protobuf::Message {
   }
   
   void InitAsDefaultInstance();
-  static Header* default_instance_;
+  static DataFile* default_instance_;
 };
 // ===================================================================
 
@@ -940,43 +940,43 @@ class Header : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// Header_Description_Link
+// DataFile_Description_Link
 
 // required string url = 1;
-inline bool Header_Description_Link::has_url() const {
+inline bool DataFile_Description_Link::has_url() const {
   return _has_bit(0);
 }
-inline void Header_Description_Link::clear_url() {
+inline void DataFile_Description_Link::clear_url() {
   if (url_ != &_default_url_) {
     url_->clear();
   }
   _clear_bit(0);
 }
-inline const ::std::string& Header_Description_Link::url() const {
+inline const ::std::string& DataFile_Description_Link::url() const {
   return *url_;
 }
-inline void Header_Description_Link::set_url(const ::std::string& value) {
+inline void DataFile_Description_Link::set_url(const ::std::string& value) {
   _set_bit(0);
   if (url_ == &_default_url_) {
     url_ = new ::std::string;
   }
   url_->assign(value);
 }
-inline void Header_Description_Link::set_url(const char* value) {
+inline void DataFile_Description_Link::set_url(const char* value) {
   _set_bit(0);
   if (url_ == &_default_url_) {
     url_ = new ::std::string;
   }
   url_->assign(value);
 }
-inline void Header_Description_Link::set_url(const char* value, size_t size) {
+inline void DataFile_Description_Link::set_url(const char* value, size_t size) {
   _set_bit(0);
   if (url_ == &_default_url_) {
     url_ = new ::std::string;
   }
   url_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Header_Description_Link::mutable_url() {
+inline ::std::string* DataFile_Description_Link::mutable_url() {
   _set_bit(0);
   if (url_ == &_default_url_) {
     url_ = new ::std::string;
@@ -985,40 +985,40 @@ inline ::std::string* Header_Description_Link::mutable_url() {
 }
 
 // optional string description = 2;
-inline bool Header_Description_Link::has_description() const {
+inline bool DataFile_Description_Link::has_description() const {
   return _has_bit(1);
 }
-inline void Header_Description_Link::clear_description() {
+inline void DataFile_Description_Link::clear_description() {
   if (description_ != &_default_description_) {
     description_->clear();
   }
   _clear_bit(1);
 }
-inline const ::std::string& Header_Description_Link::description() const {
+inline const ::std::string& DataFile_Description_Link::description() const {
   return *description_;
 }
-inline void Header_Description_Link::set_description(const ::std::string& value) {
+inline void DataFile_Description_Link::set_description(const ::std::string& value) {
   _set_bit(1);
   if (description_ == &_default_description_) {
     description_ = new ::std::string;
   }
   description_->assign(value);
 }
-inline void Header_Description_Link::set_description(const char* value) {
+inline void DataFile_Description_Link::set_description(const char* value) {
   _set_bit(1);
   if (description_ == &_default_description_) {
     description_ = new ::std::string;
   }
   description_->assign(value);
 }
-inline void Header_Description_Link::set_description(const char* value, size_t size) {
+inline void DataFile_Description_Link::set_description(const char* value, size_t size) {
   _set_bit(1);
   if (description_ == &_default_description_) {
     description_ = new ::std::string;
   }
   description_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Header_Description_Link::mutable_description() {
+inline ::std::string* DataFile_Description_Link::mutable_description() {
   _set_bit(1);
   if (description_ == &_default_description_) {
     description_ = new ::std::string;
@@ -1028,43 +1028,43 @@ inline ::std::string* Header_Description_Link::mutable_description() {
 
 // -------------------------------------------------------------------
 
-// Header_Description_Author
+// DataFile_Description_Author
 
 // required string name = 1;
-inline bool Header_Description_Author::has_name() const {
+inline bool DataFile_Description_Author::has_name() const {
   return _has_bit(0);
 }
-inline void Header_Description_Author::clear_name() {
+inline void DataFile_Description_Author::clear_name() {
   if (name_ != &_default_name_) {
     name_->clear();
   }
   _clear_bit(0);
 }
-inline const ::std::string& Header_Description_Author::name() const {
+inline const ::std::string& DataFile_Description_Author::name() const {
   return *name_;
 }
-inline void Header_Description_Author::set_name(const ::std::string& value) {
+inline void DataFile_Description_Author::set_name(const ::std::string& value) {
   _set_bit(0);
   if (name_ == &_default_name_) {
     name_ = new ::std::string;
   }
   name_->assign(value);
 }
-inline void Header_Description_Author::set_name(const char* value) {
+inline void DataFile_Description_Author::set_name(const char* value) {
   _set_bit(0);
   if (name_ == &_default_name_) {
     name_ = new ::std::string;
   }
   name_->assign(value);
 }
-inline void Header_Description_Author::set_name(const char* value, size_t size) {
+inline void DataFile_Description_Author::set_name(const char* value, size_t size) {
   _set_bit(0);
   if (name_ == &_default_name_) {
     name_ = new ::std::string;
   }
   name_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Header_Description_Author::mutable_name() {
+inline ::std::string* DataFile_Description_Author::mutable_name() {
   _set_bit(0);
   if (name_ == &_default_name_) {
     name_ = new ::std::string;
@@ -1072,70 +1072,70 @@ inline ::std::string* Header_Description_Author::mutable_name() {
   return name_;
 }
 
-// repeated .decs.Header.Description.Link links = 2;
-inline int Header_Description_Author::links_size() const {
+// repeated .decs.DataFile.Description.Link links = 2;
+inline int DataFile_Description_Author::links_size() const {
   return links_.size();
 }
-inline void Header_Description_Author::clear_links() {
+inline void DataFile_Description_Author::clear_links() {
   links_.Clear();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link >&
-Header_Description_Author::links() const {
+inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >&
+DataFile_Description_Author::links() const {
   return links_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link >*
-Header_Description_Author::mutable_links() {
+inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >*
+DataFile_Description_Author::mutable_links() {
   return &links_;
 }
-inline const ::decs::Header_Description_Link& Header_Description_Author::links(int index) const {
+inline const ::decs::DataFile_Description_Link& DataFile_Description_Author::links(int index) const {
   return links_.Get(index);
 }
-inline ::decs::Header_Description_Link* Header_Description_Author::mutable_links(int index) {
+inline ::decs::DataFile_Description_Link* DataFile_Description_Author::mutable_links(int index) {
   return links_.Mutable(index);
 }
-inline ::decs::Header_Description_Link* Header_Description_Author::add_links() {
+inline ::decs::DataFile_Description_Link* DataFile_Description_Author::add_links() {
   return links_.Add();
 }
 
 // -------------------------------------------------------------------
 
-// Header_Description
+// DataFile_Description
 
 // optional string description = 1;
-inline bool Header_Description::has_description() const {
+inline bool DataFile_Description::has_description() const {
   return _has_bit(0);
 }
-inline void Header_Description::clear_description() {
+inline void DataFile_Description::clear_description() {
   if (description_ != &_default_description_) {
     description_->clear();
   }
   _clear_bit(0);
 }
-inline const ::std::string& Header_Description::description() const {
+inline const ::std::string& DataFile_Description::description() const {
   return *description_;
 }
-inline void Header_Description::set_description(const ::std::string& value) {
+inline void DataFile_Description::set_description(const ::std::string& value) {
   _set_bit(0);
   if (description_ == &_default_description_) {
     description_ = new ::std::string;
   }
   description_->assign(value);
 }
-inline void Header_Description::set_description(const char* value) {
+inline void DataFile_Description::set_description(const char* value) {
   _set_bit(0);
   if (description_ == &_default_description_) {
     description_ = new ::std::string;
   }
   description_->assign(value);
 }
-inline void Header_Description::set_description(const char* value, size_t size) {
+inline void DataFile_Description::set_description(const char* value, size_t size) {
   _set_bit(0);
   if (description_ == &_default_description_) {
     description_ = new ::std::string;
   }
   description_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* Header_Description::mutable_description() {
+inline ::std::string* DataFile_Description::mutable_description() {
   _set_bit(0);
   if (description_ == &_default_description_) {
     description_ = new ::std::string;
@@ -1143,441 +1143,441 @@ inline ::std::string* Header_Description::mutable_description() {
   return description_;
 }
 
-// repeated .decs.Header.Description.Link links = 2;
-inline int Header_Description::links_size() const {
+// repeated .decs.DataFile.Description.Link links = 2;
+inline int DataFile_Description::links_size() const {
   return links_.size();
 }
-inline void Header_Description::clear_links() {
+inline void DataFile_Description::clear_links() {
   links_.Clear();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link >&
-Header_Description::links() const {
+inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >&
+DataFile_Description::links() const {
   return links_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Link >*
-Header_Description::mutable_links() {
+inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >*
+DataFile_Description::mutable_links() {
   return &links_;
 }
-inline const ::decs::Header_Description_Link& Header_Description::links(int index) const {
+inline const ::decs::DataFile_Description_Link& DataFile_Description::links(int index) const {
   return links_.Get(index);
 }
-inline ::decs::Header_Description_Link* Header_Description::mutable_links(int index) {
+inline ::decs::DataFile_Description_Link* DataFile_Description::mutable_links(int index) {
   return links_.Mutable(index);
 }
-inline ::decs::Header_Description_Link* Header_Description::add_links() {
+inline ::decs::DataFile_Description_Link* DataFile_Description::add_links() {
   return links_.Add();
 }
 
-// repeated .decs.Header.Description.Author authors = 3;
-inline int Header_Description::authors_size() const {
+// repeated .decs.DataFile.Description.Author authors = 3;
+inline int DataFile_Description::authors_size() const {
   return authors_.size();
 }
-inline void Header_Description::clear_authors() {
+inline void DataFile_Description::clear_authors() {
   authors_.Clear();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Author >&
-Header_Description::authors() const {
+inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >&
+DataFile_Description::authors() const {
   return authors_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Description_Author >*
-Header_Description::mutable_authors() {
+inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >*
+DataFile_Description::mutable_authors() {
   return &authors_;
 }
-inline const ::decs::Header_Description_Author& Header_Description::authors(int index) const {
+inline const ::decs::DataFile_Description_Author& DataFile_Description::authors(int index) const {
   return authors_.Get(index);
 }
-inline ::decs::Header_Description_Author* Header_Description::mutable_authors(int index) {
+inline ::decs::DataFile_Description_Author* DataFile_Description::mutable_authors(int index) {
   return authors_.Mutable(index);
 }
-inline ::decs::Header_Description_Author* Header_Description::add_authors() {
+inline ::decs::DataFile_Description_Author* DataFile_Description::add_authors() {
   return authors_.Add();
 }
 
 // -------------------------------------------------------------------
 
-// Header_ElementList
+// DataFile_ElementList
 
 // repeated uint32 elements = 1;
-inline int Header_ElementList::elements_size() const {
+inline int DataFile_ElementList::elements_size() const {
   return elements_.size();
 }
-inline void Header_ElementList::clear_elements() {
+inline void DataFile_ElementList::clear_elements() {
   elements_.Clear();
 }
 inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
-Header_ElementList::elements() const {
+DataFile_ElementList::elements() const {
   return elements_;
 }
 inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
-Header_ElementList::mutable_elements() {
+DataFile_ElementList::mutable_elements() {
   return &elements_;
 }
-inline ::google::protobuf::uint32 Header_ElementList::elements(int index) const {
+inline ::google::protobuf::uint32 DataFile_ElementList::elements(int index) const {
   return elements_.Get(index);
 }
-inline void Header_ElementList::set_elements(int index, ::google::protobuf::uint32 value) {
+inline void DataFile_ElementList::set_elements(int index, ::google::protobuf::uint32 value) {
   elements_.Set(index, value);
 }
-inline void Header_ElementList::add_elements(::google::protobuf::uint32 value) {
+inline void DataFile_ElementList::add_elements(::google::protobuf::uint32 value) {
   elements_.Add(value);
 }
 
 // -------------------------------------------------------------------
 
-// Header_Problem
+// DataFile_Problem
 
-// optional .decs.Header.Description description = 1;
-inline bool Header_Problem::has_description() const {
+// optional .decs.DataFile.Description description = 1;
+inline bool DataFile_Problem::has_description() const {
   return _has_bit(0);
 }
-inline void Header_Problem::clear_description() {
-  if (description_ != NULL) description_->::decs::Header_Description::Clear();
+inline void DataFile_Problem::clear_description() {
+  if (description_ != NULL) description_->::decs::DataFile_Description::Clear();
   _clear_bit(0);
 }
-inline const ::decs::Header_Description& Header_Problem::description() const {
+inline const ::decs::DataFile_Description& DataFile_Problem::description() const {
   return description_ != NULL ? *description_ : *default_instance_->description_;
 }
-inline ::decs::Header_Description* Header_Problem::mutable_description() {
+inline ::decs::DataFile_Description* DataFile_Problem::mutable_description() {
   _set_bit(0);
-  if (description_ == NULL) description_ = new ::decs::Header_Description;
+  if (description_ == NULL) description_ = new ::decs::DataFile_Description;
   return description_;
 }
 
 // optional uint32 problem_id = 2;
-inline bool Header_Problem::has_problem_id() const {
+inline bool DataFile_Problem::has_problem_id() const {
   return _has_bit(1);
 }
-inline void Header_Problem::clear_problem_id() {
+inline void DataFile_Problem::clear_problem_id() {
   problem_id_ = 0u;
   _clear_bit(1);
 }
-inline ::google::protobuf::uint32 Header_Problem::problem_id() const {
+inline ::google::protobuf::uint32 DataFile_Problem::problem_id() const {
   return problem_id_;
 }
-inline void Header_Problem::set_problem_id(::google::protobuf::uint32 value) {
+inline void DataFile_Problem::set_problem_id(::google::protobuf::uint32 value) {
   _set_bit(1);
   problem_id_ = value;
 }
 
 // optional uint32 sub_problem_id = 3;
-inline bool Header_Problem::has_sub_problem_id() const {
+inline bool DataFile_Problem::has_sub_problem_id() const {
   return _has_bit(2);
 }
-inline void Header_Problem::clear_sub_problem_id() {
+inline void DataFile_Problem::clear_sub_problem_id() {
   sub_problem_id_ = 0u;
   _clear_bit(2);
 }
-inline ::google::protobuf::uint32 Header_Problem::sub_problem_id() const {
+inline ::google::protobuf::uint32 DataFile_Problem::sub_problem_id() const {
   return sub_problem_id_;
 }
-inline void Header_Problem::set_sub_problem_id(::google::protobuf::uint32 value) {
+inline void DataFile_Problem::set_sub_problem_id(::google::protobuf::uint32 value) {
   _set_bit(2);
   sub_problem_id_ = value;
 }
 
 // required uint32 column_count = 4;
-inline bool Header_Problem::has_column_count() const {
+inline bool DataFile_Problem::has_column_count() const {
   return _has_bit(3);
 }
-inline void Header_Problem::clear_column_count() {
+inline void DataFile_Problem::clear_column_count() {
   column_count_ = 0u;
   _clear_bit(3);
 }
-inline ::google::protobuf::uint32 Header_Problem::column_count() const {
+inline ::google::protobuf::uint32 DataFile_Problem::column_count() const {
   return column_count_;
 }
-inline void Header_Problem::set_column_count(::google::protobuf::uint32 value) {
+inline void DataFile_Problem::set_column_count(::google::protobuf::uint32 value) {
   _set_bit(3);
   column_count_ = value;
 }
 
 // required uint32 element_count = 5;
-inline bool Header_Problem::has_element_count() const {
+inline bool DataFile_Problem::has_element_count() const {
   return _has_bit(4);
 }
-inline void Header_Problem::clear_element_count() {
+inline void DataFile_Problem::clear_element_count() {
   element_count_ = 0u;
   _clear_bit(4);
 }
-inline ::google::protobuf::uint32 Header_Problem::element_count() const {
+inline ::google::protobuf::uint32 DataFile_Problem::element_count() const {
   return element_count_;
 }
-inline void Header_Problem::set_element_count(::google::protobuf::uint32 value) {
+inline void DataFile_Problem::set_element_count(::google::protobuf::uint32 value) {
   _set_bit(4);
   element_count_ = value;
 }
 
-// repeated .decs.Header.ElementList rows = 6;
-inline int Header_Problem::rows_size() const {
+// repeated .decs.DataFile.ElementList rows = 6;
+inline int DataFile_Problem::rows_size() const {
   return rows_.size();
 }
-inline void Header_Problem::clear_rows() {
+inline void DataFile_Problem::clear_rows() {
   rows_.Clear();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList >&
-Header_Problem::rows() const {
+inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >&
+DataFile_Problem::rows() const {
   return rows_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList >*
-Header_Problem::mutable_rows() {
+inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >*
+DataFile_Problem::mutable_rows() {
   return &rows_;
 }
-inline const ::decs::Header_ElementList& Header_Problem::rows(int index) const {
+inline const ::decs::DataFile_ElementList& DataFile_Problem::rows(int index) const {
   return rows_.Get(index);
 }
-inline ::decs::Header_ElementList* Header_Problem::mutable_rows(int index) {
+inline ::decs::DataFile_ElementList* DataFile_Problem::mutable_rows(int index) {
   return rows_.Mutable(index);
 }
-inline ::decs::Header_ElementList* Header_Problem::add_rows() {
+inline ::decs::DataFile_ElementList* DataFile_Problem::add_rows() {
   return rows_.Add();
 }
 
 // repeated uint32 secondary_columns = 7;
-inline int Header_Problem::secondary_columns_size() const {
+inline int DataFile_Problem::secondary_columns_size() const {
   return secondary_columns_.size();
 }
-inline void Header_Problem::clear_secondary_columns() {
+inline void DataFile_Problem::clear_secondary_columns() {
   secondary_columns_.Clear();
 }
 inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
-Header_Problem::secondary_columns() const {
+DataFile_Problem::secondary_columns() const {
   return secondary_columns_;
 }
 inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
-Header_Problem::mutable_secondary_columns() {
+DataFile_Problem::mutable_secondary_columns() {
   return &secondary_columns_;
 }
-inline ::google::protobuf::uint32 Header_Problem::secondary_columns(int index) const {
+inline ::google::protobuf::uint32 DataFile_Problem::secondary_columns(int index) const {
   return secondary_columns_.Get(index);
 }
-inline void Header_Problem::set_secondary_columns(int index, ::google::protobuf::uint32 value) {
+inline void DataFile_Problem::set_secondary_columns(int index, ::google::protobuf::uint32 value) {
   secondary_columns_.Set(index, value);
 }
-inline void Header_Problem::add_secondary_columns(::google::protobuf::uint32 value) {
+inline void DataFile_Problem::add_secondary_columns(::google::protobuf::uint32 value) {
   secondary_columns_.Add(value);
 }
 
 // repeated uint32 init_vector = 8;
-inline int Header_Problem::init_vector_size() const {
+inline int DataFile_Problem::init_vector_size() const {
   return init_vector_.size();
 }
-inline void Header_Problem::clear_init_vector() {
+inline void DataFile_Problem::clear_init_vector() {
   init_vector_.Clear();
 }
 inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
-Header_Problem::init_vector() const {
+DataFile_Problem::init_vector() const {
   return init_vector_;
 }
 inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
-Header_Problem::mutable_init_vector() {
+DataFile_Problem::mutable_init_vector() {
   return &init_vector_;
 }
-inline ::google::protobuf::uint32 Header_Problem::init_vector(int index) const {
+inline ::google::protobuf::uint32 DataFile_Problem::init_vector(int index) const {
   return init_vector_.Get(index);
 }
-inline void Header_Problem::set_init_vector(int index, ::google::protobuf::uint32 value) {
+inline void DataFile_Problem::set_init_vector(int index, ::google::protobuf::uint32 value) {
   init_vector_.Set(index, value);
 }
-inline void Header_Problem::add_init_vector(::google::protobuf::uint32 value) {
+inline void DataFile_Problem::add_init_vector(::google::protobuf::uint32 value) {
   init_vector_.Add(value);
 }
 
-// optional .decs.Header.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
-inline bool Header_Problem::has_result_strategy() const {
+// optional .decs.DataFile.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
+inline bool DataFile_Problem::has_result_strategy() const {
   return _has_bit(8);
 }
-inline void Header_Problem::clear_result_strategy() {
+inline void DataFile_Problem::clear_result_strategy() {
   result_strategy_ = 0;
   _clear_bit(8);
 }
-inline ::decs::Header_Problem_ResultStrategy Header_Problem::result_strategy() const {
-  return static_cast< ::decs::Header_Problem_ResultStrategy >(result_strategy_);
+inline ::decs::DataFile_Problem_ResultStrategy DataFile_Problem::result_strategy() const {
+  return static_cast< ::decs::DataFile_Problem_ResultStrategy >(result_strategy_);
 }
-inline void Header_Problem::set_result_strategy(::decs::Header_Problem_ResultStrategy value) {
-  GOOGLE_DCHECK(::decs::Header_Problem_ResultStrategy_IsValid(value));
+inline void DataFile_Problem::set_result_strategy(::decs::DataFile_Problem_ResultStrategy value) {
+  GOOGLE_DCHECK(::decs::DataFile_Problem_ResultStrategy_IsValid(value));
   _set_bit(8);
   result_strategy_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// Header_Result
+// DataFile_Result
 
-// optional .decs.Header.Description description = 1;
-inline bool Header_Result::has_description() const {
+// optional .decs.DataFile.Description description = 1;
+inline bool DataFile_Result::has_description() const {
   return _has_bit(0);
 }
-inline void Header_Result::clear_description() {
-  if (description_ != NULL) description_->::decs::Header_Description::Clear();
+inline void DataFile_Result::clear_description() {
+  if (description_ != NULL) description_->::decs::DataFile_Description::Clear();
   _clear_bit(0);
 }
-inline const ::decs::Header_Description& Header_Result::description() const {
+inline const ::decs::DataFile_Description& DataFile_Result::description() const {
   return description_ != NULL ? *description_ : *default_instance_->description_;
 }
-inline ::decs::Header_Description* Header_Result::mutable_description() {
+inline ::decs::DataFile_Description* DataFile_Result::mutable_description() {
   _set_bit(0);
-  if (description_ == NULL) description_ = new ::decs::Header_Description;
+  if (description_ == NULL) description_ = new ::decs::DataFile_Description;
   return description_;
 }
 
 // optional uint32 problem_id = 2;
-inline bool Header_Result::has_problem_id() const {
+inline bool DataFile_Result::has_problem_id() const {
   return _has_bit(1);
 }
-inline void Header_Result::clear_problem_id() {
+inline void DataFile_Result::clear_problem_id() {
   problem_id_ = 0u;
   _clear_bit(1);
 }
-inline ::google::protobuf::uint32 Header_Result::problem_id() const {
+inline ::google::protobuf::uint32 DataFile_Result::problem_id() const {
   return problem_id_;
 }
-inline void Header_Result::set_problem_id(::google::protobuf::uint32 value) {
+inline void DataFile_Result::set_problem_id(::google::protobuf::uint32 value) {
   _set_bit(1);
   problem_id_ = value;
 }
 
 // optional uint32 sub_problem_id = 3;
-inline bool Header_Result::has_sub_problem_id() const {
+inline bool DataFile_Result::has_sub_problem_id() const {
   return _has_bit(2);
 }
-inline void Header_Result::clear_sub_problem_id() {
+inline void DataFile_Result::clear_sub_problem_id() {
   sub_problem_id_ = 0u;
   _clear_bit(2);
 }
-inline ::google::protobuf::uint32 Header_Result::sub_problem_id() const {
+inline ::google::protobuf::uint32 DataFile_Result::sub_problem_id() const {
   return sub_problem_id_;
 }
-inline void Header_Result::set_sub_problem_id(::google::protobuf::uint32 value) {
+inline void DataFile_Result::set_sub_problem_id(::google::protobuf::uint32 value) {
   _set_bit(2);
   sub_problem_id_ = value;
 }
 
 // required uint64 solution_count = 4;
-inline bool Header_Result::has_solution_count() const {
+inline bool DataFile_Result::has_solution_count() const {
   return _has_bit(3);
 }
-inline void Header_Result::clear_solution_count() {
+inline void DataFile_Result::clear_solution_count() {
   solution_count_ = GOOGLE_ULONGLONG(0);
   _clear_bit(3);
 }
-inline ::google::protobuf::uint64 Header_Result::solution_count() const {
+inline ::google::protobuf::uint64 DataFile_Result::solution_count() const {
   return solution_count_;
 }
-inline void Header_Result::set_solution_count(::google::protobuf::uint64 value) {
+inline void DataFile_Result::set_solution_count(::google::protobuf::uint64 value) {
   _set_bit(3);
   solution_count_ = value;
 }
 
-// repeated .decs.Header.ElementList solutions = 5;
-inline int Header_Result::solutions_size() const {
+// repeated .decs.DataFile.ElementList solutions = 5;
+inline int DataFile_Result::solutions_size() const {
   return solutions_.size();
 }
-inline void Header_Result::clear_solutions() {
+inline void DataFile_Result::clear_solutions() {
   solutions_.Clear();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList >&
-Header_Result::solutions() const {
+inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >&
+DataFile_Result::solutions() const {
   return solutions_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::decs::Header_ElementList >*
-Header_Result::mutable_solutions() {
+inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >*
+DataFile_Result::mutable_solutions() {
   return &solutions_;
 }
-inline const ::decs::Header_ElementList& Header_Result::solutions(int index) const {
+inline const ::decs::DataFile_ElementList& DataFile_Result::solutions(int index) const {
   return solutions_.Get(index);
 }
-inline ::decs::Header_ElementList* Header_Result::mutable_solutions(int index) {
+inline ::decs::DataFile_ElementList* DataFile_Result::mutable_solutions(int index) {
   return solutions_.Mutable(index);
 }
-inline ::decs::Header_ElementList* Header_Result::add_solutions() {
+inline ::decs::DataFile_ElementList* DataFile_Result::add_solutions() {
   return solutions_.Add();
 }
 
-// optional .decs.Header.Result.ResultState state = 6 [default = COMPLETE];
-inline bool Header_Result::has_state() const {
+// optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
+inline bool DataFile_Result::has_state() const {
   return _has_bit(5);
 }
-inline void Header_Result::clear_state() {
+inline void DataFile_Result::clear_state() {
   state_ = 0;
   _clear_bit(5);
 }
-inline ::decs::Header_Result_ResultState Header_Result::state() const {
-  return static_cast< ::decs::Header_Result_ResultState >(state_);
+inline ::decs::DataFile_Result_ResultState DataFile_Result::state() const {
+  return static_cast< ::decs::DataFile_Result_ResultState >(state_);
 }
-inline void Header_Result::set_state(::decs::Header_Result_ResultState value) {
-  GOOGLE_DCHECK(::decs::Header_Result_ResultState_IsValid(value));
+inline void DataFile_Result::set_state(::decs::DataFile_Result_ResultState value) {
+  GOOGLE_DCHECK(::decs::DataFile_Result_ResultState_IsValid(value));
   _set_bit(5);
   state_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// Header
+// DataFile
 
-// optional .decs.Header.Description description = 1;
-inline bool Header::has_description() const {
+// optional .decs.DataFile.Description description = 1;
+inline bool DataFile::has_description() const {
   return _has_bit(0);
 }
-inline void Header::clear_description() {
-  if (description_ != NULL) description_->::decs::Header_Description::Clear();
+inline void DataFile::clear_description() {
+  if (description_ != NULL) description_->::decs::DataFile_Description::Clear();
   _clear_bit(0);
 }
-inline const ::decs::Header_Description& Header::description() const {
+inline const ::decs::DataFile_Description& DataFile::description() const {
   return description_ != NULL ? *description_ : *default_instance_->description_;
 }
-inline ::decs::Header_Description* Header::mutable_description() {
+inline ::decs::DataFile_Description* DataFile::mutable_description() {
   _set_bit(0);
-  if (description_ == NULL) description_ = new ::decs::Header_Description;
+  if (description_ == NULL) description_ = new ::decs::DataFile_Description;
   return description_;
 }
 
-// repeated .decs.Header.Problem problems = 2;
-inline int Header::problems_size() const {
+// repeated .decs.DataFile.Problem problems = 2;
+inline int DataFile::problems_size() const {
   return problems_.size();
 }
-inline void Header::clear_problems() {
+inline void DataFile::clear_problems() {
   problems_.Clear();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Problem >&
-Header::problems() const {
+inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >&
+DataFile::problems() const {
   return problems_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Problem >*
-Header::mutable_problems() {
+inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >*
+DataFile::mutable_problems() {
   return &problems_;
 }
-inline const ::decs::Header_Problem& Header::problems(int index) const {
+inline const ::decs::DataFile_Problem& DataFile::problems(int index) const {
   return problems_.Get(index);
 }
-inline ::decs::Header_Problem* Header::mutable_problems(int index) {
+inline ::decs::DataFile_Problem* DataFile::mutable_problems(int index) {
   return problems_.Mutable(index);
 }
-inline ::decs::Header_Problem* Header::add_problems() {
+inline ::decs::DataFile_Problem* DataFile::add_problems() {
   return problems_.Add();
 }
 
-// repeated .decs.Header.Result results = 3;
-inline int Header::results_size() const {
+// repeated .decs.DataFile.Result results = 3;
+inline int DataFile::results_size() const {
   return results_.size();
 }
-inline void Header::clear_results() {
+inline void DataFile::clear_results() {
   results_.Clear();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::decs::Header_Result >&
-Header::results() const {
+inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >&
+DataFile::results() const {
   return results_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::decs::Header_Result >*
-Header::mutable_results() {
+inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >*
+DataFile::mutable_results() {
   return &results_;
 }
-inline const ::decs::Header_Result& Header::results(int index) const {
+inline const ::decs::DataFile_Result& DataFile::results(int index) const {
   return results_.Get(index);
 }
-inline ::decs::Header_Result* Header::mutable_results(int index) {
+inline ::decs::DataFile_Result* DataFile::mutable_results(int index) {
   return results_.Mutable(index);
 }
-inline ::decs::Header_Result* Header::add_results() {
+inline ::decs::DataFile_Result* DataFile::add_results() {
   return results_.Add();
 }
 
