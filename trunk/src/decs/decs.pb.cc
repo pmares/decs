@@ -11,29 +11,29 @@ namespace decs {
 
 namespace {
 
-const ::google::protobuf::Descriptor* Header_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* DataFile_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Header_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Header_Description_descriptor_ = NULL;
+  DataFile_reflection_ = NULL;
+const ::google::protobuf::Descriptor* DataFile_Description_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Header_Description_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Header_Description_Link_descriptor_ = NULL;
+  DataFile_Description_reflection_ = NULL;
+const ::google::protobuf::Descriptor* DataFile_Description_Link_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Header_Description_Link_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Header_Description_Author_descriptor_ = NULL;
+  DataFile_Description_Link_reflection_ = NULL;
+const ::google::protobuf::Descriptor* DataFile_Description_Author_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Header_Description_Author_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Header_ElementList_descriptor_ = NULL;
+  DataFile_Description_Author_reflection_ = NULL;
+const ::google::protobuf::Descriptor* DataFile_ElementList_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Header_ElementList_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Header_Problem_descriptor_ = NULL;
+  DataFile_ElementList_reflection_ = NULL;
+const ::google::protobuf::Descriptor* DataFile_Problem_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Header_Problem_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Header_Problem_ResultStrategy_descriptor_ = NULL;
-const ::google::protobuf::Descriptor* Header_Result_descriptor_ = NULL;
+  DataFile_Problem_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* DataFile_Problem_ResultStrategy_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* DataFile_Result_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Header_Result_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Header_Result_ResultState_descriptor_ = NULL;
+  DataFile_Result_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* DataFile_Result_ResultState_descriptor_ = NULL;
 
 }  // namespace
 
@@ -44,132 +44,132 @@ void protobuf_AssignDesc_decs_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "decs.proto");
   GOOGLE_CHECK(file != NULL);
-  Header_descriptor_ = file->message_type(0);
-  static const int Header_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, description_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, problems_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, results_),
+  DataFile_descriptor_ = file->message_type(0);
+  static const int DataFile_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, description_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, problems_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, results_),
   };
-  Header_reflection_ =
+  DataFile_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      Header_descriptor_,
-      Header::default_instance_,
-      Header_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header, _unknown_fields_),
+      DataFile_descriptor_,
+      DataFile::default_instance_,
+      DataFile_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Header));
-  Header_Description_descriptor_ = Header_descriptor_->nested_type(0);
-  static const int Header_Description_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description, description_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description, links_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description, authors_),
+      sizeof(DataFile));
+  DataFile_Description_descriptor_ = DataFile_descriptor_->nested_type(0);
+  static const int DataFile_Description_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, description_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, links_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, authors_),
   };
-  Header_Description_reflection_ =
+  DataFile_Description_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      Header_Description_descriptor_,
-      Header_Description::default_instance_,
-      Header_Description_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description, _unknown_fields_),
+      DataFile_Description_descriptor_,
+      DataFile_Description::default_instance_,
+      DataFile_Description_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Header_Description));
-  Header_Description_Link_descriptor_ = Header_Description_descriptor_->nested_type(0);
-  static const int Header_Description_Link_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description_Link, url_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description_Link, description_),
+      sizeof(DataFile_Description));
+  DataFile_Description_Link_descriptor_ = DataFile_Description_descriptor_->nested_type(0);
+  static const int DataFile_Description_Link_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Link, url_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Link, description_),
   };
-  Header_Description_Link_reflection_ =
+  DataFile_Description_Link_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      Header_Description_Link_descriptor_,
-      Header_Description_Link::default_instance_,
-      Header_Description_Link_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description_Link, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description_Link, _unknown_fields_),
+      DataFile_Description_Link_descriptor_,
+      DataFile_Description_Link::default_instance_,
+      DataFile_Description_Link_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Link, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Link, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Header_Description_Link));
-  Header_Description_Author_descriptor_ = Header_Description_descriptor_->nested_type(1);
-  static const int Header_Description_Author_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description_Author, name_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description_Author, links_),
+      sizeof(DataFile_Description_Link));
+  DataFile_Description_Author_descriptor_ = DataFile_Description_descriptor_->nested_type(1);
+  static const int DataFile_Description_Author_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Author, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Author, links_),
   };
-  Header_Description_Author_reflection_ =
+  DataFile_Description_Author_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      Header_Description_Author_descriptor_,
-      Header_Description_Author::default_instance_,
-      Header_Description_Author_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description_Author, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Description_Author, _unknown_fields_),
+      DataFile_Description_Author_descriptor_,
+      DataFile_Description_Author::default_instance_,
+      DataFile_Description_Author_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Author, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Author, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Header_Description_Author));
-  Header_ElementList_descriptor_ = Header_descriptor_->nested_type(1);
-  static const int Header_ElementList_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_ElementList, elements_),
+      sizeof(DataFile_Description_Author));
+  DataFile_ElementList_descriptor_ = DataFile_descriptor_->nested_type(1);
+  static const int DataFile_ElementList_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_ElementList, elements_),
   };
-  Header_ElementList_reflection_ =
+  DataFile_ElementList_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      Header_ElementList_descriptor_,
-      Header_ElementList::default_instance_,
-      Header_ElementList_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_ElementList, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_ElementList, _unknown_fields_),
+      DataFile_ElementList_descriptor_,
+      DataFile_ElementList::default_instance_,
+      DataFile_ElementList_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_ElementList, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_ElementList, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Header_ElementList));
-  Header_Problem_descriptor_ = Header_descriptor_->nested_type(2);
-  static const int Header_Problem_offsets_[9] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, description_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, problem_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, sub_problem_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, column_count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, element_count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, rows_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, secondary_columns_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, init_vector_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, result_strategy_),
+      sizeof(DataFile_ElementList));
+  DataFile_Problem_descriptor_ = DataFile_descriptor_->nested_type(2);
+  static const int DataFile_Problem_offsets_[9] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, description_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, problem_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, sub_problem_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, column_count_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, element_count_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, rows_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, secondary_columns_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, init_vector_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, result_strategy_),
   };
-  Header_Problem_reflection_ =
+  DataFile_Problem_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      Header_Problem_descriptor_,
-      Header_Problem::default_instance_,
-      Header_Problem_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Problem, _unknown_fields_),
+      DataFile_Problem_descriptor_,
+      DataFile_Problem::default_instance_,
+      DataFile_Problem_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Header_Problem));
-  Header_Problem_ResultStrategy_descriptor_ = Header_Problem_descriptor_->enum_type(0);
-  Header_Result_descriptor_ = Header_descriptor_->nested_type(3);
-  static const int Header_Result_offsets_[6] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Result, description_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Result, problem_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Result, sub_problem_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Result, solution_count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Result, solutions_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Result, state_),
+      sizeof(DataFile_Problem));
+  DataFile_Problem_ResultStrategy_descriptor_ = DataFile_Problem_descriptor_->enum_type(0);
+  DataFile_Result_descriptor_ = DataFile_descriptor_->nested_type(3);
+  static const int DataFile_Result_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, description_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, problem_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, sub_problem_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, solution_count_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, solutions_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, state_),
   };
-  Header_Result_reflection_ =
+  DataFile_Result_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      Header_Result_descriptor_,
-      Header_Result::default_instance_,
-      Header_Result_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Result, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Header_Result, _unknown_fields_),
+      DataFile_Result_descriptor_,
+      DataFile_Result::default_instance_,
+      DataFile_Result_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(Header_Result));
-  Header_Result_ResultState_descriptor_ = Header_Result_descriptor_->enum_type(0);
+      sizeof(DataFile_Result));
+  DataFile_Result_ResultState_descriptor_ = DataFile_Result_descriptor_->enum_type(0);
 }
 
 namespace {
@@ -183,38 +183,38 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes() {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Header_descriptor_, &Header::default_instance());
+    DataFile_descriptor_, &DataFile::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Header_Description_descriptor_, &Header_Description::default_instance());
+    DataFile_Description_descriptor_, &DataFile_Description::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Header_Description_Link_descriptor_, &Header_Description_Link::default_instance());
+    DataFile_Description_Link_descriptor_, &DataFile_Description_Link::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Header_Description_Author_descriptor_, &Header_Description_Author::default_instance());
+    DataFile_Description_Author_descriptor_, &DataFile_Description_Author::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Header_ElementList_descriptor_, &Header_ElementList::default_instance());
+    DataFile_ElementList_descriptor_, &DataFile_ElementList::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Header_Problem_descriptor_, &Header_Problem::default_instance());
+    DataFile_Problem_descriptor_, &DataFile_Problem::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    Header_Result_descriptor_, &Header_Result::default_instance());
+    DataFile_Result_descriptor_, &DataFile_Result::default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_decs_2eproto() {
-  delete Header::default_instance_;
-  delete Header_reflection_;
-  delete Header_Description::default_instance_;
-  delete Header_Description_reflection_;
-  delete Header_Description_Link::default_instance_;
-  delete Header_Description_Link_reflection_;
-  delete Header_Description_Author::default_instance_;
-  delete Header_Description_Author_reflection_;
-  delete Header_ElementList::default_instance_;
-  delete Header_ElementList_reflection_;
-  delete Header_Problem::default_instance_;
-  delete Header_Problem_reflection_;
-  delete Header_Result::default_instance_;
-  delete Header_Result_reflection_;
+  delete DataFile::default_instance_;
+  delete DataFile_reflection_;
+  delete DataFile_Description::default_instance_;
+  delete DataFile_Description_reflection_;
+  delete DataFile_Description_Link::default_instance_;
+  delete DataFile_Description_Link_reflection_;
+  delete DataFile_Description_Author::default_instance_;
+  delete DataFile_Description_Author_reflection_;
+  delete DataFile_ElementList::default_instance_;
+  delete DataFile_ElementList_reflection_;
+  delete DataFile_Problem::default_instance_;
+  delete DataFile_Problem_reflection_;
+  delete DataFile_Result::default_instance_;
+  delete DataFile_Result_reflection_;
 }
 
 void protobuf_AddDesc_decs_2eproto() {
@@ -224,49 +224,49 @@ void protobuf_AddDesc_decs_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\ndecs.proto\022\004decs\"\202\010\n\006Header\022-\n\013descrip"
-    "tion\030\001 \001(\0132\030.decs.Header.Description\022&\n\010"
-    "problems\030\002 \003(\0132\024.decs.Header.Problem\022$\n\007"
-    "results\030\003 \003(\0132\023.decs.Header.Result\032\362\001\n\013D"
-    "escription\022\023\n\013description\030\001 \001(\t\022,\n\005links"
-    "\030\002 \003(\0132\035.decs.Header.Description.Link\0220\n"
-    "\007authors\030\003 \003(\0132\037.decs.Header.Description"
-    ".Author\032(\n\004Link\022\013\n\003url\030\001 \002(\t\022\023\n\013descript"
-    "ion\030\002 \001(\t\032D\n\006Author\022\014\n\004name\030\001 \002(\t\022,\n\005lin"
-    "ks\030\002 \003(\0132\035.decs.Header.Description.Link\032"
-    "\037\n\013ElementList\022\020\n\010elements\030\001 \003(\r\032\325\002\n\007Pro"
-    "blem\022-\n\013description\030\001 \001(\0132\030.decs.Header."
-    "Description\022\022\n\nproblem_id\030\002 \001(\r\022\026\n\016sub_p"
-    "roblem_id\030\003 \001(\r\022\024\n\014column_count\030\004 \002(\r\022\025\n"
-    "\relement_count\030\005 \002(\r\022&\n\004rows\030\006 \003(\0132\030.dec"
-    "s.Header.ElementList\022\031\n\021secondary_column"
-    "s\030\007 \003(\r\022\023\n\013init_vector\030\010 \003(\r\022C\n\017result_s"
-    "trategy\030\t \001(\0162#.decs.Header.Problem.Resu"
-    "ltStrategy:\005COUNT\"%\n\016ResultStrategy\022\t\n\005C"
-    "OUNT\020\000\022\010\n\004FULL\020\001\032\214\002\n\006Result\022-\n\013descripti"
-    "on\030\001 \001(\0132\030.decs.Header.Description\022\022\n\npr"
-    "oblem_id\030\002 \001(\r\022\026\n\016sub_problem_id\030\003 \001(\r\022\026"
-    "\n\016solution_count\030\004 \002(\004\022+\n\tsolutions\030\005 \003("
-    "\0132\030.decs.Header.ElementList\0228\n\005state\030\006 \001"
-    "(\0162\037.decs.Header.Result.ResultState:\010COM"
-    "PLETE\"(\n\013ResultState\022\014\n\010COMPLETE\020\000\022\013\n\007PA"
-    "RTIAL\020\001", 1047);
+    "\n\ndecs.proto\022\004decs\"\234\010\n\010DataFile\022/\n\013descr"
+    "iption\030\001 \001(\0132\032.decs.DataFile.Description"
+    "\022(\n\010problems\030\002 \003(\0132\026.decs.DataFile.Probl"
+    "em\022&\n\007results\030\003 \003(\0132\025.decs.DataFile.Resu"
+    "lt\032\370\001\n\013Description\022\023\n\013description\030\001 \001(\t\022"
+    ".\n\005links\030\002 \003(\0132\037.decs.DataFile.Descripti"
+    "on.Link\0222\n\007authors\030\003 \003(\0132!.decs.DataFile"
+    ".Description.Author\032(\n\004Link\022\013\n\003url\030\001 \002(\t"
+    "\022\023\n\013description\030\002 \001(\t\032F\n\006Author\022\014\n\004name\030"
+    "\001 \002(\t\022.\n\005links\030\002 \003(\0132\037.decs.DataFile.Des"
+    "cription.Link\032\037\n\013ElementList\022\020\n\010elements"
+    "\030\001 \003(\r\032\333\002\n\007Problem\022/\n\013description\030\001 \001(\0132"
+    "\032.decs.DataFile.Description\022\022\n\nproblem_i"
+    "d\030\002 \001(\r\022\026\n\016sub_problem_id\030\003 \001(\r\022\024\n\014colum"
+    "n_count\030\004 \002(\r\022\025\n\relement_count\030\005 \002(\r\022(\n\004"
+    "rows\030\006 \003(\0132\032.decs.DataFile.ElementList\022\031"
+    "\n\021secondary_columns\030\007 \003(\r\022\023\n\013init_vector"
+    "\030\010 \003(\r\022E\n\017result_strategy\030\t \001(\0162%.decs.D"
+    "ataFile.Problem.ResultStrategy:\005COUNT\"%\n"
+    "\016ResultStrategy\022\t\n\005COUNT\020\000\022\010\n\004FULL\020\001\032\222\002\n"
+    "\006Result\022/\n\013description\030\001 \001(\0132\032.decs.Data"
+    "File.Description\022\022\n\nproblem_id\030\002 \001(\r\022\026\n\016"
+    "sub_problem_id\030\003 \001(\r\022\026\n\016solution_count\030\004"
+    " \002(\004\022-\n\tsolutions\030\005 \003(\0132\032.decs.DataFile."
+    "ElementList\022:\n\005state\030\006 \001(\0162!.decs.DataFi"
+    "le.Result.ResultState:\010COMPLETE\"(\n\013Resul"
+    "tState\022\014\n\010COMPLETE\020\000\022\013\n\007PARTIAL\020\001", 1073);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "decs.proto", &protobuf_RegisterTypes);
-  Header::default_instance_ = new Header();
-  Header_Description::default_instance_ = new Header_Description();
-  Header_Description_Link::default_instance_ = new Header_Description_Link();
-  Header_Description_Author::default_instance_ = new Header_Description_Author();
-  Header_ElementList::default_instance_ = new Header_ElementList();
-  Header_Problem::default_instance_ = new Header_Problem();
-  Header_Result::default_instance_ = new Header_Result();
-  Header::default_instance_->InitAsDefaultInstance();
-  Header_Description::default_instance_->InitAsDefaultInstance();
-  Header_Description_Link::default_instance_->InitAsDefaultInstance();
-  Header_Description_Author::default_instance_->InitAsDefaultInstance();
-  Header_ElementList::default_instance_->InitAsDefaultInstance();
-  Header_Problem::default_instance_->InitAsDefaultInstance();
-  Header_Result::default_instance_->InitAsDefaultInstance();
+  DataFile::default_instance_ = new DataFile();
+  DataFile_Description::default_instance_ = new DataFile_Description();
+  DataFile_Description_Link::default_instance_ = new DataFile_Description_Link();
+  DataFile_Description_Author::default_instance_ = new DataFile_Description_Author();
+  DataFile_ElementList::default_instance_ = new DataFile_ElementList();
+  DataFile_Problem::default_instance_ = new DataFile_Problem();
+  DataFile_Result::default_instance_ = new DataFile_Result();
+  DataFile::default_instance_->InitAsDefaultInstance();
+  DataFile_Description::default_instance_->InitAsDefaultInstance();
+  DataFile_Description_Link::default_instance_->InitAsDefaultInstance();
+  DataFile_Description_Author::default_instance_->InitAsDefaultInstance();
+  DataFile_ElementList::default_instance_->InitAsDefaultInstance();
+  DataFile_Problem::default_instance_->InitAsDefaultInstance();
+  DataFile_Result::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_decs_2eproto);
 }
 
@@ -280,38 +280,38 @@ struct StaticDescriptorInitializer_decs_2eproto {
 
 // ===================================================================
 
-const ::std::string Header_Description_Link::_default_url_;
-const ::std::string Header_Description_Link::_default_description_;
+const ::std::string DataFile_Description_Link::_default_url_;
+const ::std::string DataFile_Description_Link::_default_description_;
 #ifndef _MSC_VER
-const int Header_Description_Link::kUrlFieldNumber;
-const int Header_Description_Link::kDescriptionFieldNumber;
+const int DataFile_Description_Link::kUrlFieldNumber;
+const int DataFile_Description_Link::kDescriptionFieldNumber;
 #endif  // !_MSC_VER
 
-Header_Description_Link::Header_Description_Link()
+DataFile_Description_Link::DataFile_Description_Link()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void Header_Description_Link::InitAsDefaultInstance() {}
+void DataFile_Description_Link::InitAsDefaultInstance() {}
 
-Header_Description_Link::Header_Description_Link(const Header_Description_Link& from)
+DataFile_Description_Link::DataFile_Description_Link(const DataFile_Description_Link& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Header_Description_Link::SharedCtor() {
+void DataFile_Description_Link::SharedCtor() {
   _cached_size_ = 0;
   url_ = const_cast< ::std::string*>(&_default_url_);
   description_ = const_cast< ::std::string*>(&_default_description_);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Header_Description_Link::~Header_Description_Link() {
+DataFile_Description_Link::~DataFile_Description_Link() {
   SharedDtor();
 }
 
-void Header_Description_Link::SharedDtor() {
+void DataFile_Description_Link::SharedDtor() {
   if (url_ != &_default_url_) {
     delete url_;
   }
@@ -322,22 +322,22 @@ void Header_Description_Link::SharedDtor() {
   }
 }
 
-const ::google::protobuf::Descriptor* Header_Description_Link::descriptor() {
+const ::google::protobuf::Descriptor* DataFile_Description_Link::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_Description_Link_descriptor_;
+  return DataFile_Description_Link_descriptor_;
 }
 
-const Header_Description_Link& Header_Description_Link::default_instance() {
+const DataFile_Description_Link& DataFile_Description_Link::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_decs_2eproto();  return *default_instance_;
 }
 
-Header_Description_Link* Header_Description_Link::default_instance_ = NULL;
+DataFile_Description_Link* DataFile_Description_Link::default_instance_ = NULL;
 
-Header_Description_Link* Header_Description_Link::New() const {
-  return new Header_Description_Link;
+DataFile_Description_Link* DataFile_Description_Link::New() const {
+  return new DataFile_Description_Link;
 }
 
-void Header_Description_Link::Clear() {
+void DataFile_Description_Link::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (_has_bit(0)) {
       if (url_ != &_default_url_) {
@@ -354,7 +354,7 @@ void Header_Description_Link::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool Header_Description_Link::MergePartialFromCodedStream(
+bool DataFile_Description_Link::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -399,11 +399,11 @@ bool Header_Description_Link::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Header_Description_Link::SerializeWithCachedSizes(
+void DataFile_Description_Link::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   ::google::protobuf::uint8* raw_buffer = output->GetDirectBufferForNBytesAndAdvance(_cached_size_);
   if (raw_buffer != NULL) {
-    Header_Description_Link::SerializeWithCachedSizesToArray(raw_buffer);
+    DataFile_Description_Link::SerializeWithCachedSizesToArray(raw_buffer);
     return;
   }
   
@@ -423,7 +423,7 @@ void Header_Description_Link::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* Header_Description_Link::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* DataFile_Description_Link::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required string url = 1;
   if (_has_bit(0)) {
@@ -442,7 +442,7 @@ void Header_Description_Link::SerializeWithCachedSizes(
   return target;
 }
 
-int Header_Description_Link::ByteSize() const {
+int DataFile_Description_Link::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -468,10 +468,10 @@ int Header_Description_Link::ByteSize() const {
   return total_size;
 }
 
-void Header_Description_Link::MergeFrom(const ::google::protobuf::Message& from) {
+void DataFile_Description_Link::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Header_Description_Link* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Header_Description_Link*>(
+  const DataFile_Description_Link* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const DataFile_Description_Link*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -480,7 +480,7 @@ void Header_Description_Link::MergeFrom(const ::google::protobuf::Message& from)
   }
 }
 
-void Header_Description_Link::MergeFrom(const Header_Description_Link& from) {
+void DataFile_Description_Link::MergeFrom(const DataFile_Description_Link& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
@@ -493,19 +493,19 @@ void Header_Description_Link::MergeFrom(const Header_Description_Link& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Header_Description_Link::CopyFrom(const ::google::protobuf::Message& from) {
+void DataFile_Description_Link::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Description_Link::CopyFrom(const Header_Description_Link& from) {
+void DataFile_Description_Link::CopyFrom(const DataFile_Description_Link& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Description_Link::Swap(Header_Description_Link* other) {
+void DataFile_Description_Link::Swap(DataFile_Description_Link* other) {
   if (other != this) {
     std::swap(url_, other->url_);
     std::swap(description_, other->description_);
@@ -515,53 +515,53 @@ void Header_Description_Link::Swap(Header_Description_Link* other) {
   }
 }
 
-bool Header_Description_Link::IsInitialized() const {
+bool DataFile_Description_Link::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   return true;
 }
 
-const ::google::protobuf::Descriptor* Header_Description_Link::GetDescriptor() const {
+const ::google::protobuf::Descriptor* DataFile_Description_Link::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Reflection* Header_Description_Link::GetReflection() const {
+const ::google::protobuf::Reflection* DataFile_Description_Link::GetReflection() const {
   protobuf_AssignDescriptorsOnce();
-  return Header_Description_Link_reflection_;
+  return DataFile_Description_Link_reflection_;
 }
 
 // -------------------------------------------------------------------
 
-const ::std::string Header_Description_Author::_default_name_;
+const ::std::string DataFile_Description_Author::_default_name_;
 #ifndef _MSC_VER
-const int Header_Description_Author::kNameFieldNumber;
-const int Header_Description_Author::kLinksFieldNumber;
+const int DataFile_Description_Author::kNameFieldNumber;
+const int DataFile_Description_Author::kLinksFieldNumber;
 #endif  // !_MSC_VER
 
-Header_Description_Author::Header_Description_Author()
+DataFile_Description_Author::DataFile_Description_Author()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void Header_Description_Author::InitAsDefaultInstance() {}
+void DataFile_Description_Author::InitAsDefaultInstance() {}
 
-Header_Description_Author::Header_Description_Author(const Header_Description_Author& from)
+DataFile_Description_Author::DataFile_Description_Author(const DataFile_Description_Author& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Header_Description_Author::SharedCtor() {
+void DataFile_Description_Author::SharedCtor() {
   _cached_size_ = 0;
   name_ = const_cast< ::std::string*>(&_default_name_);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Header_Description_Author::~Header_Description_Author() {
+DataFile_Description_Author::~DataFile_Description_Author() {
   SharedDtor();
 }
 
-void Header_Description_Author::SharedDtor() {
+void DataFile_Description_Author::SharedDtor() {
   if (name_ != &_default_name_) {
     delete name_;
   }
@@ -569,22 +569,22 @@ void Header_Description_Author::SharedDtor() {
   }
 }
 
-const ::google::protobuf::Descriptor* Header_Description_Author::descriptor() {
+const ::google::protobuf::Descriptor* DataFile_Description_Author::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_Description_Author_descriptor_;
+  return DataFile_Description_Author_descriptor_;
 }
 
-const Header_Description_Author& Header_Description_Author::default_instance() {
+const DataFile_Description_Author& DataFile_Description_Author::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_decs_2eproto();  return *default_instance_;
 }
 
-Header_Description_Author* Header_Description_Author::default_instance_ = NULL;
+DataFile_Description_Author* DataFile_Description_Author::default_instance_ = NULL;
 
-Header_Description_Author* Header_Description_Author::New() const {
-  return new Header_Description_Author;
+DataFile_Description_Author* DataFile_Description_Author::New() const {
+  return new DataFile_Description_Author;
 }
 
-void Header_Description_Author::Clear() {
+void DataFile_Description_Author::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (_has_bit(0)) {
       if (name_ != &_default_name_) {
@@ -597,7 +597,7 @@ void Header_Description_Author::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool Header_Description_Author::MergePartialFromCodedStream(
+bool DataFile_Description_Author::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -614,7 +614,7 @@ bool Header_Description_Author::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .decs.Header.Description.Link links = 2;
+      // repeated .decs.DataFile.Description.Link links = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -644,11 +644,11 @@ bool Header_Description_Author::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Header_Description_Author::SerializeWithCachedSizes(
+void DataFile_Description_Author::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   ::google::protobuf::uint8* raw_buffer = output->GetDirectBufferForNBytesAndAdvance(_cached_size_);
   if (raw_buffer != NULL) {
-    Header_Description_Author::SerializeWithCachedSizesToArray(raw_buffer);
+    DataFile_Description_Author::SerializeWithCachedSizesToArray(raw_buffer);
     return;
   }
   
@@ -657,7 +657,7 @@ void Header_Description_Author::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteString(1, this->name(), output);
   }
   
-  // repeated .decs.Header.Description.Link links = 2;
+  // repeated .decs.DataFile.Description.Link links = 2;
   for (int i = 0; i < this->links_size(); i++) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->links(i), output);
   }
@@ -668,14 +668,14 @@ void Header_Description_Author::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* Header_Description_Author::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* DataFile_Description_Author::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required string name = 1;
   if (_has_bit(0)) {
     target = ::google::protobuf::internal::WireFormat::WriteStringToArray(1, this->name(), target);
   }
   
-  // repeated .decs.Header.Description.Link links = 2;
+  // repeated .decs.DataFile.Description.Link links = 2;
   for (int i = 0; i < this->links_size(); i++) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->links(i), target);
   }
@@ -687,7 +687,7 @@ void Header_Description_Author::SerializeWithCachedSizes(
   return target;
 }
 
-int Header_Description_Author::ByteSize() const {
+int DataFile_Description_Author::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -698,7 +698,7 @@ int Header_Description_Author::ByteSize() const {
     }
     
   }
-  // repeated .decs.Header.Description.Link links = 2;
+  // repeated .decs.DataFile.Description.Link links = 2;
   total_size += 1 * this->links_size();
   for (int i = 0; i < this->links_size(); i++) {
     total_size +=
@@ -715,10 +715,10 @@ int Header_Description_Author::ByteSize() const {
   return total_size;
 }
 
-void Header_Description_Author::MergeFrom(const ::google::protobuf::Message& from) {
+void DataFile_Description_Author::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Header_Description_Author* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Header_Description_Author*>(
+  const DataFile_Description_Author* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const DataFile_Description_Author*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -727,7 +727,7 @@ void Header_Description_Author::MergeFrom(const ::google::protobuf::Message& fro
   }
 }
 
-void Header_Description_Author::MergeFrom(const Header_Description_Author& from) {
+void DataFile_Description_Author::MergeFrom(const DataFile_Description_Author& from) {
   GOOGLE_CHECK_NE(&from, this);
   links_.MergeFrom(from.links_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -738,19 +738,19 @@ void Header_Description_Author::MergeFrom(const Header_Description_Author& from)
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Header_Description_Author::CopyFrom(const ::google::protobuf::Message& from) {
+void DataFile_Description_Author::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Description_Author::CopyFrom(const Header_Description_Author& from) {
+void DataFile_Description_Author::CopyFrom(const DataFile_Description_Author& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Description_Author::Swap(Header_Description_Author* other) {
+void DataFile_Description_Author::Swap(DataFile_Description_Author* other) {
   if (other != this) {
     std::swap(name_, other->name_);
     links_.Swap(&other->links_);
@@ -760,7 +760,7 @@ void Header_Description_Author::Swap(Header_Description_Author* other) {
   }
 }
 
-bool Header_Description_Author::IsInitialized() const {
+bool DataFile_Description_Author::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
   for (int i = 0; i < links_size(); i++) {
@@ -769,48 +769,48 @@ bool Header_Description_Author::IsInitialized() const {
   return true;
 }
 
-const ::google::protobuf::Descriptor* Header_Description_Author::GetDescriptor() const {
+const ::google::protobuf::Descriptor* DataFile_Description_Author::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Reflection* Header_Description_Author::GetReflection() const {
+const ::google::protobuf::Reflection* DataFile_Description_Author::GetReflection() const {
   protobuf_AssignDescriptorsOnce();
-  return Header_Description_Author_reflection_;
+  return DataFile_Description_Author_reflection_;
 }
 
 // -------------------------------------------------------------------
 
-const ::std::string Header_Description::_default_description_;
+const ::std::string DataFile_Description::_default_description_;
 #ifndef _MSC_VER
-const int Header_Description::kDescriptionFieldNumber;
-const int Header_Description::kLinksFieldNumber;
-const int Header_Description::kAuthorsFieldNumber;
+const int DataFile_Description::kDescriptionFieldNumber;
+const int DataFile_Description::kLinksFieldNumber;
+const int DataFile_Description::kAuthorsFieldNumber;
 #endif  // !_MSC_VER
 
-Header_Description::Header_Description()
+DataFile_Description::DataFile_Description()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void Header_Description::InitAsDefaultInstance() {}
+void DataFile_Description::InitAsDefaultInstance() {}
 
-Header_Description::Header_Description(const Header_Description& from)
+DataFile_Description::DataFile_Description(const DataFile_Description& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Header_Description::SharedCtor() {
+void DataFile_Description::SharedCtor() {
   _cached_size_ = 0;
   description_ = const_cast< ::std::string*>(&_default_description_);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Header_Description::~Header_Description() {
+DataFile_Description::~DataFile_Description() {
   SharedDtor();
 }
 
-void Header_Description::SharedDtor() {
+void DataFile_Description::SharedDtor() {
   if (description_ != &_default_description_) {
     delete description_;
   }
@@ -818,22 +818,22 @@ void Header_Description::SharedDtor() {
   }
 }
 
-const ::google::protobuf::Descriptor* Header_Description::descriptor() {
+const ::google::protobuf::Descriptor* DataFile_Description::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_Description_descriptor_;
+  return DataFile_Description_descriptor_;
 }
 
-const Header_Description& Header_Description::default_instance() {
+const DataFile_Description& DataFile_Description::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_decs_2eproto();  return *default_instance_;
 }
 
-Header_Description* Header_Description::default_instance_ = NULL;
+DataFile_Description* DataFile_Description::default_instance_ = NULL;
 
-Header_Description* Header_Description::New() const {
-  return new Header_Description;
+DataFile_Description* DataFile_Description::New() const {
+  return new DataFile_Description;
 }
 
-void Header_Description::Clear() {
+void DataFile_Description::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (_has_bit(0)) {
       if (description_ != &_default_description_) {
@@ -847,7 +847,7 @@ void Header_Description::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool Header_Description::MergePartialFromCodedStream(
+bool DataFile_Description::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -864,7 +864,7 @@ bool Header_Description::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .decs.Header.Description.Link links = 2;
+      // repeated .decs.DataFile.Description.Link links = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -878,7 +878,7 @@ bool Header_Description::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .decs.Header.Description.Author authors = 3;
+      // repeated .decs.DataFile.Description.Author authors = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -908,11 +908,11 @@ bool Header_Description::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Header_Description::SerializeWithCachedSizes(
+void DataFile_Description::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   ::google::protobuf::uint8* raw_buffer = output->GetDirectBufferForNBytesAndAdvance(_cached_size_);
   if (raw_buffer != NULL) {
-    Header_Description::SerializeWithCachedSizesToArray(raw_buffer);
+    DataFile_Description::SerializeWithCachedSizesToArray(raw_buffer);
     return;
   }
   
@@ -921,12 +921,12 @@ void Header_Description::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteString(1, this->description(), output);
   }
   
-  // repeated .decs.Header.Description.Link links = 2;
+  // repeated .decs.DataFile.Description.Link links = 2;
   for (int i = 0; i < this->links_size(); i++) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->links(i), output);
   }
   
-  // repeated .decs.Header.Description.Author authors = 3;
+  // repeated .decs.DataFile.Description.Author authors = 3;
   for (int i = 0; i < this->authors_size(); i++) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(3, this->authors(i), output);
   }
@@ -937,19 +937,19 @@ void Header_Description::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* Header_Description::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* DataFile_Description::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // optional string description = 1;
   if (_has_bit(0)) {
     target = ::google::protobuf::internal::WireFormat::WriteStringToArray(1, this->description(), target);
   }
   
-  // repeated .decs.Header.Description.Link links = 2;
+  // repeated .decs.DataFile.Description.Link links = 2;
   for (int i = 0; i < this->links_size(); i++) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->links(i), target);
   }
   
-  // repeated .decs.Header.Description.Author authors = 3;
+  // repeated .decs.DataFile.Description.Author authors = 3;
   for (int i = 0; i < this->authors_size(); i++) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(3, this->authors(i), target);
   }
@@ -961,7 +961,7 @@ void Header_Description::SerializeWithCachedSizes(
   return target;
 }
 
-int Header_Description::ByteSize() const {
+int DataFile_Description::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -972,7 +972,7 @@ int Header_Description::ByteSize() const {
     }
     
   }
-  // repeated .decs.Header.Description.Link links = 2;
+  // repeated .decs.DataFile.Description.Link links = 2;
   total_size += 1 * this->links_size();
   for (int i = 0; i < this->links_size(); i++) {
     total_size +=
@@ -980,7 +980,7 @@ int Header_Description::ByteSize() const {
         this->links(i));
   }
   
-  // repeated .decs.Header.Description.Author authors = 3;
+  // repeated .decs.DataFile.Description.Author authors = 3;
   total_size += 1 * this->authors_size();
   for (int i = 0; i < this->authors_size(); i++) {
     total_size +=
@@ -997,10 +997,10 @@ int Header_Description::ByteSize() const {
   return total_size;
 }
 
-void Header_Description::MergeFrom(const ::google::protobuf::Message& from) {
+void DataFile_Description::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Header_Description* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Header_Description*>(
+  const DataFile_Description* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const DataFile_Description*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1009,7 +1009,7 @@ void Header_Description::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Header_Description::MergeFrom(const Header_Description& from) {
+void DataFile_Description::MergeFrom(const DataFile_Description& from) {
   GOOGLE_CHECK_NE(&from, this);
   links_.MergeFrom(from.links_);
   authors_.MergeFrom(from.authors_);
@@ -1021,19 +1021,19 @@ void Header_Description::MergeFrom(const Header_Description& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Header_Description::CopyFrom(const ::google::protobuf::Message& from) {
+void DataFile_Description::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Description::CopyFrom(const Header_Description& from) {
+void DataFile_Description::CopyFrom(const DataFile_Description& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Description::Swap(Header_Description* other) {
+void DataFile_Description::Swap(DataFile_Description* other) {
   if (other != this) {
     std::swap(description_, other->description_);
     links_.Swap(&other->links_);
@@ -1044,7 +1044,7 @@ void Header_Description::Swap(Header_Description* other) {
   }
 }
 
-bool Header_Description::IsInitialized() const {
+bool DataFile_Description::IsInitialized() const {
   
   for (int i = 0; i < links_size(); i++) {
     if (!this->links(i).IsInitialized()) return false;
@@ -1055,70 +1055,70 @@ bool Header_Description::IsInitialized() const {
   return true;
 }
 
-const ::google::protobuf::Descriptor* Header_Description::GetDescriptor() const {
+const ::google::protobuf::Descriptor* DataFile_Description::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Reflection* Header_Description::GetReflection() const {
+const ::google::protobuf::Reflection* DataFile_Description::GetReflection() const {
   protobuf_AssignDescriptorsOnce();
-  return Header_Description_reflection_;
+  return DataFile_Description_reflection_;
 }
 
 // -------------------------------------------------------------------
 
 #ifndef _MSC_VER
-const int Header_ElementList::kElementsFieldNumber;
+const int DataFile_ElementList::kElementsFieldNumber;
 #endif  // !_MSC_VER
 
-Header_ElementList::Header_ElementList()
+DataFile_ElementList::DataFile_ElementList()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void Header_ElementList::InitAsDefaultInstance() {}
+void DataFile_ElementList::InitAsDefaultInstance() {}
 
-Header_ElementList::Header_ElementList(const Header_ElementList& from)
+DataFile_ElementList::DataFile_ElementList(const DataFile_ElementList& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Header_ElementList::SharedCtor() {
+void DataFile_ElementList::SharedCtor() {
   _cached_size_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Header_ElementList::~Header_ElementList() {
+DataFile_ElementList::~DataFile_ElementList() {
   SharedDtor();
 }
 
-void Header_ElementList::SharedDtor() {
+void DataFile_ElementList::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-const ::google::protobuf::Descriptor* Header_ElementList::descriptor() {
+const ::google::protobuf::Descriptor* DataFile_ElementList::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_ElementList_descriptor_;
+  return DataFile_ElementList_descriptor_;
 }
 
-const Header_ElementList& Header_ElementList::default_instance() {
+const DataFile_ElementList& DataFile_ElementList::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_decs_2eproto();  return *default_instance_;
 }
 
-Header_ElementList* Header_ElementList::default_instance_ = NULL;
+DataFile_ElementList* DataFile_ElementList::default_instance_ = NULL;
 
-Header_ElementList* Header_ElementList::New() const {
-  return new Header_ElementList;
+DataFile_ElementList* DataFile_ElementList::New() const {
+  return new DataFile_ElementList;
 }
 
-void Header_ElementList::Clear() {
+void DataFile_ElementList::Clear() {
   elements_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool Header_ElementList::MergePartialFromCodedStream(
+bool DataFile_ElementList::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -1155,11 +1155,11 @@ bool Header_ElementList::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Header_ElementList::SerializeWithCachedSizes(
+void DataFile_ElementList::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   ::google::protobuf::uint8* raw_buffer = output->GetDirectBufferForNBytesAndAdvance(_cached_size_);
   if (raw_buffer != NULL) {
-    Header_ElementList::SerializeWithCachedSizesToArray(raw_buffer);
+    DataFile_ElementList::SerializeWithCachedSizesToArray(raw_buffer);
     return;
   }
   
@@ -1174,7 +1174,7 @@ void Header_ElementList::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* Header_ElementList::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* DataFile_ElementList::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // repeated uint32 elements = 1;
   for (int i = 0; i < this->elements_size(); i++) {
@@ -1188,7 +1188,7 @@ void Header_ElementList::SerializeWithCachedSizes(
   return target;
 }
 
-int Header_ElementList::ByteSize() const {
+int DataFile_ElementList::ByteSize() const {
   int total_size = 0;
   
   // repeated uint32 elements = 1;
@@ -1210,10 +1210,10 @@ int Header_ElementList::ByteSize() const {
   return total_size;
 }
 
-void Header_ElementList::MergeFrom(const ::google::protobuf::Message& from) {
+void DataFile_ElementList::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Header_ElementList* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Header_ElementList*>(
+  const DataFile_ElementList* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const DataFile_ElementList*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1222,25 +1222,25 @@ void Header_ElementList::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Header_ElementList::MergeFrom(const Header_ElementList& from) {
+void DataFile_ElementList::MergeFrom(const DataFile_ElementList& from) {
   GOOGLE_CHECK_NE(&from, this);
   elements_.MergeFrom(from.elements_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Header_ElementList::CopyFrom(const ::google::protobuf::Message& from) {
+void DataFile_ElementList::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_ElementList::CopyFrom(const Header_ElementList& from) {
+void DataFile_ElementList::CopyFrom(const DataFile_ElementList& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_ElementList::Swap(Header_ElementList* other) {
+void DataFile_ElementList::Swap(DataFile_ElementList* other) {
   if (other != this) {
     elements_.Swap(&other->elements_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -1249,27 +1249,27 @@ void Header_ElementList::Swap(Header_ElementList* other) {
   }
 }
 
-bool Header_ElementList::IsInitialized() const {
+bool DataFile_ElementList::IsInitialized() const {
   
   return true;
 }
 
-const ::google::protobuf::Descriptor* Header_ElementList::GetDescriptor() const {
+const ::google::protobuf::Descriptor* DataFile_ElementList::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Reflection* Header_ElementList::GetReflection() const {
+const ::google::protobuf::Reflection* DataFile_ElementList::GetReflection() const {
   protobuf_AssignDescriptorsOnce();
-  return Header_ElementList_reflection_;
+  return DataFile_ElementList_reflection_;
 }
 
 // -------------------------------------------------------------------
 
-const ::google::protobuf::EnumDescriptor* Header_Problem_ResultStrategy_descriptor() {
+const ::google::protobuf::EnumDescriptor* DataFile_Problem_ResultStrategy_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_Problem_ResultStrategy_descriptor_;
+  return DataFile_Problem_ResultStrategy_descriptor_;
 }
-bool Header_Problem_ResultStrategy_IsValid(int value) {
+bool DataFile_Problem_ResultStrategy_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -1280,38 +1280,38 @@ bool Header_Problem_ResultStrategy_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const Header_Problem_ResultStrategy Header_Problem::COUNT;
-const Header_Problem_ResultStrategy Header_Problem::FULL;
-const Header_Problem_ResultStrategy Header_Problem::ResultStrategy_MIN;
-const Header_Problem_ResultStrategy Header_Problem::ResultStrategy_MAX;
+const DataFile_Problem_ResultStrategy DataFile_Problem::COUNT;
+const DataFile_Problem_ResultStrategy DataFile_Problem::FULL;
+const DataFile_Problem_ResultStrategy DataFile_Problem::ResultStrategy_MIN;
+const DataFile_Problem_ResultStrategy DataFile_Problem::ResultStrategy_MAX;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
-const int Header_Problem::kDescriptionFieldNumber;
-const int Header_Problem::kProblemIdFieldNumber;
-const int Header_Problem::kSubProblemIdFieldNumber;
-const int Header_Problem::kColumnCountFieldNumber;
-const int Header_Problem::kElementCountFieldNumber;
-const int Header_Problem::kRowsFieldNumber;
-const int Header_Problem::kSecondaryColumnsFieldNumber;
-const int Header_Problem::kInitVectorFieldNumber;
-const int Header_Problem::kResultStrategyFieldNumber;
+const int DataFile_Problem::kDescriptionFieldNumber;
+const int DataFile_Problem::kProblemIdFieldNumber;
+const int DataFile_Problem::kSubProblemIdFieldNumber;
+const int DataFile_Problem::kColumnCountFieldNumber;
+const int DataFile_Problem::kElementCountFieldNumber;
+const int DataFile_Problem::kRowsFieldNumber;
+const int DataFile_Problem::kSecondaryColumnsFieldNumber;
+const int DataFile_Problem::kInitVectorFieldNumber;
+const int DataFile_Problem::kResultStrategyFieldNumber;
 #endif  // !_MSC_VER
 
-Header_Problem::Header_Problem()
+DataFile_Problem::DataFile_Problem()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void Header_Problem::InitAsDefaultInstance() {  description_ = const_cast< ::decs::Header_Description*>(&::decs::Header_Description::default_instance());
+void DataFile_Problem::InitAsDefaultInstance() {  description_ = const_cast< ::decs::DataFile_Description*>(&::decs::DataFile_Description::default_instance());
 }
 
-Header_Problem::Header_Problem(const Header_Problem& from)
+DataFile_Problem::DataFile_Problem(const DataFile_Problem& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Header_Problem::SharedCtor() {
+void DataFile_Problem::SharedCtor() {
   _cached_size_ = 0;
   description_ = NULL;
   problem_id_ = 0u;
@@ -1322,35 +1322,35 @@ void Header_Problem::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Header_Problem::~Header_Problem() {
+DataFile_Problem::~DataFile_Problem() {
   SharedDtor();
 }
 
-void Header_Problem::SharedDtor() {
+void DataFile_Problem::SharedDtor() {
   if (this != default_instance_) {
     delete description_;
   }
 }
 
-const ::google::protobuf::Descriptor* Header_Problem::descriptor() {
+const ::google::protobuf::Descriptor* DataFile_Problem::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_Problem_descriptor_;
+  return DataFile_Problem_descriptor_;
 }
 
-const Header_Problem& Header_Problem::default_instance() {
+const DataFile_Problem& DataFile_Problem::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_decs_2eproto();  return *default_instance_;
 }
 
-Header_Problem* Header_Problem::default_instance_ = NULL;
+DataFile_Problem* DataFile_Problem::default_instance_ = NULL;
 
-Header_Problem* Header_Problem::New() const {
-  return new Header_Problem;
+DataFile_Problem* DataFile_Problem::New() const {
+  return new DataFile_Problem;
 }
 
-void Header_Problem::Clear() {
+void DataFile_Problem::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (_has_bit(0)) {
-      if (description_ != NULL) description_->::decs::Header_Description::Clear();
+      if (description_ != NULL) description_->::decs::DataFile_Description::Clear();
     }
     problem_id_ = 0u;
     sub_problem_id_ = 0u;
@@ -1367,13 +1367,13 @@ void Header_Problem::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool Header_Problem::MergePartialFromCodedStream(
+bool DataFile_Problem::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormat::GetTagFieldNumber(tag)) {
-      // optional .decs.Header.Description description = 1;
+      // optional .decs.DataFile.Description description = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -1441,7 +1441,7 @@ bool Header_Problem::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .decs.Header.ElementList rows = 6;
+      // repeated .decs.DataFile.ElementList rows = 6;
       case 6: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -1485,7 +1485,7 @@ bool Header_Problem::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .decs.Header.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
+      // optional .decs.DataFile.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
       case 9: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_VARINT) {
@@ -1494,8 +1494,8 @@ bool Header_Problem::MergePartialFromCodedStream(
        parse_result_strategy:
         int value;
         DO_(::google::protobuf::internal::WireFormat::ReadEnum(input, &value));
-        if (::decs::Header_Problem_ResultStrategy_IsValid(value)) {
-          set_result_strategy(static_cast< ::decs::Header_Problem_ResultStrategy >(value));
+        if (::decs::DataFile_Problem_ResultStrategy_IsValid(value)) {
+          set_result_strategy(static_cast< ::decs::DataFile_Problem_ResultStrategy >(value));
         } else {
           mutable_unknown_fields()->AddVarint(9, value);
         }
@@ -1519,15 +1519,15 @@ bool Header_Problem::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Header_Problem::SerializeWithCachedSizes(
+void DataFile_Problem::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   ::google::protobuf::uint8* raw_buffer = output->GetDirectBufferForNBytesAndAdvance(_cached_size_);
   if (raw_buffer != NULL) {
-    Header_Problem::SerializeWithCachedSizesToArray(raw_buffer);
+    DataFile_Problem::SerializeWithCachedSizesToArray(raw_buffer);
     return;
   }
   
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   if (_has_bit(0)) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(1, this->description(), output);
   }
@@ -1552,7 +1552,7 @@ void Header_Problem::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteUInt32(5, this->element_count(), output);
   }
   
-  // repeated .decs.Header.ElementList rows = 6;
+  // repeated .decs.DataFile.ElementList rows = 6;
   for (int i = 0; i < this->rows_size(); i++) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(6, this->rows(i), output);
   }
@@ -1567,7 +1567,7 @@ void Header_Problem::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteUInt32(8, this->init_vector(i), output);
   }
   
-  // optional .decs.Header.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
+  // optional .decs.DataFile.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
   if (_has_bit(8)) {
     ::google::protobuf::internal::WireFormat::WriteEnum(9, this->result_strategy(), output);
   }
@@ -1578,9 +1578,9 @@ void Header_Problem::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* Header_Problem::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* DataFile_Problem::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   if (_has_bit(0)) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(1, this->description(), target);
   }
@@ -1605,7 +1605,7 @@ void Header_Problem::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::WriteUInt32ToArray(5, this->element_count(), target);
   }
   
-  // repeated .decs.Header.ElementList rows = 6;
+  // repeated .decs.DataFile.ElementList rows = 6;
   for (int i = 0; i < this->rows_size(); i++) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(6, this->rows(i), target);
   }
@@ -1620,7 +1620,7 @@ void Header_Problem::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::WriteUInt32ToArray(8, this->init_vector(i), target);
   }
   
-  // optional .decs.Header.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
+  // optional .decs.DataFile.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
   if (_has_bit(8)) {
     target = ::google::protobuf::internal::WireFormat::WriteEnumToArray(9, this->result_strategy(), target);
   }
@@ -1632,11 +1632,11 @@ void Header_Problem::SerializeWithCachedSizes(
   return target;
 }
 
-int Header_Problem::ByteSize() const {
+int DataFile_Problem::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .decs.Header.Description description = 1;
+    // optional .decs.DataFile.Description description = 1;
     if (has_description()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
@@ -1673,14 +1673,14 @@ int Header_Problem::ByteSize() const {
     
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional .decs.Header.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
+    // optional .decs.DataFile.Problem.ResultStrategy result_strategy = 9 [default = COUNT];
     if (has_result_strategy()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormat::EnumSize(this->result_strategy());
     }
     
   }
-  // repeated .decs.Header.ElementList rows = 6;
+  // repeated .decs.DataFile.ElementList rows = 6;
   total_size += 1 * this->rows_size();
   for (int i = 0; i < this->rows_size(); i++) {
     total_size +=
@@ -1717,10 +1717,10 @@ int Header_Problem::ByteSize() const {
   return total_size;
 }
 
-void Header_Problem::MergeFrom(const ::google::protobuf::Message& from) {
+void DataFile_Problem::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Header_Problem* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Header_Problem*>(
+  const DataFile_Problem* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const DataFile_Problem*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1729,14 +1729,14 @@ void Header_Problem::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Header_Problem::MergeFrom(const Header_Problem& from) {
+void DataFile_Problem::MergeFrom(const DataFile_Problem& from) {
   GOOGLE_CHECK_NE(&from, this);
   rows_.MergeFrom(from.rows_);
   secondary_columns_.MergeFrom(from.secondary_columns_);
   init_vector_.MergeFrom(from.init_vector_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
-      mutable_description()->::decs::Header_Description::MergeFrom(from.description());
+      mutable_description()->::decs::DataFile_Description::MergeFrom(from.description());
     }
     if (from._has_bit(1)) {
       set_problem_id(from.problem_id());
@@ -1759,19 +1759,19 @@ void Header_Problem::MergeFrom(const Header_Problem& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Header_Problem::CopyFrom(const ::google::protobuf::Message& from) {
+void DataFile_Problem::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Problem::CopyFrom(const Header_Problem& from) {
+void DataFile_Problem::CopyFrom(const DataFile_Problem& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Problem::Swap(Header_Problem* other) {
+void DataFile_Problem::Swap(DataFile_Problem* other) {
   if (other != this) {
     std::swap(description_, other->description_);
     std::swap(problem_id_, other->problem_id_);
@@ -1788,7 +1788,7 @@ void Header_Problem::Swap(Header_Problem* other) {
   }
 }
 
-bool Header_Problem::IsInitialized() const {
+bool DataFile_Problem::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000018) != 0x00000018) return false;
   
   if (has_description()) {
@@ -1797,22 +1797,22 @@ bool Header_Problem::IsInitialized() const {
   return true;
 }
 
-const ::google::protobuf::Descriptor* Header_Problem::GetDescriptor() const {
+const ::google::protobuf::Descriptor* DataFile_Problem::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Reflection* Header_Problem::GetReflection() const {
+const ::google::protobuf::Reflection* DataFile_Problem::GetReflection() const {
   protobuf_AssignDescriptorsOnce();
-  return Header_Problem_reflection_;
+  return DataFile_Problem_reflection_;
 }
 
 // -------------------------------------------------------------------
 
-const ::google::protobuf::EnumDescriptor* Header_Result_ResultState_descriptor() {
+const ::google::protobuf::EnumDescriptor* DataFile_Result_ResultState_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_Result_ResultState_descriptor_;
+  return DataFile_Result_ResultState_descriptor_;
 }
-bool Header_Result_ResultState_IsValid(int value) {
+bool DataFile_Result_ResultState_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -1823,35 +1823,35 @@ bool Header_Result_ResultState_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const Header_Result_ResultState Header_Result::COMPLETE;
-const Header_Result_ResultState Header_Result::PARTIAL;
-const Header_Result_ResultState Header_Result::ResultState_MIN;
-const Header_Result_ResultState Header_Result::ResultState_MAX;
+const DataFile_Result_ResultState DataFile_Result::COMPLETE;
+const DataFile_Result_ResultState DataFile_Result::PARTIAL;
+const DataFile_Result_ResultState DataFile_Result::ResultState_MIN;
+const DataFile_Result_ResultState DataFile_Result::ResultState_MAX;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
-const int Header_Result::kDescriptionFieldNumber;
-const int Header_Result::kProblemIdFieldNumber;
-const int Header_Result::kSubProblemIdFieldNumber;
-const int Header_Result::kSolutionCountFieldNumber;
-const int Header_Result::kSolutionsFieldNumber;
-const int Header_Result::kStateFieldNumber;
+const int DataFile_Result::kDescriptionFieldNumber;
+const int DataFile_Result::kProblemIdFieldNumber;
+const int DataFile_Result::kSubProblemIdFieldNumber;
+const int DataFile_Result::kSolutionCountFieldNumber;
+const int DataFile_Result::kSolutionsFieldNumber;
+const int DataFile_Result::kStateFieldNumber;
 #endif  // !_MSC_VER
 
-Header_Result::Header_Result()
+DataFile_Result::DataFile_Result()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void Header_Result::InitAsDefaultInstance() {  description_ = const_cast< ::decs::Header_Description*>(&::decs::Header_Description::default_instance());
+void DataFile_Result::InitAsDefaultInstance() {  description_ = const_cast< ::decs::DataFile_Description*>(&::decs::DataFile_Description::default_instance());
 }
 
-Header_Result::Header_Result(const Header_Result& from)
+DataFile_Result::DataFile_Result(const DataFile_Result& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Header_Result::SharedCtor() {
+void DataFile_Result::SharedCtor() {
   _cached_size_ = 0;
   description_ = NULL;
   problem_id_ = 0u;
@@ -1861,35 +1861,35 @@ void Header_Result::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Header_Result::~Header_Result() {
+DataFile_Result::~DataFile_Result() {
   SharedDtor();
 }
 
-void Header_Result::SharedDtor() {
+void DataFile_Result::SharedDtor() {
   if (this != default_instance_) {
     delete description_;
   }
 }
 
-const ::google::protobuf::Descriptor* Header_Result::descriptor() {
+const ::google::protobuf::Descriptor* DataFile_Result::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_Result_descriptor_;
+  return DataFile_Result_descriptor_;
 }
 
-const Header_Result& Header_Result::default_instance() {
+const DataFile_Result& DataFile_Result::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_decs_2eproto();  return *default_instance_;
 }
 
-Header_Result* Header_Result::default_instance_ = NULL;
+DataFile_Result* DataFile_Result::default_instance_ = NULL;
 
-Header_Result* Header_Result::New() const {
-  return new Header_Result;
+DataFile_Result* DataFile_Result::New() const {
+  return new DataFile_Result;
 }
 
-void Header_Result::Clear() {
+void DataFile_Result::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (_has_bit(0)) {
-      if (description_ != NULL) description_->::decs::Header_Description::Clear();
+      if (description_ != NULL) description_->::decs::DataFile_Description::Clear();
     }
     problem_id_ = 0u;
     sub_problem_id_ = 0u;
@@ -1901,13 +1901,13 @@ void Header_Result::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool Header_Result::MergePartialFromCodedStream(
+bool DataFile_Result::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormat::GetTagFieldNumber(tag)) {
-      // optional .decs.Header.Description description = 1;
+      // optional .decs.DataFile.Description description = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -1961,7 +1961,7 @@ bool Header_Result::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .decs.Header.ElementList solutions = 5;
+      // repeated .decs.DataFile.ElementList solutions = 5;
       case 5: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -1975,7 +1975,7 @@ bool Header_Result::MergePartialFromCodedStream(
         break;
       }
       
-      // optional .decs.Header.Result.ResultState state = 6 [default = COMPLETE];
+      // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
       case 6: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_VARINT) {
@@ -1984,8 +1984,8 @@ bool Header_Result::MergePartialFromCodedStream(
        parse_state:
         int value;
         DO_(::google::protobuf::internal::WireFormat::ReadEnum(input, &value));
-        if (::decs::Header_Result_ResultState_IsValid(value)) {
-          set_state(static_cast< ::decs::Header_Result_ResultState >(value));
+        if (::decs::DataFile_Result_ResultState_IsValid(value)) {
+          set_state(static_cast< ::decs::DataFile_Result_ResultState >(value));
         } else {
           mutable_unknown_fields()->AddVarint(6, value);
         }
@@ -2009,15 +2009,15 @@ bool Header_Result::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Header_Result::SerializeWithCachedSizes(
+void DataFile_Result::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   ::google::protobuf::uint8* raw_buffer = output->GetDirectBufferForNBytesAndAdvance(_cached_size_);
   if (raw_buffer != NULL) {
-    Header_Result::SerializeWithCachedSizesToArray(raw_buffer);
+    DataFile_Result::SerializeWithCachedSizesToArray(raw_buffer);
     return;
   }
   
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   if (_has_bit(0)) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(1, this->description(), output);
   }
@@ -2037,12 +2037,12 @@ void Header_Result::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteUInt64(4, this->solution_count(), output);
   }
   
-  // repeated .decs.Header.ElementList solutions = 5;
+  // repeated .decs.DataFile.ElementList solutions = 5;
   for (int i = 0; i < this->solutions_size(); i++) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(5, this->solutions(i), output);
   }
   
-  // optional .decs.Header.Result.ResultState state = 6 [default = COMPLETE];
+  // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
   if (_has_bit(5)) {
     ::google::protobuf::internal::WireFormat::WriteEnum(6, this->state(), output);
   }
@@ -2053,9 +2053,9 @@ void Header_Result::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* Header_Result::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* DataFile_Result::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   if (_has_bit(0)) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(1, this->description(), target);
   }
@@ -2075,12 +2075,12 @@ void Header_Result::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::WriteUInt64ToArray(4, this->solution_count(), target);
   }
   
-  // repeated .decs.Header.ElementList solutions = 5;
+  // repeated .decs.DataFile.ElementList solutions = 5;
   for (int i = 0; i < this->solutions_size(); i++) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(5, this->solutions(i), target);
   }
   
-  // optional .decs.Header.Result.ResultState state = 6 [default = COMPLETE];
+  // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
   if (_has_bit(5)) {
     target = ::google::protobuf::internal::WireFormat::WriteEnumToArray(6, this->state(), target);
   }
@@ -2092,11 +2092,11 @@ void Header_Result::SerializeWithCachedSizes(
   return target;
 }
 
-int Header_Result::ByteSize() const {
+int DataFile_Result::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .decs.Header.Description description = 1;
+    // optional .decs.DataFile.Description description = 1;
     if (has_description()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
@@ -2124,14 +2124,14 @@ int Header_Result::ByteSize() const {
           this->solution_count());
     }
     
-    // optional .decs.Header.Result.ResultState state = 6 [default = COMPLETE];
+    // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
     if (has_state()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormat::EnumSize(this->state());
     }
     
   }
-  // repeated .decs.Header.ElementList solutions = 5;
+  // repeated .decs.DataFile.ElementList solutions = 5;
   total_size += 1 * this->solutions_size();
   for (int i = 0; i < this->solutions_size(); i++) {
     total_size +=
@@ -2148,10 +2148,10 @@ int Header_Result::ByteSize() const {
   return total_size;
 }
 
-void Header_Result::MergeFrom(const ::google::protobuf::Message& from) {
+void DataFile_Result::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Header_Result* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Header_Result*>(
+  const DataFile_Result* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const DataFile_Result*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2160,12 +2160,12 @@ void Header_Result::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Header_Result::MergeFrom(const Header_Result& from) {
+void DataFile_Result::MergeFrom(const DataFile_Result& from) {
   GOOGLE_CHECK_NE(&from, this);
   solutions_.MergeFrom(from.solutions_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
-      mutable_description()->::decs::Header_Description::MergeFrom(from.description());
+      mutable_description()->::decs::DataFile_Description::MergeFrom(from.description());
     }
     if (from._has_bit(1)) {
       set_problem_id(from.problem_id());
@@ -2183,19 +2183,19 @@ void Header_Result::MergeFrom(const Header_Result& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Header_Result::CopyFrom(const ::google::protobuf::Message& from) {
+void DataFile_Result::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Result::CopyFrom(const Header_Result& from) {
+void DataFile_Result::CopyFrom(const DataFile_Result& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header_Result::Swap(Header_Result* other) {
+void DataFile_Result::Swap(DataFile_Result* other) {
   if (other != this) {
     std::swap(description_, other->description_);
     std::swap(problem_id_, other->problem_id_);
@@ -2209,7 +2209,7 @@ void Header_Result::Swap(Header_Result* other) {
   }
 }
 
-bool Header_Result::IsInitialized() const {
+bool DataFile_Result::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000008) != 0x00000008) return false;
   
   if (has_description()) {
@@ -2218,72 +2218,72 @@ bool Header_Result::IsInitialized() const {
   return true;
 }
 
-const ::google::protobuf::Descriptor* Header_Result::GetDescriptor() const {
+const ::google::protobuf::Descriptor* DataFile_Result::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Reflection* Header_Result::GetReflection() const {
+const ::google::protobuf::Reflection* DataFile_Result::GetReflection() const {
   protobuf_AssignDescriptorsOnce();
-  return Header_Result_reflection_;
+  return DataFile_Result_reflection_;
 }
 
 // -------------------------------------------------------------------
 
 #ifndef _MSC_VER
-const int Header::kDescriptionFieldNumber;
-const int Header::kProblemsFieldNumber;
-const int Header::kResultsFieldNumber;
+const int DataFile::kDescriptionFieldNumber;
+const int DataFile::kProblemsFieldNumber;
+const int DataFile::kResultsFieldNumber;
 #endif  // !_MSC_VER
 
-Header::Header()
+DataFile::DataFile()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void Header::InitAsDefaultInstance() {  description_ = const_cast< ::decs::Header_Description*>(&::decs::Header_Description::default_instance());
+void DataFile::InitAsDefaultInstance() {  description_ = const_cast< ::decs::DataFile_Description*>(&::decs::DataFile_Description::default_instance());
 }
 
-Header::Header(const Header& from)
+DataFile::DataFile(const DataFile& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void Header::SharedCtor() {
+void DataFile::SharedCtor() {
   _cached_size_ = 0;
   description_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Header::~Header() {
+DataFile::~DataFile() {
   SharedDtor();
 }
 
-void Header::SharedDtor() {
+void DataFile::SharedDtor() {
   if (this != default_instance_) {
     delete description_;
   }
 }
 
-const ::google::protobuf::Descriptor* Header::descriptor() {
+const ::google::protobuf::Descriptor* DataFile::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Header_descriptor_;
+  return DataFile_descriptor_;
 }
 
-const Header& Header::default_instance() {
+const DataFile& DataFile::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_decs_2eproto();  return *default_instance_;
 }
 
-Header* Header::default_instance_ = NULL;
+DataFile* DataFile::default_instance_ = NULL;
 
-Header* Header::New() const {
-  return new Header;
+DataFile* DataFile::New() const {
+  return new DataFile;
 }
 
-void Header::Clear() {
+void DataFile::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (_has_bit(0)) {
-      if (description_ != NULL) description_->::decs::Header_Description::Clear();
+      if (description_ != NULL) description_->::decs::DataFile_Description::Clear();
     }
   }
   problems_.Clear();
@@ -2292,13 +2292,13 @@ void Header::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool Header::MergePartialFromCodedStream(
+bool DataFile::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormat::GetTagFieldNumber(tag)) {
-      // optional .decs.Header.Description description = 1;
+      // optional .decs.DataFile.Description description = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -2310,7 +2310,7 @@ bool Header::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .decs.Header.Problem problems = 2;
+      // repeated .decs.DataFile.Problem problems = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -2324,7 +2324,7 @@ bool Header::MergePartialFromCodedStream(
         break;
       }
       
-      // repeated .decs.Header.Result results = 3;
+      // repeated .decs.DataFile.Result results = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
@@ -2354,25 +2354,25 @@ bool Header::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void Header::SerializeWithCachedSizes(
+void DataFile::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   ::google::protobuf::uint8* raw_buffer = output->GetDirectBufferForNBytesAndAdvance(_cached_size_);
   if (raw_buffer != NULL) {
-    Header::SerializeWithCachedSizesToArray(raw_buffer);
+    DataFile::SerializeWithCachedSizesToArray(raw_buffer);
     return;
   }
   
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   if (_has_bit(0)) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(1, this->description(), output);
   }
   
-  // repeated .decs.Header.Problem problems = 2;
+  // repeated .decs.DataFile.Problem problems = 2;
   for (int i = 0; i < this->problems_size(); i++) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->problems(i), output);
   }
   
-  // repeated .decs.Header.Result results = 3;
+  // repeated .decs.DataFile.Result results = 3;
   for (int i = 0; i < this->results_size(); i++) {
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(3, this->results(i), output);
   }
@@ -2383,19 +2383,19 @@ void Header::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* Header::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* DataFile::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional .decs.Header.Description description = 1;
+  // optional .decs.DataFile.Description description = 1;
   if (_has_bit(0)) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(1, this->description(), target);
   }
   
-  // repeated .decs.Header.Problem problems = 2;
+  // repeated .decs.DataFile.Problem problems = 2;
   for (int i = 0; i < this->problems_size(); i++) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->problems(i), target);
   }
   
-  // repeated .decs.Header.Result results = 3;
+  // repeated .decs.DataFile.Result results = 3;
   for (int i = 0; i < this->results_size(); i++) {
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(3, this->results(i), target);
   }
@@ -2407,11 +2407,11 @@ void Header::SerializeWithCachedSizes(
   return target;
 }
 
-int Header::ByteSize() const {
+int DataFile::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .decs.Header.Description description = 1;
+    // optional .decs.DataFile.Description description = 1;
     if (has_description()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
@@ -2419,7 +2419,7 @@ int Header::ByteSize() const {
     }
     
   }
-  // repeated .decs.Header.Problem problems = 2;
+  // repeated .decs.DataFile.Problem problems = 2;
   total_size += 1 * this->problems_size();
   for (int i = 0; i < this->problems_size(); i++) {
     total_size +=
@@ -2427,7 +2427,7 @@ int Header::ByteSize() const {
         this->problems(i));
   }
   
-  // repeated .decs.Header.Result results = 3;
+  // repeated .decs.DataFile.Result results = 3;
   total_size += 1 * this->results_size();
   for (int i = 0; i < this->results_size(); i++) {
     total_size +=
@@ -2444,10 +2444,10 @@ int Header::ByteSize() const {
   return total_size;
 }
 
-void Header::MergeFrom(const ::google::protobuf::Message& from) {
+void DataFile::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Header* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Header*>(
+  const DataFile* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const DataFile*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2456,31 +2456,31 @@ void Header::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Header::MergeFrom(const Header& from) {
+void DataFile::MergeFrom(const DataFile& from) {
   GOOGLE_CHECK_NE(&from, this);
   problems_.MergeFrom(from.problems_);
   results_.MergeFrom(from.results_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
-      mutable_description()->::decs::Header_Description::MergeFrom(from.description());
+      mutable_description()->::decs::DataFile_Description::MergeFrom(from.description());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Header::CopyFrom(const ::google::protobuf::Message& from) {
+void DataFile::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header::CopyFrom(const Header& from) {
+void DataFile::CopyFrom(const DataFile& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Header::Swap(Header* other) {
+void DataFile::Swap(DataFile* other) {
   if (other != this) {
     std::swap(description_, other->description_);
     problems_.Swap(&other->problems_);
@@ -2491,7 +2491,7 @@ void Header::Swap(Header* other) {
   }
 }
 
-bool Header::IsInitialized() const {
+bool DataFile::IsInitialized() const {
   
   if (has_description()) {
     if (!this->description().IsInitialized()) return false;
@@ -2505,13 +2505,13 @@ bool Header::IsInitialized() const {
   return true;
 }
 
-const ::google::protobuf::Descriptor* Header::GetDescriptor() const {
+const ::google::protobuf::Descriptor* DataFile::GetDescriptor() const {
   return descriptor();
 }
 
-const ::google::protobuf::Reflection* Header::GetReflection() const {
+const ::google::protobuf::Reflection* DataFile::GetReflection() const {
   protobuf_AssignDescriptorsOnce();
-  return Header_reflection_;
+  return DataFile_reflection_;
 }
 
 }  // namespace decs

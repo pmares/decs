@@ -1,7 +1,7 @@
 
 package decs;
 
-message Header {
+message DataFile {
 	message Description {
 		message Link {
 			required string url = 1;
