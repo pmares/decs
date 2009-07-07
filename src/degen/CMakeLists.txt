@@ -5,7 +5,7 @@ set(SOURCES
 	nqdecs.cpp
 )
 
-include_directories( ${CMAKE_SOURCE_DIR}/decs )
+include_directories( ${CMAKE_SOURCE_DIR}/decs ${CMAKE_SOURCE_DIR}/protobuf/src )
 
 add_executable( degen ${SOURCES} )
 target_link_libraries( degen decs )
