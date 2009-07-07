@@ -16,6 +16,6 @@ set(SOURCES
 	sbnode.cpp
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/vendor/protobuf/include)
 add_library( decs STATIC ${SOURCES} )
+target_link_libraries ( decs protobuf )
 set_target_properties( decs PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
