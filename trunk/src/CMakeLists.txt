@@ -109,6 +109,7 @@ INCLUDE(CPack)
 
 # List the subdirectories
 add_subdirectory( decs )
+add_subdirectory( protobuf )
 if(DECS_BUILD_UTILS)
 	add_subdirectory( dance )
 	add_subdirectory( degen )
