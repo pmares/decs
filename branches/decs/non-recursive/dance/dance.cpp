@@ -39,6 +39,7 @@ void print_usage() {
 		"Options:\n"
 		"  -v, --verbose      Verbose output.\n"
 		"  -q, --quiet        Quiet. Don't output to stdout.\n"
+		"  --file-info        Print information about DECS file and exit.\n"
 		"  --statistics       Print the number of nodes and link updates.\n"
 		"  --profile          Print the node count and link update profile.\n"
 		"  --no-heuristic     Disable the column selection by size heuristic.\n"
@@ -114,6 +115,7 @@ int main(int argc, char* argv[]) {
 	uint verbose = 1;
 	bool showStats = false;
 	bool showProfile = false;
+	bool showFileInfo = false;
 	char* file = 0;
 	
 	// Interpret command line parameters.
@@ -128,6 +130,8 @@ int main(int argc, char* argv[]) {
 		} else if (!strcmp(argv[i], "--version")) {
 			print_version();
 			return 0;
+		} else if (!strcmp(argv[i], "--file-info")) {
+			showFileInfo = true;
 		} else if (!strcmp(argv[i], "--statistics")) {
 			showStats = true;
 		} else if (!strcmp(argv[i], "--profile")) {
@@ -164,7 +168,14 @@ int main(int argc, char* argv[]) {
 		return DFIO_ERR_FILE_PARSE;
 	}
 	f.close();
-		
+
+	if (showFileInfo) {
+		// Display file information and exit.
+		cout << "File information:" << endl;
+		cout << df.DebugString();
+		return DFIO_ERR_SUCCESS;
+	}
+
 	SBMatrix* matrix = new SBMatrix();
 	dfio_set_data_file(&df);
 	dfio_read_matrix(matrix, matrix_id);
