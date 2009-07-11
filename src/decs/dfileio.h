@@ -1,6 +1,6 @@
 /**
  * libdecs - Exact cover solver library using the Dancing Links algorithm.
- * Copyright (C) 2007-2008 Jan Magne Tjensvold
+ * Copyright (C) 2007-2009 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -24,6 +24,7 @@
 #include "type.h"
 #include "dformat.h"
 #include "sbmatrix.h"
+#include "decs.pb.h"
 
 /**
  * Global library constants.
@@ -44,8 +45,8 @@ enum DFIOError {
 	/** The file version is incompatible. */
 	DFIO_ERR_FILE_VERSION = 2,
 	
-	/** Unknown file ID (the first 4 bytes was not 'DECS'). */
-	DFIO_ERR_FILE_ID = 3,
+	/** Failed to parse data in file. */
+	DFIO_ERR_FILE_PARSE = 3,
 	
 	/** The column indexes read from the file is not sorted. */
 	DFIO_ERR_COL_UNSORTED = 4,
@@ -223,7 +224,7 @@ enum DFIOFileType {
 //uint dfio_open_write(char* file);
 //uint dfio_close();
 uint dfio_new_file(FILE* f, DFIOFileType type);
-uint dfio_load_file(FILE* f);
+uint dfio_load_file(const decs::DataFile& df, const char* file_name);
 uint dfio_cleanup();
 
 DFIOError dfio_last_error();
@@ -250,18 +251,8 @@ uint dfio_has_prop(uint prop);
 uxlong dfio_get_prop(DFIOProperty prop);
 uint dfio_set_prop(DFIOProperty prop, uxlong value);
 
-/**
- * Returns the version compatibility mode currently in effect. The DFIO_COMP_*
- * constants determine if it runs in native, forward or backward compatibility
- * mode. It will also flag any incompatibilities and warn if potential problems
- * like loss of information might arise.
- */
-uint dfio_comp_mode();
-
-DFIOFileType dfio_file_type();
-
-uint dfio_read_matrix(SBMatrix* matrix);
-uint dfio_write_headers();
+uint dfio_read_matrix(SBMatrix* matrix, uint index);
+uint dfio_set_data_file(decs::DataFile* data_file);
 
 
 #endif /*DFIO_H_*/

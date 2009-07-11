@@ -1,6 +1,6 @@
 /**
  * dance - Exact cover solver program for the Dancing Links library.
- * Copyright (C) 2007-2008 Jan Magne Tjensvold
+ * Copyright (C) 2007-2009 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -17,12 +17,15 @@
  */
 
 #include <iostream>
+#include <fstream>
+#include <string>
 
 #include "dlx.h"
 #include "dfileio.h"
 #include "sbmatrix.h"
+#include "decs.pb.h"
 
-const char* VERSION = "0.3";
+const char* VERSION = "0.3.0";
 
 using namespace std;
 
@@ -51,7 +54,7 @@ void print_usage() {
 void print_version() {
 	cout << 
 		"dance (DECS toolkit) " << VERSION << "\n"
-		"Copyright (C) 2007-2008 Jan Magne Tjensvold\n"
+		"Copyright (C) 2007-2009 Jan Magne Tjensvold\n"
 		"This is free software; See the source for copying conditions. There is NO\n"
 		"WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.";
 }
@@ -71,8 +74,8 @@ int solve_error(uint code) {
 		cerr << "Incompatible file version";
 		return 1;
 		break;
-	case DFIO_ERR_FILE_ID:
-		cerr << "Incompatible file ID";
+	case DFIO_ERR_FILE_PARSE:
+		cerr << "Failed to parse data file";
 		return 1;
 		break;
 	case DFIO_ERR_OOB_COL_IDX:
@@ -103,6 +106,11 @@ int solve_error(uint code) {
 }
 
 int main(int argc, char* argv[]) {
+	// Verify that the version of the library that we linked against is
+	// compatible with the version of the headers we compiled against.
+	GOOGLE_PROTOBUF_VERIFY_VERSION;
+	
+	uint matrix_id = 0; // Default matrix index. TODO: Create command line param to allow user to specify this.
 	uint verbose = 1;
 	bool showStats = false;
 	bool showProfile = false;
@@ -129,41 +137,41 @@ int main(int argc, char* argv[]) {
 		} else if (i == argc-1) {
 			file = argv[i];
 		} else {
-			cerr << "Unknown command line parameter '" << argv[i] << "'\n";
+			cerr << "Unknown command line parameter '" << argv[i] << "'" << endl;
 			usage_error();
 		}
 	}
 	
 	if (!file) {
-		cerr << "No file specified on the command line\n";
+		cerr << "No file specified on the command line" << endl;
 		usage_error();
 	}
 	
 	dlx_set_verbose_level(verbose);
 	
 	if (verbose > 0) {
-		cout << "Dancing to the rhythm of\n" << file << "\n\n";
+		cout << "Dancing to the rhythm of\n" << file << endl << endl;
 		cout << "Loading..." << endl;
 	}
 	
-#ifdef _WIN32
-	FILE* f = fopen(file, "rb");
-#else
-	FILE* f = fopen(file, "r");
-#endif
+	decs::DataFile df;
+	fstream f(file, ios::in | ios::binary);
 	if (!f) {
-		cerr << "Unable to open file for reading '" << file << "'\n";
-		return 1;
+		f.close();
+		return DFIO_ERR_FILE_OPEN;
+	} else if (!df.ParseFromIstream(&f)) {
+		f.close();
+		return DFIO_ERR_FILE_PARSE;
 	}
-	
-	
-	dfio_load_file(f);
+	f.close();
+		
 	SBMatrix* matrix = new SBMatrix();
-	dfio_read_matrix(matrix);
+	dfio_set_data_file(&df);
+	dfio_read_matrix(matrix, matrix_id);
 	dfio_cleanup();
 
 	if (verbose > 0) cout << "Searching..." << endl;
-	uint result = dlx_solve(matrix);
+	int result = dlx_solve(matrix);
 	if (result != DFIO_ERR_SUCCESS) return solve_error(result);
 	
 
@@ -173,29 +181,57 @@ int main(int argc, char* argv[]) {
 	uxlong solutions =  dlx_count_solutions();
 
 	if (verbose > 0) {
-		cout << "Search complete\n";
-		cout << "\nNumber of solutions: " << solutions;
+		cout << "Search complete" << endl;
+		cout << endl << "Number of solutions: " << solutions;
 	}
 	if (showStats) {
-		cout << "\nTotal nodes: " << nodes;
-		cout << "\nTotal link updates: " << updates;
+		cout << endl;
+		cout << "Total nodes: " << nodes << endl;
+		cout << "Total link updates: " << updates;
 	}
 	if (showProfile) {
-		cout << "\n\nNode, link update and solution profile:\n";
-		cout << "Level        Nodes               Updates             Solutions\n"; 
+		cout << endl << endl;
+		cout << "Node, link update and solution profile:" << endl;
+		cout << "Level       Nodes               Updates             Solutions" << endl; 
 		uint maxLevel = dlx_get_max_level() + 1;
 		for (uint i = 0; i < maxLevel; i++) {
-			uxlong upd = dlx_get_update_profile(i);
 			uxlong nod = dlx_get_node_profile(i);
+			uxlong upd = dlx_get_update_profile(i);
 			uxlong sol = dlx_get_solution_profile(i);
-			printf(" %3u  %10u (%5.1f%%)  %10u (%5.1f%%)  %10u (%5.1f%%)\n", i,
-				nod, double(nod) / double(nodes) * 100,
-				upd, double(upd) / double(updates) * 100,
-				sol, double(sol) / double(solutions) * 100);
+
+			cout.precision(1);
+			cout.setf(ios_base::right | ios_base::fixed);
+
+			cout.width(4);
+			cout << i;
+
+			cout.width(12);
+			cout << nod << " (";
+			cout.width(5);
+			cout << double(nod) / double(nodes) * 100 << "%)";
+
+			cout.width(12);
+			cout << upd << " (";
+			cout.width(5);
+			cout << double(upd) / double(updates) * 100 << "%)";
+
+			cout.width(12);
+			cout << sol << " (";
+			cout.width(5);
+			cout << double(sol) / double(solutions) * 100 << "%)";
+
+			cout << endl;
+
+
+//			printf(" %3u  %10u (%5.1f%%)  %10u (%5.1f%%)  %10u (%5.1f%%)\n", i,
+//				nod, double(nod) / double(nodes) * 100,
+//				upd, double(upd) / double(updates) * 100,
+//				sol, double(sol) / double(solutions) * 100);
 		}
 
-		cout << "\n\nFanout profile:\n";
-		cout << "Level    Nodes      Updates     Solutions\n"; 
+		cout << endl << endl;
+		cout << "Fanout profile:" << endl;
+		cout << "Level    Nodes      Updates     Solutions" << endl; 
 		uxlong upd1 = dlx_get_update_profile(0);
 		uxlong nod1 = dlx_get_node_profile(0);
 		uxlong sol1 = dlx_get_solution_profile(0);
@@ -203,19 +239,26 @@ int main(int argc, char* argv[]) {
 			uxlong upd = dlx_get_update_profile(i);
 			uxlong nod = dlx_get_node_profile(i);
 			uxlong sol = dlx_get_solution_profile(i);
-			if (sol1 > 0)
-				printf(" %3u  %8.1f%  %8.1f%  %8.1f%\n", i,
-					double(nod) / double(nod1) * 100,
-					double(upd) / double(upd1) * 100,
-					double(sol) / double(sol1) * 100);
-			else
-				printf(" %3u  %8.1f%  %8.1f%\n", i,
-					double(nod) / double(nod1) * 100,
-					double(upd) / double(upd1) * 100);
+
+			cout.width(4);
+			cout << i;
+
+			cout.width(10);
+			cout << double(nod) / double(nod1) * 100 << "%";
+
+			cout.width(10);
+			cout << double(upd) / double(upd1) * 100 << "%";
+
+			if (sol1 > 0) {
+				cout.width(10);
+				cout << double(sol) / double(sol1) * 100 << "%";
+			}
+
+			cout << endl;
+
 			upd1 = upd;
 			nod1 = nod;
 			sol1 = sol;
-//			cout << i << '\t' << upd << " (" << () * 100.0 << "%)" << '\t' << nod << " (" << (double(nod) / double(nodes)) * 100.0 << "%)\n"; 
 		}
 	}
 	
