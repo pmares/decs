@@ -47,8 +47,8 @@ void protobuf_AssignDesc_decs_2eproto() {
   DataFile_descriptor_ = file->message_type(0);
   static const int DataFile_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, description_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, problems_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, results_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, problem_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile, result_),
   };
   DataFile_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -64,8 +64,8 @@ void protobuf_AssignDesc_decs_2eproto() {
   DataFile_Description_descriptor_ = DataFile_descriptor_->nested_type(0);
   static const int DataFile_Description_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, description_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, links_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, authors_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, link_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description, author_),
   };
   DataFile_Description_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -97,7 +97,7 @@ void protobuf_AssignDesc_decs_2eproto() {
   DataFile_Description_Author_descriptor_ = DataFile_Description_descriptor_->nested_type(1);
   static const int DataFile_Description_Author_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Author, name_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Author, links_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Description_Author, link_),
   };
   DataFile_Description_Author_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -112,7 +112,7 @@ void protobuf_AssignDesc_decs_2eproto() {
       sizeof(DataFile_Description_Author));
   DataFile_ElementList_descriptor_ = DataFile_descriptor_->nested_type(1);
   static const int DataFile_ElementList_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_ElementList, elements_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_ElementList, element_),
   };
   DataFile_ElementList_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -132,8 +132,8 @@ void protobuf_AssignDesc_decs_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, sub_problem_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, column_count_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, element_count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, rows_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, secondary_columns_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, row_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, secondary_column_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, init_vector_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Problem, result_strategy_),
   };
@@ -155,7 +155,7 @@ void protobuf_AssignDesc_decs_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, problem_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, sub_problem_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, solution_count_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, solutions_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, solution_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataFile_Result, state_),
   };
   DataFile_Result_reflection_ =
@@ -224,33 +224,33 @@ void protobuf_AddDesc_decs_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\ndecs.proto\022\004decs\"\234\010\n\010DataFile\022/\n\013descr"
+    "\n\ndecs.proto\022\004decs\"\223\010\n\010DataFile\022/\n\013descr"
     "iption\030\001 \001(\0132\032.decs.DataFile.Description"
-    "\022(\n\010problems\030\002 \003(\0132\026.decs.DataFile.Probl"
-    "em\022&\n\007results\030\003 \003(\0132\025.decs.DataFile.Resu"
-    "lt\032\370\001\n\013Description\022\023\n\013description\030\001 \001(\t\022"
-    ".\n\005links\030\002 \003(\0132\037.decs.DataFile.Descripti"
-    "on.Link\0222\n\007authors\030\003 \003(\0132!.decs.DataFile"
-    ".Description.Author\032(\n\004Link\022\013\n\003url\030\001 \002(\t"
-    "\022\023\n\013description\030\002 \001(\t\032F\n\006Author\022\014\n\004name\030"
-    "\001 \002(\t\022.\n\005links\030\002 \003(\0132\037.decs.DataFile.Des"
-    "cription.Link\032\037\n\013ElementList\022\020\n\010elements"
-    "\030\001 \003(\r\032\333\002\n\007Problem\022/\n\013description\030\001 \001(\0132"
-    "\032.decs.DataFile.Description\022\022\n\nproblem_i"
-    "d\030\002 \001(\r\022\026\n\016sub_problem_id\030\003 \001(\r\022\024\n\014colum"
-    "n_count\030\004 \002(\r\022\025\n\relement_count\030\005 \002(\r\022(\n\004"
-    "rows\030\006 \003(\0132\032.decs.DataFile.ElementList\022\031"
-    "\n\021secondary_columns\030\007 \003(\r\022\023\n\013init_vector"
-    "\030\010 \003(\r\022E\n\017result_strategy\030\t \001(\0162%.decs.D"
-    "ataFile.Problem.ResultStrategy:\005COUNT\"%\n"
-    "\016ResultStrategy\022\t\n\005COUNT\020\000\022\010\n\004FULL\020\001\032\222\002\n"
-    "\006Result\022/\n\013description\030\001 \001(\0132\032.decs.Data"
-    "File.Description\022\022\n\nproblem_id\030\002 \001(\r\022\026\n\016"
-    "sub_problem_id\030\003 \001(\r\022\026\n\016solution_count\030\004"
-    " \002(\004\022-\n\tsolutions\030\005 \003(\0132\032.decs.DataFile."
-    "ElementList\022:\n\005state\030\006 \001(\0162!.decs.DataFi"
-    "le.Result.ResultState:\010COMPLETE\"(\n\013Resul"
-    "tState\022\014\n\010COMPLETE\020\000\022\013\n\007PARTIAL\020\001", 1073);
+    "\022\'\n\007problem\030\002 \003(\0132\026.decs.DataFile.Proble"
+    "m\022%\n\006result\030\003 \003(\0132\025.decs.DataFile.Result"
+    "\032\365\001\n\013Description\022\023\n\013description\030\001 \001(\t\022-\n"
+    "\004link\030\002 \003(\0132\037.decs.DataFile.Description."
+    "Link\0221\n\006author\030\003 \003(\0132!.decs.DataFile.Des"
+    "cription.Author\032(\n\004Link\022\013\n\003url\030\001 \002(\t\022\023\n\013"
+    "description\030\002 \001(\t\032E\n\006Author\022\014\n\004name\030\001 \002("
+    "\t\022-\n\004link\030\002 \003(\0132\037.decs.DataFile.Descript"
+    "ion.Link\032\036\n\013ElementList\022\017\n\007element\030\001 \003(\r"
+    "\032\331\002\n\007Problem\022/\n\013description\030\001 \001(\0132\032.decs"
+    ".DataFile.Description\022\022\n\nproblem_id\030\002 \001("
+    "\r\022\026\n\016sub_problem_id\030\003 \001(\r\022\024\n\014column_coun"
+    "t\030\004 \002(\r\022\025\n\relement_count\030\005 \002(\r\022\'\n\003row\030\006 "
+    "\003(\0132\032.decs.DataFile.ElementList\022\030\n\020secon"
+    "dary_column\030\007 \003(\r\022\023\n\013init_vector\030\010 \003(\r\022E"
+    "\n\017result_strategy\030\t \001(\0162%.decs.DataFile."
+    "Problem.ResultStrategy:\005COUNT\"%\n\016ResultS"
+    "trategy\022\t\n\005COUNT\020\000\022\010\n\004FULL\020\001\032\221\002\n\006Result\022"
+    "/\n\013description\030\001 \001(\0132\032.decs.DataFile.Des"
+    "cription\022\022\n\nproblem_id\030\002 \001(\r\022\026\n\016sub_prob"
+    "lem_id\030\003 \001(\r\022\026\n\016solution_count\030\004 \002(\004\022,\n\010"
+    "solution\030\005 \003(\0132\032.decs.DataFile.ElementLi"
+    "st\022:\n\005state\030\006 \001(\0162!.decs.DataFile.Result"
+    ".ResultState:\010COMPLETE\"(\n\013ResultState\022\014\n"
+    "\010COMPLETE\020\000\022\013\n\007PARTIAL\020\001", 1064);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "decs.proto", &protobuf_RegisterTypes);
   DataFile::default_instance_ = new DataFile();
@@ -535,7 +535,7 @@ const ::google::protobuf::Reflection* DataFile_Description_Link::GetReflection()
 const ::std::string DataFile_Description_Author::_default_name_;
 #ifndef _MSC_VER
 const int DataFile_Description_Author::kNameFieldNumber;
-const int DataFile_Description_Author::kLinksFieldNumber;
+const int DataFile_Description_Author::kLinkFieldNumber;
 #endif  // !_MSC_VER
 
 DataFile_Description_Author::DataFile_Description_Author()
@@ -592,7 +592,7 @@ void DataFile_Description_Author::Clear() {
       }
     }
   }
-  links_.Clear();
+  link_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -610,20 +610,20 @@ bool DataFile_Description_Author::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         DO_(::google::protobuf::internal::WireFormat::ReadString(input, mutable_name()));
-        if (input->ExpectTag(18)) goto parse_links;
+        if (input->ExpectTag(18)) goto parse_link;
         break;
       }
       
-      // repeated .decs.DataFile.Description.Link links = 2;
+      // repeated .decs.DataFile.Description.Link link = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
           goto handle_uninterpreted;
         }
-       parse_links:
+       parse_link:
         DO_(::google::protobuf::internal::WireFormat::ReadMessageNoVirtual(
-             input, add_links()));
-        if (input->ExpectTag(18)) goto parse_links;
+             input, add_link()));
+        if (input->ExpectTag(18)) goto parse_link;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -657,9 +657,9 @@ void DataFile_Description_Author::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteString(1, this->name(), output);
   }
   
-  // repeated .decs.DataFile.Description.Link links = 2;
-  for (int i = 0; i < this->links_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->links(i), output);
+  // repeated .decs.DataFile.Description.Link link = 2;
+  for (int i = 0; i < this->link_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->link(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -675,9 +675,9 @@ void DataFile_Description_Author::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::WriteStringToArray(1, this->name(), target);
   }
   
-  // repeated .decs.DataFile.Description.Link links = 2;
-  for (int i = 0; i < this->links_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->links(i), target);
+  // repeated .decs.DataFile.Description.Link link = 2;
+  for (int i = 0; i < this->link_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->link(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -698,12 +698,12 @@ int DataFile_Description_Author::ByteSize() const {
     }
     
   }
-  // repeated .decs.DataFile.Description.Link links = 2;
-  total_size += 1 * this->links_size();
-  for (int i = 0; i < this->links_size(); i++) {
+  // repeated .decs.DataFile.Description.Link link = 2;
+  total_size += 1 * this->link_size();
+  for (int i = 0; i < this->link_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
-        this->links(i));
+        this->link(i));
   }
   
   if (!unknown_fields().empty()) {
@@ -729,7 +729,7 @@ void DataFile_Description_Author::MergeFrom(const ::google::protobuf::Message& f
 
 void DataFile_Description_Author::MergeFrom(const DataFile_Description_Author& from) {
   GOOGLE_CHECK_NE(&from, this);
-  links_.MergeFrom(from.links_);
+  link_.MergeFrom(from.link_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
       set_name(from.name());
@@ -753,7 +753,7 @@ void DataFile_Description_Author::CopyFrom(const DataFile_Description_Author& fr
 void DataFile_Description_Author::Swap(DataFile_Description_Author* other) {
   if (other != this) {
     std::swap(name_, other->name_);
-    links_.Swap(&other->links_);
+    link_.Swap(&other->link_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -763,8 +763,8 @@ void DataFile_Description_Author::Swap(DataFile_Description_Author* other) {
 bool DataFile_Description_Author::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
-  for (int i = 0; i < links_size(); i++) {
-    if (!this->links(i).IsInitialized()) return false;
+  for (int i = 0; i < link_size(); i++) {
+    if (!this->link(i).IsInitialized()) return false;
   }
   return true;
 }
@@ -783,8 +783,8 @@ const ::google::protobuf::Reflection* DataFile_Description_Author::GetReflection
 const ::std::string DataFile_Description::_default_description_;
 #ifndef _MSC_VER
 const int DataFile_Description::kDescriptionFieldNumber;
-const int DataFile_Description::kLinksFieldNumber;
-const int DataFile_Description::kAuthorsFieldNumber;
+const int DataFile_Description::kLinkFieldNumber;
+const int DataFile_Description::kAuthorFieldNumber;
 #endif  // !_MSC_VER
 
 DataFile_Description::DataFile_Description()
@@ -841,8 +841,8 @@ void DataFile_Description::Clear() {
       }
     }
   }
-  links_.Clear();
-  authors_.Clear();
+  link_.Clear();
+  author_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -860,34 +860,34 @@ bool DataFile_Description::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         DO_(::google::protobuf::internal::WireFormat::ReadString(input, mutable_description()));
-        if (input->ExpectTag(18)) goto parse_links;
+        if (input->ExpectTag(18)) goto parse_link;
         break;
       }
       
-      // repeated .decs.DataFile.Description.Link links = 2;
+      // repeated .decs.DataFile.Description.Link link = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
           goto handle_uninterpreted;
         }
-       parse_links:
+       parse_link:
         DO_(::google::protobuf::internal::WireFormat::ReadMessageNoVirtual(
-             input, add_links()));
-        if (input->ExpectTag(18)) goto parse_links;
-        if (input->ExpectTag(26)) goto parse_authors;
+             input, add_link()));
+        if (input->ExpectTag(18)) goto parse_link;
+        if (input->ExpectTag(26)) goto parse_author;
         break;
       }
       
-      // repeated .decs.DataFile.Description.Author authors = 3;
+      // repeated .decs.DataFile.Description.Author author = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
           goto handle_uninterpreted;
         }
-       parse_authors:
+       parse_author:
         DO_(::google::protobuf::internal::WireFormat::ReadMessageNoVirtual(
-             input, add_authors()));
-        if (input->ExpectTag(26)) goto parse_authors;
+             input, add_author()));
+        if (input->ExpectTag(26)) goto parse_author;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -921,14 +921,14 @@ void DataFile_Description::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteString(1, this->description(), output);
   }
   
-  // repeated .decs.DataFile.Description.Link links = 2;
-  for (int i = 0; i < this->links_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->links(i), output);
+  // repeated .decs.DataFile.Description.Link link = 2;
+  for (int i = 0; i < this->link_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->link(i), output);
   }
   
-  // repeated .decs.DataFile.Description.Author authors = 3;
-  for (int i = 0; i < this->authors_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(3, this->authors(i), output);
+  // repeated .decs.DataFile.Description.Author author = 3;
+  for (int i = 0; i < this->author_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(3, this->author(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -944,14 +944,14 @@ void DataFile_Description::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::WriteStringToArray(1, this->description(), target);
   }
   
-  // repeated .decs.DataFile.Description.Link links = 2;
-  for (int i = 0; i < this->links_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->links(i), target);
+  // repeated .decs.DataFile.Description.Link link = 2;
+  for (int i = 0; i < this->link_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->link(i), target);
   }
   
-  // repeated .decs.DataFile.Description.Author authors = 3;
-  for (int i = 0; i < this->authors_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(3, this->authors(i), target);
+  // repeated .decs.DataFile.Description.Author author = 3;
+  for (int i = 0; i < this->author_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(3, this->author(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -972,20 +972,20 @@ int DataFile_Description::ByteSize() const {
     }
     
   }
-  // repeated .decs.DataFile.Description.Link links = 2;
-  total_size += 1 * this->links_size();
-  for (int i = 0; i < this->links_size(); i++) {
+  // repeated .decs.DataFile.Description.Link link = 2;
+  total_size += 1 * this->link_size();
+  for (int i = 0; i < this->link_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
-        this->links(i));
+        this->link(i));
   }
   
-  // repeated .decs.DataFile.Description.Author authors = 3;
-  total_size += 1 * this->authors_size();
-  for (int i = 0; i < this->authors_size(); i++) {
+  // repeated .decs.DataFile.Description.Author author = 3;
+  total_size += 1 * this->author_size();
+  for (int i = 0; i < this->author_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
-        this->authors(i));
+        this->author(i));
   }
   
   if (!unknown_fields().empty()) {
@@ -1011,8 +1011,8 @@ void DataFile_Description::MergeFrom(const ::google::protobuf::Message& from) {
 
 void DataFile_Description::MergeFrom(const DataFile_Description& from) {
   GOOGLE_CHECK_NE(&from, this);
-  links_.MergeFrom(from.links_);
-  authors_.MergeFrom(from.authors_);
+  link_.MergeFrom(from.link_);
+  author_.MergeFrom(from.author_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
       set_description(from.description());
@@ -1036,8 +1036,8 @@ void DataFile_Description::CopyFrom(const DataFile_Description& from) {
 void DataFile_Description::Swap(DataFile_Description* other) {
   if (other != this) {
     std::swap(description_, other->description_);
-    links_.Swap(&other->links_);
-    authors_.Swap(&other->authors_);
+    link_.Swap(&other->link_);
+    author_.Swap(&other->author_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -1046,11 +1046,11 @@ void DataFile_Description::Swap(DataFile_Description* other) {
 
 bool DataFile_Description::IsInitialized() const {
   
-  for (int i = 0; i < links_size(); i++) {
-    if (!this->links(i).IsInitialized()) return false;
+  for (int i = 0; i < link_size(); i++) {
+    if (!this->link(i).IsInitialized()) return false;
   }
-  for (int i = 0; i < authors_size(); i++) {
-    if (!this->authors(i).IsInitialized()) return false;
+  for (int i = 0; i < author_size(); i++) {
+    if (!this->author(i).IsInitialized()) return false;
   }
   return true;
 }
@@ -1067,7 +1067,7 @@ const ::google::protobuf::Reflection* DataFile_Description::GetReflection() cons
 // -------------------------------------------------------------------
 
 #ifndef _MSC_VER
-const int DataFile_ElementList::kElementsFieldNumber;
+const int DataFile_ElementList::kElementFieldNumber;
 #endif  // !_MSC_VER
 
 DataFile_ElementList::DataFile_ElementList()
@@ -1113,7 +1113,7 @@ DataFile_ElementList* DataFile_ElementList::New() const {
 }
 
 void DataFile_ElementList::Clear() {
-  elements_.Clear();
+  element_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1124,17 +1124,17 @@ bool DataFile_ElementList::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormat::GetTagFieldNumber(tag)) {
-      // repeated uint32 elements = 1;
+      // repeated uint32 element = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_VARINT) {
           goto handle_uninterpreted;
         }
-       parse_elements:
+       parse_element:
         ::google::protobuf::uint32 value;
         DO_(::google::protobuf::internal::WireFormat::ReadUInt32(input, &value));
-        add_elements(value);
-        if (input->ExpectTag(8)) goto parse_elements;
+        add_element(value);
+        if (input->ExpectTag(8)) goto parse_element;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -1163,9 +1163,9 @@ void DataFile_ElementList::SerializeWithCachedSizes(
     return;
   }
   
-  // repeated uint32 elements = 1;
-  for (int i = 0; i < this->elements_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteUInt32(1, this->elements(i), output);
+  // repeated uint32 element = 1;
+  for (int i = 0; i < this->element_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteUInt32(1, this->element(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -1176,9 +1176,9 @@ void DataFile_ElementList::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* DataFile_ElementList::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated uint32 elements = 1;
-  for (int i = 0; i < this->elements_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteUInt32ToArray(1, this->elements(i), target);
+  // repeated uint32 element = 1;
+  for (int i = 0; i < this->element_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteUInt32ToArray(1, this->element(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -1191,14 +1191,14 @@ void DataFile_ElementList::SerializeWithCachedSizes(
 int DataFile_ElementList::ByteSize() const {
   int total_size = 0;
   
-  // repeated uint32 elements = 1;
+  // repeated uint32 element = 1;
   {
     int data_size = 0;
-    for (int i = 0; i < this->elements_size(); i++) {
+    for (int i = 0; i < this->element_size(); i++) {
       data_size += ::google::protobuf::internal::WireFormat::UInt32Size(
-        this->elements(i));
+        this->element(i));
     }
-    total_size += 1 * this->elements_size() + data_size;
+    total_size += 1 * this->element_size() + data_size;
   }
   
   if (!unknown_fields().empty()) {
@@ -1224,7 +1224,7 @@ void DataFile_ElementList::MergeFrom(const ::google::protobuf::Message& from) {
 
 void DataFile_ElementList::MergeFrom(const DataFile_ElementList& from) {
   GOOGLE_CHECK_NE(&from, this);
-  elements_.MergeFrom(from.elements_);
+  element_.MergeFrom(from.element_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -1242,7 +1242,7 @@ void DataFile_ElementList::CopyFrom(const DataFile_ElementList& from) {
 
 void DataFile_ElementList::Swap(DataFile_ElementList* other) {
   if (other != this) {
-    elements_.Swap(&other->elements_);
+    element_.Swap(&other->element_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -1291,8 +1291,8 @@ const int DataFile_Problem::kProblemIdFieldNumber;
 const int DataFile_Problem::kSubProblemIdFieldNumber;
 const int DataFile_Problem::kColumnCountFieldNumber;
 const int DataFile_Problem::kElementCountFieldNumber;
-const int DataFile_Problem::kRowsFieldNumber;
-const int DataFile_Problem::kSecondaryColumnsFieldNumber;
+const int DataFile_Problem::kRowFieldNumber;
+const int DataFile_Problem::kSecondaryColumnFieldNumber;
 const int DataFile_Problem::kInitVectorFieldNumber;
 const int DataFile_Problem::kResultStrategyFieldNumber;
 #endif  // !_MSC_VER
@@ -1360,8 +1360,8 @@ void DataFile_Problem::Clear() {
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     result_strategy_ = 0;
   }
-  rows_.Clear();
-  secondary_columns_.Clear();
+  row_.Clear();
+  secondary_column_.Clear();
   init_vector_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1437,35 +1437,35 @@ bool DataFile_Problem::MergePartialFromCodedStream(
         DO_(::google::protobuf::internal::WireFormat::ReadUInt32(
               input, &element_count_));
         _set_bit(4);
-        if (input->ExpectTag(50)) goto parse_rows;
+        if (input->ExpectTag(50)) goto parse_row;
         break;
       }
       
-      // repeated .decs.DataFile.ElementList rows = 6;
+      // repeated .decs.DataFile.ElementList row = 6;
       case 6: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
           goto handle_uninterpreted;
         }
-       parse_rows:
+       parse_row:
         DO_(::google::protobuf::internal::WireFormat::ReadMessageNoVirtual(
-             input, add_rows()));
-        if (input->ExpectTag(50)) goto parse_rows;
-        if (input->ExpectTag(56)) goto parse_secondary_columns;
+             input, add_row()));
+        if (input->ExpectTag(50)) goto parse_row;
+        if (input->ExpectTag(56)) goto parse_secondary_column;
         break;
       }
       
-      // repeated uint32 secondary_columns = 7;
+      // repeated uint32 secondary_column = 7;
       case 7: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_VARINT) {
           goto handle_uninterpreted;
         }
-       parse_secondary_columns:
+       parse_secondary_column:
         ::google::protobuf::uint32 value;
         DO_(::google::protobuf::internal::WireFormat::ReadUInt32(input, &value));
-        add_secondary_columns(value);
-        if (input->ExpectTag(56)) goto parse_secondary_columns;
+        add_secondary_column(value);
+        if (input->ExpectTag(56)) goto parse_secondary_column;
         if (input->ExpectTag(64)) goto parse_init_vector;
         break;
       }
@@ -1552,14 +1552,14 @@ void DataFile_Problem::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteUInt32(5, this->element_count(), output);
   }
   
-  // repeated .decs.DataFile.ElementList rows = 6;
-  for (int i = 0; i < this->rows_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(6, this->rows(i), output);
+  // repeated .decs.DataFile.ElementList row = 6;
+  for (int i = 0; i < this->row_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(6, this->row(i), output);
   }
   
-  // repeated uint32 secondary_columns = 7;
-  for (int i = 0; i < this->secondary_columns_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteUInt32(7, this->secondary_columns(i), output);
+  // repeated uint32 secondary_column = 7;
+  for (int i = 0; i < this->secondary_column_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteUInt32(7, this->secondary_column(i), output);
   }
   
   // repeated uint32 init_vector = 8;
@@ -1605,14 +1605,14 @@ void DataFile_Problem::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::WriteUInt32ToArray(5, this->element_count(), target);
   }
   
-  // repeated .decs.DataFile.ElementList rows = 6;
-  for (int i = 0; i < this->rows_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(6, this->rows(i), target);
+  // repeated .decs.DataFile.ElementList row = 6;
+  for (int i = 0; i < this->row_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(6, this->row(i), target);
   }
   
-  // repeated uint32 secondary_columns = 7;
-  for (int i = 0; i < this->secondary_columns_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteUInt32ToArray(7, this->secondary_columns(i), target);
+  // repeated uint32 secondary_column = 7;
+  for (int i = 0; i < this->secondary_column_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteUInt32ToArray(7, this->secondary_column(i), target);
   }
   
   // repeated uint32 init_vector = 8;
@@ -1680,22 +1680,22 @@ int DataFile_Problem::ByteSize() const {
     }
     
   }
-  // repeated .decs.DataFile.ElementList rows = 6;
-  total_size += 1 * this->rows_size();
-  for (int i = 0; i < this->rows_size(); i++) {
+  // repeated .decs.DataFile.ElementList row = 6;
+  total_size += 1 * this->row_size();
+  for (int i = 0; i < this->row_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
-        this->rows(i));
+        this->row(i));
   }
   
-  // repeated uint32 secondary_columns = 7;
+  // repeated uint32 secondary_column = 7;
   {
     int data_size = 0;
-    for (int i = 0; i < this->secondary_columns_size(); i++) {
+    for (int i = 0; i < this->secondary_column_size(); i++) {
       data_size += ::google::protobuf::internal::WireFormat::UInt32Size(
-        this->secondary_columns(i));
+        this->secondary_column(i));
     }
-    total_size += 1 * this->secondary_columns_size() + data_size;
+    total_size += 1 * this->secondary_column_size() + data_size;
   }
   
   // repeated uint32 init_vector = 8;
@@ -1731,8 +1731,8 @@ void DataFile_Problem::MergeFrom(const ::google::protobuf::Message& from) {
 
 void DataFile_Problem::MergeFrom(const DataFile_Problem& from) {
   GOOGLE_CHECK_NE(&from, this);
-  rows_.MergeFrom(from.rows_);
-  secondary_columns_.MergeFrom(from.secondary_columns_);
+  row_.MergeFrom(from.row_);
+  secondary_column_.MergeFrom(from.secondary_column_);
   init_vector_.MergeFrom(from.init_vector_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
@@ -1778,8 +1778,8 @@ void DataFile_Problem::Swap(DataFile_Problem* other) {
     std::swap(sub_problem_id_, other->sub_problem_id_);
     std::swap(column_count_, other->column_count_);
     std::swap(element_count_, other->element_count_);
-    rows_.Swap(&other->rows_);
-    secondary_columns_.Swap(&other->secondary_columns_);
+    row_.Swap(&other->row_);
+    secondary_column_.Swap(&other->secondary_column_);
     init_vector_.Swap(&other->init_vector_);
     std::swap(result_strategy_, other->result_strategy_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -1833,7 +1833,7 @@ const int DataFile_Result::kDescriptionFieldNumber;
 const int DataFile_Result::kProblemIdFieldNumber;
 const int DataFile_Result::kSubProblemIdFieldNumber;
 const int DataFile_Result::kSolutionCountFieldNumber;
-const int DataFile_Result::kSolutionsFieldNumber;
+const int DataFile_Result::kSolutionFieldNumber;
 const int DataFile_Result::kStateFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1896,7 +1896,7 @@ void DataFile_Result::Clear() {
     solution_count_ = GOOGLE_ULONGLONG(0);
     state_ = 0;
   }
-  solutions_.Clear();
+  solution_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1957,20 +1957,20 @@ bool DataFile_Result::MergePartialFromCodedStream(
         DO_(::google::protobuf::internal::WireFormat::ReadUInt64(
               input, &solution_count_));
         _set_bit(3);
-        if (input->ExpectTag(42)) goto parse_solutions;
+        if (input->ExpectTag(42)) goto parse_solution;
         break;
       }
       
-      // repeated .decs.DataFile.ElementList solutions = 5;
+      // repeated .decs.DataFile.ElementList solution = 5;
       case 5: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
           goto handle_uninterpreted;
         }
-       parse_solutions:
+       parse_solution:
         DO_(::google::protobuf::internal::WireFormat::ReadMessageNoVirtual(
-             input, add_solutions()));
-        if (input->ExpectTag(42)) goto parse_solutions;
+             input, add_solution()));
+        if (input->ExpectTag(42)) goto parse_solution;
         if (input->ExpectTag(48)) goto parse_state;
         break;
       }
@@ -2037,9 +2037,9 @@ void DataFile_Result::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteUInt64(4, this->solution_count(), output);
   }
   
-  // repeated .decs.DataFile.ElementList solutions = 5;
-  for (int i = 0; i < this->solutions_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(5, this->solutions(i), output);
+  // repeated .decs.DataFile.ElementList solution = 5;
+  for (int i = 0; i < this->solution_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(5, this->solution(i), output);
   }
   
   // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
@@ -2075,9 +2075,9 @@ void DataFile_Result::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::WriteUInt64ToArray(4, this->solution_count(), target);
   }
   
-  // repeated .decs.DataFile.ElementList solutions = 5;
-  for (int i = 0; i < this->solutions_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(5, this->solutions(i), target);
+  // repeated .decs.DataFile.ElementList solution = 5;
+  for (int i = 0; i < this->solution_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(5, this->solution(i), target);
   }
   
   // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
@@ -2131,12 +2131,12 @@ int DataFile_Result::ByteSize() const {
     }
     
   }
-  // repeated .decs.DataFile.ElementList solutions = 5;
-  total_size += 1 * this->solutions_size();
-  for (int i = 0; i < this->solutions_size(); i++) {
+  // repeated .decs.DataFile.ElementList solution = 5;
+  total_size += 1 * this->solution_size();
+  for (int i = 0; i < this->solution_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
-        this->solutions(i));
+        this->solution(i));
   }
   
   if (!unknown_fields().empty()) {
@@ -2162,7 +2162,7 @@ void DataFile_Result::MergeFrom(const ::google::protobuf::Message& from) {
 
 void DataFile_Result::MergeFrom(const DataFile_Result& from) {
   GOOGLE_CHECK_NE(&from, this);
-  solutions_.MergeFrom(from.solutions_);
+  solution_.MergeFrom(from.solution_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
       mutable_description()->::decs::DataFile_Description::MergeFrom(from.description());
@@ -2201,7 +2201,7 @@ void DataFile_Result::Swap(DataFile_Result* other) {
     std::swap(problem_id_, other->problem_id_);
     std::swap(sub_problem_id_, other->sub_problem_id_);
     std::swap(solution_count_, other->solution_count_);
-    solutions_.Swap(&other->solutions_);
+    solution_.Swap(&other->solution_);
     std::swap(state_, other->state_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -2231,8 +2231,8 @@ const ::google::protobuf::Reflection* DataFile_Result::GetReflection() const {
 
 #ifndef _MSC_VER
 const int DataFile::kDescriptionFieldNumber;
-const int DataFile::kProblemsFieldNumber;
-const int DataFile::kResultsFieldNumber;
+const int DataFile::kProblemFieldNumber;
+const int DataFile::kResultFieldNumber;
 #endif  // !_MSC_VER
 
 DataFile::DataFile()
@@ -2286,8 +2286,8 @@ void DataFile::Clear() {
       if (description_ != NULL) description_->::decs::DataFile_Description::Clear();
     }
   }
-  problems_.Clear();
-  results_.Clear();
+  problem_.Clear();
+  result_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -2306,34 +2306,34 @@ bool DataFile::MergePartialFromCodedStream(
         }
         DO_(::google::protobuf::internal::WireFormat::ReadMessageNoVirtual(
              input, mutable_description()));
-        if (input->ExpectTag(18)) goto parse_problems;
+        if (input->ExpectTag(18)) goto parse_problem;
         break;
       }
       
-      // repeated .decs.DataFile.Problem problems = 2;
+      // repeated .decs.DataFile.Problem problem = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
           goto handle_uninterpreted;
         }
-       parse_problems:
+       parse_problem:
         DO_(::google::protobuf::internal::WireFormat::ReadMessageNoVirtual(
-             input, add_problems()));
-        if (input->ExpectTag(18)) goto parse_problems;
-        if (input->ExpectTag(26)) goto parse_results;
+             input, add_problem()));
+        if (input->ExpectTag(18)) goto parse_problem;
+        if (input->ExpectTag(26)) goto parse_result;
         break;
       }
       
-      // repeated .decs.DataFile.Result results = 3;
+      // repeated .decs.DataFile.Result result = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormat::GetTagWireType(tag) !=
             ::google::protobuf::internal::WireFormat::WIRETYPE_LENGTH_DELIMITED) {
           goto handle_uninterpreted;
         }
-       parse_results:
+       parse_result:
         DO_(::google::protobuf::internal::WireFormat::ReadMessageNoVirtual(
-             input, add_results()));
-        if (input->ExpectTag(26)) goto parse_results;
+             input, add_result()));
+        if (input->ExpectTag(26)) goto parse_result;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2367,14 +2367,14 @@ void DataFile::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(1, this->description(), output);
   }
   
-  // repeated .decs.DataFile.Problem problems = 2;
-  for (int i = 0; i < this->problems_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->problems(i), output);
+  // repeated .decs.DataFile.Problem problem = 2;
+  for (int i = 0; i < this->problem_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(2, this->problem(i), output);
   }
   
-  // repeated .decs.DataFile.Result results = 3;
-  for (int i = 0; i < this->results_size(); i++) {
-    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(3, this->results(i), output);
+  // repeated .decs.DataFile.Result result = 3;
+  for (int i = 0; i < this->result_size(); i++) {
+    ::google::protobuf::internal::WireFormat::WriteMessageNoVirtual(3, this->result(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -2390,14 +2390,14 @@ void DataFile::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(1, this->description(), target);
   }
   
-  // repeated .decs.DataFile.Problem problems = 2;
-  for (int i = 0; i < this->problems_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->problems(i), target);
+  // repeated .decs.DataFile.Problem problem = 2;
+  for (int i = 0; i < this->problem_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(2, this->problem(i), target);
   }
   
-  // repeated .decs.DataFile.Result results = 3;
-  for (int i = 0; i < this->results_size(); i++) {
-    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(3, this->results(i), target);
+  // repeated .decs.DataFile.Result result = 3;
+  for (int i = 0; i < this->result_size(); i++) {
+    target = ::google::protobuf::internal::WireFormat::WriteMessageNoVirtualToArray(3, this->result(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -2419,20 +2419,20 @@ int DataFile::ByteSize() const {
     }
     
   }
-  // repeated .decs.DataFile.Problem problems = 2;
-  total_size += 1 * this->problems_size();
-  for (int i = 0; i < this->problems_size(); i++) {
+  // repeated .decs.DataFile.Problem problem = 2;
+  total_size += 1 * this->problem_size();
+  for (int i = 0; i < this->problem_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
-        this->problems(i));
+        this->problem(i));
   }
   
-  // repeated .decs.DataFile.Result results = 3;
-  total_size += 1 * this->results_size();
-  for (int i = 0; i < this->results_size(); i++) {
+  // repeated .decs.DataFile.Result result = 3;
+  total_size += 1 * this->result_size();
+  for (int i = 0; i < this->result_size(); i++) {
     total_size +=
       ::google::protobuf::internal::WireFormat::MessageSizeNoVirtual(
-        this->results(i));
+        this->result(i));
   }
   
   if (!unknown_fields().empty()) {
@@ -2458,8 +2458,8 @@ void DataFile::MergeFrom(const ::google::protobuf::Message& from) {
 
 void DataFile::MergeFrom(const DataFile& from) {
   GOOGLE_CHECK_NE(&from, this);
-  problems_.MergeFrom(from.problems_);
-  results_.MergeFrom(from.results_);
+  problem_.MergeFrom(from.problem_);
+  result_.MergeFrom(from.result_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from._has_bit(0)) {
       mutable_description()->::decs::DataFile_Description::MergeFrom(from.description());
@@ -2483,8 +2483,8 @@ void DataFile::CopyFrom(const DataFile& from) {
 void DataFile::Swap(DataFile* other) {
   if (other != this) {
     std::swap(description_, other->description_);
-    problems_.Swap(&other->problems_);
-    results_.Swap(&other->results_);
+    problem_.Swap(&other->problem_);
+    result_.Swap(&other->result_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -2496,11 +2496,11 @@ bool DataFile::IsInitialized() const {
   if (has_description()) {
     if (!this->description().IsInitialized()) return false;
   }
-  for (int i = 0; i < problems_size(); i++) {
-    if (!this->problems(i).IsInitialized()) return false;
+  for (int i = 0; i < problem_size(); i++) {
+    if (!this->problem(i).IsInitialized()) return false;
   }
-  for (int i = 0; i < results_size(); i++) {
-    if (!this->results(i).IsInitialized()) return false;
+  for (int i = 0; i < result_size(); i++) {
+    if (!this->result(i).IsInitialized()) return false;
   }
   return true;
 }

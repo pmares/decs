@@ -64,7 +64,7 @@ uint nq_transform(char* file) {
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 	decs::DataFile data_file;
-	decs::DataFile::Problem* problem = data_file.add_problems();
+	decs::DataFile::Problem* problem = data_file.add_problem();
 
 	problem->set_column_count(6 * queens - 6);
 
@@ -88,7 +88,7 @@ uint nq_transform(char* file) {
 	uint secols = 4 * queens - 6;
 	for (uint i = 0; i < secols; i++) {
 		uint col = 2 * queens + i;
-		problem->add_secondary_columns(col);
+		problem->add_secondary_column(col);
 	}
 	
 	uint elems = 0;
@@ -108,20 +108,20 @@ uint nq_transform(char* file) {
 			//if (b == VOID_DIAG1 || b == VOID_DIAG2) cols--;  // B0 and B(2N-2) should be omitted.
 			
 			uint js = j + queens;
-			decs::DataFile::ElementList* row = problem->add_rows();
-			row->add_elements(i);
-			row->add_elements(js);
+			decs::DataFile::ElementList* row = problem->add_row();
+			row->add_element(i);
+			row->add_element(js);
 
 			uint as, bs;
 			as = a < VOID_DIAG2 ? a + 2 * queens - 1 : a + 2 * queens - 2;
 			bs = b < VOID_DIAG2 ? b + 4 * queens - 4 : b + 4 * queens - 5;
 			
 			if (a != VOID_DIAG1 && a != VOID_DIAG2)
-				row->add_elements(as);
+				row->add_element(as);
 			if (b != VOID_DIAG1 && b != VOID_DIAG2)
-				row->add_elements(bs);
+				row->add_element(bs);
 			
-			elems += row->elements_size();
+			elems += row->element_size();
 		}
 	}
 	
