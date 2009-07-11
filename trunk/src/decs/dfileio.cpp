@@ -49,14 +49,14 @@ uint dfio_read_matrix(SBMatrix* matrix, uint index) {
 	// SBColumn* header = sb_from_file(FILE* f);
 	// ...
 	
-	if (data_file->problems_size() < index + 1) return 0;
-	const decs::DataFile::Problem& problem = data_file->problems(index);
+	if (data_file->problem_size() < index + 1) return 0;
+	const decs::DataFile::Problem& problem = data_file->problem(index);
 
 	SBColumn* root = new SBColumn();
 	matrix->setRoot(root);
 
 	uint cols = problem.column_count();
-	uint rows = problem.rows_size();
+	uint rows = problem.row_size();
 	uint elems = problem.element_count();
 
 	if (cols == 0) return (err_last = DFIO_ERR_OOB_COLUMNS);
@@ -84,13 +84,13 @@ uint dfio_read_matrix(SBMatrix* matrix, uint index) {
 
 	
 	// Read the secondary column list if available.
-	uint secol_size = problem.secondary_columns_size();
+	uint secol_size = problem.secondary_column_size();
 	if (secol_size > cols) return (err_last = DFIO_ERR_OOB_COLUMNS);
 	uint* secol = new uint[secol_size];
 	if (secol_size > 0) {
 		// Read all secondary column data.
 		for (uint i = 0; i < secol_size; i++) {
-			secol[i] = problem.secondary_columns(i);
+			secol[i] = problem.secondary_column(i);
 		}
 		
 		// Validate data.
@@ -138,9 +138,9 @@ uint dfio_read_matrix(SBMatrix* matrix, uint index) {
 	// Create the circular quad-linked matrix structure.
 	uint itemstot = 0;
 	for (uint i = 0; i < rows; i++) {
-		decs::DataFile::ElementList elements = problem.rows(i);
+		decs::DataFile::ElementList elements = problem.row(i);
 		SBNode* u = 0; // instead of t
-		uint items = elements.elements_size();
+		uint items = elements.element_size();
 		itemstot += items;
 		
 		if (items > cols) return (err_last = DFIO_ERR_OOB_COLUMNS);
@@ -148,7 +148,7 @@ uint dfio_read_matrix(SBMatrix* matrix, uint index) {
 		
 		uint tmpcol = 0;
 		for (uint j = 0; j < items; j++) {
-			uint column = elements.elements(j);
+			uint column = elements.element(j);
 			if (column >= cols) return (err_last = DFIO_ERR_OOB_COL_IDX);
 			if (j > 0 && column <= tmpcol) return (err_last = DFIO_ERR_COL_UNSORTED);
 			

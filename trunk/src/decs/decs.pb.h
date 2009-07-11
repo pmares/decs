@@ -242,15 +242,15 @@ class DataFile_Description_Author : public ::google::protobuf::Message {
   inline void set_name(const char* value, size_t size);
   inline ::std::string* mutable_name();
   
-  // repeated .decs.DataFile.Description.Link links = 2;
-  inline int links_size() const;
-  inline void clear_links();
-  static const int kLinksFieldNumber = 2;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >& links() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >* mutable_links();
-  inline const ::decs::DataFile_Description_Link& links(int index) const;
-  inline ::decs::DataFile_Description_Link* mutable_links(int index);
-  inline ::decs::DataFile_Description_Link* add_links();
+  // repeated .decs.DataFile.Description.Link link = 2;
+  inline int link_size() const;
+  inline void clear_link();
+  static const int kLinkFieldNumber = 2;
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >& link() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >* mutable_link();
+  inline const ::decs::DataFile_Description_Link& link(int index) const;
+  inline ::decs::DataFile_Description_Link* mutable_link(int index);
+  inline ::decs::DataFile_Description_Link* add_link();
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -258,7 +258,7 @@ class DataFile_Description_Author : public ::google::protobuf::Message {
   
   ::std::string* name_;
   static const ::std::string _default_name_;
-  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link > links_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link > link_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
   friend void protobuf_ShutdownFile_decs_2eproto();
@@ -347,25 +347,25 @@ class DataFile_Description : public ::google::protobuf::Message {
   inline void set_description(const char* value, size_t size);
   inline ::std::string* mutable_description();
   
-  // repeated .decs.DataFile.Description.Link links = 2;
-  inline int links_size() const;
-  inline void clear_links();
-  static const int kLinksFieldNumber = 2;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >& links() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >* mutable_links();
-  inline const ::decs::DataFile_Description_Link& links(int index) const;
-  inline ::decs::DataFile_Description_Link* mutable_links(int index);
-  inline ::decs::DataFile_Description_Link* add_links();
+  // repeated .decs.DataFile.Description.Link link = 2;
+  inline int link_size() const;
+  inline void clear_link();
+  static const int kLinkFieldNumber = 2;
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >& link() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >* mutable_link();
+  inline const ::decs::DataFile_Description_Link& link(int index) const;
+  inline ::decs::DataFile_Description_Link* mutable_link(int index);
+  inline ::decs::DataFile_Description_Link* add_link();
   
-  // repeated .decs.DataFile.Description.Author authors = 3;
-  inline int authors_size() const;
-  inline void clear_authors();
-  static const int kAuthorsFieldNumber = 3;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >& authors() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >* mutable_authors();
-  inline const ::decs::DataFile_Description_Author& authors(int index) const;
-  inline ::decs::DataFile_Description_Author* mutable_authors(int index);
-  inline ::decs::DataFile_Description_Author* add_authors();
+  // repeated .decs.DataFile.Description.Author author = 3;
+  inline int author_size() const;
+  inline void clear_author();
+  static const int kAuthorFieldNumber = 3;
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >& author() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >* mutable_author();
+  inline const ::decs::DataFile_Description_Author& author(int index) const;
+  inline ::decs::DataFile_Description_Author* mutable_author(int index);
+  inline ::decs::DataFile_Description_Author* add_author();
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
@@ -373,8 +373,8 @@ class DataFile_Description : public ::google::protobuf::Message {
   
   ::std::string* description_;
   static const ::std::string _default_description_;
-  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link > links_;
-  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author > authors_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link > link_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author > author_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
   friend void protobuf_ShutdownFile_decs_2eproto();
@@ -450,21 +450,21 @@ class DataFile_ElementList : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // repeated uint32 elements = 1;
-  inline int elements_size() const;
-  inline void clear_elements();
-  static const int kElementsFieldNumber = 1;
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >& elements() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >* mutable_elements();
-  inline ::google::protobuf::uint32 elements(int index) const;
-  inline void set_elements(int index, ::google::protobuf::uint32 value);
-  inline void add_elements(::google::protobuf::uint32 value);
+  // repeated uint32 element = 1;
+  inline int element_size() const;
+  inline void clear_element();
+  static const int kElementFieldNumber = 1;
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >& element() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >* mutable_element();
+  inline ::google::protobuf::uint32 element(int index) const;
+  inline void set_element(int index, ::google::protobuf::uint32 value);
+  inline void add_element(::google::protobuf::uint32 value);
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > elements_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > element_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
   friend void protobuf_ShutdownFile_decs_2eproto();
@@ -597,25 +597,25 @@ class DataFile_Problem : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 element_count() const;
   inline void set_element_count(::google::protobuf::uint32 value);
   
-  // repeated .decs.DataFile.ElementList rows = 6;
-  inline int rows_size() const;
-  inline void clear_rows();
-  static const int kRowsFieldNumber = 6;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >& rows() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >* mutable_rows();
-  inline const ::decs::DataFile_ElementList& rows(int index) const;
-  inline ::decs::DataFile_ElementList* mutable_rows(int index);
-  inline ::decs::DataFile_ElementList* add_rows();
+  // repeated .decs.DataFile.ElementList row = 6;
+  inline int row_size() const;
+  inline void clear_row();
+  static const int kRowFieldNumber = 6;
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >& row() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >* mutable_row();
+  inline const ::decs::DataFile_ElementList& row(int index) const;
+  inline ::decs::DataFile_ElementList* mutable_row(int index);
+  inline ::decs::DataFile_ElementList* add_row();
   
-  // repeated uint32 secondary_columns = 7;
-  inline int secondary_columns_size() const;
-  inline void clear_secondary_columns();
-  static const int kSecondaryColumnsFieldNumber = 7;
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >& secondary_columns() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >* mutable_secondary_columns();
-  inline ::google::protobuf::uint32 secondary_columns(int index) const;
-  inline void set_secondary_columns(int index, ::google::protobuf::uint32 value);
-  inline void add_secondary_columns(::google::protobuf::uint32 value);
+  // repeated uint32 secondary_column = 7;
+  inline int secondary_column_size() const;
+  inline void clear_secondary_column();
+  static const int kSecondaryColumnFieldNumber = 7;
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >& secondary_column() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >* mutable_secondary_column();
+  inline ::google::protobuf::uint32 secondary_column(int index) const;
+  inline void set_secondary_column(int index, ::google::protobuf::uint32 value);
+  inline void add_secondary_column(::google::protobuf::uint32 value);
   
   // repeated uint32 init_vector = 8;
   inline int init_vector_size() const;
@@ -643,8 +643,8 @@ class DataFile_Problem : public ::google::protobuf::Message {
   ::google::protobuf::uint32 sub_problem_id_;
   ::google::protobuf::uint32 column_count_;
   ::google::protobuf::uint32 element_count_;
-  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList > rows_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > secondary_columns_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList > row_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > secondary_column_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > init_vector_;
   int result_strategy_;
   friend void  protobuf_AddDesc_decs_2eproto();
@@ -772,15 +772,15 @@ class DataFile_Result : public ::google::protobuf::Message {
   inline ::google::protobuf::uint64 solution_count() const;
   inline void set_solution_count(::google::protobuf::uint64 value);
   
-  // repeated .decs.DataFile.ElementList solutions = 5;
-  inline int solutions_size() const;
-  inline void clear_solutions();
-  static const int kSolutionsFieldNumber = 5;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >& solutions() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >* mutable_solutions();
-  inline const ::decs::DataFile_ElementList& solutions(int index) const;
-  inline ::decs::DataFile_ElementList* mutable_solutions(int index);
-  inline ::decs::DataFile_ElementList* add_solutions();
+  // repeated .decs.DataFile.ElementList solution = 5;
+  inline int solution_size() const;
+  inline void clear_solution();
+  static const int kSolutionFieldNumber = 5;
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >& solution() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >* mutable_solution();
+  inline const ::decs::DataFile_ElementList& solution(int index) const;
+  inline ::decs::DataFile_ElementList* mutable_solution(int index);
+  inline ::decs::DataFile_ElementList* add_solution();
   
   // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
   inline bool has_state() const;
@@ -797,7 +797,7 @@ class DataFile_Result : public ::google::protobuf::Message {
   ::google::protobuf::uint32 problem_id_;
   ::google::protobuf::uint32 sub_problem_id_;
   ::google::protobuf::uint64 solution_count_;
-  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList > solutions_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList > solution_;
   int state_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
@@ -886,33 +886,33 @@ class DataFile : public ::google::protobuf::Message {
   inline const ::decs::DataFile_Description& description() const;
   inline ::decs::DataFile_Description* mutable_description();
   
-  // repeated .decs.DataFile.Problem problems = 2;
-  inline int problems_size() const;
-  inline void clear_problems();
-  static const int kProblemsFieldNumber = 2;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >& problems() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >* mutable_problems();
-  inline const ::decs::DataFile_Problem& problems(int index) const;
-  inline ::decs::DataFile_Problem* mutable_problems(int index);
-  inline ::decs::DataFile_Problem* add_problems();
+  // repeated .decs.DataFile.Problem problem = 2;
+  inline int problem_size() const;
+  inline void clear_problem();
+  static const int kProblemFieldNumber = 2;
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >& problem() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >* mutable_problem();
+  inline const ::decs::DataFile_Problem& problem(int index) const;
+  inline ::decs::DataFile_Problem* mutable_problem(int index);
+  inline ::decs::DataFile_Problem* add_problem();
   
-  // repeated .decs.DataFile.Result results = 3;
-  inline int results_size() const;
-  inline void clear_results();
-  static const int kResultsFieldNumber = 3;
-  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >& results() const;
-  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >* mutable_results();
-  inline const ::decs::DataFile_Result& results(int index) const;
-  inline ::decs::DataFile_Result* mutable_results(int index);
-  inline ::decs::DataFile_Result* add_results();
+  // repeated .decs.DataFile.Result result = 3;
+  inline int result_size() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 3;
+  inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >& result() const;
+  inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >* mutable_result();
+  inline const ::decs::DataFile_Result& result(int index) const;
+  inline ::decs::DataFile_Result* mutable_result(int index);
+  inline ::decs::DataFile_Result* add_result();
   
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
   ::decs::DataFile_Description* description_;
-  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem > problems_;
-  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result > results_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem > problem_;
+  ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result > result_;
   friend void  protobuf_AddDesc_decs_2eproto();
   friend void protobuf_AssignDesc_decs_2eproto();
   friend void protobuf_ShutdownFile_decs_2eproto();
@@ -1072,29 +1072,29 @@ inline ::std::string* DataFile_Description_Author::mutable_name() {
   return name_;
 }
 
-// repeated .decs.DataFile.Description.Link links = 2;
-inline int DataFile_Description_Author::links_size() const {
-  return links_.size();
+// repeated .decs.DataFile.Description.Link link = 2;
+inline int DataFile_Description_Author::link_size() const {
+  return link_.size();
 }
-inline void DataFile_Description_Author::clear_links() {
-  links_.Clear();
+inline void DataFile_Description_Author::clear_link() {
+  link_.Clear();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >&
-DataFile_Description_Author::links() const {
-  return links_;
+DataFile_Description_Author::link() const {
+  return link_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >*
-DataFile_Description_Author::mutable_links() {
-  return &links_;
+DataFile_Description_Author::mutable_link() {
+  return &link_;
 }
-inline const ::decs::DataFile_Description_Link& DataFile_Description_Author::links(int index) const {
-  return links_.Get(index);
+inline const ::decs::DataFile_Description_Link& DataFile_Description_Author::link(int index) const {
+  return link_.Get(index);
 }
-inline ::decs::DataFile_Description_Link* DataFile_Description_Author::mutable_links(int index) {
-  return links_.Mutable(index);
+inline ::decs::DataFile_Description_Link* DataFile_Description_Author::mutable_link(int index) {
+  return link_.Mutable(index);
 }
-inline ::decs::DataFile_Description_Link* DataFile_Description_Author::add_links() {
-  return links_.Add();
+inline ::decs::DataFile_Description_Link* DataFile_Description_Author::add_link() {
+  return link_.Add();
 }
 
 // -------------------------------------------------------------------
@@ -1143,83 +1143,83 @@ inline ::std::string* DataFile_Description::mutable_description() {
   return description_;
 }
 
-// repeated .decs.DataFile.Description.Link links = 2;
-inline int DataFile_Description::links_size() const {
-  return links_.size();
+// repeated .decs.DataFile.Description.Link link = 2;
+inline int DataFile_Description::link_size() const {
+  return link_.size();
 }
-inline void DataFile_Description::clear_links() {
-  links_.Clear();
+inline void DataFile_Description::clear_link() {
+  link_.Clear();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >&
-DataFile_Description::links() const {
-  return links_;
+DataFile_Description::link() const {
+  return link_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Link >*
-DataFile_Description::mutable_links() {
-  return &links_;
+DataFile_Description::mutable_link() {
+  return &link_;
 }
-inline const ::decs::DataFile_Description_Link& DataFile_Description::links(int index) const {
-  return links_.Get(index);
+inline const ::decs::DataFile_Description_Link& DataFile_Description::link(int index) const {
+  return link_.Get(index);
 }
-inline ::decs::DataFile_Description_Link* DataFile_Description::mutable_links(int index) {
-  return links_.Mutable(index);
+inline ::decs::DataFile_Description_Link* DataFile_Description::mutable_link(int index) {
+  return link_.Mutable(index);
 }
-inline ::decs::DataFile_Description_Link* DataFile_Description::add_links() {
-  return links_.Add();
+inline ::decs::DataFile_Description_Link* DataFile_Description::add_link() {
+  return link_.Add();
 }
 
-// repeated .decs.DataFile.Description.Author authors = 3;
-inline int DataFile_Description::authors_size() const {
-  return authors_.size();
+// repeated .decs.DataFile.Description.Author author = 3;
+inline int DataFile_Description::author_size() const {
+  return author_.size();
 }
-inline void DataFile_Description::clear_authors() {
-  authors_.Clear();
+inline void DataFile_Description::clear_author() {
+  author_.Clear();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >&
-DataFile_Description::authors() const {
-  return authors_;
+DataFile_Description::author() const {
+  return author_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Description_Author >*
-DataFile_Description::mutable_authors() {
-  return &authors_;
+DataFile_Description::mutable_author() {
+  return &author_;
 }
-inline const ::decs::DataFile_Description_Author& DataFile_Description::authors(int index) const {
-  return authors_.Get(index);
+inline const ::decs::DataFile_Description_Author& DataFile_Description::author(int index) const {
+  return author_.Get(index);
 }
-inline ::decs::DataFile_Description_Author* DataFile_Description::mutable_authors(int index) {
-  return authors_.Mutable(index);
+inline ::decs::DataFile_Description_Author* DataFile_Description::mutable_author(int index) {
+  return author_.Mutable(index);
 }
-inline ::decs::DataFile_Description_Author* DataFile_Description::add_authors() {
-  return authors_.Add();
+inline ::decs::DataFile_Description_Author* DataFile_Description::add_author() {
+  return author_.Add();
 }
 
 // -------------------------------------------------------------------
 
 // DataFile_ElementList
 
-// repeated uint32 elements = 1;
-inline int DataFile_ElementList::elements_size() const {
-  return elements_.size();
+// repeated uint32 element = 1;
+inline int DataFile_ElementList::element_size() const {
+  return element_.size();
 }
-inline void DataFile_ElementList::clear_elements() {
-  elements_.Clear();
+inline void DataFile_ElementList::clear_element() {
+  element_.Clear();
 }
 inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
-DataFile_ElementList::elements() const {
-  return elements_;
+DataFile_ElementList::element() const {
+  return element_;
 }
 inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
-DataFile_ElementList::mutable_elements() {
-  return &elements_;
+DataFile_ElementList::mutable_element() {
+  return &element_;
 }
-inline ::google::protobuf::uint32 DataFile_ElementList::elements(int index) const {
-  return elements_.Get(index);
+inline ::google::protobuf::uint32 DataFile_ElementList::element(int index) const {
+  return element_.Get(index);
 }
-inline void DataFile_ElementList::set_elements(int index, ::google::protobuf::uint32 value) {
-  elements_.Set(index, value);
+inline void DataFile_ElementList::set_element(int index, ::google::protobuf::uint32 value) {
+  element_.Set(index, value);
 }
-inline void DataFile_ElementList::add_elements(::google::protobuf::uint32 value) {
-  elements_.Add(value);
+inline void DataFile_ElementList::add_element(::google::protobuf::uint32 value) {
+  element_.Add(value);
 }
 
 // -------------------------------------------------------------------
@@ -1307,54 +1307,54 @@ inline void DataFile_Problem::set_element_count(::google::protobuf::uint32 value
   element_count_ = value;
 }
 
-// repeated .decs.DataFile.ElementList rows = 6;
-inline int DataFile_Problem::rows_size() const {
-  return rows_.size();
+// repeated .decs.DataFile.ElementList row = 6;
+inline int DataFile_Problem::row_size() const {
+  return row_.size();
 }
-inline void DataFile_Problem::clear_rows() {
-  rows_.Clear();
+inline void DataFile_Problem::clear_row() {
+  row_.Clear();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >&
-DataFile_Problem::rows() const {
-  return rows_;
+DataFile_Problem::row() const {
+  return row_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >*
-DataFile_Problem::mutable_rows() {
-  return &rows_;
+DataFile_Problem::mutable_row() {
+  return &row_;
 }
-inline const ::decs::DataFile_ElementList& DataFile_Problem::rows(int index) const {
-  return rows_.Get(index);
+inline const ::decs::DataFile_ElementList& DataFile_Problem::row(int index) const {
+  return row_.Get(index);
 }
-inline ::decs::DataFile_ElementList* DataFile_Problem::mutable_rows(int index) {
-  return rows_.Mutable(index);
+inline ::decs::DataFile_ElementList* DataFile_Problem::mutable_row(int index) {
+  return row_.Mutable(index);
 }
-inline ::decs::DataFile_ElementList* DataFile_Problem::add_rows() {
-  return rows_.Add();
+inline ::decs::DataFile_ElementList* DataFile_Problem::add_row() {
+  return row_.Add();
 }
 
-// repeated uint32 secondary_columns = 7;
-inline int DataFile_Problem::secondary_columns_size() const {
-  return secondary_columns_.size();
+// repeated uint32 secondary_column = 7;
+inline int DataFile_Problem::secondary_column_size() const {
+  return secondary_column_.size();
 }
-inline void DataFile_Problem::clear_secondary_columns() {
-  secondary_columns_.Clear();
+inline void DataFile_Problem::clear_secondary_column() {
+  secondary_column_.Clear();
 }
 inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
-DataFile_Problem::secondary_columns() const {
-  return secondary_columns_;
+DataFile_Problem::secondary_column() const {
+  return secondary_column_;
 }
 inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
-DataFile_Problem::mutable_secondary_columns() {
-  return &secondary_columns_;
+DataFile_Problem::mutable_secondary_column() {
+  return &secondary_column_;
 }
-inline ::google::protobuf::uint32 DataFile_Problem::secondary_columns(int index) const {
-  return secondary_columns_.Get(index);
+inline ::google::protobuf::uint32 DataFile_Problem::secondary_column(int index) const {
+  return secondary_column_.Get(index);
 }
-inline void DataFile_Problem::set_secondary_columns(int index, ::google::protobuf::uint32 value) {
-  secondary_columns_.Set(index, value);
+inline void DataFile_Problem::set_secondary_column(int index, ::google::protobuf::uint32 value) {
+  secondary_column_.Set(index, value);
 }
-inline void DataFile_Problem::add_secondary_columns(::google::protobuf::uint32 value) {
-  secondary_columns_.Add(value);
+inline void DataFile_Problem::add_secondary_column(::google::protobuf::uint32 value) {
+  secondary_column_.Add(value);
 }
 
 // repeated uint32 init_vector = 8;
@@ -1468,29 +1468,29 @@ inline void DataFile_Result::set_solution_count(::google::protobuf::uint64 value
   solution_count_ = value;
 }
 
-// repeated .decs.DataFile.ElementList solutions = 5;
-inline int DataFile_Result::solutions_size() const {
-  return solutions_.size();
+// repeated .decs.DataFile.ElementList solution = 5;
+inline int DataFile_Result::solution_size() const {
+  return solution_.size();
 }
-inline void DataFile_Result::clear_solutions() {
-  solutions_.Clear();
+inline void DataFile_Result::clear_solution() {
+  solution_.Clear();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >&
-DataFile_Result::solutions() const {
-  return solutions_;
+DataFile_Result::solution() const {
+  return solution_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_ElementList >*
-DataFile_Result::mutable_solutions() {
-  return &solutions_;
+DataFile_Result::mutable_solution() {
+  return &solution_;
 }
-inline const ::decs::DataFile_ElementList& DataFile_Result::solutions(int index) const {
-  return solutions_.Get(index);
+inline const ::decs::DataFile_ElementList& DataFile_Result::solution(int index) const {
+  return solution_.Get(index);
 }
-inline ::decs::DataFile_ElementList* DataFile_Result::mutable_solutions(int index) {
-  return solutions_.Mutable(index);
+inline ::decs::DataFile_ElementList* DataFile_Result::mutable_solution(int index) {
+  return solution_.Mutable(index);
 }
-inline ::decs::DataFile_ElementList* DataFile_Result::add_solutions() {
-  return solutions_.Add();
+inline ::decs::DataFile_ElementList* DataFile_Result::add_solution() {
+  return solution_.Add();
 }
 
 // optional .decs.DataFile.Result.ResultState state = 6 [default = COMPLETE];
@@ -1531,54 +1531,54 @@ inline ::decs::DataFile_Description* DataFile::mutable_description() {
   return description_;
 }
 
-// repeated .decs.DataFile.Problem problems = 2;
-inline int DataFile::problems_size() const {
-  return problems_.size();
+// repeated .decs.DataFile.Problem problem = 2;
+inline int DataFile::problem_size() const {
+  return problem_.size();
 }
-inline void DataFile::clear_problems() {
-  problems_.Clear();
+inline void DataFile::clear_problem() {
+  problem_.Clear();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >&
-DataFile::problems() const {
-  return problems_;
+DataFile::problem() const {
+  return problem_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Problem >*
-DataFile::mutable_problems() {
-  return &problems_;
+DataFile::mutable_problem() {
+  return &problem_;
 }
-inline const ::decs::DataFile_Problem& DataFile::problems(int index) const {
-  return problems_.Get(index);
+inline const ::decs::DataFile_Problem& DataFile::problem(int index) const {
+  return problem_.Get(index);
 }
-inline ::decs::DataFile_Problem* DataFile::mutable_problems(int index) {
-  return problems_.Mutable(index);
+inline ::decs::DataFile_Problem* DataFile::mutable_problem(int index) {
+  return problem_.Mutable(index);
 }
-inline ::decs::DataFile_Problem* DataFile::add_problems() {
-  return problems_.Add();
+inline ::decs::DataFile_Problem* DataFile::add_problem() {
+  return problem_.Add();
 }
 
-// repeated .decs.DataFile.Result results = 3;
-inline int DataFile::results_size() const {
-  return results_.size();
+// repeated .decs.DataFile.Result result = 3;
+inline int DataFile::result_size() const {
+  return result_.size();
 }
-inline void DataFile::clear_results() {
-  results_.Clear();
+inline void DataFile::clear_result() {
+  result_.Clear();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >&
-DataFile::results() const {
-  return results_;
+DataFile::result() const {
+  return result_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::decs::DataFile_Result >*
-DataFile::mutable_results() {
-  return &results_;
+DataFile::mutable_result() {
+  return &result_;
 }
-inline const ::decs::DataFile_Result& DataFile::results(int index) const {
-  return results_.Get(index);
+inline const ::decs::DataFile_Result& DataFile::result(int index) const {
+  return result_.Get(index);
 }
-inline ::decs::DataFile_Result* DataFile::mutable_results(int index) {
-  return results_.Mutable(index);
+inline ::decs::DataFile_Result* DataFile::mutable_result(int index) {
+  return result_.Mutable(index);
 }
-inline ::decs::DataFile_Result* DataFile::add_results() {
-  return results_.Add();
+inline ::decs::DataFile_Result* DataFile::add_result() {
+  return result_.Add();
 }
 
 
