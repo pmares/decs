@@ -9,46 +9,48 @@ include( FindZLIB )
 
 # We only need libprotobuf so we can disable zlib and not compile protoc.
 
-# Checking for hash_map and hash_set is tricky so we just say they don't exist for the moment.
-
+# Checking for hash_map and hash_set is tricky, but we do it anyways.
 if (NOT HASH_TEST_RUN)
-	set(HASH_TEST_RUN 1 CACHE INTERNAL "Has run the hash map and hash set tests")
-	foreach (HASH_HEADER ext/ "")
-		foreach (HASH_NS stdext __gnu_cxx "" std)
-			message(STATUS "Looking for hash_map and hash_set in header <${HASH_HEADER}hash_map>, <${HASH_HEADER}hash_set> and namespace '${HASH_NS}'")
-			file(WRITE
-				${CMAKE_BINARY_DIR}/CMakeTmp/testHashImpl.cpp
-				"#include <${HASH_HEADER}hash_map>
-				#include <${HASH_HEADER}hash_set>
-				int main () { ${HASH_NS}::hash_map<int, int> m; ${HASH_NS}::hash_set<int> s; return 0; }"
-			)
-			
-			try_compile(HASH_WORKS
-				${CMAKE_BINARY_DIR}
-				${CMAKE_BINARY_DIR}/CMakeTmp/testHashImpl.cpp
-			)
-			
-			if (HASH_WORKS)
-				message(STATUS "Looking for hash_map and hash_set in header <${HASH_HEADER}hash_map>, <${HASH_HEADER}hash_set> and namespace '${HASH_NS}' - found!")
-				set(HAVE_HASH_MAP 1 CACHE INTERNAL "Have hash_map")
-				set(HAVE_HASH_SET 1 CACHE INTERNAL "Have hash_set")
-				set(HASH_MAP_H <${HASH_HEADER}hash_map> CACHE INTERNAL "hash_map header")
-				set(HASH_SET_H <${HASH_HEADER}hash_set> CACHE INTERNAL "hash_set header")
-				set(HASH_NAMESPACE ${HASH_NS} CACHE INTERNAL "Namespace for hash_map/hash_set")
-			else (HASH_WORKS)
-				message(STATUS "Looking for hash_map and hash_set in header <${HASH_HEADER}hash_map>, <${HASH_HEADER}hash_set> and namespace '${HASH_NS}' - not found")
-			endif (HASH_WORKS)
-		endforeach (HASH_NS stdext __gnu_cxx "" std)
-	endforeach (HASH_HEADER ext/ "")
-endif (NOT HASH_TEST_RUN)
+	message(STATUS "Looking for hash_map and hash_set")
+	foreach (HASH_NS stdext __gnu_cxx std "")
+		foreach (HASH_HEADER "" ext/)
+			if (NOT HASH_WORKS)
+				file(WRITE
+					${CMAKE_BINARY_DIR}/CMakeTmp/testHashImpl.cpp
+					"#include <${HASH_HEADER}hash_map>
+					#include <${HASH_HEADER}hash_set>
+					int main () { ${HASH_NS}::hash_map<int, int> m; ${HASH_NS}::hash_set<int> s; return 0; }"
+				)
+				
+				try_compile(HASH_WORKS
+					${CMAKE_BINARY_DIR}
+					${CMAKE_BINARY_DIR}/CMakeTmp/testHashImpl.cpp
+				)
+				
+				if (HASH_WORKS)
+					set(HAVE_HASH_MAP 1 CACHE INTERNAL "Have hash_map")
+					set(HAVE_HASH_SET 1 CACHE INTERNAL "Have hash_set")
+					set(HASH_MAP_H <${HASH_HEADER}hash_map> CACHE INTERNAL "hash_map header")
+					set(HASH_SET_H <${HASH_HEADER}hash_set> CACHE INTERNAL "hash_set header")
+					set(HASH_NAMESPACE ${HASH_NS} CACHE INTERNAL "Namespace for hash_map/hash_set")
+				endif (HASH_WORKS)
+			endif (NOT HASH_WORKS)
+		endforeach (HASH_HEADER "" ext/)
+	endforeach (HASH_NS stdext __gnu_cxx "" std)
+	
+	if (HAVE_HASH_MAP)
+		message(STATUS "Looking for hash_map and hash_set - found")
+	else (HAVE_HASH_MAP)
+		message(STATUS "Looking for hash_map and hash_set - not found.")
+		set(HAVE_HASH_MAP "" CACHE INTERNAL "Have hash_map")
+		set(HAVE_HASH_SET "" CACHE INTERNAL "Have hash_set")
+		set(HASH_MAP_H "" CACHE INTERNAL "hash_map header")
+		set(HASH_SET_H "" CACHE INTERNAL "hash_set header")
+		set(HASH_NAMESPACE "" CACHE INTERNAL "Namespace for hash_map/hash_set")
+	endif (HAVE_HASH_MAP)
 
-if (NOT HAVE_HASH_MAP)
-	set(HAVE_HASH_MAP "" CACHE INTERNAL "Have hash_map")
-	set(HAVE_HASH_SET "" CACHE INTERNAL "Have hash_set")
-	set(HASH_MAP_H "" CACHE INTERNAL "hash_map header")
-	set(HASH_SET_H "" CACHE INTERNAL "hash_set header")
-	set(HASH_NAMESPACE "" CACHE INTERNAL "Namespace for hash_map/hash_set")
-endif (NOT HAVE_HASH_MAP)
+	set(HASH_TEST_RUN 1 CACHE INTERNAL "Has run the hash map and hash set tests")
+endif (NOT HASH_TEST_RUN)
 
 
 check_include_files( dlfcn.h HAVE_DLFCN_H )
