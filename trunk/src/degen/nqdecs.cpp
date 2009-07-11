@@ -1,6 +1,6 @@
 /**
  * libnqdecs - DECS transform for the n-queens problem.
- * Copyright (C) 2007-2008 Jan Magne Tjensvold
+ * Copyright (C) 2007-2009 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -17,9 +17,12 @@
  */
 
 #include <cstdio>
+#include <iostream>
+#include <fstream>
 
 #include "nqdecs.h"
 #include "dfileio.h"
+#include "decs.pb.h"
 
 using namespace std;
 
@@ -55,15 +58,19 @@ int nq_set_organ_pipe_order(bool enable) {
 	return 0;
 }
 
-uint nq_transform(FILE* file) {
-	uint retval = dfio_new_file(file, DFIO_TYPE_MATRIX);
-	if (retval != DFIO_ERR_SUCCESS)
-		return retval;
+uint nq_transform(char* file) {
+	// Verify that the version of the library that we linked against is
+	// compatible with the version of the headers we compiled against.
+	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-	DFIOMatrixHeader fh;
-	fh.cols = 6 * queens - 6;
+	decs::DataFile data_file;
+	decs::DataFile::Problem* problem = data_file.add_problems();
+
+	problem->set_column_count(6 * queens - 6);
 
 	// Write problem specific information.
+	// TODO: Convert this to Protocol Buffers
+	/**
 	ProbInfo pi;
 	fh.probid = PROB_ID;
 	fh.prob_off = sizeof(DFIOHeader);
@@ -74,20 +81,16 @@ uint nq_transform(FILE* file) {
 			= pi.reserved[4] = 0;
 	out.seekp(fh.prob_off);
 	out.write(reinterpret_cast<char *>(&pi),sizeof(ProbInfo));
+	*/
 	
-	
-	// Begin the element section. 
-	fh.elem_off = out.tellp();
 	
 	// Write the secondary column list.
 	uint secols = 4 * queens - 6;
-	out.write(reinterpret_cast<char *>(&secols),sizeof(secols));
 	for (uint i = 0; i < secols; i++) {
 		uint col = 2 * queens + i;
-		out.write(reinterpret_cast<char *>(&col),sizeof(col));
+		problem->add_secondary_columns(col);
 	}
 	
-	uint rows = 0;
 	uint elems = 0;
 	
 	// Corner diagonals to omit.
@@ -98,38 +101,46 @@ uint nq_transform(FILE* file) {
 	// i and j represents the rank and file respectively.
 	for (uint i = 0; i < queens; i++) {      // Rank
 		for (uint j = 0; j < queens; j++) {  // File
-			uint cols = 4;
 			uint a = i + j;
 			uint b = queens - 1 - i + j;
 			
-			if (a == VOID_DIAG1 || a == VOID_DIAG2) cols--;  // A0 and A(2N-2) should be omitted.
-			if (b == VOID_DIAG1 || b == VOID_DIAG2) cols--;  // B0 and B(2N-2) should be omitted.
-			out.write(reinterpret_cast<char *>(&cols),sizeof(cols));
+			//if (a == VOID_DIAG1 || a == VOID_DIAG2) cols--;  // A0 and A(2N-2) should be omitted.
+			//if (b == VOID_DIAG1 || b == VOID_DIAG2) cols--;  // B0 and B(2N-2) should be omitted.
 			
 			uint js = j + queens;
-			out.write(reinterpret_cast<char *>(&i),sizeof(i));
-			out.write(reinterpret_cast<char *>(&js),sizeof(js));
+			decs::DataFile::ElementList* row = problem->add_rows();
+			row->add_elements(i);
+			row->add_elements(js);
 
 			uint as, bs;
 			as = a < VOID_DIAG2 ? a + 2 * queens - 1 : a + 2 * queens - 2;
 			bs = b < VOID_DIAG2 ? b + 4 * queens - 4 : b + 4 * queens - 5;
 			
 			if (a != VOID_DIAG1 && a != VOID_DIAG2)
-				out.write(reinterpret_cast<char *>(&as),sizeof(as));
+				row->add_elements(as);
 			if (b != VOID_DIAG1 && b != VOID_DIAG2)
-				out.write(reinterpret_cast<char *>(&bs),sizeof(bs));
+				row->add_elements(bs);
 			
-			elems += cols;
-			rows++;
+			elems += row->elements_size();
 		}
 	}
 	
 	// Finally write the file header.
+	problem->set_element_count(elems);
+	/*
 	out.seekp(0);
 	fh.rows = rows;
 	fh.elems = elems;
 	out.write(reinterpret_cast<char *>(&fh),sizeof(DFIOHeader));
+	*/
+
+	// Write to file.
+	fstream output(file, ios::out | ios::trunc | ios::binary);
+	if (!data_file.SerializeToOstream(&output)) {
+		return DFIO_ERR_FILE_WRITE;
+	}
 	
+	google::protobuf::ShutdownProtobufLibrary();
 	return 0;
 }
 

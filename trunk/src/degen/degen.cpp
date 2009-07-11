@@ -1,6 +1,6 @@
 /**
  * degen - Exact cover matrix generator for the DECS library.
- * Copyright (C) 2007-2008 Jan Magne Tjensvold
+ * Copyright (C) 2007-2009 Jan Magne Tjensvold
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include "nqdecs.h"
+#include "dfileio.h"
 
 const char* VERSION = "0.2";
 
@@ -64,7 +65,7 @@ void print_usage() {
 void print_version() {
 	cout <<
 		"degen (DECS toolkit) " << VERSION << "\n"
-		"Copyright (C) 2007 Jan Magne Tjensvold\n"
+		"Copyright (C) 2007-2009 Jan Magne Tjensvold\n"
 		"This is free software; See the source for copying conditions. There is NO\n"
 		"WARRANTY; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.";
 }
@@ -138,7 +139,7 @@ int main(int argc, char* argv[]) {
 		}
 		
 		cout << "Generating matrix..." << '\n';
-		if (nq_transform(file)) {
+		if (nq_transform(file) != DFIO_ERR_SUCCESS) {
 			cerr << "Unable to complete forward transform";
 			return 1;
 		}
