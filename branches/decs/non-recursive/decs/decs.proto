@@ -10,16 +10,16 @@ message DataFile {
 		
 		message Author {
 			required string name = 1;
-			repeated Link links = 2;
+			repeated Link link = 2;
 		}
 		
 		optional string description = 1;
-		repeated Link links = 2;
-		repeated Author authors = 3;
+		repeated Link link = 2;
+		repeated Author author = 3;
 	}
 
 	message ElementList {
-		repeated uint32 elements = 1;
+		repeated uint32 element = 1;
 	}
 	
 	message Problem {
@@ -29,8 +29,8 @@ message DataFile {
 		required uint32 column_count = 4;
 		required uint32 element_count = 5;
 		
-		repeated ElementList rows = 6;
-		repeated uint32 secondary_columns = 7;
+		repeated ElementList row = 6;
+		repeated uint32 secondary_column = 7;
 		repeated uint32 init_vector = 8;
 		
 		enum ResultStrategy {
@@ -45,7 +45,7 @@ message DataFile {
 		optional uint32 problem_id = 2;
 		optional uint32 sub_problem_id = 3;
 		required uint64 solution_count = 4;
-		repeated ElementList solutions = 5;
+		repeated ElementList solution = 5;
 		
 		enum ResultState {
 			COMPLETE = 0;  // The final result of the specified problem or sub-problem.
@@ -55,6 +55,6 @@ message DataFile {
 	}
 	
 	optional Description description = 1;
-	repeated Problem problems = 2;
-	repeated Result results = 3;
+	repeated Problem problem = 2;
+	repeated Result result = 3;
 }
