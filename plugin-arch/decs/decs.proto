@@ -1,0 +1,60 @@
+
+package decs;
+
+message DataFile {
+	message Description {
+		message Link {
+			required string url = 1;
+			optional string description = 2;
+		}
+		
+		message Author {
+			required string name = 1;
+			repeated Link link = 2;
+		}
+		
+		optional string description = 1;
+		repeated Link link = 2;
+		repeated Author author = 3;
+	}
+
+	message ElementList {
+		repeated uint32 element = 1;
+	}
+	
+	message Problem {
+		optional Description description = 1;
+		optional uint32 problem_id = 2;
+		optional uint32 sub_problem_id = 3;
+		required uint32 column_count = 4;
+		required uint32 element_count = 5;
+		
+		repeated ElementList row = 6;
+		repeated uint32 secondary_column = 7;
+		repeated uint32 init_vector = 8;
+		
+		enum ResultStrategy {
+			COUNT = 0;  // Only return a count of how many solutions were found.
+			FULL = 1;   // Return complete descriptions of all the solutions found.
+		}
+		optional ResultStrategy result_strategy = 9 [default = COUNT];
+	}
+	
+	message Result {
+		optional Description description = 1;
+		optional uint32 problem_id = 2;
+		optional uint32 sub_problem_id = 3;
+		required uint64 solution_count = 4;
+		repeated ElementList solution = 5;
+		
+		enum ResultState {
+			COMPLETE = 0;  // The final result of the specified problem or sub-problem.
+			PARTIAL = 1;   // Not all solutions may have been found as the computation has not yet completed.
+		}
+		optional ResultState state = 6 [default = COMPLETE];
+	}
+	
+	optional Description description = 1;
+	repeated Problem problem = 2;
+	repeated Result result = 3;
+}
